@@ -1,0 +1,565 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=268"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>9. Mise en œuvre de JavaScript (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Recueillir des informations en Javascript</a></li>
+<li class="menu-lv2"><a href='#a2'>Qui suis-je en double</a></li>
+<li class="menu-lv2"><a href='#a3'>Être ou fenêtre, that is the question</a></li>
+<li class="menu-lv2"><a href='#a4'>Deviner un nombre dans une page HTML</a></li>
+<li class="menu-lv2"><a href='#a5'>Contrôle du temps.</a></li>
+<li class="menu-lv2"><a href='#a6'>Variables et typage</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux sur Machine<br />9. Mise en œuvre de JavaScript</h1>
+<p>Cette première séance de travaux sur machine consacrée à JavaScript montre où insérer des programmes écrits dans ce langage dans une page HTML, à savoir soit via une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#edef-SCRIPT" class='spip_glossaire' title="Voir la description de 'script' dans la documentation de 'html'" rel='external'>script</a>, soit dans des <i>événements scriptables</i>, comme <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onload" class='spip_glossaire' title="Voir la description de 'onload' dans la documentation de 'html' section 1" rel='external'>onload</a>, <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onsubmit" class='spip_glossaire' title="Voir la description de 'onsubmit' dans la documentation de 'html' section 1" rel='external'>onsubmit</a>, <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onchange" class='spip_glossaire' title="Voir la description de 'onchange' dans la documentation de 'html' section 1" rel='external'>onchange</a>&nbsp;etc.
+Dès le début de la séance, on cherchera dans les menus de son navigateur comment ouvrir la <i>console d&#8217;erreurs</i>, fenêtre dénonçant les erreurs de syntaxe ou d&#8217;exécution du JavaScript de la page chargée.</p>
+
+<p>La dernière documentation officielle de Javascript se nomme <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/Javascript/Ecma-262.pdf" class='spip_out' rel='external'>ECMA Script</a>&nbsp;;
+elle disponible par ce lien sur le site de l&#8217;ARI,  et sera la seule fournie pour l&#8217;examen. Profitez des séances de TME pour vous familiariser avec et trouver les informations qui pourraient vous manquer.</p>
+<br /><div id='sequence268'>
+<span id='e2672'></span>
+
+
+<h2 id='a1'>1 Recueillir des informations en Javascript</h2>
+<p>L&#8217;un des intérêts d&#8217;un langage de script côté client est d&#8217;afficher des informations qui ne sont pas connues du serveur HTTP. Une utilisation typique est l&#8217;affichage d&#8217;informations relatives au navigateur. De même que PHP fournit des informations sur le serveur via le  tableau associatif <code class='spip_code'>$_SERVER</code>, JavaScript fournit des informations sur le client via l&#8217;objet  prédéfini <tt>navigator</tt> qui possède en particulier les propriétés suivantes&nbsp;:</p>
+
+<ul class="spip"><li> <tt>userAgent</tt>&nbsp;: sa description&nbsp;;</li><li> <tt>appName</tt>&nbsp;: son nom&nbsp;;</li><li> <tt>appCodeName</tt>&nbsp;:  son moteur de rendu graphique&nbsp;;</li><li> <tt>appVersion</tt>&nbsp;:  sa version.</li></ul>
+<p>L&#8217;objet prédéfini <tt>document</tt> possède lui aussi certains champs spécifiques (en plus de ses balises, sur lesquelles on reviendra)&nbsp;;</p>
+
+<ul class="spip"><li> <tt>lastModified</tt>&nbsp;:  sa date de modification&nbsp;;</li><li> <tt>location</tt>&nbsp;:  l&#8217;URL du document&nbsp;;</li><li> <tt>referrer</tt>&nbsp;:  l&#8217;URL d&#8217;origine (celle qui avait le lien menant sur celle-ci).</li></ul>
+<p>Écrire une page HTML affichant une liste <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/lists.html#edef-UL" class='spip_glossaire' title="Voir la description de 'ul' dans la documentation de 'html'" rel='external'>ul</a> dont les items sont les informations ci-dessus. On utilisera la méthode <tt>writeln</tt> de l&#8217;object <tt>document</tt> pour afficher le texte HTML souhaité, et la concaténation de chaînes, grâce à l&#8217;opérateur +, pour n&#8217;avoir qu&#8217;un seul appel à cette fonction. La balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-BODY" class='spip_glossaire' title="Voir la description de 'body' dans la documentation de 'html'" rel='external'>body</a> de la page n&#8217;aura qu&#8217;une seule fille&nbsp;: la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#edef-SCRIPT" class='spip_glossaire' title="Voir la description de 'script' dans la documentation de 'html'" rel='external'>script</a>.</p>
+
+<p>Attention, le <tt>referrer</tt>, bien que toujours défini, peut être vide, dans le cas (probable) où vous appelez directement votre page HTML en saisissant son URL directement dans la barre d&#8217;adresse. Dans ce cas, affichez un message d&#8217;avertissement à la place du <tt>referrer</tt>.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=676&amp;cle=4510b13ef6ce8eb552f9669da999cea8c1dd5af6&amp;file=distant%2FVCS%2FLI355%2FTM%2F9%2Fqui-suis-je.html"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger qui-suis-je.html</a>
+</div>
+<p><code><span style="color: #000000">
+&lt;html&gt;<br />&nbsp;&nbsp;&lt;head&gt;&lt;title&gt;Qui&nbsp;suis-je&gt;&lt;/title&gt;&lt;/head&gt;<br />&nbsp;&nbsp;&lt;body&gt;&lt;script&nbsp;type="text/javascript"&gt;&lt;!--<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.writeln("&lt;ul&gt;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;"&lt;li&gt;&nbsp;Code&nbsp;du&nbsp;Navigateur&nbsp;:&nbsp;"&nbsp;+&nbsp;navigator.appCodeName&nbsp;+&nbsp;"&lt;/li&gt;\n"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;"&lt;li&gt;&nbsp;Nom&nbsp;du&nbsp;Navigateur&nbsp;:&nbsp;"&nbsp;+&nbsp;navigator.appName&nbsp;+&nbsp;"&lt;/li&gt;\n"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;"&lt;li&gt;&nbsp;Version&nbsp;du&nbsp;Navigateur&nbsp;:&nbsp;"&nbsp;+&nbsp;navigator.appVersion&nbsp;+&nbsp;"&lt;/li&gt;\n"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;"&lt;li&gt;&nbsp;Description&nbsp;du&nbsp;Navigateur&nbsp;:&nbsp;"&nbsp;+&nbsp;navigator.userAgent&nbsp;+&nbsp;"&lt;/li&gt;\n"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;"&lt;li&gt;&nbsp;Date&nbsp;de&nbsp;modification&nbsp;:&nbsp;"&nbsp;+&nbsp;document.lastModified&nbsp;+&nbsp;"&lt;/li&gt;\n"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;"&lt;li&gt;&nbsp;URL&nbsp;:&nbsp;"&nbsp;+&nbsp;document.location&nbsp;+&nbsp;"&lt;/li&gt;\n"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;"&lt;li&gt;&nbsp;URL&nbsp;d'origine&nbsp;:&nbsp;"&nbsp;+&nbsp;document.referrer&nbsp;+&nbsp;"&lt;/li&gt;\n"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;"&lt;/ul&gt;");<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;--&gt;&lt;/script&gt;&lt;/body&gt;<br />&lt;/html&gt;<br /><br /></span>
+</code></p></div>
+ 
+ <div id='reponses2672'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum6739"> 
+	    <div class="reponse">
+	<div class="forum-titre">Recueillir des informations en Javascript</div>
+17 avril 2014 &agrave; 17h09min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;html&gt;<br />
+ &lt;head&gt;&lt;title&gt;Ex 1&lt;/title&gt;&lt;head&gt;<br />
+ &lt;body&gt;<br />
+ &nbsp; &lt;script type='text/javascript'&gt;<br />
+ &nbsp; &nbsp; document.writeln('&lt;ul&gt;&lt;li&gt;navigator.userAgent: '+navigator.userAgent+'&lt;/li&gt;' + <br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'&lt;li&gt;navigator.appName: '+navigator.appName+'&lt;/li&gt;' +<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'&lt;li&gt;navigator.appCodeName: '+navigator.appCodeName+'&lt;/li&gt;' +<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'&lt;li&gt;navigator.appVersion: '+navigator.appVersion+'&lt;/li&gt;' +<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'&lt;li&gt;document.lastModified: '+document.lastModified+'&lt;/li&gt;' +<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'&lt;li&gt;document.location: '+document.location+'&lt;/li&gt;');<br />
+ &nbsp; &nbsp; if (document.referrer!='')<br />
+ &nbsp; &nbsp; &nbsp; document.writeln('&lt;li&gt;document.referrer: '+document.referrer+'&lt;/li&gt;&lt;/ul&gt;');<br />
+ &nbsp; &nbsp; else <br />
+ &nbsp; &nbsp; &nbsp; alert('avertissemen: document.referrer est vide');<br />
+ &nbsp; &lt;/script&gt;<br />
+ &lt;/body&gt;<br />
+&lt;/html&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2425'></span>
+
+
+<h2 id='a2'>2 Qui suis-je en double</h2>
+<p>On souhaite à présent écrire une variante de la page précédente, où la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-BODY" class='spip_glossaire' title="Voir la description de 'body' dans la documentation de 'html'" rel='external'>body</a>  possède un attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onload" class='spip_glossaire' title="Voir la description de 'onload' dans la documentation de 'html' section 1" rel='external'>onload</a> qui provoque l&#8217;affichage des mêmes informations dans une autre fenêtre, grace à la fonction Javascript nommé <tt>alert</tt>.  Cette fonction prend un argument une chaîne qu&#8217;elle affiche littéralement&nbsp;: ce n&#8217;est pas du HTML mais du texte brut. On souhaite toujours afficher la présentation HTML avec balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/lists.html#edef-UL" class='spip_glossaire' title="Voir la description de 'ul' dans la documentation de 'html'" rel='external'>ul</a> et  <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/lists.html#edef-LI" class='spip_glossaire' title="Voir la description de 'li' dans la documentation de 'html'" rel='external'>li</a>&nbsp;dans le corps de la page, mais évidemment sans ces balises pour la fenêtre d&#8217;alerte, car elles apparaitraient elles-mêmes. On voudrait plutôt des passages à la ligne avec un simple <tt>\n</tt>.</p>
+
+<p>Pour éviter de dupliquer le calcul des informations, on les mettra dans un tableau  JavaScript, à l&#8217;aide de la syntaxe&nbsp;:</p>
+<div class='spip_code'><code>infos = new Array(....);</code></div>
+<p>où les points de suspension sont à remplacer par les informations en question, séparées par des virgules. Ensuite on utilisera deux fois ce tableau pour créer les textes souhaités. On pourra utiliser soit la méthode  pour tableau nommée <tt>join</tt>, équivalente de la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.join.html" class='spip_glossaire' title="Voir la description de 'join' dans la documentation de 'php'" rel='external'>join</a>&nbsp;de PHP mais qui ne retient que les éléments du tableau indexés par un nombre, soit la construction <tt>for (</tt><i>variable</i><tt> in</tt> <i>tableau</i> <tt>)</tt>.</p>
+
+<p>Ecrire cette variante selon les spécifications ci-dessus.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=675&amp;cle=d8799d9d9e0d189b304ae2f42d3835abbcc76b6b&amp;file=distant%2FVCS%2FLI355%2FTM%2F9%2Fqui-suis-je-double.html"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger qui-suis-je-double.html</a>
+</div>
+<p><code><span style="color: #000000">
+&lt;html&gt;<br />&nbsp;&nbsp;&lt;head&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Informations&nbsp;issues&nbsp;du&nbsp;navigateur&lt;/title&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;script&nbsp;type="text/javascript"&gt;&lt;!--<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;info&nbsp;=&nbsp;new&nbsp;Array(<br />&nbsp;&nbsp;&nbsp;&nbsp;"Code&nbsp;du&nbsp;Navigateur&nbsp;:&nbsp;"&nbsp;+&nbsp;navigator.appCodeName,<br />&nbsp;&nbsp;&nbsp;&nbsp;"Nom&nbsp;du&nbsp;Navigateur&nbsp;:&nbsp;"&nbsp;+&nbsp;navigator.appName,<br />&nbsp;&nbsp;&nbsp;&nbsp;"Version&nbsp;Navigateur&nbsp;:&nbsp;"&nbsp;+&nbsp;navigator.appVersion,<br />&nbsp;&nbsp;&nbsp;&nbsp;"Description&nbsp;du&nbsp;Navigateur&nbsp;:&nbsp;"&nbsp;+&nbsp;navigator.userAgent,<br />&nbsp;&nbsp;&nbsp;&nbsp;"Date&nbsp;de&nbsp;modification&nbsp;:&nbsp;"&nbsp;+&nbsp;document.lastModified,<br />&nbsp;&nbsp;&nbsp;&nbsp;"URL&nbsp;:&nbsp;"&nbsp;+&nbsp;document.location,<br />&nbsp;&nbsp;&nbsp;&nbsp;"URL&nbsp;d'origine&nbsp;:&nbsp;"&nbsp;+&nbsp;document.referrer<br />&nbsp;&nbsp;&nbsp;&nbsp;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&gt;&lt;/script&gt;<br />&nbsp;&nbsp;&lt;/head&gt;<br />&nbsp;&nbsp;&lt;body&nbsp;onload='alert(info.join("\n"))'&gt;&lt;script&nbsp;type="text/javascript"&gt;&lt;!--<br />&nbsp;&nbsp;&nbsp;&nbsp;document.writeln('&lt;ul&gt;&lt;li&gt;'+&nbsp;info.join("&lt;/li&gt;\n&lt;li&gt;")&nbsp;+&nbsp;'&lt;/li&gt;&lt;/ul&gt;')<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;--&gt;&lt;/script&gt;&lt;/body&gt;<br />&lt;/html&gt;<br /></span>
+</code></p></div>
+ 
+ <div id='reponses2425'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum6740"> 
+	    <div class="reponse">
+	<div class="forum-titre">Qui suis-je en double</div>
+17 avril 2014 &agrave; 17h20min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><p>comment faire passages à la ligne avec un simple \n dans join&nbsp;????????????????????????</p>
+
+<div class="spip_code"><code>&lt;html&gt;<br />
+ &lt;head&gt;&lt;title&gt;Ex 2&lt;/title&gt;&lt;head&gt;<br />
+ &lt;body onload=alert(infos)&gt;<br />
+ &nbsp; &lt;script type='text/javascript'&gt;<br />
+ &nbsp; &nbsp; infos=new Array('navigator.userAgent: '+navigator.userAgent,<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'navigator.appName: '+navigator.appName,<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'navigator.appCodeName: '+navigator.appCodeName,<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'navigator.appVersion: '+navigator.appVersion,<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'document.lastModified: '+document.lastModified,<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'document.location: '+document.location,<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (document.referrer!='') ? 'document.referrer: '+document.referrer:'');<br />
+ &nbsp; &nbsp; document.writeln(infos.join());<br />
+ &nbsp; &lt;/script&gt;<br />
+ &lt;/body&gt;<br />
+&lt;/html&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2674'></span>
+
+
+<h2 id='a3'>3 Être ou fenêtre, that is the question</h2>
+<p>Lorsque l&#8217;on clique sur un balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/links.html#edef-A" class='spip_glossaire' title="Voir la description de 'a' dans la documentation de 'html'" rel='external'>a</a>, le comportement habituel est de remplacer le contenu de la fenêtre courante par le contenu de la page renvoyée par l&#8217;URL indiquée dans l&#8217;attribut <a href="http://fr.wikipedia.org/wiki/href" class='spip_glossaire' title="Voir la description de 'href' dans la documentation de 'hml' section 1" rel='external'>href</a>. Il est possible de forcer l&#8217;ouverture d&#8217;une nouvelle fenêtre pour recevoir ce contenu et de laisser la fenêtre d&#8217;origine intacte. Pour cela, on ajoute à la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/links.html#edef-A" class='spip_glossaire' title="Voir la description de 'a' dans la documentation de 'html'" rel='external'>a</a> un attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onclick" class='spip_glossaire' title="Voir la description de 'onclick' dans la documentation de 'html' section 1" rel='external'>onclick</a> qui va provoquer l&#8217;ouverture d&#8217;une fenêtre en utilisant la méthode <tt>open</tt> de l&#8217;objet <tt>window</tt>. Cette méthode, qui retourne en résultat un identifiant de fenêtre, accepte trois arguments&nbsp;:</p>
+
+<ul class="spip"><li> l&#8217;URL donnant le contenu de la page&nbsp;;</li><li> le nom de la fenêtre (utile pour réécrire dans une fenêtre déjà ouverte)&nbsp;; cet argument étant redondant avec la valeur retournée par <tt>open</tt> on préfèrera l&#8217;ignorer&nbsp;;</li><li> une liste de couples nom=valeur séparés par des virgules, donnant certaines caractéristiques de la fenêtre, notamment ses dimensions en pixels (<tt>width</tt> et <tt>height</tt>).</li></ul>
+<p>Pour obtenir l&#8217;URL prévue, il suffit d&#8217;évaluer <tt>this.href</tt> pendant l&#8217;exécution de l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onclick" class='spip_glossaire' title="Voir la description de 'onclick' dans la documentation de 'html' section 1" rel='external'>onclick</a>, car <tt>this</tt> pointe alors sur la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/links.html#edef-A" class='spip_glossaire' title="Voir la description de 'a' dans la documentation de 'html'" rel='external'>a</a>&nbsp;concernée. Pour le titre, on prendra un nom arbitraire. Pour les caractéristiques, il s&#8217;agit d&#8217;une chaîne de couples <i>nom</i>=<i>valeur</i> séparés par des virgules, avec comme noms notamment <tt>width</tt> et <tt>height</tt> exigeant comme valeurs un nombre de pixels, et <tt>toolbar</tt> exigeant <tt>yes</tt> ou <tt>no</tt>.
+La valeur retournée par la méthode <tt>open</tt> est un identifiant de fenêtre.</p>
+
+<p>Ecrire une page HTML comportant une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/links.html#edef-A" class='spip_glossaire' title="Voir la description de 'a' dans la documentation de 'html'" rel='external'>a</a>&nbsp;pointant sur votre solution au premier exercice, de sorte que celle-ci s&#8217;ouvre dans une nouvelle fenêtre de dimension 900x200 sans barre d&#8217;outils et avec <tt>exercice 1</tt> comme titre.</p>
+
+<p>Pour éviter que cette page s&#8217;ouvre <i>aussi</i> dans la fenêtre d&#8217;origine, il faut rajouter dans l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onclick" class='spip_glossaire' title="Voir la description de 'onclick' dans la documentation de 'html' section 1" rel='external'>onclick</a> comme deuxième et dernière instruction "<tt>return false</tt>" qui interdit au navigateur d&#8217;activer le lien. Pour finir, ajouter à la page d&#8217;origine une deuxième balise 
+<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/links.html#edef-A" class='spip_glossaire' title="Voir la description de 'a' dans la documentation de 'html'" rel='external'>a</a>&nbsp;de sorte qu&#8217;en cliquant dessus, on obtienne la fermeture de la fenêtre ouverte pour l&#8217;autre balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/links.html#edef-A" class='spip_glossaire' title="Voir la description de 'a' dans la documentation de 'html'" rel='external'>a</a>. On utilisera pour cela la méthode <tt>close</tt> utilisable avec toute variable JavaScript dont la valeur est un identifiant de fenêtre.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=674&amp;cle=1fd8e2818df922494395481c07cf4dcdedb23c25&amp;file=distant%2FVCS%2FLI355%2FTM%2F9%2Ffenetre.html"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger fenetre.html</a>
+</div>
+<p><code><span style="color: #000000">
+&lt;html&gt;<br />&nbsp;&nbsp;&lt;head&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Ouvrir&nbsp;une&nbsp;fenêtre&lt;/title&gt;<br />&nbsp;&nbsp;&lt;/head&gt;<br />&nbsp;&nbsp;&lt;body&gt;&lt;div&gt;&lt;a&nbsp;href='qui-suis-je.html'<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onclick="fen&nbsp;=&nbsp;window.open(this.href,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'',<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'width=900,height=200,toolbar=no');<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false"&gt;Cliquer&nbsp;ici&nbsp;pour&nbsp;ouvrir&lt;/a&gt;&lt;br&nbsp;/&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;a&nbsp;onclick='if&nbsp;(fen)&nbsp;fen.close()'&gt;Cliquer&nbsp;ici&nbsp;pour&nbsp;fermer&lt;/a&gt;<br />&nbsp;&nbsp;&lt;/div&gt;&lt;/body&gt;<br />&lt;/html&gt;<br /><br /></span>
+</code></p></div>
+ 
+ <div id='reponses2674'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum6189"> 
+	    <div class="reponse">
+	<div class="forum-titre">Être ou fenêtre, that is the question</div>
+27 mars 2014 &agrave; 12h31min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;html&gt;<br />
+ &nbsp;&lt;head&gt;&lt;title&gt;Ex 3&lt;/title&gt;&lt;head&gt;<br />
+ &nbsp;&lt;body&gt;<br />
+ &nbsp; &nbsp;&lt;script type='text/javascript'&gt;<br />
+ &nbsp; &nbsp; &nbsp;document.writeln(<br />
+ &nbsp; &nbsp; &nbsp; &quot;&lt;a onclick=\&quot;id1=window.open(\'qui-suis-je.html\',\'\',\'width=900,height=200,tolbar=no\');return false;\&quot;&gt;ouvrir&lt;/a&gt;&lt;br&gt;&quot; + <br />
+ &nbsp; &nbsp; &nbsp; &quot;&lt;br&gt;&lt;a onclick='id1.close()'&gt;fermer&lt;/a&gt;&quot;);<br />
+ &nbsp; &nbsp;&lt;/script&gt;<br />
+ &nbsp;&lt;/body&gt;<br />
+&lt;/html&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2404'></span>
+
+
+<h2 id='a4'>4 Deviner un nombre dans une page HTML</h2>
+<p>On se propose d&#8217;écrire une page XHTML avec du code JavaScript  offrant un petit jeu pour faire  deviner un nombre tiré aléatoirement.</p>
+
+<ol class="spip"><li> Ecrire  la fonction JavaScript <tt>init</tt> 
+ qui initialise la variable <tt>nbadeviner</tt> à  un entier aléatoire compris entre 0 et 10&nbsp;; on utilisera les fonctions <tt>Math.floor</tt> et <tt>Math.random</tt> qui retourne un nombre compris entre 0 inclus et 1 exclu&nbsp;;</li><li> Ecrire la fonction <i>controle</i> qui prend en argument un objet <tt>input</tt> pour en prendre le champ <tt>value</tt>, et qui ouvre une fenêtre d&#8217;alerte affichant&nbsp;:<ul class="spip"><li> <i>farceur</i> si la saisie n&#8217;est pas un nombre&nbsp;;</li><li> <i>gagné</i> si la saisie est le nombre tiré aléatoirement&nbsp;;</li><li> <i>C&#8217;est plus</i> si la saisie est un nombre inférieur&nbsp;;</li><li> <i>C&#8217;est moins</i> si  la saisie est un nombre supérieur.</li></ul></li><li> Ecrire une page XHTML comportant&nbsp;:<ul class="spip"><li> une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#edef-SCRIPT" class='spip_glossaire' title="Voir la description de 'script' dans la documentation de 'html'" rel='external'>script</a> comportant les fonction ci-dessus&nbsp;;</li><li> une balise <a href="http://fr.wikipedia.org/wiki/body" class='spip_glossaire' title="Voir la description de 'body' dans la documentation de 'hmtl'" rel='external'>body</a> déclenchant l&#8217;appel de la fonction <tt>init</tt> au chargement de la page&nbsp;;</li><li>  un formulaire sans action et d&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onsubmit" class='spip_glossaire' title="Voir la description de 'onsubmit' dans la documentation de 'html' section 1" rel='external'>onsubmit</a> valant <tt>return false</tt> pour bloquer tout envoi, son unique  balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-INPUT" class='spip_glossaire' title="Voir la description de 'input' dans la documentation de 'html'" rel='external'>input</a> servant seulement à appliquer la  fonction JavaScript <tt>controle</tt> sur la saisie (accessible à ce niveau par l&#8217;expression <tt>this</tt>) lorsque celle-ci est finie (attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onchange" class='spip_glossaire' title="Voir la description de 'onchange' dans la documentation de 'html' section 1" rel='external'>onchange</a>).</li></ul></li></ol>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=672&amp;cle=b577d608ca66572e6ef41d90cc45883abe43c2df&amp;file=distant%2FVCS%2FLI355%2FTM%2F9%2Fdevine.html"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger devine.html</a>
+</div>
+<p><code><span style="color: #000000">
+&lt;html&gt;<br />&lt;head&gt;<br />&lt;script&nbsp;type="text/javascript"&gt;<br /><br />function&nbsp;init(){<br />&nbsp;&nbsp;&nbsp;&nbsp;nbadeviner&nbsp;=&nbsp;Math.floor(Math.random()*10+1);<br />}<br /><br />function&nbsp;controler(input){<br />&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;=&nbsp;input.value;<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(isNaN(n))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(&nbsp;"&nbsp;Farceur,&nbsp;ce&nbsp;n'est&nbsp;pas&nbsp;un&nbsp;nombre&nbsp;!");<br />&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;if&nbsp;(n&nbsp;==&nbsp;nbadeviner)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(&nbsp;"gagné");<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;(n&nbsp;&lt;&nbsp;&nbsp;nbadeviner)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("C'est&nbsp;plus");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("C'est&nbsp;moins");<br />}<br />&lt;/script&gt;<br />&lt;/head&gt;<br />&lt;body&nbsp;onload="init();"&gt;<br />&lt;h1&gt;&nbsp;Deviner&nbsp;un&nbsp;Nombre&nbsp;&lt;/h1&gt;<br />&lt;form&nbsp;onsubmit='return&nbsp;false'&gt;<br />&lt;label&nbsp;for='elnb'&gt;Saisir&nbsp;votre&nbsp;proposition&lt;/label&gt;<br />&lt;input&nbsp;id="nb"&nbsp;&nbsp;onchange="controler(this)"&nbsp;/&gt;<br />&lt;/form&gt;<br />&lt;/body&gt;<br />&lt;/html&gt;<br /></span>
+</code></p></div>
+ 
+ <div id='reponses2404'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum6741"> 
+	    <div class="reponse">
+	<div class="forum-titre">Deviner un nombre dans une page HTML</div>
+17 avril 2014 &agrave; 18h27min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;html&gt;<br />
+ &nbsp;&lt;head&gt;&lt;title&gt;Ex 4&lt;/title&gt;&lt;head&gt;<br />
+ &nbsp;&lt;body onload='init()' &gt;<br />
+ &nbsp; &lt;script type='text/javascript'&gt;<br />
+ &nbsp; document.writeln(<br />
+ &nbsp; &nbsp;&quot;&lt;form onsubmit='return false;'&gt;&quot; + // pour bloquer tout envoi<br />
+ &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;&lt;fieldset&gt;&quot; +<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;&lt;label for 'id1'&gt;essayez de deviner un nombre entre 0 et 10: &lt;/label&gt;&quot; +<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&quot;&lt;input type='text' onchange='controle(this);' name='id1'&gt;&quot;+<br />
+ &nbsp; &nbsp; &nbsp;&quot;&lt;/fieldset&gt;&quot; +<br />
+ &nbsp; &nbsp;&quot;&lt;/form&gt;&quot;);<br />
+<br />
+ &nbsp; &nbsp;function init () {<br />
+ &nbsp; &nbsp; &nbsp;aDeviner = Math.floor(10*Math.random()); // 0,00 ... 0,999 -&gt; 0,00 ... 9,99 <br />
+ &nbsp; &nbsp;}<br />
+ &nbsp; &nbsp;<br />
+ &nbsp; &nbsp;function controle(input) {<br />
+ &nbsp; &nbsp; &nbsp;if(!/^\d+(\.\d+)?$/.test(input.value))<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;alert(&quot;not a number&quot;);<br />
+ &nbsp; &nbsp; &nbsp;else if (input.value == aDeviner)<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;alert(&quot;gagne&quot;);<br />
+ &nbsp; &nbsp; &nbsp;else if (input.value &lt; aDeviner)<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;alert(&quot;c\'est plus&quot;);<br />
+ &nbsp; &nbsp; &nbsp;else <br />
+ &nbsp; &nbsp; &nbsp; &nbsp;alert(&quot;c\'est moins&quot;);<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp; &nbsp;&lt;/script&gt;<br />
+ &nbsp;&lt;/body&gt;<br />
+&lt;/html&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3154'></span>
+
+
+<h2 id='a5'>5 Contrôle du temps.</h2>
+<p>On souhaite modifier le jeu précédent en imposant un temps maximal pour deviner le nombre. La page XHTML est inchangée  à ceci près  que la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#edef-SCRIPT" class='spip_glossaire' title="Voir la description de 'script' dans la documentation de 'html'" rel='external'>script</a> référence à présent un fichier JavaScript.</p>
+
+<p>La fonction permettant de déclencher une exécution à un moment fixe se nomme <tt>setTimeout</tt>, et sa syntaxe est</p>
+
+<p><code class='spip_code'> var d= setTimeout(&quot;Fonction()&quot;, Delai );</code></p>
+
+<p>où <code class='spip_code'>Fonction</code> est la fonction appelée lors de l&#8217;exécution du timeout et <code class='spip_code'>Delai</code> le temps en millisecondes avant exécution de la fonction spécifiée.  Pour supprimer cette échéance, il faut appliquer la syntaxe suivante&nbsp;: <code class='spip_code'>clearTimeout(d);</code>.</p>
+
+<p>Modifier les fonctions JavaScript  de sorte que si le délai est écoulé avant que le nombre n&#8217;ait été deviné, une fenêtre s&#8217;ouvre, affichant un message indiquant que la partie est perdue et demande confirmation pour relancer une nouvelle partie. Vous utiliserez la méthode <tt>window.confirm()</tt> pour afficher une boîte dite  de dialogue  qui renvoie vrai lorsque le bouton <i>ok</i> est choisi.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=673&amp;cle=3fdc5c1c17b7ef3c38027ce0a9f82643d44b86c0&amp;file=distant%2FVCS%2FLI355%2FTM%2F9%2Fdevine.js"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger devine.js</a>
+</div>
+<pre>function init(){
+  nbadeviner = Math.floor(Math.random()*10+1);
+  delai = setTimeout ("delaiExpire()", 10000);
+}
+
+function controler(input){
+  n = input.value;
+  if (isNaN(n))
+    alert( " Farceur, ce n'est pas un nombre !");
+  else if (n == nbadeviner) {
+    clearTimeout(delai);
+    alert( "gagné");
+  } else if (n &lt;  nbadeviner)
+    alert("C'est plus");
+  else 
+    alert("C'est moins");
+}
+
+function delaiExpire(){
+  chaine = "Le délai est expiré !";
+  chaine += "Il fallait trouver " + nbadeviner;
+  chaine += ". Voulez-vous continuer ?";
+  if(confirm(chaine)) init();
+}
+</pre></div>
+ 
+ <div id='reponses3154'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum6766"> 
+	    <div class="reponse">
+	<div class="forum-titre">Contrôle du temps.</div>
+28 avril 2014 &agrave; 10h40min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code> &nbsp;document.writeln(<br />
+ &nbsp; &quot;&lt;form onsubmit='return false;' name='myform'&gt;&quot; + // pour bloquer tout envoi<br />
+ &nbsp; &nbsp; &quot;&lt;fieldset&gt;&quot; +<br />
+ &nbsp; &nbsp; &nbsp; &quot;&lt;label for 'id1'&gt;essayez de deviner un nombre entre 0 et 10: &lt;/label&gt;&quot; +<br />
+ &nbsp; &nbsp; &nbsp; &quot;&lt;input type='text' onchange='controle(this);' id='input1'&gt;&quot; +<br />
+ &nbsp; &nbsp; &quot;&lt;/fieldset&gt;&quot; +<br />
+ &nbsp; &quot;&lt;/form&gt;&quot;);<br />
+<br />
+ &nbsp;function init () {<br />
+ &nbsp; &nbsp;aDeviner = Math.floor(10*Math.random()); // 0,00 ... 0,999 -&gt; 0,00 ... 9,99 <br />
+ &nbsp; &nbsp;d = setTimeout(&quot;gameOver()&quot;,10000);<br />
+ &nbsp; &nbsp;tempsecoule=0;<br />
+ &nbsp; &nbsp;gagne=0;<br />
+ &nbsp; &nbsp;focus = document.getElementById('input1').focus();<br />
+ &nbsp;}<br />
+ &nbsp; <br />
+ &nbsp;function controle(input) {<br />
+ &nbsp; &nbsp;if(!gagne &amp;&amp; !tempsecoule) {<br />
+ &nbsp; &nbsp; &nbsp;if(!/^\d+(\.\d+)?$/.test(input.value))<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;alert(&quot;not a number&quot;);<br />
+ &nbsp; &nbsp; &nbsp;else if (input.value == aDeviner) {<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;alert(&quot;gagne&quot;);<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;gagne=1;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;gameOver();<br />
+ &nbsp; &nbsp; &nbsp;}<br />
+ &nbsp; &nbsp; &nbsp;else if (input.value &lt; aDeviner)<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;alert(&quot;c\'est plus&quot;);<br />
+ &nbsp; &nbsp; &nbsp;else <br />
+ &nbsp; &nbsp; &nbsp; &nbsp;alert(&quot;c\'est moins&quot;);<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp;}<br />
+ &nbsp; <br />
+ &nbsp;function gameOver() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; tempsecoule=1;<br />
+ &nbsp; &nbsp;if(window.confirm((gagne?&quot;&quot;:&quot;votre temps est ecoule, &quot;) + &quot;encore une partie?&quot;)) {<br />
+ &nbsp; &nbsp; &nbsp;location.reload();<br />
+ &nbsp; &nbsp; &nbsp;init();<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp;}</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3417'></span>
+
+
+<h2 id='a6'>6 Variables et typage</h2>
+<p>On considère la fonction suivante&nbsp;:</p>
+
+<p><code class='spip_code'> function add(x, y){ &nbsp;return x + y;}</code></p>
+
+<ol class="spip"><li> Rappeler les types possibles pour les variables et leurs valeurs associées en Javascript. </li><li> Qu&#8217;affichent les instructions suivantes&nbsp;?<ol class="spip"><li> add(3,2)</li><li> add(3,"2")</li><li> var s&nbsp;; add(3,s)</li><li> s=2&nbsp;; add(3,s)</li><li> s="hello"&nbsp;; add(3,s)</li></ol></li><li> Ecrire une fonction <i>toNumber()</i> qui prend un paramètre x&nbsp;:
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;si x est une variable numérique ou une chaîne de caractères représentant une valeur numérique, la fonction renverra la valeur numérique de x,
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;sinon, la fonction renverra la valeur NaN (<i>Not a Number</i>). Vous pourrez utiliser la fonction <strong>isNaN</strong> qui renvoie <i>false</i> si l&#8217;objet passé en paramètre représente une valeur numérique. Vous pourrez également utiliser  la fonction <strong>Number</strong> qui convertit  une chaîne de caractères représentant un nombre en valeur numérique.</li><li> Modifier la fonction <i>add</i> pour que cette fonction retourne la valeur <i>NaN</i> si l&#8217;un des deux paramètres n&#8217;est pas correct et effectue l&#8217;addition correctement si l&#8217;un des deux paramètres est une chaîne de caractères représentant une valeur numérique.</li><li> La fonction <strong>eval()</strong> prend en entrée une chaîne de caractères représentant du code Javascript et effectue les instructions qui y sont décrites. On considère dans notre exemple, que 3 variables a, b et c sont déjà déclarées. Définir une variable code qui contient une chaîne de caractères représentant du code Javascript qui effectue les opérations suivantes&nbsp;:
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;la variable a est initialisée avec une opération arithmétique simple (addition par exemple),
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;la valeur de la variable b est définie par l&#8217;appel à la fonction Math.floor() sur une valeur réelle,
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;et la variable c est égale à l&#8217;appel de la fonction <strong>add()</strong> précédente sur les variables a et b.
+Evaluer la variable code et afficher après cela les valeurs respectives des variables a, b et c.</li></ol>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=677&amp;cle=146648d5675a7fe4955df4a064d2c8129753edf3&amp;file=distant%2FVCS%2FLI355%2FTM%2F9%2Fvariables.txt"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger variables.txt</a>
+</div>
+<pre>- Question 1 : types de variables en Javascript :
+
+-# boolean (variable true/false), 
+-# string (variable de chaîne de caractères), 
+-# number (variable numérique), 
+-# function (fonction). 
+-# object (objet),
+-# undefined (type indéterminé)
+
+------------------------------------------------------------------
+- Question 2 : le programme affiche le résultat suivant :
+
+5 // 3 + 2 &lt;br/&gt;
+32 // 3 + "2" &lt;br/&gt;
+NaN // 3 + s avec s vide &lt;br/&gt;
+5 // 3 + 2 avec s = 2 (et non pas "2") &lt;br/&gt;
+3hello // 3 + "hello" &lt;br/&gt;
+
+------------------------------------------------------------------
+- Question 3 et 4 : fonction {toNumber()} et {add()} :
+
+&lt;code&gt;
+function toNumber(x){ 
+ return (isNaN(x))? NaN : Number(x); 
+}
+
+function add(a,b){ 
+    return toNumber(a) + toNumber(b); 
+}
+&lt;/code&gt;
+
+------------------------------------------------------------------
+- Question 5 : fonction {eval()} :
+
+&lt;code&gt;
+var a, b, c;
+var code="a= 3+3; b=Math.floor(13.5);c=add(a,b);"; 
+eval(code); 
+document.write ("a : " + a + "&lt;br&gt;");
+document.write ("b : " + b + "&lt;br&gt;");
+document.write ("c : " + c + "&lt;br&gt;");
+&lt;/code&gt;
+</pre></div>
+ 
+ <div id='reponses3417'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum6754"> 
+	    <div class="reponse">
+	<div class="forum-titre">Variables et typage</div>
+24 avril 2014 &agrave; 12h45min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><p>1) type Underfined&nbsp;: 
+<br />type Boolean&nbsp;: 0 1 
+<br />type String&nbsp;: "hello" 
+<br />type Number&nbsp;: 1 -1 0.5 
+<br />type Object&nbsp;: 
+<br />type Null&nbsp;: null 
+<br />type Reference Specification&nbsp;: adresse</p>
+
+<p>2) add(3,2) 5 
+<br />add(3,"2") 32 
+<br />var s&nbsp;; add(3,s) isNAN 
+<br />var s=2&nbsp;; add(3,s) 5 
+<br />add(3,"hello") 3hello</p>
+
+<p>3) et 4) 
+<br /></p>
+<div class="spip_code"><code>function add(x, y) {<br />
+ &nbsp; if(Number(x) &amp;&amp; Number(y))<br />
+ &nbsp; &nbsp; return Number(x) + Number(y);<br />
+return null; // NAN ?<br />
+}<br />
+<br />
+function toNumber(x) {<br />
+ &nbsp; if(!isNAN(Number(x))) // isNAN(x) = false si valeur numerique<br />
+ &nbsp; &nbsp; &nbsp;return Number(x);<br />
+ &nbsp; return null; // NAN ? <br />
+}</code></div>
+<p>4)</p>
+<div class="spip_code"><code>&lt;html&gt;<br />
+ &nbsp;&lt;head&gt;&lt;title&gt;variables&lt;/title&gt;&lt;head&gt;<br />
+ &nbsp;&lt;body onload='func()' &gt;<br />
+ &nbsp; &nbsp;&lt;script type='text/javascript'&gt;<br />
+ &nbsp; &nbsp; &nbsp;<br />
+ &nbsp; &nbsp; &nbsp;function func() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //var a,b,c;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var code=&quot;a=2+3;b=Math.floor(4.5);c=add(a,b);&quot;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; eval(code);<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;document.writeln(&quot;a=&quot;+a+&quot;&lt;br&gt;b=&quot;+b+&quot;&lt;br&gt;c=&quot;+a+&quot;+&quot;+b+&quot;=&quot;+c+&quot;&lt;br&gt;&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+ &nbsp; &nbsp; &nbsp;function add(x, y) {<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;document.writeln(&quot; &nbsp;x=&quot;+x+&quot;, y=&quot;+y+&quot;&lt;br&gt;&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(Number(x) &amp;&amp; Number(y))<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return Number(x) + Number(y);<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;return null; // NAN ?<br />
+ &nbsp; &nbsp; &nbsp;}<br />
+<br />
+ &nbsp; &nbsp; &nbsp;function toNumber(x) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(!isNAN(Number(x))) // isNAN(x) = false si valeur numerique<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return Number(x);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return null; // NAN ? <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+ &nbsp; &nbsp;&lt;/script&gt;<br />
+ &nbsp;&lt;/body&gt;<br />
+&lt;/html&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FMise-en-oeuvre-de-JavaScript"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FMise-en-oeuvre-de-JavaScript'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FMise-en-oeuvre-de-JavaScript&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 15h01min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FMise-en-oeuvre-de-JavaScript'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

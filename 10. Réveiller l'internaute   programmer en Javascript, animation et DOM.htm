@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=271"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>10. Réveiller l'internaute : programmer en Javascript, animation et DOM (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Défilement d&#8217;images</a></li>
+<li class="menu-lv2"><a href='#a2'>Un bouton inaccessible</a></li>
+<li class="menu-lv2"><a href='#a3'>Contrôle interactif des saisies</a></li>
+<li class="menu-lv2"><a href='#a4'>AJAX</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux sur Machine<br />10. Réveiller l&#8217;internaute&nbsp;: programmer en Javascript, animation et DOM</h1>
+<p>Cette séance exploite les possibilités de manipulation du Document Object Model avec JavaScript. Comme précédemment, on commencera tout de suite par ouvrir la console d&#8217;erreurs du navigateur, en ayant son d&#8217;avoir cette fenêtre constamment visible.</p>
+<br /><div id='sequence271'>
+<span id='e2463'></span>
+
+
+<h2 id='a1'>1 Défilement d&#8217;images</h2>
+<p>Le but de cet exercice est de construire une page HTML comportant une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/objects.html#edef-IMG" class='spip_glossaire' title="html" rel='external'>img</a> qui présente une image changeant à intervalles réguliers, par exemple pour construire un site de présentation de photos sous forme de diaporama automatique. Pour ce faire, le corps de  cette page sera réduit à une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-DIV" class='spip_glossaire' title="html" rel='external'>div</a> contenant&nbsp;:</p>
+
+<ul class="spip"><li> deux balises <a href="http://fr.wikipedia.org/wiki/button" class='spip_glossaire' title="htlm" rel='external'>button</a> permettant respectivement d&#8217;activer et d&#8217;arrêter le défilement d&#8217;images&nbsp;;</li><li> une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/objects.html#edef-IMG" class='spip_glossaire' title="html" rel='external'>img</a>.</li></ul>
+<p> L&#8217;en-tête de cette page aura une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#edef-SCRIPT" class='spip_glossaire' title="html" rel='external'>script</a> d&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/links.html#adef-type-A" class='spip_glossaire' title="html" rel='external'>type</a> de valeur <tt>text/javascript</tt> définissant&nbsp;:</p>
+
+<ul class="spip"><li> <tt>images</tt>, un tableau global d&#8217;URL d&#8217;images (vous pouvez prendre les deux images utilisées à la séance <a href="Analyse-XML-dirigee-par-les#a5" class='spip_in'>Analyse XML  dirigée par les événements</a> que vous installerez dans le même répertoire que la page  à écrire)&nbsp;;</li><li> <tt>Arreter</tt>, une fonction sans argument qui affecte une globale <tt>last</tt> à la longueur du tableau <tt>images</tt>&nbsp;;</li><li> <tt>Activer</tt>, une fonction sans argument qui ne fait rien si la  globale <tt>last</tt> est égale à la longueur du tableau, et sinon&nbsp;: <ul class="spip"><li> incrémente cette globale modulo la longueur du tableau, </li><li> change l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-src-SCRIPT" class='spip_glossaire' title="Voir la description de 'src' dans la documentation de 'html' section 1" rel='external'>src</a> de la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/objects.html#edef-IMG" class='spip_glossaire' title="html" rel='external'>img</a> en lui donnant comme valeur l&#8217;image désignée par <tt>last</tt> dans le tableau,</li><li> se rappelle elle-même 300 millisecondes plus tard à l&#8217;aide de la fonction JavaScript <tt>setTimeout</tt>.</li></ul></li></ul>
+<p>Ce code JavaScript étant écrit, que mettre dans les attributs <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onclick" class='spip_glossaire' title="html" rel='external'>onclick</a>&nbsp;des deux boutons pour obtenir le défilement désiré&nbsp;?</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=852&amp;cle=13717f18393c4c75417d1022e2a4dee83fbec19e&amp;file=distant%2FVCS%2FLI355%2FTM%2F10%2Fdefilement.html"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger defilement.html</a>
+</div>
+<p><code><span style="color: #000000">
+&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Strict//EN"<br />&nbsp;&nbsp;&nbsp;&nbsp;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;<br />&lt;html&nbsp;xml:lang="fr"&nbsp;lang="fr"&nbsp;dir="ltr"&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />&lt;head&gt;<br />&lt;title&gt;PACS&nbsp;TME&nbsp;10&nbsp;Exercice&nbsp;3&lt;/title&gt;<br />&lt;script&nbsp;type="text/javascript"&gt;<br />images&nbsp;=&nbsp;["../8/detoure.jpg",&nbsp;"../8/gnu.png"];<br />function&nbsp;Activer&nbsp;()&nbsp;{<br />&nbsp;&nbsp;if&nbsp;(images.length&nbsp;&gt;&nbsp;last)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;last&nbsp;=&nbsp;(last+1)&nbsp;%&nbsp;images.length;<br />&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('image').src&nbsp;=&nbsp;images[last];<br />&nbsp;&nbsp;&nbsp;&nbsp;setTimeout(function&nbsp;()&nbsp;{Activer()},&nbsp;300);<br />&nbsp;&nbsp;}<br />}<br /><br />function&nbsp;Arreter()&nbsp;{<br />&nbsp;&nbsp;last&nbsp;=&nbsp;images.length;<br />}<br />&lt;/script&gt;<br />&lt;/head&gt;<br />&lt;body&gt;&lt;div&gt;<br />&nbsp;&nbsp;&lt;button&nbsp;onclick="last&nbsp;=&nbsp;0;Activer()"&gt;Activer&lt;/button&gt;<br />&nbsp;&nbsp;&lt;button&nbsp;onclick="Arreter()"&gt;Arreter&lt;/button&gt;<br />&nbsp;&nbsp;&lt;img&nbsp;id='image'&nbsp;src=''&nbsp;alt=''&nbsp;&nbsp;/&gt;<br />&lt;/div&gt;&lt;/body&gt;<br />&lt;/html&gt;<br /></span>
+</code></p></div>
+ 
+ <div id='reponses2463'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum6372"> 
+	    <div class="reponse">
+	<div class="forum-titre">Défilement d&#8217;images</div>
+3 avril 2014 &agrave; 12h09min, par  <a href="mailto:">KOSTRIKOVA ANNA</a>  (et 3103288)
+	<div><div class="spip_code"><code>&lt;html&gt;<br />
+&lt;head&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+ &nbsp;&lt;form action=''&gt;<br />
+ &nbsp; &nbsp;&lt;input type=&quot;button&quot; value=&quot;arreter&quot; onclick='arreter()'&gt;<br />
+ &nbsp; &nbsp;&lt;input type=&quot;button&quot; value=&quot;activer&quot; onclick='activer()'&gt;<br />
+ &nbsp;&lt;/form&gt;<br />
+ &nbsp;&lt;img src='image1.png' id='img1'&gt;<br />
+ &nbsp;&lt;script type='text/javascript'&gt;<br />
+ &nbsp;var tab=new Array('image1.png','image2.jpg','image3.jpg');<br />
+ &nbsp;var last=0;<br />
+ &nbsp;function arreter() {<br />
+ &nbsp; &nbsp;last=tab.length;<br />
+ &nbsp;}<br />
+ &nbsp;function activer() &nbsp;{<br />
+ &nbsp; &nbsp;if(last!=tab.length) {<br />
+ &nbsp; &nbsp; &nbsp; last= (last+1) % (tab.length);<br />
+ &nbsp; &nbsp; &nbsp; document.getElementById('img1').setAttribute('src',tab[last]);<br />
+ &nbsp; &nbsp; &nbsp; //alert(tab[last]);<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp; &nbsp;setTimeout('activer()',300);<br />
+ &nbsp;}<br />
+ &nbsp;&lt;/script&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2462'></span>
+
+
+<h2 id='a2'>2 Un bouton inaccessible</h2>
+<p>On souhaite écrire une page HTML  contenant un formulaire proposant deux boutons Oui et Non côte à côte permettant de répondre à une question posée dans le titre (<i>êtes-vous satisfait de l&#8217;action gouvernement&nbsp;?</i>, <i>Aimez-vous ce cours</i> etc). Chacun des deux boutons aura  un attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onclick" class='spip_glossaire' title="html" rel='external'>onclick</a> tel que lors d&#8217;un clic s&#8217;affiche la phrase <i>Merci d&#8217;avoir dit <tt>XXX</tt></i> où XXX est  la réponse choisie (on ne s&#8217;occupe pas d&#8217;enregistrer la réponse dans le cadre de cet exercice).</p>
+
+<p>Toutefois, le formulaire est facétieux&nbsp;: le bouton Non est à l&#8217;intérieur d&#8217;une  balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-DIV" class='spip_glossaire' title="html" rel='external'>div</a> pourvue d&#8217;un attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onmouseover" class='spip_glossaire' title="html" rel='external'>onmouseover</a>, programmé afin que quand la souris s&#8217;approche de ce bouton, ce bloc est déplacé ailleurs sur la page. Il est ainsi impossible de cliquer dessus même en agissant rapidement, car au moment du clic le bouton n&#8217;est déjà plus sous la souris.</p>
+
+<p>Une telle page HTML devra contenir&nbsp;:</p>
+
+<ul class="spip"><li>  un <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-FIELDSET" class='spip_glossaire' title="html" rel='external'>fieldset</a> dont l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/present/styles.html#adef-style" class='spip_glossaire' title="html" rel='external'>style</a> vaut "<tt>width:7em</tt>" et dont le contenu est&nbsp;:<ul class="spip"><li> le bouton Oui&nbsp;;</li><li> le bouton Non, contenu dans une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-DIV" class='spip_glossaire' title="html" rel='external'>div</a> ayant pour attributs&nbsp;:<ul class="spip"><li> <a href="http://fr.wikipedia.org/wiki/style" class='spip_glossaire' title="htm" rel='external'>style</a>, de valeur "<tt>position: absolute; left: 5em; top: 5em; margin-top: 0.4em</tt>&nbsp;;</li><li> <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onmouseover" class='spip_glossaire' title="html" rel='external'>onmouseover</a>, appliquant une fonction JavaScript <tt>bouger</tt> sur <tt>this</tt>&nbsp;;</li></ul></li></ul></li><li> une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#edef-SCRIPT" class='spip_glossaire' title="html" rel='external'>script</a> comportant&nbsp;:<ul class="spip"><li> l&#8217;affectation de deux globales <tt>left=5</tt> et <tt>top=5</tt> reprenant le choix ci-dessus comme position initiale du bouton Non&nbsp;;</li><li> la fonction <tt>merci</tt> affichant la phrase mentionnée ci-dessus&nbsp;;</li><li> la fonction <tt>bouger</tt> qui doit changer aléatoirement les propriétés <tt>left</tt> et <tt>top</tt> de la balise reçue en argument.</li></ul></li></ul>
+<p>On utilisera la fonction <strong>Math.random</strong> qui renvoie un nombre de 0 à 1 pour disposer d&#8217;une valeur aléatoire. Afin d&#8217;éviter un déplacement trop faible du bouton, on procédera par ajout à la position courante des nombres aléatoires multipliés par 100, et on appliquera un modulo de la taille de la page au résultat pour que le bouton reste dans son cadre. Tout repose sur la propriété <tt>position: absolute</tt> qui permet d&#8217;afficher un bloc typographique indépendamment de ce qui figure déjà sur la page.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=853&amp;cle=141caa00c8ca8984da4a3ac74c6d8827c417d688&amp;file=distant%2FVCS%2FLI355%2FTM%2F10%2Fbouton_inaccessible.html"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger bouton_inaccessible.html</a>
+</div>
+<p><code><span style="color: #000000">
+&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Strict//EN"<br />&nbsp;&nbsp;&nbsp;&nbsp;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;<br />&lt;html&nbsp;xml:lang="fr"&nbsp;lang="fr"&nbsp;dir="ltr"&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />&lt;head&gt;<br />&lt;title&gt;Un&nbsp;bouton&nbsp;inaccessible&lt;/title&gt;<br />&lt;script&nbsp;type="text/javascript"&gt;<br />top&nbsp;=&nbsp;5;<br />left&nbsp;=&nbsp;5;<br /><br />function&nbsp;bouger(div){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dx&nbsp;=&nbsp;Math.random()*100;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dy&nbsp;=&nbsp;Math.random()*100;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top&nbsp;=&nbsp;(top&nbsp;+&nbsp;dx)%20;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;div.style.top&nbsp;=&nbsp;top&nbsp;+"em"&nbsp;;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left&nbsp;=&nbsp;(left&nbsp;+&nbsp;dy)%20;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;div.style.left=&nbsp;left&nbsp;+"em"&nbsp;;<br />}<br /><br />function&nbsp;merci(rep){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("Merci&nbsp;d'avoir&nbsp;dit&nbsp;"&nbsp;+&nbsp;rep);<br />}<br />&lt;/script&gt;<br />&lt;/head&gt;<br />&lt;body&gt;<br />&lt;h1&gt;Aimez-vous&nbsp;cet&nbsp;exercice&nbsp;?&lt;/h1&gt;<br />&lt;form&nbsp;action=''&gt;&lt;fieldset&nbsp;style='width:&nbsp;7em'&gt;<br />&lt;input&nbsp;type="button"&nbsp;value="OUI"&nbsp;onclick="merci(this.value);"&nbsp;/&gt;<br />&lt;div&nbsp;style="position:&nbsp;absolute;&nbsp;left:&nbsp;5em;&nbsp;top:&nbsp;5em;&nbsp;margin-top:&nbsp;0.4em"<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onmouseover="bouger(this);"&nbsp;&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;type="button"&nbsp;value="NON"&nbsp;onclick="merci(this.value);"&nbsp;/&gt;<br />&lt;/div&gt;<br />&lt;/fieldset&gt;&lt;/form&gt;<br />&lt;/body&gt;<br />&lt;/html&gt;<br /></span>
+</code></p></div>
+ 
+ <div id='reponses2462'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum6762"> 
+	    <div class="reponse">
+	<div class="forum-titre">Un bouton inaccessible</div>
+25 avril 2014 &agrave; 18h24min, par  <a href="mailto:">KOSTRIKOVA ANNA</a>  (et 3103288)
+	<div><p>EXERCICE 2 // il reste de remplacer 200 par document.width en em(!)&nbsp;???</p>
+
+<div class="spip_code"><code>&lt;html&gt;<br />
+&lt;head&gt;<br />
+&lt;/head&gt;<br />
+&lt;body &gt;<br />
+ &amp;ecirc;tes-vous satisfait de l&amp;#39;action gouvernement?<br />
+ &lt;form&gt;<br />
+ &nbsp; &lt;fieldset style=&quot;font-size:1em;width:7em;border:0&quot; id=&quot;idform&quot;&gt;<br />
+ &nbsp; &nbsp; &lt;input type=&quot;button&quot; value=&quot;oui&quot; onclick='merci(this)' style=&quot;position:absolute; left:2em; top:2em;&quot; &gt;<br />
+ &nbsp; &nbsp; &lt;div onmouseover='bouger(this)' style=&quot;position:absolute; left:5em; top:1.7em&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &lt;input type=&quot;button&quot; value=&quot;non&quot; onclick='merci(this)' &gt;<br />
+ &nbsp; &nbsp; &lt;/div&gt;<br />
+ &nbsp; &lt;/fieldset&gt;<br />
+ &lt;/form&gt;<br />
+ <br />
+ &lt;script type='text/javascript'&gt;<br />
+ &nbsp; var left=5; <br />
+ &nbsp; var topp=5;<br />
+ &nbsp; function bouger(arg) {<br />
+ &nbsp; &nbsp; left += Math.round(Math.random()*100);<br />
+ &nbsp; &nbsp; left = left % 200; // % document.width en em(!) ???<br />
+ &nbsp; &nbsp; arg.style.setProperty('left',left+&quot;pt&quot;);<br />
+ &nbsp; &nbsp; topp += Math.round(Math.random()*100);<br />
+ &nbsp; &nbsp; topp = topp % 200;<br />
+ &nbsp; &nbsp; arg.style.setProperty('top',topp+&quot;pt&quot;);<br />
+ &nbsp; }<br />
+ &nbsp; function merci(arg) { alert('Merci d\'avoir dit ' + arg.value);}<br />
+ &lt;/script&gt;<br />
+<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;</code></div>
+<p>EXERCICE 3</p>
+
+<div class="spip_code"><code>&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;<br />
+ &nbsp;&lt;head&gt;<br />
+ &nbsp; &nbsp;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;<br />
+ &nbsp; &nbsp;&lt;title&gt;Cr&amp;eacute;neau dans ICS&lt;/title&gt;<br />
+ &nbsp;&lt;/head&gt; <br />
+ &nbsp;&lt;body onload='return init_ics(this)'&gt;<br />
+ &nbsp; &nbsp;&lt;h1&gt;Cr&amp;eacute;neau dans ICS&lt;/h1&gt;<br />
+ &nbsp; &nbsp;&lt;form onsubmit=controle_heure(this) method=&quot;post&quot; enctype=&quot;multipart/form-data&quot; if=&quot;myForm&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp;&lt;fieldset&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;label for='jour'&gt;Jour&lt;/label&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;input name='jour' id='jour' onblur=controle_jour(this)&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;label for='debut'&gt;Commencement&lt;/label&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;input name='debut' id='debut' onblur=controle_heure(this)&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;label for='fin'&gt;Fin&lt;/label&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;input name='fin' id='fin' onblur=controle_heure(this)&gt;<br />
+ &nbsp; &nbsp; &nbsp;&lt;/fieldset&gt;<br />
+ &nbsp; &nbsp; &nbsp;&lt;fieldset&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;label for='ICS'&gt;Agenda &lt;/label&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;input type='file' name='ICS' id='ICS'/&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;input type='submit' value='Demander ce rendez-vous' /&gt;<br />
+ &nbsp; &nbsp; &nbsp;&lt;/fieldset&gt;<br />
+ &nbsp; &nbsp;&lt;/form&gt; <br />
+ &nbsp;&lt;/body&gt; <br />
+&lt;/html&gt;<br />
+<br />
+&lt;script type='text/javascript'&gt;<br />
+ &nbsp;OK=true;<br />
+ &nbsp;<br />
+ &nbsp;function init_ics() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; var today = new Date();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; var day = today.getDate() &gt;= 9 ? today.getDate()+1 : today.getDate()+11;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; var month = today.getMonth() &gt;=9 ? today.getMonth()+1: today.getMonth()+11;<br />
+ &nbsp; &nbsp;document.getElementById(&quot;jour&quot;).value = &quot;&quot; + day + month + today.getFullYear();<br />
+ &nbsp; &nbsp;document.getElementById(&quot;debut&quot;).value = &quot;120000&quot;;<br />
+ &nbsp; &nbsp;document.getElementById(&quot;fin&quot;).value = &quot;130000&quot;;<br />
+ &nbsp; &nbsp;document.getElementById('ICS').focus();<br />
+ &nbsp;}<br />
+ &nbsp;<br />
+ &nbsp;function controle_jour(input) {<br />
+ &nbsp; &nbsp;if(!/^\d\d\d\d\d\d\d\d$/.exec(input.value)) {<br />
+ &nbsp; &nbsp; &nbsp;alert(&quot;verifiez date&quot;);<br />
+ &nbsp; &nbsp; &nbsp;OK=false;<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp;}<br />
+ &nbsp;<br />
+ &nbsp;function controle_heure(input) {<br />
+ &nbsp; &nbsp;if(!/^\d\d\d\d\d\d$/.exec(input.value)) {<br />
+ &nbsp; &nbsp; &nbsp;alert(&quot;verifiez l'heure&quot;);<br />
+ &nbsp; &nbsp; &nbsp;OK=false;<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp;}<br />
+<br />
+ &nbsp;function controle_heure(form) { <br />
+ &nbsp; &nbsp;return (OK &amp;&amp; document.getElementById(&quot;debut&quot;).value&lt;document.getElementById(&quot;fin&quot;).value);<br />
+ &nbsp;} &nbsp; &nbsp;<br />
+&lt;/script&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3599'></span>
+
+
+<h2 id='a3'>3 Contrôle interactif des saisies</h2>
+<p>L&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onsubmit" class='spip_glossaire' title="html" rel='external'>onsubmit</a> permet de contrôler les saisies d&#8217;un formulaire afin d&#8217;invalider son envoi lorsqu&#8217;elles seront à coup sûr refusées par le serveur. Toutefois, lorsqu&#8217;un formulaire contient beaucoup de champs de saisies, il est désagréable d&#8217;attendre de parvenir au bouton de soumission final pour être notifié d&#8217;une erreur dans les premières saisies. Il est possible de contrôler les saisies à mesure qu&#8217;elles sont introduites, en plaçant dans les balises de saisies un attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onblur" class='spip_glossaire' title="html" rel='external'>onblur</a>, dont le contenu est exécuté par l&#8217;interprète JavaScript dès que la saisie de cette balise est terminée, autrement dit dès que cette balise perd le focus. Il est remarquer qu&#8217;au cas où cette balise n&#8217;aurait jamais eu le focus au moment de la soumission, aucun contrôle n&#8217;aura été fait sur son contenu, ce qui, la plupart du temps, nécessite quand même un contrôle final par <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onsubmit" class='spip_glossaire' title="html" rel='external'>onsubmit</a>.</p>
+
+<p>Un exemple d&#8217;un tel formulaire est donné par <a href="Un-type-MIME-pour-les-calendriers#a4" class='spip_in'>le dernier exercice de la séance</a>,  qui contient plusieurs saisies supposées correctes lors de cette séance, et qu&#8217;il s&#8217;agit de vérifier à présent. On prendra la partie HTML de la solution PHP proposée, qu&#8217;il s&#8217;agit donc de compléter par des attributs à événements et des fonctions JavaScript. Les 3 premières saisies doivent être des nombres de 8 chiffres pour le premier, et de 6 chiffres pour les deux autres. De plus, le 3e doit être strictement supérieur au 2e.</p>
+
+<p>Afin de se débarrasser du cas des saisies n&#8217;ayant jamais eu le focus, on souhaite initialiser l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#adef-value-INPUT" class='spip_glossaire' title="html" rel='external'>value</a> à des valeurs correctes et utiles. Pour la 2e et 3e, ce sont des heures de début et de fin de rendez-vous, on prendra midi et une heure plus tard, soit 120000 et 130000. La première saisie indique un jour, et on souhaite prendre le jour qu&#8217;il est. Comme il s&#8217;agit d&#8217;une page HTML, cette initialisation ne peut se faire qu&#8217;en JavaScript, en utilisant son objet Date avec les méthodes suivantes&nbsp;:</p>
+
+<ul class="spip"><li> <tt>getFullYear</tt>, qui retourne la date sur 4 chiffres&nbsp;;</li><li> <tt>getDate</tt>, qui retourne le numéro du jour du mois, parfois sur un chiffre qu&#8217;il faudra alors compléter par un "0"&nbsp;;</li><li> <tt>getMonth</tt>, qui retourne le mois, compté à partir de 0 et parfois sur un chiffre, deux incommodités à corriger.</li></ul>
+<p>Au final, il faudra écrire&nbsp;:</p>
+
+<ul class="spip"><li> une fonction JavaScript <tt>controle_jour</tt>, recevant en argument une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-INPUT" class='spip_glossaire' title="html" rel='external'>input</a> et  vérifiant que sa valeur est un nombre sur 8 chiffres&nbsp;; si ce n&#8217;est pas le cas, elle le signale dans une fenêtre d&#8217;alerte et affecte la globale <tt>ok</tt> à <tt>False</tt>&nbsp;;</li><li> une fonction JavaScript <tt>controle_heure</tt>, recevant en argument une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-INPUT" class='spip_glossaire' title="html" rel='external'>input</a> et  vérifiant que sa valeur est un nombre sur 6 chiffres&nbsp;; si ce n&#8217;est pas le cas, elle le signale dans une fenêtre d&#8217;alerte et affecte la globale <tt>ok</tt> à <tt>False</tt>&nbsp;;</li><li>  une fonction JavaScript <tt>controle_heure</tt>, recevant en argument une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-FORM" class='spip_glossaire' title="html" rel='external'>form</a>, retournant <tt>False</tt> si la globale <tt>ok</tt> vaut <tt>False</tt> ou si la 3e saisie est inférieure à la seconde, <tt>True</tt> autrement&nbsp;;</li><li> une fonction JavaScript <tt>init_ics</tt>, affectant à l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#adef-value-INPUT" class='spip_glossaire' title="html" rel='external'>value</a> de la première balise de saisie avec le jour qu&#8217;il est exprimé sur 8 chiffres&nbsp;; en outre cette fonction donne le focus à la 4e balise de saisie,</li></ul>
+<p>Modifier le texte HTML fourni  afin d&#8217;y ajouter la déclaration de ces fonctions, et ajouter aux balises qui le nécessitent les attributs <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onload" class='spip_glossaire' title="html" rel='external'>onload</a>,  <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onsubmit" class='spip_glossaire' title="html" rel='external'>onsubmit</a> et <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/scripts.html#adef-onblur" class='spip_glossaire' title="html" rel='external'>onblur</a> avec les appels de fonctions judicieux pour effectuer les contrôles demandés.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=854&amp;cle=909d4a9a71c8b09d55318674aded09ba136df6e6&amp;file=distant%2FVCS%2FLI355%2FTM%2F10%2Ffocus-blur.html"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger focus-blur.html</a>
+</div>
+<p><code><span style="color: #000000">
+&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;Basic&nbsp;1.1//EN"&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"&gt;<br />&lt;html&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />&nbsp;&nbsp;&lt;head&gt;<br />&nbsp;&nbsp;&lt;meta&nbsp;http-equiv="Content-Type"&nbsp;content="text/html;&nbsp;charset=utf-8"&nbsp;/&gt;<br />&nbsp;&nbsp;&lt;title&gt;Créneau&nbsp;dans&nbsp;ICS&lt;/title&gt;<br />&nbsp;&nbsp;&lt;script&nbsp;type='text/javascript'&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;ok&nbsp;=&nbsp;true;<br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;controle_jour(input)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!/^&nbsp;*[0-9]{8}&nbsp;*$/.test(input.value))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('jour&nbsp;incorrect:&nbsp;'&nbsp;+&nbsp;&nbsp;input.value);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ok&nbsp;=&nbsp;false;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;controle_heure(input)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!/^&nbsp;*[0-9]{6}&nbsp;*$/.test(input.value))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('heure&nbsp;incorrecte:&nbsp;'&nbsp;+&nbsp;input.value);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ok&nbsp;=&nbsp;false;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;controle_ics(form)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!ok)&nbsp;return&nbsp;false;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(form.elements['fin'].value&nbsp;&lt;=&nbsp;form.elements['debut'].value)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('fin&nbsp;avant&nbsp;debut&nbsp;');<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;init_ics()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;d&nbsp;=&nbsp;new&nbsp;Date();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;m&nbsp;=&nbsp;d.getMonth()+1;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(m&nbsp;&lt;&nbsp;10)&nbsp;m&nbsp;=&nbsp;'0'&nbsp;+&nbsp;m;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;j&nbsp;=&nbsp;d.getDate();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(j&nbsp;&lt;&nbsp;10)&nbsp;j&nbsp;=&nbsp;'0'&nbsp;+&nbsp;j;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('jour').value&nbsp;=&nbsp;d.getFullYear()&nbsp;+&nbsp;m&nbsp;+&nbsp;d.getDate();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('ICS').focus();<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;&lt;/script&gt;&nbsp;<br />&nbsp;&nbsp;&lt;/head&gt;&nbsp;<br />&nbsp;&nbsp;&lt;body&nbsp;onload="init_ics()"&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Créneau&nbsp;dans&nbsp;ICS&lt;/h1&gt;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;form&nbsp;action="creneau_ics.php"&nbsp;method="post"&nbsp;enctype="multipart/form-data"<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onsubmit='return&nbsp;controle_ics(this)'&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;fieldset&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for='jour'&gt;Jour&nbsp;&lt;/label&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;name='jour'&nbsp;id='jour'&nbsp;onblur='controle_jour(this)'&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for='debut'&gt;Commencement&nbsp;&lt;/label&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;name='debut'&nbsp;id='debut'&nbsp;value='120000'&nbsp;onblur='controle_heure(this)'&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for='fin'&gt;Fin&nbsp;&lt;/label&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;name='fin'&nbsp;id='fin'&nbsp;value='130000'&nbsp;onblur='controle_heure(this)'&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/fieldset&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;fieldset&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for='ICS'&gt;Agenda&nbsp;&lt;/label&gt;&lt;input&nbsp;type='file'&nbsp;name='ICS'&nbsp;id='ICS'/&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;type='submit'&nbsp;value='Demander&nbsp;ce&nbsp;rendez-vous'&nbsp;/&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/fieldset&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/form&gt;&nbsp;<br />&nbsp;&nbsp;&lt;/body&gt;&nbsp;<br />&lt;/html&gt;<br /></span>
+</code></p></div>
+
+
+<span id='e3600'></span>
+
+
+<h2 id='a4'>4 AJAX</h2>
+<p>En fonction du temps qu&#8217;il vous reste, reprenez les questions de la <a href="Formulaires-en-AJAX" class='spip_in'>séance de travaux dirigés de la semaine</a>.</p>
+
+
+<div style='text-align:right' id='s1040'>
+</div>
+
+
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FReveiller-l-internaute-programmer"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FReveiller-l-internaute-programmer'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FReveiller-l-internaute-programmer&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 15h03min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FReveiller-l-internaute-programmer'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=292"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>11. La configuration d'un serveur HTTP (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Transformer le pseudo-xml</a></li>
+<li class="menu-lv2"><a href='#a2'>Lire du pseudo-XML</a></li>
+<li class="menu-lv2"><a href='#a3'>Que sers-je&nbsp;?</a></li>
+<li class="menu-lv2"><a href='#a4'>Réécriture d&#8217;URL</a></li>
+<li class="menu-lv2"><a href='#a5'>Contrôle personnalisé</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux sur Machine<br />11. La configuration d&#8217;un serveur HTTP</h1>
+<p>Cette séance étend <a href="Un-serveur-HTTP-minimal" class='spip_in'>Un serveur HTTP minimal</a> en lui faisant lire le fichier de configuration standard du serveur HTTP Apache. La syntaxe de ce fichier est une sorte de XML qu&#8217;il faudra pré-traiter avant de le passer à SAX. On repérera ensuite quelques directives représentatives qui permettront de mieux comprendre comment fonctionne Apache en essayant de l&#8217;imiter.</p>
+<br /><div id='sequence292'>
+<span id='e3604'></span>
+
+
+<h2 id='a1'>1 Transformer le pseudo-xml</h2>
+<p>Le fichier de configuration apache est inspiré de XML dans sa structuration par des balises ouvrantes et fermantes. Il s&#8217;en distingue sur 3 points&nbsp;:</p>
+
+<ul class="spip"><li> les lignes commençant par le signe # (éventuellement précédé d&#8217;espaces), sont des commentaires  qu&#8217;il faut complètement ignorer (d&#8217;autant que peuvent y  figurer  &lt; et &gt;)&nbsp;;</li><li> l&#8217;intégralité du fichier n&#8217;est pas entourée par un couple de balises&nbsp;;</li><li> les balises ouvrantes ne respectent pas la syntaxe des attributs&nbsp;: tout ce qui suit le nom est un pseudo-attribut unique et anonyme, par exemple&nbsp;: 
+<pre>
+<tt>&lt;Files ~ "^\.ht"&gt;</tt>
+ou
+<tt>&lt;Directory /&gt;</tt>
+</pre></li></ul>
+<p>Le dernier cas induit évidemment une grande ambiguïté avec les constructions XML.</p>
+
+<p>Pour profiter néanmoins de l&#8217;analyseur SAX, nous allons d&#8217;abord charger ce fichier dans un tableau PHP et effectuer des transformations dans le but d&#8217;obtenir un texte <i>conforme</i> à XML&nbsp;; la <i>validité</i> n&#8217;ayant pas de sens en l&#8217;absence de DTD). Ces transformations sont donc&nbsp;:</p>
+
+<ul class="spip"><li> Avec les fonctions <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.array-unshift.html" class='spip_glossaire' title="Voir la description de 'array_unshift' dans la documentation de 'php'" rel='external'>array_unshift</a> et <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.array-push.html" class='spip_glossaire' title="Voir la description de 'array_push' dans la documentation de 'php'" rel='external'>array_push</a> on encadrera ce tableau avec une balise quelconque&nbsp;;</li><li> si une ligne comporte une balise ouvrante dont le nom est suivi de caractères significatifs, on transformera celle-ci de sorte que cette suite de caractères significatifs sera remplacée par un attribut XML de nom quelconque, dont la valeur, encadrée par des guillemets, sera cette suite. On veillera à ne pas rajouter ces guillemets si la suite en question est déjà encadrée de guillemets. </li></ul>
+<p>Ainsi, les exemples ci-dessus deviendront&nbsp;:</p>
+<pre>
+<tt>&lt;Files att='~ "^\.ht"'&gt;</tt> 
+et
+ <tt>&lt;Directory att='/'&gt;</tt>.
+</pre>
+<p>Ecrire la fonction <code class='spip_code'>pseudo_xml_to_array_xml</code> qui prend en argument un nom de fichier, le charge dans un tableau PHP à l&#8217;aide de la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.file.html" class='spip_glossaire' title="Voir la description de 'file' dans la documentation de 'php'" rel='external'>file</a>, effectue les transformations énumérées ci-dessus, et retourne le tableau.</p>
+
+<p>Note&nbsp;: la configuration actuelle de vos machines possède plusieurs fichiers de configuration d&#8217;Apache&nbsp;: <tt>/etc/apache2/apache2.conf</tt> et <tt>/etc/apache2/sites-enabled/000-default</tt>&nbsp;;  utilisez-les pour tester.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=855&amp;cle=917f4b01e1323ae486087485bd341aa35f1b962b&amp;file=distant%2FVCS%2FLI355%2FTM%2F11%2Fpseudo_xml_vers_tableau.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger pseudo_xml_vers_tableau.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />define&nbsp;</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_BALISE'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"/^\s*(&lt;\S+)\s+([^&gt;]+)(&gt;.*)$/"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">define&nbsp;</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_ATTR'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'#^".*"$#'</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">pseudo_xml_to_array_xml</span><span style="color: #007700">(</span><span style="color: #0000BB">$path</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$resultat&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$file&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">file</span><span style="color: #007700">(</span><span style="color: #0000BB">$path</span><span style="color: #007700">);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">array_unshift</span><span style="color: #007700">(</span><span style="color: #0000BB">$file</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'&lt;CONF&gt;'</span><span style="color: #007700">);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">array_push</span><span style="color: #007700">(</span><span style="color: #0000BB">$file</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'&lt;/CONF&gt;'</span><span style="color: #007700">);<br /><br />&nbsp;&nbsp;foreach(</span><span style="color: #0000BB">$file&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$l&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">ltrim</span><span style="color: #007700">(</span><span style="color: #0000BB">$l</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$l&nbsp;</span><span style="color: #007700">AND&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">]&nbsp;!==&nbsp;</span><span style="color: #DD0000">'#'</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #0000BB">RE_BALISE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">,</span><span style="color: #0000BB">$a</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #0000BB">RE_ATTR</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$s&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strpos</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">],&nbsp;</span><span style="color: #DD0000">'"'</span><span style="color: #007700">)&nbsp;?&nbsp;</span><span style="color: #DD0000">"'"&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #DD0000">'"'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$s&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #0000BB">$s</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$l&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">"&nbsp;v="&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">]&nbsp;&nbsp;.&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">3</span><span style="color: #007700">];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">array_push</span><span style="color: #007700">(</span><span style="color: #0000BB">$resultat</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$resultat</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">//Test&nbsp;<br />//&nbsp;var_dump&nbsp;(pseudo_xml_to_array_xml("httpd.conf"));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+
+
+<span id='e2706'></span>
+
+
+<h2 id='a2'>2 Lire du pseudo-XML</h2>
+<p>A l&#8217;aide de la fonction <code class='spip_code'>pseudo_xml_to_array_xml</code> que vous venez de réaliser,  écrire un analyseur du fichier de configuration d&#8217;Apache, se contentant pour le moment d&#8217;afficher le texte brut amputé des commentaires et des balises, et précédé d&#8217;un numéro indiquant le nombre de balises entourant la ligne affichée (autrement dit sa profondeur dans l&#8217;arbre XML).</p>
+
+<p>En prévision de la question suivante, rédiger la réponse sous forme d&#8217;une fonction prenant en arguments le chemin d&#8217;accès au fichier, la fonction traitant les balises ouvrantes, celle traitant les balises fermantes et celle traitant les zones de texte. On pourra s&#8217;inspirer de la fonction donnée à la séance <a href="Accessibilite-des-sites-Web" class='spip_in'>Accessibilité des sites Web</a>.</p>
+
+<p>Note&nbsp;: Avant donc d&#8217;envoyer les lignes à SAX, vous devez d&#8217;abord les transformer à l&#8217;aide la fonction <code class='spip_code'>pseudo_xml_to_array_xml</code>.</p>
+
+
+<div style='text-align:right' id='s10'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>pseudo-xml.php</tt><br />
+</div>
+
+ 
+ <div id='reponses2706'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum6763"> 
+	    <div class="reponse">
+	<div class="forum-titre">Lire du pseudo-XML</div>
+26 avril 2014 &agrave; 13h59min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php<br />
+include 'pseudo_xml_vers_tableau.php';<br />
+global $prof;<br />
+<br />
+function ouvrante($parser,$name,$attrs) {<br />
+ &nbsp;global $prof;<br />
+ &nbsp;$prof++;<br />
+}<br />
+<br />
+function fermante($parser,$name) {<br />
+ &nbsp;global $prof;<br />
+ &nbsp;$prof--;<br />
+}<br />
+<br />
+function texte($parser,$data) {<br />
+ &nbsp;global $prof;<br />
+ &nbsp;preg_match('@^([^#]*)@',$data,$m);<br />
+ &nbsp;$m[1]=trim($m[1]);<br />
+ &nbsp;if(!empty($m[1]))<br />
+ &nbsp; &nbsp;echo &quot;&lt;br&gt;&quot;.$prof.&quot; : &quot;.htmlspecialchars($m[1]); &nbsp;<br />
+}<br />
+<br />
+<br />
+function pseudo_xml($path,$ouvrante,$fermante,$texte) {<br />
+ &nbsp;global $prof;<br />
+ &nbsp;$prof=0;<br />
+ &nbsp;$xml_parser=xml_parser_create();<br />
+ &nbsp;xml_set_element_handler($xml_parser, $ouvrante, $fermante);<br />
+ &nbsp;xml_set_character_data_handler($xml_parser, $texte);<br />
+ &nbsp;xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false); <br />
+ &nbsp;<br />
+ &nbsp;foreach(pseudo_xml_to_array_xml($path) as $ligne) <br />
+ &nbsp; &nbsp;xml_parse($xml_parser,$ligne); <br />
+ &nbsp;xml_parser_free($xml_parser);<br />
+}<br />
+<br />
+pseudo_xml('t.txt',&quot;ouvrante&quot;,&quot;fermante&quot;,&quot;texte&quot;);<br />
+?&gt;</code></div></div>
+	<div class="forum-repondre-message">
+		<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=ramassage&amp;id_article=2706&amp;id_rubrique=292&amp;id_forum=6763&amp;retour=La-configuration-d-un-serveur-HTTP">Am&eacute;liorer votre r&eacute;ponse&nbsp;</a>
+	</div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2708'></span>
+
+
+<h2 id='a3'>3 Que sers-je&nbsp;?</h2>
+<p>A l&#8217;intérieur du fichier de configuration, figure au moins une ligne ainsi composée&nbsp;:</p>
+
+<p><tt>DocumentRoot</tt> <i>chemin absolu d&#8217;un répertoire</i></p>
+
+<p>Comme on l&#8217;a vu, cette ligne peut figurer soit en dehors de toute balise dans le fichier originel (elle  désigne alors la racine de l&#8217;hôte par défaut&nbsp;: <tt>localhost</tt> sur le port 80), soit à l&#8217;intérieur d&#8217;une directive <tt>VirtualHost</tt> (et elle désigne alors la racine de l&#8217;hôte virtuel). 
+Dans ce second cas, le nom et le port de l&#8217;hôte virtuel peuvent être donnés de deux façons&nbsp;:</p>
+
+<ul class="spip"><li> soit la directive <tt>VirtualHost</tt> contient un pseudo-attribut de la forme <i>nom:port</i>, ou <i>nom</i> peut valoir "*" et désigner alors <tt>localhost</tt>&nbsp;;</li><li> soit il existe la directive <tt>ServerName</tt> <i>nom</i> à l&#8217;intérieur de la balise <tt>VirtualHost</tt>, ce qui donne le nom de l&#8217;hôte tandis que le port est celui par défaut (80).</li></ul>
+<p>Modifier l&#8217;analyseur de la question précédente afin qu&#8217;il affecte un tableau global dont les index seront les différents noms d&#8217;hôtes rencontrés, les valeurs associées étant des sous-tableaux dont les index sont les numéros de ports rencontrés, et la valeur associée le
+<tt>DocumentRoot</tt> correspondant. Pour simplifier, on considérera que la directive <tt>ServerName</tt> apparaît avant le <tt>DocumentRoot</tt> correspondant.</p>
+
+<p>On se servira ensuite de ce tableau global pour modifier l&#8217;étape 3 du serveur étudié en <a href="Un-serveur-HTTP-minimal" class='spip_in'>travaux dirigés</a> afin de  trouver le chemin absolu du fichier désigné par l’URL&nbsp;: les valeurs <tt>$_SERVER[&#8217;HTTP_HOST&#8217;]</tt> 
+et <tt>$_SERVER[&#8217;SERVER_PORT&#8217;]</tt> 
+communiquent en effet l&#8217;en-tête HTTP <tt>Host:</tt>, 
+autrement dit le nom du serveur, virtuel ou réel, utilisé par le client ainsi que son port.</p>
+
+
+<div style='text-align:right' id='s20'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>documentroot.php</tt><br />
+</div>
+
+ 
+ <div id='reponses2708'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum6764"> 
+	    <div class="reponse">
+	<div class="forum-titre">Que sers-je&nbsp;?</div>
+26 avril 2014 &agrave; 17h07min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php<br />
+include 'pseudo_xml_vers_tableau.php';<br />
+global $prof;<br />
+global $nomsHotes;<br />
+global $nomHote;<br />
+global $port;<br />
+global $documentRoot;<br />
+global $serverName;<br />
+<br />
+function ouvrante($parser,$name,$attrs) {<br />
+ &nbsp;global $prof;<br />
+ &nbsp;global $nomHote;<br />
+ &nbsp;global $port;<br />
+ &nbsp;$prof++;<br />
+ &nbsp;if($name=='VirtualHost') {<br />
+ &nbsp; &nbsp;preg_match(&quot;/^([^:]*)[:](.*)$/&quot;,$attrs['att'],$m);<br />
+ &nbsp; &nbsp;$nomHote=$m[1];<br />
+ &nbsp; &nbsp;$port=$m[2];<br />
+ &nbsp;}<br />
+}<br />
+<br />
+function fermante($parser,$name) {<br />
+ &nbsp;global $prof;<br />
+ &nbsp;global $nomsHotes;<br />
+ &nbsp;global $nomHote;<br />
+ &nbsp;global $port;<br />
+ &nbsp;global $documentRoot;<br />
+ &nbsp;global $ServerName;<br />
+ &nbsp;$prof--;<br />
+ &nbsp;if($name=='VirtualHost') {<br />
+ &nbsp; &nbsp;//echo &quot;nomHote = &quot;.$nomHote.&quot;&lt;br&gt;&quot;;<br />
+ &nbsp; &nbsp;//echo &quot;ServerName = &quot;.$ServerName.&quot;&lt;br&gt;&quot;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if(isset($ServerName)) { <br />
+ &nbsp; &nbsp; &nbsp;$nomHote=$ServerName;<br />
+ &nbsp; &nbsp; &nbsp;$port=80;<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp; &nbsp;$nomsHotes[$nomHote]=array($port=&gt;$documentRoot);<br />
+ &nbsp; &nbsp;echo &quot;nomsHotes[$nomHote] = ($port =&gt; &quot;.$documentRoot.&quot;)&lt;br&gt;&quot;; <br />
+ &nbsp;}<br />
+}<br />
+<br />
+function texte($parser,$data) {<br />
+ &nbsp;global $prof;<br />
+ &nbsp;global $documentRoot;<br />
+ &nbsp;global $ServerName;<br />
+ &nbsp;<br />
+ &nbsp;preg_match('@^([^#]*)@',$data,$m);<br />
+ &nbsp;$ligne=trim(htmlspecialchars($m[1]));<br />
+ &nbsp;if(!empty($ligne))<br />
+ &nbsp; &nbsp;echo $prof.&quot; : &quot;.$ligne.&quot;&lt;br&gt;&quot;; &nbsp;<br />
+ &nbsp;if(preg_match(&quot;/DocumentRoot[ ](\S*)/&quot;,$ligne,$m)) {<br />
+ &nbsp; &nbsp;$documentRoot=$m[1];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if($prof==1) {<br />
+ &nbsp; &nbsp; &nbsp;$nomHote='localhost';<br />
+ &nbsp; &nbsp; &nbsp;$port=80;<br />
+ &nbsp; &nbsp; &nbsp;$nomsHotes[$nomHote]=array($port=&gt;$documentRoot);<br />
+ &nbsp; &nbsp; &nbsp;echo &quot;nomsHotes['localhost'] = (80 =&gt; &quot;.$nomsHotes['localhost'][80].&quot;)&lt;br&gt;&quot;; <br />
+ &nbsp; &nbsp;}<br />
+ &nbsp;}<br />
+ &nbsp;if(preg_match(&quot;/ServerName[ ](\S*)/&quot;,$ligne,$m))<br />
+ &nbsp; &nbsp;$ServerName=$m[1];<br />
+}<br />
+<br />
+function pseudo_xml($path,$ouvrante,$fermante,$texte) {<br />
+ &nbsp;global $prof;<br />
+ &nbsp;global $nomsHotes;<br />
+ &nbsp;$prof=0;<br />
+ &nbsp;$nomsHotes=array();<br />
+ &nbsp;$xml_parser=xml_parser_create();<br />
+ &nbsp;xml_set_element_handler($xml_parser, $ouvrante, $fermante);<br />
+ &nbsp;xml_set_character_data_handler($xml_parser, $texte);<br />
+ &nbsp;xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false); <br />
+ &nbsp;<br />
+ &nbsp;foreach(pseudo_xml_to_array_xml($path) as $ligne) {<br />
+ &nbsp; &nbsp;//echo &quot;appelle parser pour &quot;.$ligne[0].&quot; &quot;.$ligne[1].$ligne[2].&quot;...&lt;br&gt;&quot;;<br />
+ &nbsp; &nbsp;xml_parse($xml_parser,$ligne); <br />
+ &nbsp;}<br />
+ &nbsp;xml_parser_free($xml_parser);<br />
+}<br />
+<br />
+pseudo_xml('000-default',&quot;ouvrante&quot;,&quot;fermante&quot;,&quot;texte&quot;);<br />
+?&gt;</code></div></div>
+	<div class="forum-repondre-message">
+		<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=ramassage&amp;id_article=2708&amp;id_rubrique=292&amp;id_forum=6764&amp;retour=La-configuration-d-un-serveur-HTTP">Am&eacute;liorer votre r&eacute;ponse&nbsp;</a>
+	</div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3605'></span>
+
+
+<h2 id='a4'>4 Réécriture d&#8217;URL</h2>
+<p>Apache offre des modules de réécriture d&#8217;URL, notamment <tt>mod_rewrite</tt>. Une façon de l&#8217;utiliser est de créer un fichier nommé <tt>.htaccess</tt> dans le répertoire où se trouve la ressource désignée par l&#8217;URL, ou un répertoire parent. Le fichier  <tt>.htaccess</tt>  doit contenir les deux lignes suivantes&nbsp;:</p>
+<pre>
+RewriteEngine On
+RewriteRule Modèle Redirection 
+</pre>
+Avec&nbsp;:
+<ul class="spip"><li> Modèle&nbsp;:  expression rationnelle qu&#8217;Apache applique sur l&#8217;URL&nbsp;;</li><li> Redirection&nbsp;: chemin absolu où rediriger en cas de succès </li></ul>
+<p>Nous allons écrire une règle de redirection interdisant l&#8217;accès à un type de fichier dans un répertoire donné. Pour cela, créer un fichier <i>.htaccess</i> sur le répertoire à sécuriser, et y mettre ce qu&#8217;il faut pour que toute URL désignant un fichier JPG, PNG ou GIF soit redirigée vers une page convenue se trouvant sur la racine <tt>public_html</tt>.</p>
+
+<p>Note&nbsp;:</p>
+
+<ul class="spip"><li> Il faut donc créer une page HTML prévenant que l&#8217;accès n&#8217;est pas autorisé&nbsp;;</li><li> Vous pouvez vous baser sur les images du TME8 pour tester.</li></ul>
+
+
+<div style='text-align:right' id='s30'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>htaccess.txt</tt><br />
+</div>
+
+
+
+<span id='e3606'></span>
+
+
+<h2 id='a5'>5 Contrôle personnalisé</h2>
+<p>Modifier l’étape 3 du serveur étudié en travaux dirigés afin d&#8217;appliquer les règles de redirection contenu dans les fichiers <tt>.htaccess</tt> s&#8217;ils existent dans le chemin demandé.</p>
+
+<p>Il faudra donc vérifier l&#8217;existence de ce fichier avec la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.file-exists.html" class='spip_glossaire' title="Voir la description de 'file_exists' dans la documentation de 'php'" rel='external'>file_exists</a> et voir s&#8217;il est lisible avec la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.is-readable.html" class='spip_glossaire' title="Voir la description de 'is_readable' dans la documentation de 'php'" rel='external'>is_readable</a>. Si ces conditions sont vérifiées, il faudra lire le fichier dans un tableau PHP et voir s&#8217;il contient des règles de redirection, autrement dit appliquer une expression rationnelle pour voir si le fichier contient un <tt>RewriteRule</tt><i>expression rationnelle</i> etc. Si c&#8217;est le cas, il faudra extraire cette expression rationnelle pour l&#8217;appliquer sur l&#8217;URL demandée, et en cas de succès  envoyer ce qui est indiqué comme substitution en réponse.</p>
+
+
+<div style='text-align:right' id='s40'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>http3.php</tt><br />
+</div>
+
+
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLa-configuration-d-un-serveur-HTTP"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLa-configuration-d-un-serveur-HTTP'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLa-configuration-d-un-serveur-HTTP&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 15h02min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLa-configuration-d-un-serveur-HTTP'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

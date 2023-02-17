@@ -1,0 +1,485 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=291"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>6. SVG, ou le traitement d'image par XML (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Analyse de la table</a></li>
+<li class="menu-lv2"><a href='#a2'>Rectangles en SVG</a></li>
+<li class="menu-lv2"><a href='#a3'>Envoi d&#8217;un SVG </a></li>
+<li class="menu-lv2"><a href='#a4'>Tu veux un camembert&nbsp;?</a></li>
+<li class="menu-lv2"><a href='#a5'>Annexes</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux sur Machine<br />6. SVG, ou le traitement d&#8217;image par XML</h1>
+<p>Scalable Vector Graphics est un modèle graphique fondé sur des tracés de droites et courbes exprimés en XML, reprenant les acquis de tous les langages graphiques dits <i>vectoriels</i> qui l&#8217;ont précédé.
+La fondation de ce langage graphique sur XML lui donne l&#8217;avantage d&#8217;être énoncé très facilement à partir d&#8217;un autre langage reposant sur XML. La présente séance en fournit l&#8217;illustration&nbsp;: il s&#8217;agit d&#8217;écrire des scripts PHP appliquant SAX sur un texte HTML contenant une table de chiffres, et en fournissant diverses représentations graphiques. On partira donc de la fonction principale suivante,
+prenant en argument un fichier HTML et un nom de fonction de représentation  qu&#8217;il faudra écrire&nbsp;:</p>
+<div class='spip_code'><code>function table2svg($file, $fonction)<br />
+{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; global $width, $height, $table;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $phraseur = xml_parser_create();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; xml_set_element_handler($phraseur, &quot;ouvrante&quot;, &quot;fermante&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; xml_set_character_data_handler($phraseur, &quot;texte&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; xml_parser_set_option($phraseur, XML_OPTION_CASE_FOLDING, false);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (!($f = fopen($file, &quot;r&quot;))) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; die(&quot;Impossible d'ouvrir le fichier '$file'&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; while ($data = fread($f, 1024)) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!xml_parse($phraseur, $data, feof($f))) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; die(sprintf(&quot;erreur XML : %s ligne %d&quot;,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; xml_error_string(xml_get_error_code($phraseur)),<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; xml_get_current_line_number($phraseur)));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; xml_parser_free($phraseur);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (function_exists($fonction))<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $fonction($table, $width, $height);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; else echo &quot;Mode inconnu: $mode&quot;;<br />
+}</code></div>
+<p>On suppose que  le texte HTML contient une et une seule table bien formée. Cette table contient des attributs <code class='spip_code'>width</code> et <code class='spip_code'>height</code> que vous devrez récupérer et passer en paramètre des fonctions de rendu SVG.</p>
+
+<p>Chaque cellule a comme texte un nombre entier écrit en base 10,
+et 0 à 2 attributs&nbsp;: <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/present/styles.html#adef-style" class='spip_glossaire' title="Voir la description de 'style' dans la documentation de 'html' section 1" rel='external'>style</a> qui spécifie la couleur de la cellule, et <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#adef-colspan" class='spip_glossaire' title="Voir la description de 'colspan' dans la documentation de 'html' section 1" rel='external'>colspan</a> qui
+ spécifie la fusion de la cellule avec les cellules adjacentes.
+On trouvera en annexe un fichier de test respectant ces contraintes.</p>
+<br /><div id='sequence291'>
+<span id='e2814'></span>
+
+
+<h2 id='a1'>1 Analyse de la table</h2>
+<p>Le premier travail à effectuer est de collecter le contenu de la table HTML dans un tableau PHP global, plus maniable.
+Ce tableau aura autant de lignes que la table HTML d&#8217;origine, et chaque ligne de ce tableau aura autant d&#8217;éléments que de balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TD" class='spip_glossaire' title="Voir la description de 'td' dans la documentation de 'html'" rel='external'>td</a> contenue dans la ligne d&#8217;origine dans la table HTML. 
+Chaque élément de ce tableau aura pour valeur un tableau des attributs de la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TD" class='spip_glossaire' title="Voir la description de 'td' dans la documentation de 'html'" rel='external'>td</a>  rencontrée, tableau auquel on ajoutera une clé supplémentaire "contenu" dont la valeur sera le contenu de la balise  <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TD" class='spip_glossaire' title="Voir la description de 'td' dans la documentation de 'html'" rel='external'>td</a>, expurgé des caractères séparateurs (utiliser la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.trim.html" class='spip_glossaire' title="Voir la description de 'trim' dans la documentation de 'php'" rel='external'>trim</a>).
+Si l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#adef-colspan" class='spip_glossaire' title="Voir la description de 'colspan' dans la documentation de 'html' section 1" rel='external'>colspan</a>  est manquant, il sera pris égal à 1.
+Si l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/present/styles.html#adef-style" class='spip_glossaire' title="Voir la description de 'style' dans la documentation de 'html' section 1" rel='external'>style</a>
+ est manquant, il aura pour valeur <code class='spip_code'>background-color: white</code>.
+Ainsi, par exemple, la table minimale&nbsp;:</p>
+
+<div class='spip_code'><code>&nbsp; &nbsp; &nbsp; &nbsp; &lt;table&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;tr&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;td style='background-color: red'&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/td&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/tr&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/table&gt;</code></div>
+<p>sera collectée sous la forme du tableau suivant&nbsp;:</p>
+
+<div class='spip_code'><code>&nbsp; &nbsp; &nbsp; &nbsp; array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'style' =&gt; 'background-color: red',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'colspan' =&gt; 1,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'contenu' =&gt; 2)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</code></div>
+<p>Ecrire les preneurs d&#8217;événements SAX nécessaires au but décrit. Donner <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.var-dump.html" class='spip_glossaire' title="Voir la description de 'var_dump' dans la documentation de 'php'" rel='external'>var_dump</a> comme 2e argument à la fonction principale pour voir le résultat dans votre navigateur (afficher le source pour une présentation soignée).</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=687&amp;cle=852c81e7eb7447a2e79c9d5746843ad83fc3ead7&amp;file=distant%2FVCS%2FLI355%2FTM%2F6%2Fanalyse.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger analyse.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">global&nbsp;</span><span style="color: #0000BB">$width</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$height</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$table</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$last</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$table&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$last&nbsp;</span><span style="color: #007700">=&nbsp;array();<br /><br />function&nbsp;</span><span style="color: #0000BB">ouvrante</span><span style="color: #007700">(</span><span style="color: #0000BB">$phraseur</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;global&nbsp;</span><span style="color: #0000BB">$width</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$height</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$table</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$last</span><span style="color: #007700">;<br /><br />&nbsp;&nbsp;</span><span style="color: #0000BB">$last</span><span style="color: #007700">[</span><span style="color: #DD0000">'contenu'</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">;<br />&nbsp;&nbsp;switch&nbsp;(</span><span style="color: #0000BB">$name</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;case&nbsp;</span><span style="color: #DD0000">"table"</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">$width&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">'width'</span><span style="color: #007700">];</span><span style="color: #0000BB">$height&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">'height'</span><span style="color: #007700">];break;<br />&nbsp;&nbsp;case&nbsp;</span><span style="color: #DD0000">"tr"</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">$table</span><span style="color: #007700">[]&nbsp;=&nbsp;array();&nbsp;break;<br />&nbsp;&nbsp;case&nbsp;</span><span style="color: #DD0000">"td"</span><span style="color: #007700">:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$last</span><span style="color: #007700">[</span><span style="color: #DD0000">'colspan'</span><span style="color: #007700">]&nbsp;=&nbsp;isset(</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">'colspan'</span><span style="color: #007700">])&nbsp;?&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">'colspan'</span><span style="color: #007700">]&nbsp;:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$last</span><span style="color: #007700">[</span><span style="color: #DD0000">'style'</span><span style="color: #007700">]&nbsp;=&nbsp;isset(</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">'style'</span><span style="color: #007700">])&nbsp;?&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">'style'</span><span style="color: #007700">]&nbsp;:&nbsp;</span><span style="color: #DD0000">'background-color:&nbsp;white'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;break;<br />&nbsp;&nbsp;}<br />}<br /><br />function&nbsp;</span><span style="color: #0000BB">fermante</span><span style="color: #007700">(</span><span style="color: #0000BB">$phraseur</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">)&nbsp;{}<br /><br />function&nbsp;</span><span style="color: #0000BB">texte</span><span style="color: #007700">(</span><span style="color: #0000BB">$phraseur</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$data</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;global&nbsp;</span><span style="color: #0000BB">$last</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$table</span><span style="color: #007700">;<br />&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$last</span><span style="color: #007700">[</span><span style="color: #DD0000">'contenu'</span><span style="color: #007700">]&nbsp;==&nbsp;</span><span style="color: #DD0000">'td'</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$last</span><span style="color: #007700">[</span><span style="color: #DD0000">'contenu'</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">trim</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$table</span><span style="color: #007700">[</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$table</span><span style="color: #007700">)-</span><span style="color: #0000BB">1</span><span style="color: #007700">][]&nbsp;=&nbsp;</span><span style="color: #0000BB">$last</span><span style="color: #007700">;<br />&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses2814'> 
+</div><br />
+
+<span id='e2815'></span>
+
+
+<h2 id='a2'>2 Rectangles en SVG</h2>
+<p>En SVG, on dessine un rectangle avec la balise <tt>rect</tt> qui n&#8217;a pas de contenu, mais possède les attributs suivants&nbsp;:</p>
+
+<ul class="spip"><li> x&nbsp;: coordonnée en X exprimée en pixel&nbsp;;</li><li> y&nbsp;: coordonnée en Y exprimée en pixel&nbsp;;</li><li> width&nbsp;: largeur du rectangle,  exprimée en pixel&nbsp;;</li><li> height&nbsp;: hauteur du rectangle,  exprimée en pixel&nbsp;;</li><li> fill&nbsp;: couleur du rectangle, exprimée en anglais.</li></ul>
+<p>On définira d&#8217;abord deux constantes PHP <tt>HAUTEUR</tt> et <tt>EPAISSEUR</tt> afin d&#8217;affiner la présentation selon l&#8217;écran (prendre 128 et 16 respectivement pour commencer). 
+Ecrire une fonction <code class='spip_code'>rectangle</code> prenant en argument la matrice  construite à la question précédente, et retournant en résultat un tableau PHP ayant autant d&#8217;éléments que la matrice,  chaque élément étant une balise SVG <tt>rect</tt>.
+ La  hauteur  de chaque rectangle sera le contenu de la balise <code class='spip_code'>td</code>.
+La  largeur sera <tt>EPAISSEUR</tt> multiplié par le 
+<code class='spip_code'>colspan</code>.
+La coordonnée en X sera de 0 pour le premier  rectangle, et les suivants sur la même ligne se déduiront des largeurs des précédents. 
+La coordonnée en Y sera de  <tt>HAUTEUR</tt>.
+pour la première ligne, et  à chaque nouvelle ligne, 
+Y sera décalé de  cette valeur.</p>
+
+<p>La couleur pour l&#8217;attribut <tt>fill</tt> sera celle indiquée par l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/present/styles.html#adef-style" class='spip_glossaire' title="Voir la description de 'style' dans la documentation de 'html' section 1" rel='external'>style</a> analysé précédemment, qu&#8217;il faudra prélever avec <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-match.html" class='spip_glossaire' title="Voir la description de 'preg_match' dans la documentation de 'php'" rel='external'>preg_match</a>. Si le style est incorrect, toute la fonction retournera un message d&#8217;erreur sous forme de chaîne de caractères.</p>
+
+<p><strong>Attention&nbsp;:</strong>
+l&#8217;origine du repère SVG est en haut à gauche de l&#8217;écran&nbsp;; toutes les valeurs de la coordonnée Y seront donc négatives sous peine d&#8217;avoir un dessin hors champ, autrement dit une page blanche.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=690&amp;cle=ea99bb237f3cc9f5e923dab125a338b499e74bd0&amp;file=distant%2FVCS%2FLI355%2FTM%2F6%2Frectangle.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger rectangle.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />define</span><span style="color: #007700">(</span><span style="color: #DD0000">'HAUTEUR'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">128</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'EPAISSEUR'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">16</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">"RE_COLOR"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"@background-color:\s*([^;]+)@"</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">rectangle</span><span style="color: #007700">(</span><span style="color: #0000BB">$table</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$table&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$ligne</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$k&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach(</span><span style="color: #0000BB">$ligne&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #0000BB">RE_COLOR</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">[</span><span style="color: #DD0000">'style'</span><span style="color: #007700">],&nbsp;</span><span style="color: #0000BB">$m</span><span style="color: #007700">))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #DD0000">'style&nbsp;incorrect:&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">[</span><span style="color: #DD0000">'style'</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">[]=&nbsp;</span><span style="color: #0000BB">sprintf</span><span style="color: #007700">(</span><span style="color: #DD0000">"\n&lt;rect&nbsp;x='%d'&nbsp;y='-%d'&nbsp;width='%d'&nbsp;height='%ld'<br />&nbsp;fill='%s'&nbsp;/&gt;"</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$k</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">*&nbsp;</span><span style="color: #0000BB">HAUTEUR</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">[</span><span style="color: #DD0000">'colspan'</span><span style="color: #007700">]&nbsp;*&nbsp;</span><span style="color: #0000BB">EPAISSEUR</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">[</span><span style="color: #DD0000">'contenu'</span><span style="color: #007700">],<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$m</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]<br />);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$k</span><span style="color: #007700">+=</span><span style="color: #0000BB">$v</span><span style="color: #007700">[</span><span style="color: #DD0000">'colspan'</span><span style="color: #007700">]&nbsp;*&nbsp;</span><span style="color: #0000BB">EPAISSEUR</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$i</span><span style="color: #007700">++;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses2815'> 
+</div><br />
+
+<span id='e2816'></span>
+
+
+<h2 id='a3'>3 Envoi d&#8217;un SVG </h2>
+<p>Afin d&#8217;envoyer au navigateur un document SVG complet, il faut savoir que&nbsp;:</p>
+
+<ul class="spip"><li> le <code class='spip_code'>Content-Type</code> à envoyer par la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.header.html" class='spip_glossaire' title="Voir la description de 'header' dans la documentation de 'php'" rel='external'>header</a> doit être <code class='spip_code'>image/svg+xml</code>&nbsp;;</li></ul>
+<ul class="spip"><li> le DOCTYPE est&nbsp;:
+<tt>&lt;!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'&gt;
+</tt></li></ul>
+<ul class="spip"><li> la balise <code class='spip_code'>svg</code> en début de document doit posséder les attributs <code class='spip_code'>width</code> et <code class='spip_code'>height</code> et un attribut <code class='spip_code'>xmlns</code> valant <tt><a href="http://www.w3.org/2000/svg" class='spip_url spip_out' rel='nofollow external'>http://www.w3.org/2000/svg</a></tt>&nbsp;;</li></ul>
+<ul class="spip"><li> il est préférable d&#8217;encapsuler la suite des rectangles par une balise <code class='spip_code'>g</code> avec un attribut <code class='spip_code'>transform</code> de valeur <code class='spip_code'>translate(10,10),scale(1,-1)</code> qui permet de translater le repère et de changer le système de coordonnées afin que le dessin ne soit pas hors champ (évidemment on pourra tester d&#8217;autres valeurs).</li></ul>
+<p>Muni de ces indications, écrire une  fonction <code class='spip_code'>rectangles</code>,
+prenant en argument la matrice, la largeur et la hauteur calculées à la première question, et envoyant sur le flux de sortie un document SVG complet. Il est conseillé d&#8217;utiliser FireFox, premier navigateur à avoir fourni SVG en natif.</p>
+
+
+<div style='text-align:right' id='s730'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>envoi.php</tt><br />
+</div>
+
+ 
+ <div id='reponses2816'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5476"> 
+	    <div class="reponse">
+	<div class="forum-titre">Envoi d&#8217;un SVG </div>
+4 mars 2014 &agrave; 17h41min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php<br />
+error_reporting(E_ALL);<br />
+<br />
+function rectangles($table,$widthTab,$heightTab) {<br />
+echo header(&quot;Content-type:image/svg+xml&quot;);<br />
+echo &quot;&lt;!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'&gt;&quot;;<br />
+$widthTab = '&quot;' . $widthTab . '&quot;';<br />
+$heightTab = '&quot;' . $heightTab . '&quot;';<br />
+echo &quot;&lt;svg version = '1.1' <br />
+ &nbsp; &nbsp; &nbsp;baseProfile='full' <br />
+ &nbsp; &nbsp; &nbsp;xmlns = 'http://www.w3.org/2000/svg' <br />
+ &nbsp; &nbsp; &nbsp;xmlns:xlink = 'http://www.w3.org/1999/xlink' <br />
+ &nbsp; &nbsp; &nbsp;xmlns:ev = 'http://www.w3.org/2001/xml-events' <br />
+ &nbsp; &nbsp; &nbsp;height = $widthTab<br />
+ &nbsp; &nbsp; &nbsp;width = $heightTab &gt;&quot;;<br />
+echo &quot;&lt;g transform='translate(50,50)'&gt;&quot;;<br />
+<br />
+$i=0;<br />
+$j=0;<br />
+foreach($table as $ligne) {<br />
+ &nbsp;foreach($ligne as $case) {<br />
+ &nbsp; &nbsp;$width = '&quot;30&quot;'; // '&quot;'.$width.'&quot;'<br />
+ &nbsp; &nbsp;$height = '&quot;50&quot;';<br />
+ &nbsp; &nbsp;$colspan = isset($case['colspan']) ? $case['colspan'] : 1;<br />
+ &nbsp; &nbsp;$style = isset($case['style']) ? $case['style'] : &quot;background-color: orange&quot;;<br />
+ &nbsp; &nbsp;$fill = '&quot;' . substr($style,18) . '&quot;'; // '&quot;red&quot;';<br />
+ &nbsp; &nbsp;$contenu = $case['contenu'];<br />
+ &nbsp; &nbsp;echo '&lt;rect x=&quot;10&quot; y=&quot;10&quot; width=' . $width . ' height=' . $height . ' fill=' . $fill . ' transform=&quot;translate(' . $i . ',' . $j .')&quot;/&gt;';<br />
+ &nbsp; &nbsp;echo '&lt;text transform=&quot;translate(' . (($i+20)) . ',' . (($j+50)) .')&quot;&gt;' . $contenu . '&lt;/text&gt;'; // 20, 50 - ??<br />
+ &nbsp; &nbsp;$i+=30;<br />
+ &nbsp; &nbsp;for (;$colspan&gt;1;$colspan--) {<br />
+ &nbsp; &nbsp; &nbsp;echo '&lt;rect x=&quot;10&quot; y=&quot;10&quot; width=' . $width . ' height=' . $height . ' fill=' . $fill . ' transform=&quot;translate(' . $i . ',' . $j .')&quot;/&gt;';<br />
+ &nbsp; &nbsp; &nbsp;$i+=30;<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp;}<br />
+ &nbsp;$i=0;<br />
+ &nbsp;$j+=50;<br />
+}<br />
+echo &quot;&lt;/g&gt;&lt;/svg&gt;&quot;;<br />
+}<br />
+<br />
+$table=array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: red','contenu'=&gt;'1','colspan'=&gt;'1'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: blue','contenu'=&gt;'2','colspan'=&gt;'2'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: green','contenu'=&gt;'3','colspan'=&gt;'3')<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: green','contenu'=&gt;'4','colspan'=&gt;'2'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: yellow','contenu'=&gt;'5','colspan'=&gt;'3'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: blue','contenu'=&gt;'6','colspan'=&gt;'1')<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: blue','contenu'=&gt;'7','colspan'=&gt;'3'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('contenu'=&gt;'8'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: red','contenu'=&gt;'9','colspan'=&gt;'2')<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;);<br />
+<br />
+rectangles($table,1500,1500);<br />
+?&gt;</code></div></div>
+	<div class="forum-repondre-message">
+		<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=ramassage&amp;id_article=2816&amp;id_rubrique=291&amp;id_forum=5476&amp;retour=SVG-ou-le-traitement-d-image-par">Am&eacute;liorer votre r&eacute;ponse&nbsp;</a>
+	</div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2817'></span>
+
+
+<h2 id='a4'>4 Tu veux un camembert&nbsp;?</h2>
+<p>On souhaite maintenant produire une deuxième représentation, sous forme dite de camembert, autrement dit de portion de cercle. Pour cela, SVG dispose de la balise <code class='spip_code'>path</code> possédant un attribut <code class='spip_code'>fill</code> identique à celui de
+<code class='spip_code'>rect</code>, et un attribut <code class='spip_code'>d</code> dont la valeur est un sous-langage de SVG, équivalent pour l&#8217;essentiel à PostScript. Qu&#8217;il suffise de dire que cet attribut aura pour valeur la chaîne&nbsp;:</p>
+
+<p><tt>M0,0</tt> <i>x y</i> A <i>c,d</i> 0 <i>e</i> 0 <i>f</i> <i>g</i></tt></p>
+
+<p>où</p>
+
+<ul class="spip"><li> <i>x,y</i> sont les coordonnées du point du périmètre où démarre l&#8217;arc de cercle à dessiner, </li><li> <i>c,d</i> sont  le rayon du cercle (deux fois la même chose, car c&#8217;est un cercle, pas une ellipse),</li><li> <i>e</i> vaut 0 ou 1  selon que l&#8217;arc est concave ou convexe (pour le problème considéré, cela revient à tester si la valeur dans la table est supérieure à 50),</li><li>  <i>f</i> est le sinus de l&#8217;angle de la portion multiplié par le rayon, </li><li>  <i>g</i> le cosinus multiplié par la hauteur.</li></ul>
+<p>L&#8217; unité d&#8217;angle est le centième de degré, autrement dit il faut multiplier le contenu de la balise <code class='spip_code'>td</code>&nbsp;par <tt>(3.14*2/100)</tt>.</p>
+
+<p>Définir la fonction <code class='spip_code'>camembert</code> réalisant ce dessin.</p>
+
+
+<div style='text-align:right' id='s740'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>camembert.php</tt><br />
+</div>
+
+ 
+ <div id='reponses2817'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5482"> 
+	    <div class="reponse">
+	<div class="forum-titre">Tu veux un camembert&nbsp;?</div>
+5 mars 2014 &agrave; 11h51min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php<br />
+error_reporting(E_ALL);<br />
+<br />
+function rectangles($table,$widthTab,$heightTab) {<br />
+echo header(&quot;Content-type:image/svg+xml&quot;);<br />
+echo &quot;&lt;!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'&gt;&quot;;<br />
+$widthTab = '&quot;' . $widthTab . '&quot;';<br />
+$heightTab = '&quot;' . $heightTab . '&quot;';<br />
+echo &quot;&lt;svg version = '1.1' <br />
+ &nbsp; &nbsp; &nbsp;baseProfile='full' <br />
+ &nbsp; &nbsp; &nbsp;xmlns = 'http://www.w3.org/2000/svg' <br />
+ &nbsp; &nbsp; &nbsp;xmlns:xlink = 'http://www.w3.org/1999/xlink' <br />
+ &nbsp; &nbsp; &nbsp;xmlns:ev = 'http://www.w3.org/2001/xml-events' <br />
+ &nbsp; &nbsp; &nbsp;height = $widthTab<br />
+ &nbsp; &nbsp; &nbsp;width = $heightTab &gt;&quot;;<br />
+<br />
+$width = '&quot;30&quot;'; // '&quot;'.$width.'&quot;'<br />
+$height = '&quot;50&quot;';<br />
+$i=0;<br />
+$j=0;<br />
+<br />
+echo &quot;&lt;g transform='translate(50,50)'&gt;&quot;;<br />
+foreach($table as $ligne) {<br />
+ &nbsp;foreach($ligne as $case) {<br />
+ &nbsp; &nbsp;$colspan = isset($case['colspan']) ? $case['colspan'] : 1;<br />
+ &nbsp; &nbsp;$style = isset($case['style']) ? $case['style'] : &quot;background-color: orange&quot;;<br />
+ &nbsp; &nbsp;$fill = '&quot;' . substr($style,18) . '&quot;'; // '&quot;red&quot;';<br />
+ &nbsp; &nbsp;$contenu = $case['contenu'];<br />
+ &nbsp; &nbsp;echo '&lt;rect x=&quot;10&quot; y=&quot;10&quot; width=' . $width . ' height=' . $height . ' fill=' . $fill . ' transform=&quot;translate(' . $i . ',' . $j .')&quot;/&gt;';<br />
+ &nbsp; &nbsp;echo '&lt;text transform=&quot;translate(' . (($i+20)) . ',' . (($j+50)) .')&quot;&gt;' . $contenu . '&lt;/text&gt;'; // 20, 50 - ??<br />
+ &nbsp; &nbsp;$i+=30;<br />
+ &nbsp; &nbsp;for (;$colspan&gt;1;$colspan--) {<br />
+ &nbsp; &nbsp; &nbsp;echo '&lt;rect x=&quot;10&quot; y=&quot;10&quot; width=' . $width . ' height=' . $height . ' fill=' . $fill . ' transform=&quot;translate(' . $i . ',' . $j .')&quot;/&gt;';<br />
+ &nbsp; &nbsp; &nbsp;$i+=30;<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp;}<br />
+ &nbsp;$i=0;<br />
+ &nbsp;$j+=50;<br />
+}<br />
+echo &quot;&lt;/g&gt;&quot;;<br />
+<br />
+$sumColspan=0;<br />
+$nombreParties=0;<br />
+foreach($table as $ligne)<br />
+ &nbsp;foreach($ligne as $case) {<br />
+ &nbsp; &nbsp;$sumColspan+= (isset($case['colspan']) ? $case['colspan'] : 1);<br />
+ &nbsp; &nbsp;$nombreParties++;<br />
+ &nbsp; &nbsp;}<br />
+<br />
+$radius=120;<br />
+$xDebut=0;<br />
+$yDebut=-$radius; &nbsp; &nbsp;<br />
+$angle=0;<br />
+$numeroDePartie=1;<br />
+<br />
+echo &quot;&lt;g transform='translate(150,400)'&gt;&quot;;<br />
+foreach($table as $ligne)<br />
+ &nbsp;foreach($ligne as $case) {<br />
+ &nbsp; &nbsp;$colspan = isset($case['colspan']) ? $case['colspan'] : 1;<br />
+ &nbsp; &nbsp;$style = isset($case['style']) ? $case['style'] : &quot;background-color: orange&quot;;<br />
+ &nbsp; &nbsp;$fill = '&quot;' . substr($style,18) . '&quot;';<br />
+ &nbsp; &nbsp;$partie=$colspan/$sumColspan;<br />
+ &nbsp; &nbsp;$angle+=$partie;<br />
+ &nbsp; &nbsp;$xFin = sin($angle*3.14159*2)*$radius;<br />
+ &nbsp; &nbsp;$yFin = -cos($angle*3.14159*2)*$radius;<br />
+ &nbsp; &nbsp;$numeroDePartie++;<br />
+ &nbsp; &nbsp;$largeArcFlag = 0; // ne change rien ???<br />
+ &nbsp; &nbsp;$sweepFlag = $partie &gt; 0.5 ? 1 : 0;<br />
+ &nbsp; &nbsp;<br />
+ &nbsp; &nbsp;// A : radX radY <br />
+ &nbsp; &nbsp;// &nbsp; &nbsp; x-axis-rotation = ?<br />
+ &nbsp; &nbsp;// &nbsp; &nbsp; large-arc-flag (0 grand arc, 1 petit arc) <br />
+ &nbsp; &nbsp;// &nbsp; &nbsp; sweep-flag = 1<br />
+ &nbsp; &nbsp;// &nbsp; &nbsp; x y = fin de l'arc<br />
+ &nbsp; &nbsp;echo '&lt;path d=&quot;M0,0 ' . $xDebut .',' . $yDebut . ' A' . $radius . ',' . $radius . ' ' . $largeArcFlag . ' ' . $sweepFlag . ' 1 ' . $xFin . ',' . $yFin . ' z&quot; fill=' &nbsp;. $fill . ' stroke=&quot;black&quot; stroke-width=&quot;2&quot;/&gt;';<br />
+ &nbsp; &nbsp;echo '&lt;text transform=&quot;translate(' . (sin(($angle-$partie/2)*3.14159*2)*$radius*1.2) . ',' . (-cos(($angle-$partie/2)*3.14159*2)*$radius*1.2) . ')&quot;&gt;' . $case['contenu'] . '&lt;/text&gt;';<br />
+ &nbsp; &nbsp;$xDebut=$xFin;<br />
+ &nbsp; &nbsp;$yDebut=$yFin;<br />
+ &nbsp;}<br />
+echo &quot;&lt;/g&gt;&quot;;<br />
+<br />
+echo &quot;&lt;/svg&gt;&quot;;<br />
+}<br />
+<br />
+// *************************************************************************************************<br />
+$table = array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: red','contenu'=&gt;'1','colspan'=&gt;'1'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: blue','contenu'=&gt;'2','colspan'=&gt;'2'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: green','contenu'=&gt;'3','colspan'=&gt;'3')<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: green','contenu'=&gt;'4','colspan'=&gt;'2'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: yellow','contenu'=&gt;'5','colspan'=&gt;'3'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: blue','contenu'=&gt;'6','colspan'=&gt;'1')<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: blue','contenu'=&gt;'7','colspan'=&gt;'3'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('contenu'=&gt;'8'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: yellow','contenu'=&gt;'9','colspan'=&gt;'2')<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;);<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+$table2 = array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: yellow','contenu'=&gt;'5','colspan'=&gt;'1'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: red','contenu'=&gt;'5','colspan'=&gt;'1'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: orange','contenu'=&gt;'2','colspan'=&gt;'1'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: blue','contenu'=&gt;'5','colspan'=&gt;'1'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array('style' =&gt; 'background-color: green','contenu'=&gt;'5','colspan'=&gt;'2'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;);<br />
+<br />
+<br />
+rectangles($table,1500,1500);<br />
+?&gt;</code></div></div>
+	<div class="forum-repondre-message">
+		<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=ramassage&amp;id_article=2817&amp;id_rubrique=291&amp;id_forum=5482&amp;retour=SVG-ou-le-traitement-d-image-par">Am&eacute;liorer votre r&eacute;ponse&nbsp;</a>
+	</div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3210'></span>
+
+<h2 id='a5'>5 Annexes</h2>
+
+<div class="documents-joints">
+
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=514&amp;cle=66fddecb2ec0471dd987232b4dcbaacbf5ff03e8&amp;file=distant%2FVCS%2FLI355%2FTM%2F6%2Ftest-svg.html' type='text/html' title='HTML - - test-svg.html'><img src='Ajouts/Licence_pacs_esj6_2013_2014/local/cache-vignettes/L52xH52/html-df9ff-5c7ff.png' width='52' height='52' style='height:52px;width:52px;' alt='' class='spip_logos' /></a><br />test-svg.html
+
+</div>
+
+
+<div style='text-align:right' id='s10000'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>analyse.php rectangle.php envoi.php camembert.php</tt><br />
+</div>
+
+
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FSVG-ou-le-traitement-d-image-par"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FSVG-ou-le-traitement-d-image-par'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FSVG-ou-le-traitement-d-image-par&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 19h55min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FSVG-ou-le-traitement-d-image-par'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

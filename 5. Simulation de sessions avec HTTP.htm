@@ -1,0 +1,769 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=289"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>5. Simulation de sessions avec HTTP (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Navigation dans un catalogue</a></li>
+<li class="menu-lv2"><a href='#a2'>Ces vols, c&#8217;est du vol</a></li>
+<li class="menu-lv2"><a href='#a3'>Dégager ces boutons cachés</a></li>
+<li class="menu-lv2"><a href='#a4'>Cacher les cachés</a></li>
+<li class="menu-lv2"><a href='#a5'>De la suite dans les IP</a></li>
+<li class="menu-lv2"><a href='#a6'>Vol au-dessus d&#8217;un noeud de cookies</a></li>
+<li class="menu-lv2"><a href='#a7'>Session inviolable et limitée en PHP</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux sur Machine<br />5. Simulation de sessions avec HTTP</h1>
+<p>L&#8217;absence d&#8217;états dans le protocole HTTP pose un problème aux sites Web nécessitant plusieurs visites pour un même utilisateur. L&#8217;exemple type est celui d&#8217;un catalogue d&#8217;articles trop nombreux pour être présentés  en une fois&nbsp;: le visiteur devra demander différentes pages où il cochera les articles qui l&#8217;intéressent,  mais chacune de ces demandes provoquera une nouvelle connexion au serveur qui considèrera a priori ce demandeur comme inconnu, ce qui empêche de réunir ses choix pour finaliser sa commande.</p>
+
+<p>Une première solution est de recopier les choix antérieurs dans des  <em>boutons cachés</em> de la page suivante. Mais le troisième exercice montrera pourquoi cette méthode n&#8217;est pas fiable.</p>
+
+<p>Une deuxième solution est d&#8217;utiliser des en-têtes HTTP spécifiques, nommées <em>cookies</em>, qui permettent au serveur d&#8217;exiger du client qu&#8217;il renvoie une  information caractéristique que le serveur a associée au visiteur à sa première connexion.  Cette technique, plus fiable,  est celle utilisée de nos jours. Mais nous verrons qu&#8217;elle nécessite d&#8217;être cryptée pour être vraiment fiable, et qu&#8217;elle a l&#8217;effet secondaire pernicieux de <i>pister</i> les utilisateurs. Certains sites s&#8217;en servent pour proposer à un visiteur une offre de prix proportionnelle à  la fréquence de ses visites, en faisant l&#8217;hypothèse que des visites nombreuses indiquent un intérêt soutenu donc une acceptation de prix élevés. Le but de la séance est de réaliser une telle application ... et de voir comment s&#8217;en protéger.</p>
+<br /><div id='sequence289'>
+<span id='e3527'></span>
+
+
+<h2 id='a1'>1 Navigation dans un catalogue</h2>
+<p>On souhaite construire une série de pages HTML à partir d&#8217;un catalogue d&#8217;articles. Chacune montre un article  et son prix dans un formulaire rappelant le script construisant ces pages, avec trois boutons de soumission (<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-INPUT" class='spip_glossaire' title="html" rel='external'>input</a> de <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/links.html#adef-type-A" class='spip_glossaire' title="html" rel='external'>type</a> <tt>submit</tt>) d&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/types.html#type-name" class='spip_glossaire' title="html" rel='external'>name</a> toujours égal à <tt>page</tt>, et d&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#adef-value-INPUT" class='spip_glossaire' title="html" rel='external'>value</a>  ainsi défini&nbsp;:</p>
+
+<ul class="spip"><li> pour le premier, le numéro de page précédent du catalogue (mais cette balise <a href="http://fr.wikipedia.org/wiki/input" class='spip_glossaire' title="htm" rel='external'>input</a> n&#8217;apparaît pas s&#8217;il n&#8217;existe pas)&nbsp;;</li><li> pour le deuxième, le numéro de page suivant du catalogue (idem)&nbsp;;</li><li> pour le troisième, le descriptif de l&#8217;article&nbsp;; cette dernière balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-INPUT" class='spip_glossaire' title="html" rel='external'>input</a> est suivie du prix.</li></ul>
+<p>Les règles d&#8217;accessibilité ne demandent pas de balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-LABEL" class='spip_glossaire' title="html" rel='external'>label</a> pour de tels boutons, puisque le libellé fait partie de la balise. En revanche,
+afin d&#8217;offrir une ergonomie minimale, les deux boutons de navigation seront dans une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-FIELDSET" class='spip_glossaire' title="html" rel='external'>fieldset</a>, et l&#8217;autre bouton dans un autre <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-FIELDSET" class='spip_glossaire' title="html" rel='external'>fieldset</a>. et on ajoutera des attributs <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/present/styles.html#adef-style" class='spip_glossaire' title="html" rel='external'>style</a> dont les valeurs suivent pour&nbsp;:</p>
+
+<ul class="spip"><li> la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-FORM" class='spip_glossaire' title="html" rel='external'>form</a>&nbsp;: <tt>width:15%</tt>&nbsp;;</li><li> le bouton de la page précédente&nbsp;: <tt>float:left</tt>&nbsp;;</li><li> le bouton de la page suivante&nbsp;: <tt>float:right</tt>.</li></ul>
+<p>Ecrire une fonction PHP <tt>naviguer</tt> retournant un tel formulaire utilisant la méthode <tt>post</tt>, et construit à partir des arguments suivants (les deux derniers serviront ultérieurement)&nbsp;:</p>
+
+<ol class="spip"><li> un tableau PHP où chaque index est le descriptif d&#8217;un article et la valeur associée son prix&nbsp;;</li><li> un numéro indiquant la page à  afficher, en assimilant ce numéro au n-ième élément du tableau bien que celui-ci ait des index non numériques (si ce numéro n&#8217;est pas compris entre 1 et le nombre d&#8217;articles, on prendra 1 comme valeur)&nbsp;;</li><li> un nombre destiné à multiplier le prix pour par exemple ajouter une taxe, et de valeur par défaut 1&nbsp;;</li><li> une chaîne destinée à afficher une photo de l&#8217;article ou toute autre information utile, de valeur par défaut la chaîne vide.</li></ol>
+<p>Pour fixer les idées, le premier argument pourrait être cette liste de destinations de vol avec leur prix&nbsp;:</p>
+<div class='spip_code'><code>array('Londres' =&gt; 100, 'Madrid' =&gt; 200 , 'Berlin' =&gt; 300)</code></div>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=765&amp;cle=e7196f005b9713821161a4ec45a9fd5658a9e7cf&amp;file=distant%2FVCS%2FLI355%2FTM%2F5%2Fnaviguer.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger naviguer.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;Construit&nbsp;3&nbsp;boutons&nbsp;de&nbsp;soumissions&nbsp;permettant&nbsp;de&nbsp;naviguer&nbsp;et&nbsp;choisir<br />//&nbsp;dans&nbsp;un&nbsp;catalogue&nbsp;decrit&nbsp;par&nbsp;le&nbsp;tableau&nbsp;$catalogue&nbsp;de&nbsp;forme:&nbsp;<br />//&nbsp;array(article1&nbsp;=&gt;&nbsp;prix1,&nbsp;article2&nbsp;=&gt;&nbsp;prix2,&nbsp;....)<br />//&nbsp;$n&nbsp;est&nbsp;le&nbsp;numero&nbsp;de&nbsp;page&nbsp;en&nbsp;cours&nbsp;de&nbsp;consultation<br />//&nbsp;$v&nbsp;est&nbsp;un&nbsp;multiplicateur&nbsp;du&nbsp;prix&nbsp;(par&nbsp;exemple&nbsp;une&nbsp;TVA&nbsp;de&nbsp;20%&nbsp;=&gt;&nbsp;$v=1,2)<br /><br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">naviguer</span><span style="color: #007700">(</span><span style="color: #0000BB">$catalogue</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$n</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">=</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$corps</span><span style="color: #007700">=</span><span style="color: #DD0000">''</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$att&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"&nbsp;type='submit'&nbsp;name='page'"</span><span style="color: #007700">;<br />&nbsp;&nbsp;if&nbsp;((</span><span style="color: #0000BB">$n&nbsp;</span><span style="color: #007700">&lt;=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)&nbsp;OR&nbsp;(</span><span style="color: #0000BB">$n&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$catalogue</span><span style="color: #007700">)))&nbsp;</span><span style="color: #0000BB">$n&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$n&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$p&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"&lt;input$att&nbsp;style='float:left'&nbsp;value='"&nbsp;</span><span style="color: #007700">.&nbsp;(</span><span style="color: #0000BB">$n</span><span style="color: #007700">-</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"'&nbsp;/&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;else&nbsp;</span><span style="color: #0000BB">$p&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$n&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$catalogue</span><span style="color: #007700">))<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$s&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"&lt;input$att&nbsp;style='float:right'&nbsp;value='"&nbsp;</span><span style="color: #007700">.&nbsp;(</span><span style="color: #0000BB">$n</span><span style="color: #007700">+</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"'&nbsp;/&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;else&nbsp;</span><span style="color: #0000BB">$s&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$choix&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;foreach(</span><span style="color: #0000BB">$catalogue&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$nom&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$prix</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!--</span><span style="color: #0000BB">$n</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$choix&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"&lt;input$att&nbsp;value='"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$nom&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"'&nbsp;/&gt;&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;(</span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">*&nbsp;</span><span style="color: #0000BB">$prix</span><span style="color: #007700">)&nbsp;&nbsp;.&nbsp;</span><span style="color: #DD0000">'€'</span><span style="color: #007700">;&nbsp;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$corps&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;fieldset&gt;$p$s&lt;/fieldset&gt;\n&lt;fieldset&gt;$choix&lt;/fieldset&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #DD0000">"&lt;form&nbsp;action=''&nbsp;method='post'&nbsp;style='width:15%'&gt;\n$corps&lt;/form&gt;"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #FF8000">//&nbsp;Test<br /></span><span style="color: #0000BB">$bd&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'Londres'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">100</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'Madrid'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">200&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'Berlin'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">300</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//require_once('../2/entete.php');<br />//$n&nbsp;=&nbsp;isset($_POST['page'])&nbsp;?&nbsp;$_POST['page']&nbsp;:&nbsp;1;<br />//$titre&nbsp;=&nbsp;"Page&nbsp;$n";<br />//echo&nbsp;entete($titre),&nbsp;"&lt;body&gt;\n&lt;h1&gt;",&nbsp;$titre,&nbsp;"&lt;/h1&gt;\n";<br />//if&nbsp;(!is_numeric($n))<br />//&nbsp;&nbsp;echo&nbsp;"&lt;div&gt;Bon&nbsp;voyage&nbsp;pour&nbsp;"&nbsp;.&nbsp;$bd[$n]&nbsp;.&nbsp;&nbsp;"€&nbsp;&lt;/div&gt;";<br />//else&nbsp;echo&nbsp;naviguer($bd,&nbsp;$n);<br />//echo&nbsp;"&lt;/body&lt;/html&gt;\n";<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses3527'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5528"> 
+	    <div class="reponse">
+	<div class="forum-titre">Navigation dans un catalogue</div>
+6 mars 2014 &agrave; 13h18min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php <br />
+function keyParIndex($tableau, $index) {<br />
+ &nbsp;$i=1;<br />
+ &nbsp;foreach($tableau as $k=&gt;$v) <br />
+ &nbsp; &nbsp;if (($i++)==$index)<br />
+ &nbsp; &nbsp; &nbsp;return $k;<br />
+ &nbsp;return '';<br />
+}<br />
+<br />
+function naviguer($tableau,$page,$nbVisites,$photo='') { // $photo pas utilisé<br />
+ &nbsp;$res= &quot;&lt;form method='post' action=''&gt;&lt;fieldset style = 'width:15%'&gt;&quot;;<br />
+ &nbsp;$res.= $page&gt;1 ? &quot;&lt;input type='submit' name='page' value='&quot;. ($page-1) . &quot;' style='float:left'&gt;&quot; : &quot;&quot;;<br />
+ &nbsp;$res.= $page&lt;count($tableau) ? &quot;&lt;input type='submit' name='page' value='&quot;. ($page+1) . &quot;' style='float:right'&gt;&quot; : &quot;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;/fieldset&gt;&lt;fieldset style = 'width:15%'&gt;&quot;;<br />
+ &nbsp;$nomProduit=keyParIndex($tableau,$page);<br />
+ &nbsp;$res.= &quot;&lt;input type='submit' name='page' value='&quot;.$nomProduit.&quot;'&gt;&quot;.$tableau[$nomProduit]*$nbVisites.&quot;&lt;/input&gt;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;input type='hidden' name='nbVisites' value='&quot; . ($nbVisites+1) . &quot;'&gt;&lt;/input&gt;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;/fieldset&gt;&lt;/form&gt;&quot;;<br />
+ &nbsp;return $res;<br />
+}<br />
+?&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3528'></span>
+
+
+<h2 id='a2'>2 Ces vols, c&#8217;est du vol</h2>
+<p>Il s&#8217;agit à présent d&#8217;appeler la fonction <tt>naviguer</tt> à travers un script. Celui-ci reçoit donc l&#8217;unique saisie dans l&#8217;entrée <tt>page</tt> du tableau super global <tt>$_POST</tt>,
+et qu&#8217;on prendra égale à 1 si elle est absente.
+Le script commence par afficher cette saisie comme titre de la page, à la fois
+dans la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-TITLE" class='spip_glossaire' title="html" rel='external'>title</a>&nbsp;et dans une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-H1" class='spip_glossaire' title="html" rel='external'>h1</a>.</p>
+
+<p>Si cette saisie est un nombre (prédicat <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.is-numeric.html" class='spip_glossaire' title="php" rel='external'>is_numeric</a>) c&#8217;est une demande d&#8217;une autre page du catalogue et on renvoie le formulaire avec cette page en contenu.
+Autrement, cette saisie est le choix de l&#8217;utilisateur, et on affiche 
+le message <tt>Bon voyage pour <i>n</i> €</tt>, où <i>n</i> est le prix.</p>
+
+<p>Toutefois ce script entend profiter de l&#8217;intérêt du visiteur, en estimant que s&#8217;il a visité  <i>n</i> fois le site, c&#8217;est que celui-ci l&#8217;intéresse à <i>n</i>%, c&#8217;est-à-dire qu&#8217;il est prêt à  payer <i>n</i> fois le prix initial (plus précisément <i>n-1</i> car la n-ième visite est pour confirmer le dernier prix affiché), pensant que la montée du prix est due à la rareté grandissante de l&#8217;offre et qu&#8217;il lui faut donc se décider rapidement.</p>
+
+<p>Utiliser les deux arguments supplémentaires de la fonction <tt>naviguer</tt> et la technique des boutons cachés,  autrement dit  des balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-INPUT" class='spip_glossaire' title="Voir la description de 'input' dans la documentation de 'html'" rel='external'>input</a> de <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/links.html#adef-type-A" class='spip_glossaire' title="Voir la description de 'type' dans la documentation de 'html' section 1" rel='external'>type</a> <tt>hidden</tt>, pour implémenter cette  stratégie commerciale pour le moins répugnante (le facteur multiplicatif dans cet exercice est une caricature, mais la technique est effectivement employée par certains sites).</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=763&amp;cle=157435a2f5e19c4b38b63fee4dfe19e607c8efc7&amp;file=distant%2FVCS%2FLI355%2FTM%2F5%2Fhidden.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger hidden.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">require_once(</span><span style="color: #DD0000">'../2/entete.php'</span><span style="color: #007700">);<br />include(</span><span style="color: #DD0000">'naviguer.php'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$n&nbsp;</span><span style="color: #007700">=&nbsp;isset(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'page'</span><span style="color: #007700">])&nbsp;?&nbsp;</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'page'</span><span style="color: #007700">]&nbsp;:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">=&nbsp;isset(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'visite'</span><span style="color: #007700">])&nbsp;?&nbsp;</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'visite'</span><span style="color: #007700">]&nbsp;:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$titre&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"Page&nbsp;$n"</span><span style="color: #007700">;<br />echo&nbsp;</span><span style="color: #0000BB">entete</span><span style="color: #007700">(</span><span style="color: #0000BB">$titre</span><span style="color: #007700">),&nbsp;</span><span style="color: #DD0000">"&lt;body&gt;\n&lt;h1&gt;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$titre</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"&lt;/h1&gt;\n"</span><span style="color: #007700">;<br />if&nbsp;(!</span><span style="color: #0000BB">is_numeric</span><span style="color: #007700">(</span><span style="color: #0000BB">$n</span><span style="color: #007700">))<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;div&gt;Bon&nbsp;voyage&nbsp;pour&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;(</span><span style="color: #0000BB">$bd</span><span style="color: #007700">[</span><span style="color: #0000BB">$n</span><span style="color: #007700">]&nbsp;*&nbsp;((</span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;?&nbsp;(</span><span style="color: #0000BB">$v</span><span style="color: #007700">-</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"€&nbsp;&lt;/div&gt;"</span><span style="color: #007700">;<br />else&nbsp;{<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$h&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"&lt;div&gt;&lt;input&nbsp;type='hidden'&nbsp;name='visite'&nbsp;value='"</span><span style="color: #007700">.&nbsp;(</span><span style="color: #0000BB">$v</span><span style="color: #007700">+</span><span style="color: #0000BB">1</span><span style="color: #007700">).&nbsp;</span><span style="color: #DD0000">"'&nbsp;/&gt;&lt;/div&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">naviguer</span><span style="color: #007700">(</span><span style="color: #0000BB">$bd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$n</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$h</span><span style="color: #007700">);<br />}<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;/body&lt;/html&gt;\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses3528'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5547"> 
+	    <div class="reponse">
+	<div class="forum-titre">Ces vols, c&#8217;est du vol</div>
+7 mars 2014 &agrave; 10h11min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><p>EST-CE QUE C’EST NORMALE QUE ON PEUT A TOUT MOMENT RECOMMENCER PAR "C’EST VOTRE 1 VISITE" SI ON REOUVRE LA PAGE DANS UN NOUVEL ONGLET&nbsp;??????</p>
+
+<div class="spip_code"><code>&lt;?php <br />
+include '/users/nfs/Etu6/3264006/public_html/tme2/entete.php';<br />
+<br />
+function keyParIndex($tableau, $index) {<br />
+ &nbsp;$i=1;<br />
+ &nbsp;foreach($tableau as $k=&gt;$v) <br />
+ &nbsp; &nbsp;if (($i++)==$index) return $k;<br />
+ &nbsp;return '';<br />
+}<br />
+<br />
+function naviguer($tableau,$page,$nbVisites,$photo='') { // $photo pas utilisé<br />
+ &nbsp;$res= &quot;&lt;form method='post' action=''&gt;&lt;fieldset style = 'width:15%'&gt;&quot;;<br />
+ &nbsp;$res.= $page&gt;1 ? &quot;&lt;input type='submit' name='page' value='&quot;. ($page-1) . &quot;' style='float:left'&gt;&quot; : &quot;&quot;;<br />
+ &nbsp;$res.= ($page&lt;count($tableau)) ? &quot;&lt;input type='submit' name='page' value='&quot;.($page+1).&quot;' style='float:right'&gt;&quot; : &quot;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;/fieldset&gt;&lt;fieldset style = 'width:15%'&gt;&quot;;<br />
+ &nbsp;$nomProduit=keyParIndex($tableau,$page);<br />
+ &nbsp;$res.= &quot;&lt;input type='submit' name='page' value='&quot;.$nomProduit.&quot;'&gt;&quot;.$tableau[$nomProduit]*$nbVisites.&quot;&lt;/input&gt;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;input type='hidden' name='nbVisites' value='&quot; . ($nbVisites+1) . &quot;'&gt;&lt;/input&gt;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;/fieldset&gt;&lt;/form&gt;&quot;;<br />
+ &nbsp;return $res;<br />
+}<br />
+<br />
+$nbVisites = isset($_POST['nbVisites']) ? $_POST['nbVisites'] : 1;<br />
+$page = (isset($_POST['page']) AND $nbVisites&gt;=1) ? $_POST['page'] : 1;<br />
+$tableau = array('Londres' =&gt; 100, 'Madrid' =&gt; 200 , 'Berlin' =&gt; 300, 'Amsterdam' =&gt; 150);<br />
+echo entete('page '.$page),&quot;&lt;body&gt;&lt;h1&gt;Page $page&lt;/h1&gt;C'est votre $nbVisites visite&lt;br&gt;&quot;;<br />
+if (is_numeric($page)) echo naviguer($tableau,$page,$nbVisites);<br />
+else echo &quot;bon voyage à $page pour &quot; . $tableau[$page]*$nbVisites . &quot; €&quot;;<br />
+<br />
+echo &quot;&lt;/body&gt;&lt;/html&gt;&quot;;<br />
+<br />
+/* *****************************************************************************<br />
+// premiere solution, sans buttons caches<br />
+// ne va pas comme ID ne determine pas l'utilisateur definitivement<br />
+// F5 =&gt; un visite en plus<br />
+<br />
+include 'naviguer.php';<br />
+include '/users/nfs/Etu6/3264006/public_html/tme2/entete.php';<br />
+define('FILE_COMPTEUR_VISITES',&quot;/users/nfs/Etu6/3264006/public_html/tme5/compteurVisites.txt&quot;);<br />
+<br />
+$visiteurIP = $_SERVER['REMOTE_ADDR'];<br />
+$nbVisites=1;<br />
+if(is_readable(FILE_COMPTEUR_VISITES)) {<br />
+$ligne=file(FILE_COMPTEUR_VISITES); // tableau des lignes du fichier<br />
+for ($i=1; $i&lt;count($ligne); $i++)<br />
+ if (strcmp($ligne[$i],$visiteurIP)==true)<br />
+ &nbsp; $nbVisites++;<br />
+}<br />
+echo &quot;&lt;br&gt;visiteurIP = &quot; . $visiteurIP . &quot;&lt;br&gt;&quot; . &quot;C'est votre &quot; . $nbVisites . &quot; visite&quot;;<br />
+$f=fopen(FILE_COMPTEUR_VISITES,&quot;a&quot;);<br />
+fputs($f,$visiteurIP.&quot;\n&quot;);<br />
+fclose($f);<br />
+<br />
+$page=(isset($_POST['page'])) ? $_POST['page']:'2';<br />
+echo entete('page '.$page),&quot;&lt;h1&gt;Page $page&lt;/h1&gt;&quot;;<br />
+<br />
+$tableau=array('Londres' =&gt; 100, 'Madrid' =&gt; 200 , 'Berlin' =&gt; 300);<br />
+<br />
+if (is_numeric($page))<br />
+echo naviguer($tableau,$page,($nbVisites&gt;1 ? $nbVisites:1),'');<br />
+else echo &quot;bon voyage à $page pour &quot; . $tableau[$page]*($nbVisites&gt;1 ? $nbVisites:1) . &quot; €&quot;;<br />
+<br />
+echo &quot;&lt;/body&gt;&lt;/html&gt;&quot;;<br />
+*/<br />
+?&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3529'></span>
+
+
+<h2 id='a3'>3 Dégager ces boutons cachés</h2>
+<p>Il est toujours possible de demander à son navigateur de copier le source d&#8217;une page HTML dans un fichier, de modifier ce fichier, de le faire relire par son navigateur puis de cliquer sur les boutons de soumission que contient éventuellement cette page, afin de transmettre au serveur ayant produit la page initiale un autre jeu de saisies que celui qu&#8217;il s&#8217;attend à recevoir.</p>
+
+<p>Comment un visiteur pourrait-il utiliser cette possibilité pour déjouer la stratégie commerciale décrite précédemment lorsqu&#8217;il soupçonne un site d&#8217;y avoir recours&nbsp;? Attention&nbsp;: il ne s&#8217;agit pas de modifier le script PHP, car l&#8217;utilisateur n&#8217;y a pas accès et ne sait même pas que c&#8217;est un script PHP qui a produit cette page. Il s&#8217;agit de créer une nouvelle page HTML ressemblant à la précédente, mais faisant croire qu&#8217;il s&#8217;agit de la première visite.</p>
+
+<p>Imaginez un scénario permettant d&#8217;atteindre ce but et testez le. Une fois éprouvé,  décrivez-le brièvement.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=762&amp;cle=5219a443d201130e0bb0e4b838a4a64bfb862b86&amp;file=distant%2FVCS%2FLI355%2FTM%2F5%2Fdegage_visites.txt"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger degage_visites.txt</a>
+</div>
+<pre>Il faut sauver la page HTML dans fichier,
+ puis l'éditer pour en retirer la balise Input de type Hidden. 
+Selon la manière dont le formulaire a été écrit,
+le champ Action de la balise Form peut être vide, 
+auquel cas il faut l'initialiser avec l'URL de la page HTML initiale
+(i.e. l'URL du script PHP). 
+</pre></div>
+ 
+ <div id='reponses3529'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5545"> 
+	    <div class="reponse">
+	<div class="forum-titre">Dégager ces boutons cachés</div>
+7 mars 2014 &agrave; 09h47min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><p>comment faire le navigateur relire ce fichier&nbsp;???????</p>
+
+<p>changements dans naviguer.html&nbsp;:</p>
+
+<div class="spip_code"><code> &nbsp; &nbsp; C'est votre 1 visite<br />
+ &nbsp; &nbsp; &lt;input type='hidden' name='nbVisites' value='2'&gt;&lt;/input&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3530'></span>
+
+
+<h2 id='a4'>4 Cacher les cachés</h2>
+<p>Les balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-INPUT" class='spip_glossaire' title="html" rel='external'>input</a> de <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/links.html#adef-type-A" class='spip_glossaire' title="html" rel='external'>type</a> <tt>hidden</tt> sont donc aisément falsifiables, et leur usage est limité aux situations où il n&#8217;est pas dans l&#8217;intérêt du visiteur d&#8217;en profiter.</p>
+
+<p>Une autre technique consiste à ce que le serveur demande au navigateur de mémoriser ces valeurs cachées, et de les lui redonner à chacune de ses prochaines visites. Cela est possible à travers les en-têtes HTTP&nbsp;:</p>
+
+<ul class="spip"><li> le serveur envoie des en-têtes <tt>Setcookie</tt> comportant chacun une description de la valeur à mémoriser et pour combien de temps&nbsp;;</li><li> un client qui a reçu de tels en-têtes d&#8217;un serveur, envoie autant d&#8217;en-têtes <tt>Cookie</tt> avec les valeurs mémorisées, et cela à chaque fois qu&#8217;il émet une nouvelle requête vers ce serveur.</li></ul>
+<p>La fonction PHP pour envoyer l&#8217;en-tête <tt>Setcookie</tt> est <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.setcookie.html" class='spip_glossaire' title="Voir la description de 'setcookie' dans la documentation de 'php'" rel='external'>setcookie</a>, dont seuls les deux premiers  arguments sont indispensables.&nbsp;:</p>
+
+<p><a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.setcookie.html" class='spip_glossaire' title="Voir la description de 'setcookie' dans la documentation de 'php'" rel='external'>setcookie</a><code class='spip_code'> (string name, string value, int expire, string path, string domain, int secure)</code></p>
+
+<p>Le troisième indique une date d&#8217;expiration&nbsp;; en particulier pour détruire un cookie,
+il suffit de donner une date antérieure à l&#8217;appel.
+Cette fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.setcookie.html" class='spip_glossaire' title="Voir la description de 'setcookie' dans la documentation de 'php'" rel='external'>setcookie</a> envoyant
+un en-tête <tt>HTTP</tt>, elle  doit être appelée avant l&#8217;envoi de caractères dans le flux de sortie,
+comme pour la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.header.html" class='spip_glossaire' title="Voir la description de 'header' dans la documentation de 'php'" rel='external'>header</a>,
+<tt>PHP</tt> imposant même que <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.setcookie.html" class='spip_glossaire' title="Voir la description de 'setcookie' dans la documentation de 'php'" rel='external'>setcookie</a> soit appelée avant celle-ci.</p>
+
+<p>Lorsque le site sera <strong>r</strong>appelé par le client, celui-ci transmettra les cookies, auquel  PHP donnera accès à travers  le tableau superglobal <code class='spip_code'>$_COOKIE</code> dont les index sont les noms des cookies. En pratique, on n&#8217;utilise la plupart du temps qu&#8217;un seul cookie.</p>
+
+<p>Réécrire le script PHP précédent en utilisant un cookie plutôt qu&#8217;un bouton caché.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=761&amp;cle=4bf949f8812878d0378a67b71d89bdd30c30f428&amp;file=distant%2FVCS%2FLI355%2FTM%2F5%2Fcookvisites.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger cookvisites.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">require_once(</span><span style="color: #DD0000">'../2/entete.php'</span><span style="color: #007700">);<br />include(</span><span style="color: #DD0000">'naviguer.php'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$n&nbsp;</span><span style="color: #007700">=&nbsp;isset(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'page'</span><span style="color: #007700">])&nbsp;?&nbsp;</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'page'</span><span style="color: #007700">]&nbsp;:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">=&nbsp;isset(</span><span style="color: #0000BB">$_COOKIE</span><span style="color: #007700">[</span><span style="color: #DD0000">'visite'</span><span style="color: #007700">])&nbsp;?&nbsp;</span><span style="color: #0000BB">$_COOKIE</span><span style="color: #007700">[</span><span style="color: #DD0000">'visite'</span><span style="color: #007700">]&nbsp;:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$titre&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"Page&nbsp;$n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">setcookie</span><span style="color: #007700">(</span><span style="color: #DD0000">'visite'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">+</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #0000BB">entete</span><span style="color: #007700">(</span><span style="color: #0000BB">$titre</span><span style="color: #007700">),&nbsp;</span><span style="color: #DD0000">"&lt;body&gt;\n&lt;h1&gt;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$titre</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"&lt;/h1&gt;\n"</span><span style="color: #007700">;<br />if&nbsp;(!</span><span style="color: #0000BB">is_numeric</span><span style="color: #007700">(</span><span style="color: #0000BB">$n</span><span style="color: #007700">))<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;div&gt;Bon&nbsp;voyage&nbsp;pour&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;(</span><span style="color: #0000BB">$bd</span><span style="color: #007700">[</span><span style="color: #0000BB">$n</span><span style="color: #007700">]&nbsp;*&nbsp;((</span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;?&nbsp;(</span><span style="color: #0000BB">$v</span><span style="color: #007700">-</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"€&nbsp;&lt;/div&gt;"</span><span style="color: #007700">;<br />else&nbsp;{<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$h&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">;<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">naviguer</span><span style="color: #007700">(</span><span style="color: #0000BB">$bd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$n</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$h</span><span style="color: #007700">);<br />}<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;/body&lt;/html&gt;\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses3530'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5565"> 
+	    <div class="reponse">
+	<div class="forum-titre">Cacher les cachés</div>
+12 mars 2014 &agrave; 10h24min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php <br />
+error_reporting(E_ALL);<br />
+include '/users/nfs/Etu6/3264006/public_html/tme2/entete.php'; // apres setcookies ???<br />
+<br />
+function keyParIndex($tableau, $index) {<br />
+ &nbsp;$i=1;<br />
+ &nbsp;foreach($tableau as $k=&gt;$v) <br />
+ &nbsp; &nbsp;if (($i++)==$index) return $k;<br />
+ &nbsp;return '';<br />
+}<br />
+<br />
+function naviguer($tableau,$page,$nbVisitesInput,$photo='') { // $photo pas utilisé<br />
+ &nbsp;$res= &quot;&lt;form method='post' action=''&gt;&lt;fieldset style = 'width:15%'&gt;&quot;;<br />
+ &nbsp;$res.= $page&gt;1 ? &quot;&lt;input type='submit' name='page' value='&quot;. ($page-1) . &quot;' style='float:left'&gt;&quot; : &quot;&quot;;<br />
+ &nbsp;$res.= ($page&lt;count($tableau)) ? &quot;&lt;input type='submit' name='page' value='&quot;.($page+1).&quot;' style='float:right'&gt;&quot; : &quot;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;/fieldset&gt;&lt;fieldset style = 'width:15%'&gt;&quot;;<br />
+ &nbsp;$nomProduit=keyParIndex($tableau,$page);<br />
+ &nbsp;$res.= &quot;&lt;input type='submit' name='page' value='&quot;.$nomProduit.&quot;'&gt;&quot;.$tableau[$nomProduit]*$nbVisitesInput.&quot;&lt;/input&gt;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;input type='hidden' name='nbVisitesInput' value='&quot; . ($nbVisitesInput+1) . &quot;'&gt;&lt;/input&gt;&quot;;<br />
+ &nbsp;setcookie('nbVisitesCookie',$_COOKIE['nbVisitesCookie']+1); <br />
+ &nbsp;$res.= &quot;&lt;/fieldset&gt;&lt;/form&gt;&quot;;<br />
+ &nbsp;return $res;<br />
+}<br />
+<br />
+// ************************************************************************<br />
+$nbVisitesInput = isset($_POST['nbVisitesInput']) ? $_POST['nbVisitesInput'] : 1;<br />
+$page = (isset($_POST['page']) AND $nbVisitesInput&gt;=1) ? $_POST['page'] : 1;<br />
+$tableau = array('Londres' =&gt; 100, 'Madrid' =&gt; 200 , 'Berlin' =&gt; 300, 'Amsterdam' =&gt; 150);<br />
+setcookie('nbVisitesCookie',isset($_COOKIE['nbVisitesCookie']) ? &nbsp;$_COOKIE['nbVisitesCookie'] : 1); <br />
+<br />
+//echo header('HTTP/1.0 404 Not Found'); ???????<br />
+echo entete('page '.$page).&quot;&lt;body&gt;&lt;h1&gt;Page $page&lt;/h1&gt;&quot;;<br />
+echo &quot;nbVisites (input) = $nbVisitesInput visites&lt;br&gt;&quot;;<br />
+echo &quot;nbVisites (cookie) = &quot; . $_COOKIE['nbVisitesCookie'] . &quot; visites&lt;br&gt;&quot;;<br />
+<br />
+if (is_numeric($page)) echo naviguer($tableau,$page,$nbVisitesInput);<br />
+else echo &quot;bon voyage à $page pour &quot; . $tableau[$page]*$nbVisitesInput . &quot; €&quot;;<br />
+<br />
+e</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3531'></span>
+
+
+<h2 id='a5'>5 De la suite dans les IP</h2>
+<p>Dans l&#8217;exercice précédent, le cookie a pour valeur ce qui était auparavant mis dans l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/index/elements.html" class='spip_glossaire' title="html" rel='external'>value</a> d&#8217;une balise cachée, ce qui n&#8217;empêche pas un utilisateur de déjouer à nouveau la stratégie du site simplement en détruisant  le  cookie, possibilité offerte par tous les navigateurs. Une solution plus robuste consiste à donner comme valeur au cookie non pas ce que le serveur souhaite mémoriser,  mais un identifiant dans une base de données où le serveur a placé ce qu&#8217;il veut mémoriser à propos de ce visiteur. Ainsi, le visiteur ne peut pas deviner à quoi sert ce cookie, et si sa méfiance le lui fait détruire,  le script s&#8217;apercevra que la situation est anormale et pourra refuser de s&#8217;exécuter plus avant.</p>
+
+<p>Nous allons donc à présent gérer une petite base de données, sous la forme de fichiers placés dans un répertoire nommé <tt>COOKIE</tt>, auquel votre serveur HTTP devra avoir accès en lecture et en écriture (il n&#8217;est pas nécessaire que ce fichier soit dans votre public_html, c&#8217;est même déconseillé par souci de sécurité). A chaque visiteur nouveau, il faut créer un fichier dans ce répertoire avec un nom arbitraire. En prévision de l&#8217;exercice suivant, on prendra comme nom le résultat de la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.md5.html" class='spip_glossaire' title="php" rel='external'>md5</a> appliqué à une chaîne formée d&#8217;un nombre aléatoire fourni par un appel de la fonction  <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.mt-rand.html" class='spip_glossaire' title="php" rel='external'>mt_rand</a>, de l&#8217;adresse IP du visiteur (disponible dans la super globale <tt>$_SERVER</tt>) et du nom client HTTP (idem).</p>
+
+<p>Ecrire une fonction <tt>memorise_cookie</tt> sans argument,  qui regarde si un cookie nommé <tt>visite</tt> est présent. Si oui, c&#8217;est le nom d&#8217;un fichier dans le répertoire nommé <tt>COOKIE</tt>, supposé contenir un nombre N. Sinon, la fonction crée un nom de fichier selon la spécification ci-dessus, et prend 1 comme valeur de N. Dans les deux cas, elle place dans ce fichier la valeur N+1, et demande la pose d&#8217;un cookie de nom <tt>visite</tt> et de valeur le nom du fichier. Elle retourne N en valeur.</p>
+
+<p>Réécrire le script précédent afin qu&#8217;il utilise cette fonction.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=764&amp;cle=3ae50552b145e8175fa97ab120e6ede0b728c54e&amp;file=distant%2FVCS%2FLI355%2FTM%2F5%2Fmemorise_cookie.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger memorise_cookie.php </a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">require_once(</span><span style="color: #DD0000">'../2/entete.php'</span><span style="color: #007700">);<br />include(</span><span style="color: #DD0000">'naviguer.php'</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">memorise_cookie</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;if&nbsp;(!isset(</span><span style="color: #0000BB">$_COOKIE</span><span style="color: #007700">[</span><span style="color: #DD0000">'visite'</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$f&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'COOKIE/'&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">md5</span><span style="color: #007700">(</span><span style="color: #0000BB">mt_rand</span><span style="color: #007700">()&nbsp;.&nbsp;</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'REMOTE_ADDR'</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'HTTP_USER_AGENT'</span><span style="color: #007700">]);<br />&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$f&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'COOKIE/'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$_COOKIE</span><span style="color: #007700">[</span><span style="color: #DD0000">'visite'</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_shift</span><span style="color: #007700">(</span><span style="color: #0000BB">file</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">));<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$d&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'w'</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fputs</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">+</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">);<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;</span><span style="color: #0000BB">setcookie</span><span style="color: #007700">(</span><span style="color: #DD0000">'visite'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$f</span><span style="color: #007700">);<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">;<br /><br />}<br /><br /></span><span style="color: #0000BB">$n&nbsp;</span><span style="color: #007700">=&nbsp;isset(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'page'</span><span style="color: #007700">])&nbsp;?&nbsp;</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'page'</span><span style="color: #007700">]&nbsp;:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$titre&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"Page&nbsp;$n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">memorise_cookie</span><span style="color: #007700">();<br />echo&nbsp;</span><span style="color: #0000BB">entete</span><span style="color: #007700">(</span><span style="color: #0000BB">$titre</span><span style="color: #007700">),&nbsp;</span><span style="color: #DD0000">"&lt;body&gt;\n&lt;h1&gt;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$titre</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"&lt;/h1&gt;\n"</span><span style="color: #007700">;<br />if&nbsp;(!</span><span style="color: #0000BB">is_numeric</span><span style="color: #007700">(</span><span style="color: #0000BB">$n</span><span style="color: #007700">))<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;div&gt;Bon&nbsp;voyage&nbsp;pour&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;(</span><span style="color: #0000BB">$bd</span><span style="color: #007700">[</span><span style="color: #0000BB">$n</span><span style="color: #007700">]&nbsp;*&nbsp;((</span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;?&nbsp;(</span><span style="color: #0000BB">$v</span><span style="color: #007700">-</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"€&nbsp;&lt;/div&gt;"</span><span style="color: #007700">;<br />else&nbsp;{<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$h&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">;<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">naviguer</span><span style="color: #007700">(</span><span style="color: #0000BB">$bd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$n</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$h</span><span style="color: #007700">);<br />}<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;/body&lt;/html&gt;\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses3531'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5567"> 
+	    <div class="reponse">
+	<div class="forum-titre">De la suite dans les IP</div>
+12 mars 2014 &agrave; 12h12min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php <br />
+error_reporting(E_ALL);<br />
+<br />
+include '/users/nfs/Etu6/3264006/public_html/tme2/entete.php'; <br />
+define ('REPERTOIRE_COOKIE',&quot;/users/nfs/Etu6/3264006/li355/cookies/&quot;); // ne marche pas ??<br />
+<br />
+function keyParIndex($tableau, $index) {<br />
+ &nbsp;$i=1;<br />
+ &nbsp;foreach($tableau as $k=&gt;$v) <br />
+ &nbsp; &nbsp;if (($i++)==$index) return $k;<br />
+ &nbsp;return '';<br />
+}<br />
+<br />
+function naviguer($tableau,$page,$nbVisitesInput,$photo='') { // $photo pas utilisé<br />
+ &nbsp;$res= &quot;&lt;form method='post' action=''&gt;&lt;fieldset style = 'width:15%'&gt;&quot;;<br />
+ &nbsp;$res.= $page&gt;1 ? &quot;&lt;input type='submit' name='page' value='&quot;. ($page-1) . &quot;' style='float:left'&gt;&quot; : &quot;&quot;;<br />
+ &nbsp;$res.= ($page&lt;count($tableau)) ? &quot;&lt;input type='submit' name='page' value='&quot;.($page+1).&quot;' style='float:right'&gt;&quot; : &quot;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;/fieldset&gt;&lt;fieldset style = 'width:15%'&gt;&quot;;<br />
+ &nbsp;$nomProduit=keyParIndex($tableau,$page);<br />
+ &nbsp;$res.= &quot;&lt;input type='submit' name='page' value='&quot;.$nomProduit.&quot;'&gt;&quot;.$tableau[$nomProduit]*$nbVisitesInput.&quot;&lt;/input&gt;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;/fieldset&gt;&lt;/form&gt;&quot;;<br />
+ &nbsp;return $res;<br />
+}<br />
+<br />
+function memorise_cookie() {<br />
+ &nbsp;if(!isset($_COOKIE['nomFichier'])) {<br />
+ &nbsp; &nbsp;$nomFichier=&quot;/users/nfs/Etu6/3264006/li355/cookies/&quot;.md5(mt_rand()).&quot;_&quot;.$_SERVER['REMOTE_ADDR'].&quot;_&quot;.str_replace(array('_','/',';','(',')','.',':',',',' '),'',$_SERVER['HTTP_USER_AGENT']);<br />
+ &nbsp; &nbsp;setcookie('nomFichier',$nomFichier); &nbsp; // important !! au debut ?? $_COOKIE['nomFichier']= ?? <br />
+ &nbsp; &nbsp;$nbVisitesFichier=1;<br />
+ &nbsp; &nbsp;$f=fopen($nomFichier,&quot;w&quot;);<br />
+ &nbsp; &nbsp;fputs($f,$nbVisitesFichier+1);<br />
+ &nbsp; &nbsp;@fclose($f);<br />
+ &nbsp; &nbsp;return $nbVisitesFichier;<br />
+ &nbsp;}<br />
+ &nbsp;else if (is_readable($_COOKIE['nomFichier'])) {<br />
+ &nbsp; &nbsp;$nomFichier = $_COOKIE['nomFichier'];<br />
+ &nbsp; &nbsp;$f=fopen($nomFichier,&quot;r&quot;);<br />
+ &nbsp; &nbsp;$nbVisitesFichier=fgets($f);<br />
+ &nbsp; &nbsp;@fclose($f); <br />
+ &nbsp; &nbsp;$f=fopen($nomFichier,&quot;w&quot;);<br />
+ &nbsp; &nbsp;fputs($f,$nbVisitesFichier+1);<br />
+ &nbsp; &nbsp;@fclose($f); <br />
+ &nbsp; &nbsp;return $nbVisitesFichier;<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp;else<br />
+ &nbsp; &nbsp;echo &quot;probleme fichier &quot;.$nomFichier.&quot;\n&quot;;<br />
+}<br />
+<br />
+// ************************************************************************rm <br />
+$page = (isset($_POST['page']) AND isset($_COOKIE['nomFichier'])) ? $_POST['page'] : 1;<br />
+$tableau = array('Londres' =&gt; 100, 'Madrid' =&gt; 200 , 'Berlin' =&gt; 300, 'Amsterdam' =&gt; 150);<br />
+<br />
+//unset($_COOKIE['nomFichier']);<br />
+//setcookie('nomFichier',isset($_COOKIE['nomFichier']) ? &nbsp;$_COOKIE['nomFichier'] : null); &nbsp; // superflux ??<br />
+echo entete('page '.$page).&quot;&lt;body&gt;&lt;h1&gt;Page $page&lt;/h1&gt;&quot;;<br />
+echo &quot;nbVisiter (fichier) = &quot; . memorise_cookie() . &quot;&lt;br&gt;&quot;;<br />
+<br />
+$nbVisitesFichier=isset($_COOKIE['nomFichier']) ? fgets($f=fopen($_COOKIE['nomFichier'],&quot;r&quot;)) : 1; <br />
+@fclose($f); <br />
+if (is_numeric($page)) echo naviguer($tableau,$page,$nbVisitesFichier);<br />
+else echo &quot;bon voyage a $page pour &quot; . $tableau[$page]*$nbVisitesFichier . &quot; euros&quot;;<br />
+<br />
+echo &quot;&lt;/body&gt;&lt;/html&gt;&quot;;<br />
+?&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3532'></span>
+
+
+<h2 id='a6'>6 Vol au-dessus d&#8217;un noeud de cookies</h2>
+<p>Avec la dernière version du script,  un utilisateur ne peut plus passer commande en faisant croire que c&#8217;est sa première visite. Il peut en revanche essayer de se faire passer pour un autre utilisateur, peut-être venu moins souvent. Pour cela, il lui faut envoyer un en-tête <tt>Cookie</tt> avec une valeur copiée d&#8217;un autre utilisateur. Plusieurs outils sont disponibles pour cela&nbsp;:</p>
+
+<ul class="spip"><li> utiliser telnet&nbsp;;</li><li> utiliser le navigateur Opera, le seul à offrir en standard un éditeur de cookie permettant d&#8217;en changer la valeur&nbsp;;</li><li> utiliser l&#8217;extension <tt>Cookie Manager</tt> de Firefox, qui offre lui aussi cette fonctionnalité. </li></ul>
+<p>Faites exécuter votre script plusieurs fois par un navigateur, puis une fois et une seule par un autre. Modifier le cookie géré par le premier en lui donnant la valeur indiquée par le second. Constater qu&#8217;à nouveau la stratégie du script a été déjouée.</p>
+
+<p>Pour corriger cette faiblesse, définir une variante de la fonction <tt>memorise_cookie</tt>, qui mémorise dans le fichier non seulement le nombre de visites, mais aussi le nombre aléatoire qui a servi à calculer le nom  du fichier. A chaque appel où le cookie est présent,  la fonction recalcule le nom du fichier et vérifie que c&#8217;est bien le même. Si ce n&#8217;est pas le cas, ou si le fichier n&#8217;existe pas, il y a eu vol de cookie par écoute systématique du réseau, et le script doit s&#8217;arrêter en renvoyant un code de retour 403 via la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.header.html" class='spip_glossaire' title="php" rel='external'>header</a>.</p>
+
+<p>Remarque&nbsp;: le recalcul du nom du fichier donnera un autre résultat en cas de changement de l&#8217;adresse IP et/ou du navigateur utilisé. C&#8217;est beaucoup mieux, mais on ne peut exclure la situation de deux utilisateurs du même navigateur sur la même machine (ou d&#8217;un vol de l&#8217;adresse IP). C&#8217;est pourquoi il est imprudent de conserver longtemps ses cookies, et qu&#8217;il est préférable de systématiquement utiliser des cookies cryptés, comme le permet le dernier argument de la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.setcookie.html" class='spip_glossaire' title="php" rel='external'>setcookie</a>.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=766&amp;cle=6623edf35b2f2e9c541c92a66446a03c2cc846c3&amp;file=distant%2FVCS%2FLI355%2FTM%2F5%2Fprotege_cookie.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger protege_cookie.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">require_once(</span><span style="color: #DD0000">'../2/entete.php'</span><span style="color: #007700">);<br />include(</span><span style="color: #DD0000">'naviguer.php'</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">protege_cookie</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;if&nbsp;(!isset(</span><span style="color: #0000BB">$_COOKIE</span><span style="color: #007700">[</span><span style="color: #DD0000">'visite'</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">mt_rand</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$f&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'COOKIE/'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">md5</span><span style="color: #007700">(</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'REMOTE_ADDR'</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'HTTP_USER_AGENT'</span><span style="color: #007700">]);<br />&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$f&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'COOKIE/'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$_COOKIE</span><span style="color: #007700">[</span><span style="color: #DD0000">'visite'</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$_COOKIE</span><span style="color: #007700">[</span><span style="color: #DD0000">'visite'</span><span style="color: #007700">]&nbsp;AND&nbsp;</span><span style="color: #0000BB">is_readable</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list(</span><span style="color: #0000BB">$v</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">)&nbsp;=&nbsp;</span><span style="color: #0000BB">file</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$f2&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">md5</span><span style="color: #007700">(</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'REMOTE_ADDR'</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'HTTP_USER_AGENT'</span><span style="color: #007700">]);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;</span><span style="color: #0000BB">$f2&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$_COOKIE</span><span style="color: #007700">[</span><span style="color: #DD0000">'visite'</span><span style="color: #007700">]&nbsp;!=&nbsp;</span><span style="color: #0000BB">$f2</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">'HTTP/1.1&nbsp;403&nbsp;Forbidden'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;die(</span><span style="color: #DD0000">"Vol&nbsp;de&nbsp;cookie&nbsp;mon&nbsp;gaillard"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$d&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'w'</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fputs</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">+</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"\n$a"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">);<br />&nbsp;}<br />&nbsp;&nbsp;</span><span style="color: #0000BB">setcookie</span><span style="color: #007700">(</span><span style="color: #DD0000">'visite'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$f</span><span style="color: #007700">);<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">$n&nbsp;</span><span style="color: #007700">=&nbsp;isset(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'page'</span><span style="color: #007700">])&nbsp;?&nbsp;</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'page'</span><span style="color: #007700">]&nbsp;:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$titre&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"Page&nbsp;$n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">protege_cookie</span><span style="color: #007700">();<br />echo&nbsp;</span><span style="color: #0000BB">entete</span><span style="color: #007700">(</span><span style="color: #0000BB">$titre</span><span style="color: #007700">),&nbsp;</span><span style="color: #DD0000">"&lt;body&gt;\n&lt;h1&gt;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$titre</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"&lt;/h1&gt;\n"</span><span style="color: #007700">;<br />if&nbsp;(!</span><span style="color: #0000BB">is_numeric</span><span style="color: #007700">(</span><span style="color: #0000BB">$n</span><span style="color: #007700">))<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;div&gt;Bon&nbsp;voyage&nbsp;pour&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;(</span><span style="color: #0000BB">$bd</span><span style="color: #007700">[</span><span style="color: #0000BB">$n</span><span style="color: #007700">]&nbsp;*&nbsp;((</span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;?&nbsp;(</span><span style="color: #0000BB">$v</span><span style="color: #007700">-</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"€&nbsp;&lt;/div&gt;"</span><span style="color: #007700">;<br />else&nbsp;{<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$h&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">;<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">naviguer</span><span style="color: #007700">(</span><span style="color: #0000BB">$bd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$n</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$h</span><span style="color: #007700">);<br />}<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;/body&lt;/html&gt;\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses3532'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5570"> 
+	    <div class="reponse">
+	<div class="forum-titre">Vol au-dessus d&#8217;un noeud de cookies</div>
+12 mars 2014 &agrave; 19h46min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php <br />
+error_reporting(E_ALL);<br />
+<br />
+include '/users/nfs/Etu6/3264006/public_html/tme2/entete.php'; <br />
+define ('REPERTOIRE_COOKIE',&quot;/users/nfs/Etu6/3264006/li355/cookies/&quot;); // ne marche pas ??<br />
+<br />
+function keyParIndex($tableau, $index) {<br />
+ &nbsp;$i=1;<br />
+ &nbsp;foreach($tableau as $k=&gt;$v) <br />
+ &nbsp; &nbsp;if (($i++)==$index) return $k;<br />
+ &nbsp;return '';<br />
+}<br />
+<br />
+function naviguer($tableau,$page,$nbVisitesInput,$photo='') { // $photo pas utilisé<br />
+ &nbsp;$res= &quot;&lt;form method='post' action=''&gt;&lt;fieldset style = 'width:15%'&gt;&quot;;<br />
+ &nbsp;$res.= $page&gt;1 ? &quot;&lt;input type='submit' name='page' value='&quot;. ($page-1) . &quot;' style='float:left'&gt;&quot; : &quot;&quot;;<br />
+ &nbsp;$res.= ($page&lt;count($tableau)) ? &quot;&lt;input type='submit' name='page' value='&quot;.($page+1).&quot;' style='float:right'&gt;&quot; : &quot;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;/fieldset&gt;&lt;fieldset style = 'width:15%'&gt;&quot;;<br />
+ &nbsp;$nomProduit=keyParIndex($tableau,$page);<br />
+ &nbsp;$res.= &quot;&lt;input type='submit' name='page' value='&quot;.$nomProduit.&quot;'&gt;&quot;.$tableau[$nomProduit]*$nbVisitesInput.&quot;&lt;/input&gt;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;/fieldset&gt;&lt;/form&gt;&quot;;<br />
+ &nbsp;return $res;<br />
+}<br />
+<br />
+function memorise_cookie() {<br />
+ &nbsp;if(!isset($_COOKIE['nomFichier'])) {<br />
+ &nbsp; &nbsp;$nbAleat=md5(mt_rand());<br />
+ &nbsp; &nbsp;$nomFichier=&quot;/users/nfs/Etu6/3264006/li355/cookies/&quot;.$nbAleat.&quot;_&quot;.$_SERVER['REMOTE_ADDR'].&quot;_&quot;.str_replace(array('_','/',';','(',')','.',':',',',' '),'',$_SERVER['HTTP_USER_AGENT']);<br />
+ &nbsp; &nbsp;setcookie('nomFichier',$nomFichier,0,&quot;&quot;,&quot;&quot;,1); &nbsp; // avant tout echo ?? $_COOKIE['nomFichier']= ?? <br />
+ &nbsp; &nbsp;$nbVisitesFichier=1;<br />
+ &nbsp; &nbsp;$f=fopen($nomFichier,&quot;w&quot;);<br />
+ &nbsp; &nbsp;fprintf($f,&quot;%d\n%s&quot;,$nbVisitesFichier+1,$nbAleat);<br />
+ &nbsp; &nbsp;@fclose($f);<br />
+ &nbsp; &nbsp;return $nbVisitesFichier;<br />
+ &nbsp;}<br />
+ &nbsp;else if (is_readable($_COOKIE['nomFichier'])) {<br />
+ &nbsp; &nbsp;$nomFichierCookie = $_COOKIE['nomFichier'];<br />
+ &nbsp; &nbsp;$f=fopen($nomFichierCookie,&quot;r&quot;);<br />
+ &nbsp; &nbsp;$nbVisitesFichier=fgets($f);<br />
+ &nbsp; &nbsp;$nbAleatLu=fgets($f);<br />
+ &nbsp; &nbsp;@fclose($f); <br />
+ &nbsp; &nbsp;$nomFichierRecalcule=&quot;/users/nfs/Etu6/3264006/li355/cookies/&quot;.$nbAleatLu.&quot;_&quot;.$_SERVER['REMOTE_ADDR'].&quot;_&quot;.str_replace(array('_','/',';','(',')','.',':',',',' '),'',$_SERVER['HTTP_USER_AGENT']);<br />
+ &nbsp; &nbsp;if($nomFichierCookie != $nomFichierRecalcule) {<br />
+ &nbsp; &nbsp; &nbsp;echo &quot;&lt;br&gt;vol de cookies&lt;br&gt;&quot;; <br />
+ &nbsp; &nbsp; &nbsp;// le script doit s’arrêter en renvoyant un code de retour 403 via la fonction header<br />
+ &nbsp; &nbsp; &nbsp;// ??????????????????????????????????????????????????????????????????????????????????<br />
+ &nbsp; &nbsp; &nbsp;header(&quot;Location: retour403.php&quot;); <br />
+ &nbsp; &nbsp; &nbsp;header ($_SERVER['SERVER_PROTOCOL'] . ' 403 Forbidden');<br />
+ &nbsp; &nbsp; &nbsp;header(&quot;HTTP/1.1 403 Forbidden&quot;); // apache<br />
+ &nbsp; &nbsp; &nbsp;header('Status: 403 Forbidden'); // CGI<br />
+ &nbsp; &nbsp; &nbsp;exit();<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp; &nbsp;$f=fopen($nomFichierCookie,&quot;w&quot;);<br />
+ &nbsp; &nbsp;fprintf($f,&quot;%d\n%s&quot;,$nbVisitesFichier+1,$nbAleatLu);<br />
+ &nbsp; &nbsp;@fclose($f); <br />
+ &nbsp; &nbsp;return $nbVisitesFichier;<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp;else<br />
+ &nbsp; &nbsp;echo &quot;probleme fichier &quot;.$nomFichierCookie.&quot;\n&quot;;<br />
+}<br />
+<br />
+// ************************************************************************rm <br />
+$page = (isset($_POST['page']) AND isset($_COOKIE['nomFichier'])) ? $_POST['page'] : 1;<br />
+$tableau = array('Londres' =&gt; 100, 'Madrid' =&gt; 200 , 'Berlin' =&gt; 300, 'Amsterdam' =&gt; 150);<br />
+<br />
+//unset($_COOKIE['nomFichier']);<br />
+//setcookie('nomFichier',isset($_COOKIE['nomFichier'],0,&quot;&quot;,&quot;&quot;,1) ? &nbsp;$_COOKIE['nomFichier'] : null); &nbsp; // superflux ??<br />
+echo entete('page '.$page).&quot;&lt;body&gt;&lt;h1&gt;Page $page&lt;/h1&gt;&quot;;<br />
+echo &quot;nbVisiter (fichier) = &quot; . memorise_cookie() . &quot;&lt;br&gt;&quot;;<br />
+<br />
+$nbVisitesFichier=isset($_COOKIE['nomFichier']) ? fgets($f=fopen($_COOKIE['nomFichier'],&quot;r&quot;)) : 1; <br />
+@fclose($f); <br />
+if (is_numeric($page)) echo naviguer($tableau,$page,$nbVisitesFichier);<br />
+else echo &quot;bon voyage a $page pour &quot; . $tableau[$page]*$nbVisitesFichier . &quot; euros&quot;;<br />
+<br />
+echo &quot;&lt;/body&gt;&lt;/html&gt;&quot;;<br />
+?&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2370'></span>
+
+
+<h2 id='a7'>7 Session inviolable et limitée en PHP</h2>
+<p>Un problème moins grave reste à résoudre dans la dernière version du script. Les fichiers créés vont rester indéfiniment sur le serveur,
+il faut un programme de nettoyage se déclenchant automatiquement 
+à intervalles réguliers.</p>
+
+<p>PHP offre un mécanisme accomplissant toutes ces tâches.
+Il est mis en route par  l&#8217;appel de la fonction
+<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.session-start.html" class='spip_glossaire' title="Voir la description de 'session_start' dans la documentation de 'php'" rel='external'>session_start</a> en début de script. 
+Son action est de lire la valeur du cookie
+<code class='spip_code'>PHPSESSID</code> pour déterminer le nom du fichier à gérer
+(en fait d&#8217;autres nommages sont possibles mais ne seront pas abordés
+ici). Ce fichier contient la valeur d&#8217;un
+tableau nommé <code class='spip_code'>$_SESSION</code>,
+qui  y est  sauvegardé automatiquement à la fin de l&#8217;exécution
+du script. 
+Le tableau <code class='spip_code'>$_SESSION</code> peut être rempli avec n&#8217;importe quel couple
+<i>(index, valeur)</i>, en nombre quelconque.</p>
+
+<p>Par défaut, le fichier est  en <code class='spip_code'>/tmp</code> mais il est inutile de le savoir 
+et de toutes façons seul le serveur
+<tt>HTTP</tt> possède les droits en lecture et écriture, ce qui autorise un minimum de confidentialité. Le fichier créé sera détruit lors de l&#8217;appel
+de la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.session-destroy.html" class='spip_glossaire' title="Voir la description de 'session_destroy' dans la documentation de 'php'" rel='external'>session_destroy</a> ou après un délai décidé lors de l&#8217;installation
+de <tt>PHP</tt> (il n&#8217;est malheureusement pas possible de l&#8217;inféoder au délai d&#8217;expiration
+du cookie associé).</p>
+
+<p>Réécrire l&#8217;exercice précédent avec ces deux nouvelles fonctions.</p>
+
+
+<div style='text-align:right' id='s70'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>session_php.php</tt><br />
+</div>
+
+ 
+ <div id='reponses2370'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5571"> 
+	    <div class="reponse">
+	<div class="forum-titre">Session inviolable et limitée en PHP</div>
+12 mars 2014 &agrave; 20h00min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php <br />
+error_reporting(E_ALL);<br />
+<br />
+include '/users/nfs/Etu6/3264006/public_html/tme2/entete.php'; <br />
+define ('REPERTOIRE_COOKIE',&quot;/users/nfs/Etu6/3264006/li355/cookies/&quot;); // ne marche pas ??<br />
+<br />
+function keyParIndex($tableau, $index) {<br />
+ &nbsp;$i=1;<br />
+ &nbsp;foreach($tableau as $k=&gt;$v) <br />
+ &nbsp; &nbsp;if (($i++)==$index) return $k;<br />
+ &nbsp;return '';<br />
+}<br />
+<br />
+function naviguer($tableau,$page,$nbVisitesInput,$photo='') { // $photo pas utilisé<br />
+ &nbsp;$res= &quot;&lt;form method='post' action=''&gt;&lt;fieldset style = 'width:15%'&gt;&quot;;<br />
+ &nbsp;$res.= $page&gt;1 ? &quot;&lt;input type='submit' name='page' value='&quot;. ($page-1) . &quot;' style='float:left'&gt;&quot; : &quot;&quot;;<br />
+ &nbsp;$res.= ($page&lt;count($tableau)) ? &quot;&lt;input type='submit' name='page' value='&quot;.($page+1).&quot;' style='float:right'&gt;&quot; : &quot;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;/fieldset&gt;&lt;fieldset style = 'width:15%'&gt;&quot;;<br />
+ &nbsp;$nomProduit=keyParIndex($tableau,$page);<br />
+ &nbsp;$res.= &quot;&lt;input type='submit' name='page' value='&quot;.$nomProduit.&quot;'&gt;&quot;.$tableau[$nomProduit]*$nbVisitesInput.&quot;&lt;/input&gt;&quot;;<br />
+ &nbsp;$res.= &quot;&lt;/fieldset&gt;&lt;/form&gt;&quot;;<br />
+ &nbsp;return $res;<br />
+}<br />
+<br />
+function memorise_cookie() {<br />
+ &nbsp;if(!isset($_COOKIE['nomFichier'])) {<br />
+ &nbsp; &nbsp;$nbAleat=md5(mt_rand());<br />
+ &nbsp; &nbsp;$nomFichier=&quot;/users/nfs/Etu6/3264006/li355/cookies/&quot;.$nbAleat.&quot;_&quot;.$_SERVER['REMOTE_ADDR'].&quot;_&quot;.str_replace(array('_','/',';','(',')','.',':',',',' '),'',$_SERVER['HTTP_USER_AGENT']);<br />
+ &nbsp; &nbsp;setcookie('nomFichier',$nomFichier,0,&quot;&quot;,&quot;&quot;,1); &nbsp; // avant tout echo ?? $_COOKIE['nomFichier']= ?? <br />
+ &nbsp; &nbsp;$nbVisitesFichier=1;<br />
+ &nbsp; &nbsp;$f=fopen($nomFichier,&quot;w&quot;);<br />
+ &nbsp; &nbsp;fprintf($f,&quot;%d\n%s&quot;,$nbVisitesFichier+1,$nbAleat);<br />
+ &nbsp; &nbsp;@fclose($f);<br />
+ &nbsp; &nbsp;return $nbVisitesFichier;<br />
+ &nbsp;}<br />
+ &nbsp;else if (is_readable($_COOKIE['nomFichier'])) {<br />
+ &nbsp; &nbsp;$nomFichierCookie = $_COOKIE['nomFichier'];<br />
+ &nbsp; &nbsp;$f=fopen($nomFichierCookie,&quot;r&quot;);<br />
+ &nbsp; &nbsp;$nbVisitesFichier=fgets($f);<br />
+ &nbsp; &nbsp;$nbAleatLu=fgets($f);<br />
+ &nbsp; &nbsp;@fclose($f); <br />
+ &nbsp; &nbsp;$nomFichierRecalcule=&quot;/users/nfs/Etu6/3264006/li355/cookies/&quot;.$nbAleatLu.&quot;_&quot;.$_SERVER['REMOTE_ADDR'].&quot;_&quot;.str_replace(array('_','/',';','(',')','.',':',',',' '),'',$_SERVER['HTTP_USER_AGENT']);<br />
+ &nbsp; &nbsp;if($nomFichierCookie != $nomFichierRecalcule) {<br />
+ &nbsp; &nbsp; &nbsp;echo &quot;&lt;br&gt;vol de cookies&lt;br&gt;&quot;; <br />
+ &nbsp; &nbsp; &nbsp;// le script doit s’arrêter en renvoyant un code de retour 403 via la fonction header<br />
+ &nbsp; &nbsp; &nbsp;// ??????????????????????????????????????????????????????????????????????????????????<br />
+ &nbsp; &nbsp; &nbsp;header(&quot;Location: retour403.php&quot;); <br />
+ &nbsp; &nbsp; &nbsp;header ($_SERVER['SERVER_PROTOCOL'] . ' 403 Forbidden');<br />
+ &nbsp; &nbsp; &nbsp;header(&quot;HTTP/1.1 403 Forbidden&quot;); // apache<br />
+ &nbsp; &nbsp; &nbsp;header('Status: 403 Forbidden'); // CGI<br />
+ &nbsp; &nbsp; &nbsp;exit();<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp; &nbsp;$f=fopen($nomFichierCookie,&quot;w&quot;);<br />
+ &nbsp; &nbsp;fprintf($f,&quot;%d\n%s&quot;,$nbVisitesFichier+1,$nbAleatLu);<br />
+ &nbsp; &nbsp;@fclose($f); <br />
+ &nbsp; &nbsp;return $nbVisitesFichier;<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp;else<br />
+ &nbsp; &nbsp;echo &quot;probleme fichier &quot;.$nomFichierCookie.&quot;\n&quot;;<br />
+}<br />
+<br />
+// ************************************************************************rm <br />
+session_start(); &nbsp;// correctement ???<br />
+// lire la valeur du cookie PHPSESSID pour déterminer le nom du fichier (fichier = valeur du tableau $_SESSION)<br />
+<br />
+$page = (isset($_POST['page']) AND isset($_COOKIE['nomFichier'])) ? $_POST['page'] : 1;<br />
+$tableau = array('Londres' =&gt; 100, 'Madrid' =&gt; 200 , 'Berlin' =&gt; 300, 'Amsterdam' =&gt; 150);<br />
+<br />
+//unset($_COOKIE['nomFichier']);<br />
+//setcookie('nomFichier',isset($_COOKIE['nomFichier'],0,&quot;&quot;,&quot;&quot;,1) ? &nbsp;$_COOKIE['nomFichier'] : null); &nbsp; // superflux ??<br />
+echo entete('page '.$page).&quot;&lt;body&gt;&lt;h1&gt;Page $page&lt;/h1&gt;&quot;;<br />
+echo &quot;nbVisiter (fichier) = &quot; . memorise_cookie() . &quot;&lt;br&gt;&quot;;<br />
+<br />
+$nbVisitesFichier=isset($_COOKIE['nomFichier']) ? fgets($f=fopen($_COOKIE['nomFichier'],&quot;r&quot;)) : 1; <br />
+@fclose($f); <br />
+if (is_numeric($page)) echo naviguer($tableau,$page,$nbVisitesFichier);<br />
+else echo &quot;bon voyage a $page pour &quot; . $tableau[$page]*$nbVisitesFichier . &quot; euros&quot;;<br />
+<br />
+echo &quot;&lt;/body&gt;&lt;/html&gt;&quot;;<br />
+session_destroy(); // correctement ???<br />
+// detruire le fichier créé<br />
+?&gt;</code></div></div>
+	<div class="forum-repondre-message">
+		<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=ramassage&amp;id_article=2370&amp;id_rubrique=289&amp;id_forum=5571&amp;retour=Simulation-de-sessions-avec-HTTP">Am&eacute;liorer votre r&eacute;ponse&nbsp;</a>
+	</div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FSimulation-de-sessions-avec-HTTP"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FSimulation-de-sessions-avec-HTTP'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FSimulation-de-sessions-avec-HTTP&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 13h33min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FSimulation-de-sessions-avec-HTTP'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

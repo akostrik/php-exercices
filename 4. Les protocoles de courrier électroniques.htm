@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=273"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>4. Les protocoles de courrier électroniques (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Mécanisme général</a></li>
+<li class="menu-lv2"><a href='#a2'>Connexion</a></li>
+<li class="menu-lv2"><a href='#a3'>Déconnexion</a></li>
+<li class="menu-lv2"><a href='#a4'>Contenu de la boîte</a></li>
+<li class="menu-lv2"><a href='#a5'>Récupération des en-têtes SMTP</a></li>
+<li class="menu-lv2"><a href='#a6'>Récupération du corps du message</a></li>
+<li class="menu-lv2"><a href='#a7'>Filtrage des e-mails</a></li>
+<li class="menu-lv2"><a href='#a8'>Sélection des e-mails</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux Dirig&eacute;s<br />4. Les protocoles de courrier électroniques</h1>
+<p>Cette séance étudie un protocole textuel simple, POP3,  en écrivant  un <i> client  WebMail</i> capable  d&#8217;afficher dans un navigateur son dialogue avec  le serveur de mail que vous utilisez à l&#8217;université et probablement ailleurs.</p>
+
+<p>Le Post Office Protocol version 3 (ou POP3) permet d&#8217;accéder à
+une boîte aux lettres située sur un serveur écoutant sur le port 110. Ce mode de consultation permet de lire son courrier à partir de machines différentes (on a rarement la même machine dans son cyber-café favori ou dans les salles de travaux sur machines)  ou nomades (qui changent  d&#8217;adresse d&#8217;IP grâce au service dit DHCP).</p>
+
+<p>POP3 est un protocole textuel, donc lisible et à peu près compréhensible par un humain. Les commandes sont composées d&#8217;un mot-clé (de 3 ou 4 caractères) et parfois de 1 ou 2 paramètres. Les commandes peuvent théoriquement être écrites en minuscules ou en majuscules mais l&#8217;expérience montre souvent que seules les majuscules sont acceptées. Enfin, chacune des commandes envoyées par le client doit être suivie de la séquence de caractères Retour-Chariot/Ligne-Fille (soit "\r\n") pour être exécutée par le serveur.
+Une réponse du serveur est composée d&#8217;un indicateur de réussite ou d&#8217;échec (respectivement <tt>+OK</tt> et <tt>-ERR</tt>) suivi d&#8217;un message qui  se termine par une ligne blanche suivie d&#8217;une ligne réduite à un unique point (".").</p>
+
+<table class="spip" summary="">
+<caption>Principales requêtes du protocole POP3</caption>
+<tr class='row_first'><th scope='col'>Syntaxe&nbsp;de&nbsp;la&nbsp;requête</th><th scope='col'>Description</th></tr>
+<tr class='row_odd'>
+<td>USER <i>nom</i></td>
+<td>authentification de l&#8217;utilisateur sur le serveur. La commande USER doit nécessairement précéder la commande PASS.</td></tr>
+<tr class='row_even'>
+<td>PASS <i>chaîne</i></td>
+<td>spécification du mot de passe associé à l&#8217;utilisateur précédent.</td></tr>
+<tr class='row_odd'>
+<td>STAT</td>
+<td> renvoie une ligne de deux entiers séparés par un espace, le premier indiquant le nombre de messages dans la boîte de réception, le deuxième la taille  en octets de la boîte.</td></tr>
+<tr class='row_even'>
+<td>RETR <i>numéro</i></td>
+<td>récupération complète du message <i>numéro</i>  (en-tête et corps).</td></tr>
+<tr class='row_odd'>
+<td>TOP <i>numéro nombre</i></td>
+<td>affiche les <i>nombre</i> premières lignes du message <i>numéro</i>. En cas de réussite, le serveur renvoie les en-têtes du message, une ligne blanche et les premières lignes du message.</td></tr>
+<tr class='row_even'>
+<td>DELE <i>numéro</i></td>
+<td>suppression du message <i>numéro</i>.</td></tr>
+<tr class='row_odd'>
+<td>LIST [<i>numéro</i>]</td>
+<td>liste de tous les messages et de leur taille respective (en octets) ou bien taille du message spécifié.</td></tr>
+<tr class='row_even'>
+<td>QUIT</td>
+<td>demande la fin de la session sur le serveur POP3.</td></tr>
+<tr class='row_odd'>
+<td>NOOP</td>
+<td>conserve la connexion ouverte en cas d&#8217;inactivité.</td></tr>
+</table>
+<p>Lorsqu&#8217;un utilisateur est connecté à un serveur POP3,  une autre connexion sous ce nom est refusée par le serveur. Il est donc important d&#8217;utiliser la requête QUIT pour libérer l&#8217;accès.  Si cela n&#8217;est pas fait,  il faudra attendre que le serveur considère le client comme définitivement perdu, ce qui peut prendre plusieurs minutes.</p>
+
+<p>Pour une description plus approfondie du protocole POP3 nous vous recommandons la lecture du <a href="http://www.rfc-editor.org/rfc/rfc1939.txt" class='spip_out' rel='external'>rfc 1939</a>.  Attention, il existe un protocole POP version 2 qui utilise des commandes complètement différentes.
+Il existe aussi POP3S (pour POP3 over SSL),
+version de POP3 dans laquelle les communications avec le serveur sont cryptées.  Elle utilise en général le port 995 et  est décrite dans le <a href="http://www.rfc-editor.org/rfc/rfc2595.txt" class='spip_out' rel='external'>rfc 2595</a>.</p>
+<br /><div id='sequence273'>
+<span id='e2622'></span>
+
+
+<h2 id='a1'>1 Mécanisme général</h2>
+<p>Au vu des commandes indiquées ci-dessus, POP3 est-il un protocole sans état comme HTTP (après réponse à une requête la connexion peut être coupée) ou avec état (pendant une connexion, plusieurs requêtes doivent émises  dans un certain ordre)&nbsp;? Donner un scénario plausible de dialogue entre un client et un serveur POP.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=665&amp;cle=6dd24b09990039047a4f9789d7dcea0b2de800af&amp;file=distant%2FVCS%2FLI355%2FTD%2F4%2Fmecanisme.txt"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger mecanisme.txt</a>
+</div>
+<pre>POP est un protocole à état, car avant de pouvoir utiliser les requêtes d'accès
+à la boîte de réception, il faut s'authentifier.
+Comme il  n'y a pas d'en-têtes comme en HTTP, une unique requête ne peut pas 
+à la fois fournir l'authentification et la demande d'accès,
+il faut au moins deux requêtes et même trois
+(car il y a USER et PASS, on ne donne pas les deux informations d'un coup).
+Entre chacune de ces requêtes, le serveur change d'état
+("inconnu" puis "nommé" puis "authentifié").
+
+Scénario plausible: 
+USER PASS STAT QUIT
+qui permet juste de savoir si on a des mails et combien.
+</pre></div>
+
+
+<span id='e2332'></span>
+
+
+<h2 id='a2'>2 Connexion</h2>
+<p>Pour se connecter à un serveur (POP3 ou autre), il faut établir une connexion sur un canal de communication,
+appelée traditionnellement une <i>socket</i>. En PHP, cela est réalisé par la fonction&nbsp;:</p>
+
+<p><tt>fsockopen(string target [, int port [, int &amp;errno [, string &amp;errstr [, float timeout]]]] )</tt></p>
+
+<p> dont les paramètres sont les suivants&nbsp;:</p>
+<ul>
+<li><tt>target</tt>&nbsp;: adresse du serveur  à atteindre&nbsp;;</li>
+<li><tt>port</tt>&nbsp;: port de communication sur le serveur (ici 110)&nbsp;;</li>
+<li><tt>errno</tt> et <tt>errstr</tt>&nbsp;: numéro et chaîne explicative d&#8217;une erreur éventuelle&nbsp;;</li>
+<li><tt>timeout</tt>&nbsp;: durée au-delà de laquelle la connexion est interrompue.</li>
+</ul>
+<p>Le résultat de <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fsockopen.html" class='spip_glossaire' title="Voir la description de 'fsockopen' dans la documentation de 'php'" rel='external'>fsockopen</a> est <strong>false</strong> en cas d&#8217;erreur, sinon un descripteur de socket valide sur lequel on lit et on écrit avec les mêmes fonctions que pour un fichier (<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fread.html" class='spip_glossaire' title="Voir la description de 'fread' dans la documentation de 'php'" rel='external'>fread</a>/<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fgets.html" class='spip_glossaire' title="Voir la description de 'fgets' dans la documentation de 'php'" rel='external'>fgets</a>, <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fwrite.html" class='spip_glossaire' title="Voir la description de 'fwrite' dans la documentation de 'php'" rel='external'>fwrite</a>/<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fputs.html" class='spip_glossaire' title="Voir la description de 'fputs' dans la documentation de 'php'" rel='external'>fputs</a>).</p>
+
+<p>Écrire une fonction PHP <strong>commande()</strong> qui prend en argument une socket supposée en communication avec un serveur POP3, et une chaîne, et qui 
+émet  sur la socket cette requête complétée par un saut de ligne si nécessaire.  Elle lit ensuite la réponse, et la renvoie en résultat si elle commence par <tt>+OK</tt>, si non elle renvoie <tt>False</tt>.</p>
+
+<p>Écrire ensuite une fonction PHP <strong>connexion()</strong> qui prend en paramètre un nom de serveur POP3, un identifiant d&#8217;utilisateur et un mot de passe associé et qui renvoie un descripteur de socket valide en cas de réussite et Faux sinon.
+La fonction devra dans un premier temps créer une socket, ensuite utiliser la fonction <strong>commande</strong> précédente pour identifier l&#8217;utilisateur et lire les réponses du serveur.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=661&amp;cle=5de482431583d42c368e84e23a2b4aeed9bcf112&amp;file=distant%2FVCS%2FLI355%2FTD%2F4%2Fconnexion.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger connexion.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">//&nbsp;Fonction&nbsp;qui&nbsp;envoie&nbsp;une&nbsp;commande&nbsp;au&nbsp;serveur&nbsp;POP3&nbsp;<br />//&nbsp;et&nbsp;renvoie&nbsp;vrai&nbsp;ssi&nbsp;le&nbsp;retour&nbsp;commence&nbsp;par&nbsp;"+OK"<br />//&nbsp;$com&nbsp;ne&nbsp;doit&nbsp;pas&nbsp;contenir&nbsp;CR/LF<br /><br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">commande</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,</span><span style="color: #0000BB">$com</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fputs</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">trim</span><span style="color: #007700">(</span><span style="color: #0000BB">$com</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\r\n"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$reponse&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fgets</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #DD0000">"/^\+OK/"</span><span style="color: #007700">,</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">)&nbsp;?&nbsp;</span><span style="color: #0000BB">$reponse&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">//&nbsp;Fonction&nbsp;de&nbsp;connexion&nbsp;à&nbsp;un&nbsp;serveur&nbsp;POP3<br />//&nbsp;Le&nbsp;timeOut&nbsp;est&nbsp;fixé&nbsp;à&nbsp;5&nbsp;secondes&nbsp;(par&nbsp;défaut&nbsp;300s)<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">connexion</span><span style="color: #007700">(</span><span style="color: #0000BB">$server</span><span style="color: #007700">,</span><span style="color: #0000BB">$user</span><span style="color: #007700">,</span><span style="color: #0000BB">$pass</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$sock&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fsockopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$server</span><span style="color: #007700">,</span><span style="color: #0000BB">110</span><span style="color: #007700">,</span><span style="color: #0000BB">$errno</span><span style="color: #007700">,</span><span style="color: #0000BB">$errstr</span><span style="color: #007700">,</span><span style="color: #0000BB">5</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$sock&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Erreur&nbsp;de&nbsp;connexion&nbsp;au&nbsp;serveur&nbsp;POP&nbsp;[$errno]&nbsp;:&nbsp;$errstr\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Chercher&nbsp;le&nbsp;message&nbsp;de&nbsp;bienvenue&nbsp;du&nbsp;serveur<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$reponse&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fgets</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Envoi&nbsp;de&nbsp;la&nbsp;commande&nbsp;USER<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">commande</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,</span><span style="color: #DD0000">"USER&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$user</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$res</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Envoi&nbsp;de&nbsp;la&nbsp;commande&nbsp;PASS<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">commande</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,</span><span style="color: #DD0000">"PASS&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$pass</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$res</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;L'utilisateur&nbsp;est&nbsp;reconnu<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;on&nbsp;retourne&nbsp;le&nbsp;descripteur&nbsp;de&nbsp;socket<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">return&nbsp;</span><span style="color: #0000BB">$sock</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+<span id='e2334'></span>
+
+
+<h2 id='a3'>3 Déconnexion</h2>
+<p>Pour se déconnecter d&#8217;une session POP3, le client doit envoyer la commande <tt>QUIT</tt> au serveur. Celui-ci envoie en retour un message de confirmation et ferme la socket de communication avec le client.  Le client doit signaler au système qu&#8217;il n&#8217;a plus besoin  de la socket,  à l&#8217;aide de la fonction  <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fclose.html" class='spip_glossaire' title="Voir la description de 'fclose' dans la documentation de 'php'" rel='external'>fclose</a>.</p>
+
+<p>Écrire une fonction <strong>deconnexion()</strong> qui prend en argument une socket 
+supposée en communication avec un serveur POP3
+et qui lui envoie la commande de fermeture de session.
+Elle ferme ensuite la socket. 
+Afin d&#8217;éviter des messages d&#8217;erreur intempestifs dus à une tentative de fermeture d&#8217;une socket déjà fermée, on précèdera la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fclose.html" class='spip_glossaire' title="Voir la description de 'fclose' dans la documentation de 'php'" rel='external'>fclose</a> du caractère &#8217;@&#8217;.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=662&amp;cle=849322bfe37c135a8675b041bc1a968640e0beb5&amp;file=distant%2FVCS%2FLI355%2FTD%2F4%2Fdeconnexion.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger deconnexion.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">deconnexion</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fputs</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"QUIT\r\n"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">fgets</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;@</span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+
+
+<span id='e2336'></span>
+
+
+<h2 id='a4'>4 Contenu de la boîte</h2>
+<p>Écrire une fonction <strong>get_mail_count()</strong> qui prend en argument une socket 
+supposée en communication avec un serveur POP3, lui
+demande  le nombre de messages dans la boîte de réception et la taille de celle-ci, et retourne un tableau formé de ces deux valeurs.
+On  utilisera les fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-split.html" class='spip_glossaire' title="Voir la description de 'preg_split' dans la documentation de 'php'" rel='external'>preg_split</a> et <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.array-shift.html" class='spip_glossaire' title="php" rel='external'>array_shift</a> pour transformer la réponse reçue en le tableau demandé.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=664&amp;cle=d112c20b8740dfab13a234ffb1b19fb7b3343416&amp;file=distant%2FVCS%2FLI355%2FTD%2F4%2Fget_mail_count.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger get_mail_count.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">get_mail_count</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">commande</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"STAT"</span><span style="color: #007700">);<br />&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$res</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">preg_split</span><span style="color: #007700">(</span><span style="color: #DD0000">'/\s+/'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">array_shift</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">);<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+<span id='e3514'></span>
+
+
+<h2 id='a5'>5 Récupération des en-têtes SMTP</h2>
+<p>Un message dans une boîte de réception commence toujours par des lignes d’en-têtes SMTP, précédant une ligne blanche et le corps du message (dans le cas où le message est en une seule partie). La réponse du serveur est terminée lorsqu’il envoie une ligne ne contenant qu’un point.</p>
+
+<p>Chaque en-tête est un symbole composé de lettres et de traits d’union et terminé par un deux points, le reste de la ligne étant la valeur de l’en-tête.</p>
+
+<p>Question 1. Définir une expression rationnelle sous la forme d&#8217;une constante nommée <strong>RE_ENTETE_SMTP</strong> et permettant de vérifier qu&#8217;une chaîne de caractères correspond à un en-tête valide au sens de la définition précédente.</p>
+
+<p>Question 2. Écrire une fonction <strong>entete_smtp</strong> prenant en argument une socket supposée en communication avec un serveur POP3, un numéro de message et qui retourne un tableau associatif PHP contenant en clés les noms des en-têtes SMTP du message et en valeur les valeurs associées.</p>
+
+<p>Indications&nbsp;:</p>
+
+<ul class="spip"><li> pour n&#8217;obtenir que l&#8217;en-tête d&#8217;un message on pourra se limiter à ne demander que les 0 premières lignes 
+du message considéré&nbsp;;</li><li> toutefois, il faudra lire intégralement (jusqu&#8217;au caractère &#8217;.&#8217; final) la réponse du serveur afin que le canal de communication soit vide lors de la requête suivante&nbsp;;</li><li> enfin, pour s’affranchir des caractères présents dans les lignes mais non affichés (comme <tt>\r</tt>, <tt>\t</tt>, <tt>\r</tt>), vous pouvez utiliser la fonction trim. On protégera également les entrées lues avec <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.htmlentities.html" class='spip_glossaire' title="Voir la description de 'htmlentities' dans la documentation de 'php'" rel='external'>htmlentities</a>.</li></ul>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=757&amp;cle=cbbcf6342fcbc88037051587f73e1b47fed68503&amp;file=distant%2FVCS%2FLI355%2FTD%2F4%2Frecuperation_entetes.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger recuperation_entetes.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_ENTETE_SMTP'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'/^([A-Z][-a-zA-Z0-9]+):(.*)$/'</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">recuperation_entetes</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$num</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">commande</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,</span><span style="color: #DD0000">"TOP&nbsp;$num&nbsp;0"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$res</span><span style="color: #007700">)&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$entetes&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cle&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;((</span><span style="color: #0000BB">$ligne&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">trim</span><span style="color: #007700">(</span><span style="color: #0000BB">fgets</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">)))&nbsp;!=&nbsp;</span><span style="color: #DD0000">'.'</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tmp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">htmlentities</span><span style="color: #007700">(</span><span style="color: #0000BB">$ligne</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #0000BB">RE_ENTETE_SMTP</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$tmp</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$r</span><span style="color: #007700">)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cle&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$r</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(isset(</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">[</span><span style="color: #0000BB">$cle</span><span style="color: #007700">])){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">[</span><span style="color: #0000BB">$cle</span><span style="color: #007700">]&nbsp;.=&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;\n"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$r</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">[</span><span style="color: #0000BB">$cle</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$r</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Autre&nbsp;ligne&nbsp;:&nbsp;ajout&nbsp;a&nbsp;la&nbsp;derniere&nbsp;cle&nbsp;trouvee<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">[</span><span style="color: #0000BB">$cle</span><span style="color: #007700">]&nbsp;.=&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;\n"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$tmp</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+
+
+<span id='e3515'></span>
+
+
+<h2 id='a6'>6 Récupération du corps du message</h2>
+<p>Le corps d&#8217;un mail débute après le saut de ligne qui termine les en-têtes SMTP et est terminé par la ligne finale de l&#8217;envoi du serveur ne contenant que le caractère <tt>&#8217;.&#8217;</tt>.</p>
+
+<p>Écrire une fonction <strong>recuperation_message</strong> qui prend en argument une socket supposée en communication avec un serveur POP3, un numéro de message et qui retourne une chaine de caractères contenant
+le corps du message retourné par le serveur POP3.</p>
+
+<p>Comme pour les entêtes, on veillera à protéger le texte récupéré à l&#8217;aide de la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.htmlentities.html" class='spip_glossaire' title="Voir la description de 'htmlentities' dans la documentation de 'php'" rel='external'>htmlentities</a> et on lira l&#8217;intégralité du message pour libérer le canal de communication.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=758&amp;cle=b08b927a0bc82ad4ddfe5130bc4ebe60416ecef6&amp;file=distant%2FVCS%2FLI355%2FTD%2F4%2Frecuperation_message.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger recuperation_message.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">recuperation_message</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$num</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">commande</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,</span><span style="color: #DD0000">"RETR&nbsp;$num"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$res</span><span style="color: #007700">)&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$message&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;((</span><span style="color: #0000BB">$ligne&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">trim</span><span style="color: #007700">(</span><span style="color: #0000BB">fgets</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">)))&nbsp;!=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;On&nbsp;passe&nbsp;les&nbsp;en-têtes<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Lecture&nbsp;du&nbsp;corps&nbsp;du&nbsp;message<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">while&nbsp;((</span><span style="color: #0000BB">$ligne&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">trim</span><span style="color: #007700">(</span><span style="color: #0000BB">fgets</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">)))&nbsp;!=&nbsp;</span><span style="color: #DD0000">'.'</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tmp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">preg_replace</span><span style="color: #007700">(</span><span style="color: #DD0000">"/\r\n/"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;\n"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">htmlentities</span><span style="color: #007700">(</span><span style="color: #0000BB">$ligne</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$message&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #0000BB">$tmp</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$message</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+
+
+<span id='e3516'></span>
+
+
+<h2 id='a7'>7 Filtrage des e-mails</h2>
+<p>On cherche maintenant à filtrer un message sur la base de ces en-têtes et d&#8217;un ensemble de contraintes sur les en-têtes
+exprimé par un tableau associatif de la forme&nbsp;: 
+<tt>("From" => "presidence@upmc.fr", "Subject" => "Bravo à l&#8217;équipe de l&#8217;UE LI355")</tt>.</p>
+
+<p>On retournera <tt>true</tt> uniquement si les champs d&#8217;en-tête "From" et Subject" sont conformes aux valeurs souhaitées par l&#8217;utilisateur et <tt>false</tt> sinon.</p>
+
+<p>Pour cela, écrire une fonction <strong>selection_message</strong> qui prend en argument un tableau associatif PHP représentant les en-têtes SMTP d&#8217;un message POP3 et un tableau associatif PHP indiquant les valeurs souhaitées pour certains en-têtes (éventuellement aucun).</p>
+
+<p>La fonction doit retourner <tt>true</tt> si et seulement si les en-têtes et leurs valeurs associées apparaissent dans les valeurs des en-têtes passées en argument.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=760&amp;cle=1a390cfc2f5e648784208c01846333fe13ecfee1&amp;file=distant%2FVCS%2FLI355%2FTD%2F4%2Fselection_message.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger selection_message.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">selection_message</span><span style="color: #007700">(</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$contraintes</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$contraintes&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$cle</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">$val</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!&nbsp;isset(</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">[</span><span style="color: #0000BB">$cle</span><span style="color: #007700">])&nbsp;||&nbsp;(</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">[</span><span style="color: #0000BB">$cle</span><span style="color: #007700">]&nbsp;!=&nbsp;</span><span style="color: #0000BB">$val</span><span style="color: #007700">))&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+
+
+<span id='e3517'></span>
+
+
+<h2 id='a8'>8 Sélection des e-mails</h2>
+<p>On souhaite à présent interroger le serveur POP3 en lui demandant tous les mails ayant certains en-têtes avec une valeur précise (par exemple From&nbsp;: maman@chezmoi.fr et/ou Date&nbsp;: demain).</p>
+
+<p>L’affichage prendra la forme d’une page XHTML valide, avec autant de tables que de messages compatibles avec les contraintes sur les en-têtes spécifiées par l&#8217;utilisateur.</p>
+
+<p>Pour un message ayant n en-têtes, la table aura n+1 lignes, chaque ligne indiquant un en-tête sauf la dernière qui contiendra le corps du message.</p>
+
+<p>Chaque table aura deux colonnes, la première indiquant le nom de l’en-tête la deuxième colonne indiquant le contenu, sauf pour la dernière ligne où le message s’étalera sur les deux colonnes (attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#adef-colspan" class='spip_glossaire' title="html" rel='external'>colspan</a> pour <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TD" class='spip_glossaire' title="html" rel='external'>td</a>).</p>
+
+<p>Chaque table aura pour titre (balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-CAPTION" class='spip_glossaire' title="html" rel='external'>caption</a>) le nom de l’émetteur du message (en-tête <tt>SMTP From&nbsp;:</tt>).</p>
+
+<p>Question 1. Écrire une fonction <strong>affiche_mail</strong> qui prend en argument un numéro de mail, son tableau d&#8217;en-têtes ainsi que le corps du message et retourne un tableau tel que décrit précédemment. On initialisera l&#8217;attribut
+<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#adef-summary" class='spip_glossaire' title="html" rel='external'>summary</a> du tableau avec la chaîne "Mail numéro x" où x est le numéro du mail.</p>
+
+<p>Question 2. Écrire une fonction <strong>selection_mail</strong> prenant en argument une socket supposée en communication avec un serveur POP3 et un tableau associatif représentant un ensemble d&#8217;en-têtes avec leurs valeurs, et affichant tous les messages ayant des en-têtes compatibles.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=759&amp;cle=6ccb63efde962a9e9f916616c35508fbed549333&amp;file=distant%2FVCS%2FLI355%2FTD%2F4%2Fselection_mail.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger selection_mail.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">selection_mail</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$criteres</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$n&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">get_mail_count</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$n</span><span style="color: #007700">)&nbsp;</span><span style="color: #0000BB">$n&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$n</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(;</span><span style="color: #0000BB">$n</span><span style="color: #007700">;</span><span style="color: #0000BB">$n</span><span style="color: #007700">--)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$entetes&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">recuperation_entetes</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$n</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">selection_mail</span><span style="color: #007700">(</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$criteres</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$res</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$message&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">recuperation_message</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$num</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #0000BB">affiche_mail</span><span style="color: #007700">(</span><span style="color: #0000BB">$num</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$message</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #DD0000">"&lt;html&gt;&lt;head&gt;&lt;title&gt;Mails&nbsp;filtrés&lt;/title&gt;&lt;/head&gt;&lt;body&gt;$res&lt;/body&gt;&lt;/html&gt;"</span><span style="color: #007700">;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">affiche_mail</span><span style="color: #007700">(</span><span style="color: #0000BB">$num</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$message</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"&lt;table&nbsp;summary='Mail&nbsp;num.&nbsp;$num'&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;caption&gt;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">[</span><span style="color: #DD0000">"From"</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">"&lt;/caption&gt;"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;tr&gt;&lt;th&gt;Entêtes&lt;/th&gt;&lt;th&gt;Valeurs&lt;/th&gt;&lt;/tr&gt;"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$tab&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$k</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">$v</span><span style="color: #007700">)&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;tr&gt;&lt;td&gt;$k&lt;/td&gt;&lt;td&gt;$v&lt;/td&gt;&lt;/tr&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;tr&gt;&lt;td&nbsp;colspan='2'&gt;$message&lt;/td&gt;&lt;/tr&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;/table&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLes-protocoles-de-courrier"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLes-protocoles-de-courrier'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLes-protocoles-de-courrier&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 12h34min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLes-protocoles-de-courrier'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

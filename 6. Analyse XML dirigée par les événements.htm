@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=285"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>6. Analyse XML dirigée par les événements (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Ecriture de DTD</a></li>
+<li class="menu-lv2"><a href='#a2'>Conformité d&#8217;un document XML</a></li>
+<li class="menu-lv2"><a href='#a3'>Gestion des événements avec SAX</a></li>
+<li class="menu-lv2"><a href='#a4'>Extraction de contenu avec variables globales</a></li>
+<li class="menu-lv2"><a href='#a5'>Extraction de contenu avec un objet PHP</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux Dirig&eacute;s<br />6. Analyse XML  dirigée par les événements</h1>
+<p>Cette séance est consacrée à l&#8217;étude de la nébuleuse XML. Il s&#8217;agira d&#8217;une part d&#8217;écrire une DTD (Définition de Type de Document), décrivant la grammaire utilisée par un texte XML donné.  D&#8217;autre part, on
+prendra en main l&#8217;analyseur syntaxique (Simple Analyzer for XML),
+et son modèle de programmation par déclenchement d&#8217;événements.</p>
+
+<p>Les questions de cette séance portent sur le fichier annuaire.xml décrivant un carnet d&#8217;adresse, dont le contenu est le suivant&nbsp;:</p>
+
+<div style='font-size: 78%'><div class='spip_code'><code>&lt;?xml version='1.0' encoding='iso-8859-15' standalone='no' ?&gt;<br />
+&lt;!DOCTYPE annuaire SYSTEM 'annuaire.dtd' &gt;<br />
+&lt;annuaire&gt;<br />
+&lt;elemcarnet date='15-4-02'&gt;<br />
+ &nbsp; &lt;personne sexe='M'&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;nom&gt; Archimede &lt;/nom&gt;&lt;prenom&gt; Pierre &lt;/prenom&gt;<br />
+ &nbsp; &nbsp;&lt;/personne&gt;<br />
+ &nbsp; &nbsp;&lt;adresse&gt; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;rue numero=&quot;7&quot;&gt; du puissant liquide&lt;/rue&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;ville codepostal=&quot;76000&quot;&gt; Le Havre &lt;/ville&gt;<br />
+ &nbsp; &lt;/adresse&gt;<br />
+ &nbsp; &lt;telephone fixe=&quot;03 77 66 55 44&quot; mobile=&quot;&quot; /&gt;<br />
+&lt;/elemcarnet&gt;<br />
+&lt;elemcarnet date='15-4-02'&gt;<br />
+ &nbsp; &nbsp;&lt;personne sexe='F'&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;nom&gt; Hypatia &lt;/nom&gt;&lt;prenom&gt; Cléo &lt;/prenom&gt;<br />
+ &nbsp; &nbsp;&lt;/personne&gt;<br />
+ &nbsp; &nbsp;&lt;adresse&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;rue numero=&quot;5&quot;&gt; d'Alexandrie &lt;/rue&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;&lt;ville codepostal=&quot;13000&quot;&gt; Marseille &lt;/ville&gt;<br />
+ &nbsp; &nbsp;&lt;/adresse&gt;<br />
+ &nbsp; &nbsp;&lt;telephone fixe=&quot;04 11 22 33 44&quot; mobile=&quot;06 55 44 22 11&quot; /&gt;<br />
+&lt;/elemcarnet&gt;<br />
+&lt;/annuaire&gt;</code></div>
+</div>
+<p>On suppose l&#8217;exemple totalement représentatif&nbsp;: il permet de déduire quels sont les éléments, les attributs, leur rôle facultatif ou obligatoire, les répétitions etc...</p>
+<br /><div id='sequence285'>
+<span id='e2478'></span>
+
+
+<h2 id='a1'>1 Ecriture de DTD</h2>
+<p>Une DTD est une suite de règles qui déclarent les éléments du document ou une liste d&#8217;attributs relatif à un élément.</p>
+
+<p>Déclarer un <strong>élément</strong> s&#8217;écrit&nbsp;:
+<tt>&lt;!ELEMENT</tt> <i>nom  contenu</i><tt>&gt;</tt></p>
+
+<p>Le  <i>contenu</i> est une suite composée le plus souvent des entités suivantes&nbsp;:</p>
+
+<ul>
+<li><tt>EMPTY</tt>&nbsp;:  élément sans contenu (par exemple <tt>input</tt>)</li>
+<li>(<i>elem1</i>, <i>elem2</i>, ... <i>elemN</i>)&nbsp;: groupe de plusieurs éléments qui se suivent dans cet ordre&nbsp;; </li>
+<li>(<i>elem1</i> | <i>elem2</i> | ...  |<i>elemN</i>)&nbsp;: un élément  parmi ceux listés&nbsp;;
+<li>#PCDATA&nbsp;: un élément textuel&nbsp;; </li>
+</ul>
+<p>Sur chaque élément il est possible d&#8217;appliquer des modificateurs issus des expressions rationnelles pour indiquer leur nombre (+, *,&nbsp;?)&nbsp;;</p>
+
+<p>Une <strong>liste d&#8217;attributs</strong> est déclarée à l&#8217;aide de la déclaration suivante&nbsp;:</p>
+<div class='spip_code'><code>&lt;!ATTLIST nom_element<br />
+ &nbsp; &nbsp; attnom1 atttype1 attdesc1<br />
+ &nbsp; &nbsp; attnom2 atttype2 attdesc2<br />
+&gt;</code></div>
+<p>Les <strong>types d&#8217;attributs</strong> les plus fréquent sont les suivants&nbsp;:</p>
+<ul>
+<li>CDATA&nbsp;: n&#8217;importe quelle donnée textuelle</li>
+<li>ID&nbsp;: identifiant unique pour l&#8217;élément associé</li>
+<li>(<i>valeur1</i>|...|<i>valeurN</i>)&nbsp;: liste de valeurs possibles</li>
+</ul>
+<p>Les <strong>descripteurs d&#8217;attributs</strong> peuvent être les suivants&nbsp;:</p>
+
+<ul>
+<li>#REQUIRED&nbsp;: la valeur (non précisée) est obligatoire</li>
+<li>#IMPLIED&nbsp;: valeur optionelle</li>
+</ul>
+<p>Écrire le fichier <tt>annuaire.dtd</tt> décrivant une grammaire pour  le type de document donné ci-dessus.</p>
+
+
+<div style='text-align:right' id='s920'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>annuaire.dtd</tt><br />
+</div>
+
+
+
+<span id='e2486'></span>
+
+
+<h2 id='a2'>2 Conformité d&#8217;un document XML</h2>
+<p>Un document <strong>XML</strong> est dit <i>bien formé</i> s&#8217;il respecte sa syntaxe de base&nbsp;: emboîtements corrects, attributs pourvus d&#8217;une valeur  entre simple et double apostrophes, etc. La DTD n&#8217;est pas nécessaire pour vérifier cela.</p>
+
+<p>Un document <strong>XML</strong> est dit <i>valide</i> si, en plus,  il respecte la DTD&nbsp;:
+attributs obligatoires présents, succession des balises respectée, etc.</p>
+
+<p>SAX est en général disponible en PHP (il suffit  que l&#8217;option <code class='spip_code'>--with-xml</code> soit indiqué dans ce que retourne  la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.phpinfo.html" class='spip_glossaire' title="Voir la description de 'phpinfo' dans la documentation de 'php'" rel='external'>phpinfo</a> pour s&#8217;en assurer). Il  propose les fonctions suivantes&nbsp;:</p>
+<ul>
+<li><a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.xml-parser-create.html" class='spip_glossaire' title="Voir la description de 'xml_parser_create' dans la documentation de 'php'" rel='external'>xml_parser_create</a>()&nbsp;: pour créer une instance de l&#8217;analyseur XML SAX nécessaire.</li>
+<li><a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.xml-parse.html" class='spip_glossaire' title="Voir la description de 'xml_parse' dans la documentation de 'php'" rel='external'>xml_parse</a><code class='spip_code'>($phraseur, $data, $fin)</code>&nbsp;: pour analyser la chaîne $data éventuellement incomplète ($fin).</li>
+<li><a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.xml-get-error-code.html" class='spip_glossaire' title="Voir la description de 'xml_get_error_code' dans la documentation de 'php'" rel='external'>xml_get_error_code</a><code class='spip_code'>($phraseur)</code>&nbsp;: qui renvoie le code d&#8217;erreur en cas d&#8217;échec lors de la validation.</li>
+<li><a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.xml-error-string.html" class='spip_glossaire' title="Voir la description de 'xml_error_string' dans la documentation de 'php'" rel='external'>xml_error_string</a><code class='spip_code'>($err_code)</code>&nbsp;: qui renvoie la chaîne correspondante à un code d&#8217;erreur passé en paramètre.</li>
+<li><a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.xml-get-current-line-number.html" class='spip_glossaire' title="Voir la description de 'xml_get_current_line_number' dans la documentation de 'php'" rel='external'>xml_get_current_line_number</a><code class='spip_code'>($phraseur)</code>&nbsp;: qui renvoie le numéro de ligne qui contient l&#8217;erreur.</li>
+<li><a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.xml-parser-set-option.html" class='spip_glossaire' title="Voir la description de 'xml_parser_set_option' dans la documentation de 'php'" rel='external'>xml_parser_set_option</a><code class='spip_code'>($phraseur, XML_OPTION_CASE_FOLDING, true)</code>&nbsp;: force le passage des balises en majuscules (peu recommandé, XML distinguant la casse des lettres).</li></ul>
+<p>Ecrire une fonction PHP <code class='spip_code'>lancer_phraseur</code> qui prend en argument un nom de fichier XML, lance le phraseur, et vérifie s&#8217;il est bien formé. Cette fonction doit retourner un tableau PHP dont&nbsp;:</p>
+<ul>
+<li> la première valeur contient le phraseur qui a servi à phraser le document. </li>
+<li> la deuxième valeur contient un booléen positionné à <code class='spip_code'>true</code> si des erreurs se sont produites.</li>
+</ul>
+<p>On utilisera les fonctions PHP déjà vues <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fopen.html" class='spip_glossaire' title="Voir la description de 'fopen' dans la documentation de 'php'" rel='external'>fopen</a>, <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fread.html" class='spip_glossaire' title="Voir la description de 'fread' dans la documentation de 'php'" rel='external'>fread</a> et <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fclose.html" class='spip_glossaire' title="Voir la description de 'fclose' dans la documentation de 'php'" rel='external'>fclose</a>, ainsi que <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.feof.html" class='spip_glossaire' title="Voir la description de 'feof' dans la documentation de 'php'" rel='external'>feof</a> qui retourne <tt>True</tt> si la fin du fichier est atteinte.</p>
+
+<p>Ecrire une fonction PHP <code class='spip_code'>get_xml_error_as_string</code> qui prend en argument un phraseur (ayant servi à phraser un document) et qui retourne une chaîne de caractères contenant la cause de l&#8217;erreur et la ligne à laquelle elle s&#8217;est produite. (Note&nbsp;: cette fonction n&#8217;est appelée que si une erreur s&#8217;est produite).</p>
+
+<p>Ecrire un script PHP qui utilise ces deux fonctions pour vérifier si un document XML est bien formé, et signale sinon pourquoi et à quelle ligne.</p>
+
+
+<div style='text-align:right' id='s930'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>xml_bien_forme.php</tt><br />
+</div>
+
+
+
+<span id='e2480'></span>
+
+
+<h2 id='a3'>3 Gestion des événements avec SAX</h2>
+<p>Nous nous intéressons ici à l&#8217;analyse d&#8217;un fichier XML,  à l&#8217;aide du modèle événementiel SAX.  Dans ce modèle, chaque entité syntaxique dans le texte (balise ouvrante, balise fermante etc.) provoque un <i>événement</i> lors de sa
+rencontre par l&#8217;analyseur 
+SAX. Celui-ci appelle alors une fonction que le  programmeur aura indiqué
+comme <i>preneur</i> de l&#8217;événement.
+Les trois événements principaux sont l&#8217;ouverture de balise, la fermeture de balise et un texte compris entre deux balises quelconques.</p>
+
+<p>Ecrire un script PHP permettant d&#8217;afficher la séquence des appels aux preneurs d’événements.</p>
+
+<p>Note&nbsp;: Modifier la fonction <code class='spip_code'>lancer_phraseur</code> pour associer les preneurs d&#8217;évènements.</p>
+
+<p>Indiquez quels sont les dix premiers appels de preneurs d&#8217;événements sur le fichier <tt>annuaire.xml</tt>.</p>
+
+
+<div style='text-align:right' id='s940'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>sequence_preneurs.php</tt><br />
+</div>
+
+
+
+<span id='e2482'></span>
+
+
+<h2 id='a4'>4 Extraction de contenu avec variables globales</h2>
+<p>Modifier les preneurs d&#8217;événements de l&#8217;exercice précédent de sorte à afficher le nom et le prénom des personnes répertoriées, précédés de leur civilité (M ou Mme) et suivi de leur(s) numéros de téléphone. Pour ce faire, définir 3 fonctions et les déclarer comme <i>preneur d&#8217;événements</i> à SAX.</p>
+
+<p>Remarque&nbsp;: lorsque le preneur de PCDATA est appelé, il n&#8217;est pas garanti que son argument contienne tout le texte qui se trouve entre les balises,  notamment quand  la lecture se fait ligne par ligne.</p>
+
+
+<div style='text-align:right' id='s950'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>affichage_annuaire.php</tt><br />
+</div>
+
+
+
+<span id='e2484'></span>
+
+
+<h2 id='a5'>5 Extraction de contenu avec un objet PHP</h2>
+<p>Cet exercice propose une alternative à la solution décrite dans l&#8217;exercice précédent.</p>
+
+<p>Le but est ici de s&#8217;affranchir des variables globales de la solution précédente en associant l&#8217;analyseur XML SAX à un objet PHP. Celui-ci contiendra les fonctions de gestion des événements (ouverture, fermeture des balises ainsi que extraction du contenu), de même qu&#8217;un constructeur adéquat qui initialisera l&#8217;analyseur XML et une méthode d&#8217;analyse qui interprétera une chaîne passée en paramètre.</p>
+
+<p>Nous utiliserons ici la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.xml-set-object.html" class='spip_glossaire' title="Voir la description de 'xml_set_object' dans la documentation de 'php'" rel='external'>xml_set_object</a><code class='spip_code'>($phraseur,$object)</code> qui permet d&#8217;utiliser un analyseur XML à l&#8217;intérieur d&#8217;un objet.</p>
+
+<p>Cette approche permet d&#8217;éviter l&#8217;utilisation de variables globales qui sont alors remplacées par les propriétés de l&#8217;objet ainsi créé.</p>
+
+
+<div style='text-align:right' id='s960'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>phraser_par_objet.php</tt><br />
+</div>
+
+
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FAnalyse-XML-dirigee-par-les"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FAnalyse-XML-dirigee-par-les'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FAnalyse-XML-dirigee-par-les&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 13h58min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FAnalyse-XML-dirigee-par-les'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

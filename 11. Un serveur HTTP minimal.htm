@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=286"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>11. Un serveur HTTP minimal (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Architecture générale</a></li>
+<li class="menu-lv2"><a href='#a2'>La page et son lecteur</a></li>
+<li class="menu-lv2"><a href='#a3'>Contrôle personnalisé</a></li>
+<li class="menu-lv2"><a href='#a4'>Contrôle général</a></li>
+<li class="menu-lv2"><a href='#a5'>Avoir bonne MIME</a></li>
+<li class="menu-lv2"><a href='#a6'>Votre réponse</a></li>
+<li class="menu-lv2"><a href='#a7'>Le journal</a></li>
+<li class="menu-lv2"><a href='#a8'>Annexes</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux Dirig&eacute;s<br />11. Un serveur HTTP minimal</h1>
+<p>Le proxy avec cache mis au point lors de séance intitulée <a href="Comprendre-les-requetes-HTTP" class='spip_in'>Comprendre les requêtes HTTP</a> peut être vu comme un serveur HTTP déléguant systématiquement ses requêtes à une autre machine. Cette séance est consacrée à la rédaction d&#8217;un mini-serveur HTTP reposant sur le même principe&nbsp;: il s&#8217;agit d&#8217;écrire un script coté serveur, qu&#8217;on invoque avec une Query-String  ayant comme unique paramètre une valeur qui est elle-même une adresse sur ce serveur avec éventuellement une Query-String, ce qui évacue la gestion des processus (déléguée au vrai serveur HTTP sous-jacent). On convient que l&#8217;unique paramètre se nomme <tt>url</tt>
+on aura donc par exemple  à traiter les cas suivants&nbsp;:</p>
+<div class='spip_code'><code>http://localhost/~votre-login/simulateur-serveur.php?url=/a/b/c/x.text<br />
+http://localhost/~votre-login/simulateur-serveur.php?url=/a/b/c/x.php?y=1</code></div>
+<p>Le travail à fournir est donc de simuler une requête GET dont l&#8217;argument est une adresse relative au serveur utilisé.  Pour ce faire, on suivra le modèle d&#8217;exécution d&#8217;Apache étudié en <a href="Servir-les-hyper-textes" class='spip_in'>cours</a>, qui découpe le traitement en 7 étapes où chacune indique s&#8217;il peut se poursuivre, sous peine d&#8217;exécuter tout de suite la dernière&nbsp;:</p>
+
+<ol class="spip"><li> identification du fichier local désigné par l&#8217;adresse fournie&nbsp;;</li><li> authentification éventuelle du requérant&nbsp;;</li><li> contrôle d&#8217;accès personnalisé&nbsp;;</li><li> contrôle d&#8217;accès général&nbsp;;</li><li> détermination du type MIME de la réponse à envoyer&nbsp;;</li><li> envoi de la réponse, précédée de son type&nbsp;;</li><li> mémorisation de la requête dans le journal.</li></ol>
+<br /><div id='sequence286'>
+<span id='e2692'></span>
+
+
+<h2 id='a1'>1 Architecture générale</h2>
+<p>On considère que la fonction principale du serveur à écrire est la suivante&nbsp;:</p>
+
+<div class='spip_code'><code>function serveur($url)<br />
+{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $etapes = array(0=&gt; $url);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; etape('TraiteUrl', $etapes);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; etape('TraiteAuth', $etapes);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; etape('TraitePerso', $etapes);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; etape('TraiteControle', $etapes);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; etape('TraiteMime', $etapes);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; etape('TraiteReponse', $etapes);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; etape('TraiteLog', $etapes);<br />
+}</code></div>
+<p>Définir la fonction <tt>etape</tt> qui prend en argument le nom de la fonction  traitant une certaine étape, et l&#8217;adresse du tableau <tt>$etapes</tt>. Cette fonction <tt>etape</tt> applique sur ce tableau la fonction donnée en premier argument, puis examine son résultat. 
+On convient que le résultat prendra la forme d&#8217;un tableau dont le premier élément est un code de retour HTTP. Si le code est 200, le traitement peut se poursuivre grâce aux informations données par le deuxième élément, qui est affecté à l&#8217;index suivant du tableau <tt>$etapes</tt>. Si le code n&#8217;est pas 200, il faut immédiatement envoyer au client&nbsp;:</p>
+
+<ul class="spip"><li> un en-tête de réponse composé de ce code de retour précédé de  <tt>HTTP/1.1</tt> à l&#8217;aide de la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.header.html" class='spip_glossaire' title="Voir la description de 'header' dans la documentation de 'php'" rel='external'>header</a>&nbsp;;</li><li> un corps de réponse réduit au deuxième élément, censé être un message d&#8217;erreur&nbsp;;</li><li> passer immédiatement à l&#8217;étape 7, pour effectuer la journalisation.</li></ul>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=698&amp;cle=a0830696ab2c0909eafd76dec9ef9f72e7607c34&amp;file=distant%2FVCS%2FLI355%2FTD%2F11%2Fhttp1.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger http1.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">etape</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">,&nbsp;&amp;</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list(</span><span style="color: #0000BB">$status</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">)&nbsp;=&nbsp;</span><span style="color: #0000BB">$f</span><span style="color: #007700">(</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$status&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #0000BB">200</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">[]=&nbsp;</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"HTTP/1.1&nbsp;$status"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">TraiteLog</span><span style="color: #007700">(</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+<span id='e2693'></span>
+
+
+<h2 id='a2'>2 La page et son lecteur</h2>
+<p>La fonction traitant la première étape reçoit en argument le tableau alors réduit à son élément d&#8217;index 0, savoir l&#8217;argument de la requête GET implicite.
+Le but ici est de séparer la Query-String (éventuellement absente) du reste 
+de l&#8217;argument. Dans cet exercice on n&#8217;abordera pas la réécriture d&#8217;URL, ce reste est donc le fichier demandé. Le résultat à  fournir  est un tableau de deux éléments composé de ce fichier et de la Query-String.
+ Ecrire la fonction <tt>TraiteUrl</tt>,
+réalisant cette étape 1 du traitement, en renvoyant son résultat à la fonction <tt>etape</tt> selon les spécifications retenues (code de retour à 3 chiffres, et résultat proprement dit). Cette étape n&#8217;a pas à vérifier que ce fichier existe, il n&#8217;y a donc pas d&#8217;autre code de retour possible que 200.</p>
+
+<p>L&#8217;étape 2 consiste seulement à fournir l&#8217;identité du demandeur quand elle est connue (typiquement lorsque vous l&#8217;avez indiquée à votre navigateur auparavant). En PHP, cette information est donnée par <tt>$_SERVER[&#8217;PHP_AUTH_USER&#8217;]</tt>. Ecrire la fonction <tt>TraiteAuth</tt> renvoyant cette information à la fonction <tt>etape</tt> selon les spécifications retenues. Là encore, l&#8217;absence de cette information ne doit pas être considérée comme une erreur à ce moment.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=699&amp;cle=1fb8cf7321bf173a51860339dc8a5db97b739c02&amp;file=distant%2FVCS%2FLI355%2FTD%2F11%2Fhttp2.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger http2.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">//&nbsp;Ignorer&nbsp;le&nbsp;nom&nbsp;du&nbsp;serveur&nbsp;et&nbsp;son&nbsp;protocole&nbsp;en&nbsp;cas&nbsp;d'URL&nbsp;absolue<br />//&nbsp;Separer&nbsp;la&nbsp;Query-string&nbsp;du&nbsp;reste.<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">TraiteUrl&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #DD0000">'@^(\w+://[^/]*)?([^?]*)[?]?(.*)$@'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">],&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">array_shift</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;retirer&nbsp;la&nbsp;copie&nbsp;de&nbsp;la&nbsp;chaine<br />&nbsp;&nbsp;</span><span style="color: #0000BB">array_shift</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;retirer&nbsp;le&nbsp;serveur<br />&nbsp;&nbsp;</span><span style="color: #007700">return&nbsp;array(</span><span style="color: #0000BB">200</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br />}<br /><br />function&nbsp;</span><span style="color: #0000BB">TraiteAuth&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;return&nbsp;array(</span><span style="color: #0000BB">200</span><span style="color: #007700">,@</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'PHP_AUTH_USER'</span><span style="color: #007700">]);<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+
+
+<span id='e2694'></span>
+
+
+<h2 id='a3'>3 Contrôle personnalisé</h2>
+<p>L&#8217;URL fournie dans une requête HTTP fait toujours référence à un chemin d&#8217;accès à partir du répertoire administré par le serveur. Ce répertoire, indiqué dans le fichier de configuration du serveur, est accessible en PHP par  
+<tt>$_SERVER[&#8217;DOCUMENT_ROOT&#8217;]</tt>. Sur les machines de l&#8217;ARI, celui-ci est égal à
+<tt>/var/www/html/</tt>. Les controles personnalisés sont gérés par Apache à travers les fichiers nommés <tt>.htaccess</tt> qui peuvent se trouver en tout point du chemin vers le fichier demandé à partir du répertoire administré par le serveur. Par exemple, si le fichier indiqué dans la requête est
+<tt>/a/b/c/x.txt</tt>,
+il faut examiner (avec <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.file-exists.html" class='spip_glossaire' title="Voir la description de 'file_exists' dans la documentation de 'php'" rel='external'>file_exists</a>) l&#8217;existence éventuelle des fichiers&nbsp;:</p>
+
+<ul class="spip"><li> <tt>/var/www/html/.htaccess</tt></li><li> <tt>/var/www/html/a/.htaccess</tt></li><li> <tt>/var/www/html/a/b/.htaccess</tt></li><li> <tt>/var/www/html/a/b/c/.htaccess</tt></li></ul>
+<p>De plus, si ces fichiers ne sont pas lisibles par le serveur  (fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.is-readable.html" class='spip_glossaire' title="Voir la description de 'is_readable' dans la documentation de 'php'" rel='external'>is_readable</a>) ou accessibles en écriture par tout le monde (utiliser <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fileperms.html" class='spip_glossaire' title="Voir la description de 'fileperms' dans la documentation de 'php'" rel='external'>fileperms</a> qui renvoie le <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.chmod.html" class='spip_glossaire' title="Voir la description de 'chmod' dans la documentation de 'php'" rel='external'>chmod</a>, ainsi que l&#8217;opérateur &amp;), le serveur doit considérer la situation comme l&#8217;indice d&#8217;un piratage et refuser de rendre le service en retournant le code 500.
+Autrement, pour chacun de ces fichiers, il faut regarder si l&#8217;un d&#8217;eux au moins comporte la ligne <tt>require valid-user</tt>. Si c&#8217;est le cas,
+et si l&#8217;identité du demandeur n&#8217;a pas été trouvée lors de l&#8217;étape précédente,
+il faut retourner le code 401 (<i>demande d&#8217;authentification</i>). Si elle a été trouvée il faudrait vérifier le mot de passe et retourner 403 en cas d&#8217;échec, mais on s&#8217;en dispensera dans le cadre de cet exercice. On retournera donc 200 et le chemin absolu du fichier.</p>
+
+<p>Définir la fonction <tt>TraitePerso</tt> réalisant cette fonctionnalité. On pourra utiliser la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-split.html" class='spip_glossaire' title="Voir la description de 'preg_split' dans la documentation de 'php'" rel='external'>preg_split</a><tt>(</tt><i>RegExp</i>,<i>chaîne</i><tt>)</tt> pour disposer du tableau des noms de répertoires traversés.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=700&amp;cle=7401cfb5330d5a7265c72712abe551a61bfaed5a&amp;file=distant%2FVCS%2FLI355%2FTD%2F11%2Fhttp3.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger http3.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /><br /></span><span style="color: #FF8000">//&nbsp;Ecriture&nbsp;en&nbsp;deux&nbsp;fonctions&nbsp;pour&nbsp;faciliter&nbsp;le&nbsp;cas&nbsp;Virtual&nbsp;Host&nbsp;lors&nbsp;du&nbsp;TME<br /><br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">TraitePerso&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">){<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">TraitePersoRoot</span><span style="color: #007700">(</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'DOCUMENT_ROOT'</span><span style="color: #007700">]);<br />}<br /><br />function&nbsp;</span><span style="color: #0000BB">TraitePersoRoot&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$path</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$user&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">];<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$noms&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">preg_split</span><span style="color: #007700">(</span><span style="color: #DD0000">',/+,'</span><span style="color: #007700">,&nbsp;&nbsp;</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">][</span><span style="color: #0000BB">0</span><span style="color: #007700">]);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">array_shift</span><span style="color: #007700">(</span><span style="color: #0000BB">$noms</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;saute&nbsp;le&nbsp;""&nbsp;initial<br />&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$noms&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$nom</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$file&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$path&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"/.htaccess"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">file_exists</span><span style="color: #007700">(</span><span style="color: #0000BB">$file</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">is_readable</span><span style="color: #007700">(</span><span style="color: #0000BB">$file</span><span style="color: #007700">)&nbsp;OR&nbsp;(</span><span style="color: #0000BB">fileperms&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$file</span><span style="color: #007700">)&nbsp;&amp;&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;array(</span><span style="color: #0000BB">500</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"Probleme&nbsp;d’acces&nbsp;sur&nbsp;$file"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$lignes&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">file</span><span style="color: #007700">(</span><span style="color: #0000BB">$file</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(</span><span style="color: #DD0000">"require&nbsp;valid-user\n"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$lignes</span><span style="color: #007700">)&nbsp;AND&nbsp;!</span><span style="color: #0000BB">$user</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;array(</span><span style="color: #0000BB">401</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"Demande&nbsp;d'authentification"</span><span style="color: #007700">);&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$path&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">'/'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$nom</span><span style="color: #007700">;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;return&nbsp;array(</span><span style="color: #0000BB">200</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$path</span><span style="color: #007700">);<br />}<br /></span><span style="color: #FF8000">//&nbsp;Test<br />//&nbsp;TraitePersoRoot&nbsp;(array(1&nbsp;=&gt;&nbsp;array(0&nbsp;=&gt;&nbsp;'/a/b/c.txt')),&nbsp;'');<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+<span id='e2695'></span>
+
+
+<h2 id='a4'>4 Contrôle général</h2>
+<p>Le chemin absolu déterminé à l&#8217;étape 3 est acceptable s&#8217;il désigne un fichier (fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.is-file.html" class='spip_glossaire' title="Voir la description de 'is_file' dans la documentation de 'php'" rel='external'>is_file</a>) accessible en lecture par le serveur (fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.is-readable.html" class='spip_glossaire' title="Voir la description de 'is_readable' dans la documentation de 'php'" rel='external'>is_readable</a>)&nbsp;; autrement il faut retourner le célèbre code de retour 404, et son libellé universel <i>Not Found</i>. Définir la fonction <tt>TraiteControle</tt> réalisant ce trivial  travail.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=701&amp;cle=427d7d1ee773ff1160404dcaa4a47ce96a213fa0&amp;file=distant%2FVCS%2FLI355%2FTD%2F11%2Fhttp4.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger http4.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">TraiteControle&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$f&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">[</span><span style="color: #0000BB">3</span><span style="color: #007700">];<br />&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">is_file</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">)&nbsp;OR&nbsp;!</span><span style="color: #0000BB">is_readable</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;array(</span><span style="color: #0000BB">404</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"Inatteignable"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;array(</span><span style="color: #0000BB">200</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+
+
+<span id='e2696'></span>
+
+
+<h2 id='a5'>5 Avoir bonne MIME</h2>
+<p>Si le fichier désigné est exécutable (fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.is-executable.html" class='spip_glossaire' title="Voir la description de 'is_executable' dans la documentation de 'php'" rel='external'>is_executable</a>),
+l&#8217;étape suivante se chargera de l&#8217;exécuter et on convient de retourner en valeur le code de retour 200 et la chaîne vide en attendant.
+Sinon, et si le fichier a un nom se terminant par un point et quelques lettres ou chiffres, il faut chercher à quel type MIME correspond ce suffixe. Pour cela il existe un fichier standard
+dont chaque ligne (hormis les commentaires commençant par #)
+indique un type MIME, suivi de zéro, une ou plusieurs extensions qui le caractérise. En voici des  extraits&nbsp;:</p>
+
+<pre><tt>
+# This file controls what Internet media types are sent to the client for
+# given file extension(s).  Sending the correct media type to the client
+# is important so they know how to handle the content of the file.
+# Extra types can either be added here or by using an AddType directive
+# in your config files. For more information about Internet media types,
+# please read RFC 2045, 2046, 2047, 2048, and 2077.  The Internet media type
+# registry is at &lt;<a href="http://www.iana.org/assignments/media-types/&amp;gt;" class='spip_url spip_out' rel='nofollow external'>http://www.iana.org/assignments/med...</a>.
+<p>application/zip			zip
+audio/midi			mid midi kar
+audio/mpeg			mpga mp2 mp3
+image/png			png
+image/svg+xml			svg
+image/t38
+image/tiff			tiff tif
+text/calendar			ics ifb
+text/css			css
+text/directory
+text/enriched
+text/html			html htm
+</tt></p>
+</pre>
+<p>On convient que ce fichier est indiqué par la constante MIME_TYPES (dans les salles de l&#8217;ARI, ce fichier est en <tt>/etc/mime.types</tt>). Il faut donc chercher dans ce fichier le type MIME correspondant au suffixe du fichier. Si on ne le trouve pas, ou si le fichier n&#8217;avait pas de point dans son nom, on retournera conventionnellement <tt>text/plain</tt>.</p>
+
+<p>Ecrire la fonction <tt>TraiteMime</tt> implémentant cette stratégie de détermination du type MIME.</p>
+
+<p><i>Remarque</i>&nbsp;: on notera que cette stratégie ne permet pas de fournir l&#8217;information <tt>charset</tt> pour les types textuels, ce qui explique bien des horreurs. Un serveur HTTP correctement installé utilise le module <i>magic-mime</i> qui analyse le contenu des fichiers pour déduire cette information et quelques autres.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=702&amp;cle=d1c0fc0979b0107612f5b7c09bb015736bcb7619&amp;file=distant%2FVCS%2FLI355%2FTD%2F11%2Fhttp5.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger http5.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />define</span><span style="color: #007700">(</span><span style="color: #DD0000">'MIME_TYPES'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'/usr/share/cups/mime/mime.types'</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;MacOSX<br />#define('MIME_TYPES',&nbsp;'/etc/mime.types');&nbsp;//&nbsp;Linux<br /><br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">TraiteMime&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$f&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">[</span><span style="color: #0000BB">3</span><span style="color: #007700">];<br />&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">is_executable</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">))<br />&nbsp;&nbsp;&nbsp;return&nbsp;array(</span><span style="color: #0000BB">200</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">);<br />&nbsp;elseif&nbsp;(</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #DD0000">'/\.(\w+)$/'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$f</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$e&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'/^\s*([^#]\S+)(\s+\S+)*\s+'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">'(\s.*)*$/'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">file</span><span style="color: #007700">(</span><span style="color: #0000BB">MIME_TYPES</span><span style="color: #007700">)&nbsp;as&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #0000BB">$e</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$r</span><span style="color: #007700">))&nbsp;return&nbsp;array(</span><span style="color: #0000BB">200</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$r</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]);<br />&nbsp;&nbsp;&nbsp;}<br />&nbsp;}<br />&nbsp;return&nbsp;array(</span><span style="color: #0000BB">200</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'text/plain'</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+<span id='e2697'></span>
+
+
+<h2 id='a6'>6 Votre réponse</h2>
+<p>A ce stade, le serveur doit distinguer trois cas pour terminer son travail&nbsp;:</p>
+
+<ol class="spip"><li> si le fichier est exécutable, il doit lancer son exécution grâce à la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.system.html" class='spip_glossaire' title="Voir la description de 'system' dans la documentation de 'php'" rel='external'>system</a> prenant ce fichier en argument&nbsp;;</li><li> si le fichier se termine par <tt>.php</tt> c&#8217;est le cas spécial d&#8217;un fichier qui n&#8217;est ni exécutable ni une simple donnée&nbsp;; dans le cadre d&#8217;un serveur lui-même écrit en PHP, il suffit de l&#8217;inclure (fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.include.html" class='spip_glossaire' title="Voir la description de 'include' dans la documentation de 'php'" rel='external'>include</a>)&nbsp;;</li><li> autrement il suffit d&#8217;envoyer le contenu du fichier (fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.readfile.html" class='spip_glossaire' title="Voir la description de 'readfile' dans la documentation de 'php'" rel='external'>readfile</a>) en précisant les en-têtes <tt>Content-Type</tt> et <tt>Last-Modified</tt> (à l&#8217;aide de la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.filemtime.html" class='spip_glossaire' title="Voir la description de 'filemtime' dans la documentation de 'php'" rel='external'>filemtime</a> qui donne la date de dernière modification d&#8217;un fichier).</li></ol>
+<p>Ecrire la fonction <tt>Traitereponse</tt> réalisant ce traitement (on notera que dans les deux premiers cas il faudrait transmettre la Query-String, ce qu&#8217;on ne fera pas ici).</p>
+
+<p><i>Remarque</i>&nbsp;: le premier cas est censé produire les en-têtes HTTP, en particulier le <tt>Content-Type</tt>&nbsp;; dans le cadre de cette expérimentation à travers un serveur déjà actif, ils seront malheureusement vus comme faisant partie du corps de la réponse, faute d&#8217;une interface de programmation.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=703&amp;cle=77caaeb541a3895bf50a500b65fc7a4a05b11e24&amp;file=distant%2FVCS%2FLI355%2FTD%2F11%2Fhttp6.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger http6.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">TraiteReponse&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$f&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">[</span><span style="color: #0000BB">3</span><span style="color: #007700">];<br />&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">[</span><span style="color: #0000BB">5</span><span style="color: #007700">])&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">system</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">);<br />&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #DD0000">'/\.php$/'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$f</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;include(</span><span style="color: #0000BB">$f</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"HTTP/1.1&nbsp;200"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Content-Type:&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">[</span><span style="color: #0000BB">5</span><span style="color: #007700">]);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Last-Modified:&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">filemtime</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">readfile</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;return&nbsp;array(</span><span style="color: #0000BB">200</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+<span id='e2698'></span>
+
+
+<h2 id='a7'>7 Le journal</h2>
+<p>La journalisation du serveur consiste à écrire dans un fichier (avec les fonctions
+<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fopen.html" class='spip_glossaire' title="php" rel='external'>fopen</a>, <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fclose.html" class='spip_glossaire' title="php" rel='external'>fclose</a> et <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fputs.html" class='spip_glossaire' title="php" rel='external'>fputs</a>)
+chaque service rendu, en indiquant la date et l&#8217;adresse du client. Pour ce faire, on utilisera la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.date.html" class='spip_glossaire' title="Voir la description de 'date' dans la documentation de 'php'" rel='external'>date</a> avec comme argument le format <tt>Y-m-d H:i:s</tt>, et on trouvera l&#8217;adresse du client dans <tt>$_SERVER[&#8217;REMOTE_ADDR&#8217;]</tt>. Le service rendu sera décrit par la transcription du tableau <tt>$etapes</tt> en chaîne, grâce à la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.serialize.html" class='spip_glossaire' title="Voir la description de 'serialize' dans la documentation de 'php'" rel='external'>serialize</a>.</p>
+
+<p>On considère que le fichier de journalisation est indiqué par la constante <tt>SERVER_LOG</tt>. Ecrire la fonction <tt>TraiteLog</tt>, effectuant le service de journalisation.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=704&amp;cle=759ed85d5746f067b4f95da324dc5efddab1fb6d&amp;file=distant%2FVCS%2FLI355%2FTD%2F11%2Fhttp7.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger http7.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />define</span><span style="color: #007700">(</span><span style="color: #DD0000">'SERVER_LOG'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'/tmp/pacs-http.log'</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">TraiteLog&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">){<br />&nbsp;</span><span style="color: #0000BB">$f&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #0000BB">SERVER_LOG</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'a'</span><span style="color: #007700">);<br />&nbsp;</span><span style="color: #0000BB">$m&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">serialize</span><span style="color: #007700">(</span><span style="color: #0000BB">$etapes</span><span style="color: #007700">);<br />&nbsp;</span><span style="color: #0000BB">fputs</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"Y-m-d&nbsp;H:i:s"</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">'&nbsp;['&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'REMOTE_ADDR'</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">"]&nbsp;$m\n"</span><span style="color: #007700">);<br />&nbsp;</span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$f</span><span style="color: #007700">);<br />&nbsp;return&nbsp;array(</span><span style="color: #0000BB">200</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+
+
+<span id='e3420'></span>
+
+
+
+
+
+<div style='text-align:right' id='s1030'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>http1.php http2.php http3.php http4.php http5.php http6.php http7.php</tt><br />
+</div>
+
+
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FUn-serveur-HTTP-minimal"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FUn-serveur-HTTP-minimal'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FUn-serveur-HTTP-minimal&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 19h06min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FUn-serveur-HTTP-minimal'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

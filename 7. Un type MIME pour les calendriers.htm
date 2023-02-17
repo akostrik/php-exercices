@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=290"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>7. Un type MIME pour les calendriers  (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Fusion de calendriers</a></li>
+<li class="menu-lv2"><a href='#a2'>Transmission de calendriers</a></li>
+<li class="menu-lv2"><a href='#a3'>Envoi d&#8217;un calendrier</a></li>
+<li class="menu-lv2"><a href='#a4'>Demande de rendez-vous</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux sur Machine<br />7. Un type MIME pour les calendriers </h1>
+<p>Le format ICS (<i>Internet Calendaring and Scheduling</i>), objet du <a href="http://www.ietf.org/rfc/rfc2445.txt" class='spip_out' rel='external'>RFC 5545</a>, est un type MIME décrivant le contenu d’un agenda électronique, comme on en trouve aujourd&#8217;hui sur les  téléphones portables et autres matériels.  Le but de la séance est de fournir un ensemble de scripts PHP recevant en paramètres de tels fichiers et renvoyant un autre fichier en ce format, déduit d’un calcul sur les fichiers de départ.</p>
+
+<p>Un texte en ICS est une suite de lignes dont chacune commence par un nom en majuscules ASCII, suivi d’un deux-points, suivi de la valeur associée à ce nom puis d’un caractère de fin ligne (la syntaxe complète autorise un nom à posséder des paramètres, et une valeur à tenir sur plusieurs lignes mais on se limitera aux cas les plus simples). Les noms les plus fréquents sont <code class='spip_code'>BEGIN</code> et <code class='spip_code'>END</code>, avec comme valeur <code class='spip_code'>VEVENT</code>. Ces deux lignes, sortes de balises ouvrantes et fermantes, délimitent alors un <i>événement</i>. Entre ces deux balises, figure au minimum une ligne de nom <code class='spip_code'>DTSTART</code> indiquant le début de l’événement, avec une valeur en général de 15 caractères (dans l’ordre&nbsp;: 4 chiffres pour l’année, 2 pour le mois, 2 pour le jour, la lettre <code class='spip_code'>T</code>, 2 chiffres pour les heures, 2 pour les minutes et enfin 2 pour les secondes). Le plus souvent figure une ligne <code class='spip_code'>DTEND</code> avec une valeur pareillement codée indiquant la fin de l’événement, ainsi qu’une ligne <code class='spip_code'>DESCRIPTION</code>, de valeur librement rédigée, décrivant l’événement.</p>
+
+<p>Un texte ICS commence toujours les deux lignes&nbsp;:</p>
+<div class='spip_code'><code>BEGIN:VCALENDAR<br />
+VERSION:2.0</code></div>
+<p>suivies d&#8217;autres lignes comportant des informations générales, jusqu&#8217;à une première ligne <tt>BEGIN</tt> signalant donc le 
+début de la  liste des événements si elle n&#8217;est pas vide. Il se termine par la ligne&nbsp;:</p>
+<div class='spip_code'><code>END:VCALENDAR</code></div>
+<p>Pour réaliser vos tests, vous pouvez utiliser les calendriers publiés sur
+<a href="pacs" class='spip_in'>le site de cet enseignement</a>&nbsp;: 
+à coté des horaires des groupes, figurent deux icônes dont l&#8217;un permet de télécharger un fichiers ICS (l&#8217;autre permet de s&#8217;abonner au serveur gérant ces fichiers, ce qui ne relève pas de l&#8217;exercice demandé). Si vous cliquez sur cet icône, le serveur enverra un texte ICS précédé
+de l&#8217;en-tête HTTP <tt>Content-Disposition</tt>, ce qui demande à votre navigateur de créer ce fichier sous un certain nom (qui se termine par <tt>.ics</tt>) mais certains navigateurs ignorent cet en-tête, sans raison. D&#8217;autres exécutent une extension sachant afficher de tels documents, mais cela n&#8217;empêche pas d&#8217;en demander la sauvegarde dans un fichier local.</p>
+<br /><div id='sequence290'>
+<span id='e2379'></span>
+
+
+<h2 id='a1'>1 Fusion de calendriers</h2>
+<p>Écrire en PHP une fonction <code class='spip_code'>fusionneics</code>, recevant deux noms de fichiers au format ICS et retournant leur union en valeur, sous forme d&#8217;un tableau de lignes. 
+ Les spécifications du format ICS n&#8217;imposent aucun ordre sur les événements, il suffit donc de concaténer les deux textes, en retirant l&#8217;en-tête du second et l&#8217;en-pied du premier.</p>
+
+<p>On passera du nom des fichiers à leur contenu à l&#8217;aide la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.file.html" class='spip_glossaire' title="Voir la description de 'file' dans la documentation de 'php'" rel='external'>file</a>.
+On pourra utiliser les fonctions <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.array-pop.html" class='spip_glossaire' title="Voir la description de 'array_pop' dans la documentation de 'php'" rel='external'>array_pop</a> pour retirer le dernier élément d&#8217;un tableau, et la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.array-shift.html" class='spip_glossaire' title="Voir la description de 'array_shift' dans la documentation de 'php'" rel='external'>array_shift</a> pour retirer le premier. Enfin, la concaténation de tableaux d&#8217;index numériques est réalisée par la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.array-merge.html" class='spip_glossaire' title="Voir la description de 'array_merge' dans la documentation de 'php'" rel='external'>array_merge</a>.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=741&amp;cle=272eb2cab0c162db196e064f5d80f183d49ad386&amp;file=distant%2FVCS%2FLI355%2FTM%2F7%2Ffusionne_ics.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger fusionne_ics.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php&nbsp;<br /><br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">fusionne_ics</span><span style="color: #007700">(</span><span style="color: #0000BB">$f1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$f2</span><span style="color: #007700">)&nbsp;<br />{&nbsp;<br />&nbsp;</span><span style="color: #0000BB">$f1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">file</span><span style="color: #007700">(</span><span style="color: #0000BB">$f1</span><span style="color: #007700">);&nbsp;<br /><br /></span><span style="color: #FF8000">//suppression&nbsp;du&nbsp;END:VCALENDAR<br />&nbsp;</span><span style="color: #0000BB">array_pop</span><span style="color: #007700">(</span><span style="color: #0000BB">$f1</span><span style="color: #007700">);&nbsp;<br /><br />&nbsp;</span><span style="color: #0000BB">$f2&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">file</span><span style="color: #007700">(</span><span style="color: #0000BB">$f2</span><span style="color: #007700">);<br /><br />&nbsp;</span><span style="color: #FF8000">//suppression&nbsp;du&nbsp;BEGIN:VCALENDAR<br />&nbsp;</span><span style="color: #0000BB">array_shift</span><span style="color: #007700">(</span><span style="color: #0000BB">$f2</span><span style="color: #007700">);&nbsp;<br /><br />&nbsp;</span><span style="color: #FF8000">//suppression&nbsp;du&nbsp;debut&nbsp;jusqu'au&nbsp;premier&nbsp;BEGIN<br />&nbsp;</span><span style="color: #007700">while&nbsp;(!</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #DD0000">"/^BEGIN:/"</span><span style="color: #007700">,</span><span style="color: #0000BB">$f2</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">])){<br />&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">array_shift</span><span style="color: #007700">(</span><span style="color: #0000BB">$f2</span><span style="color: #007700">);<br />&nbsp;}<br /><br />&nbsp;return&nbsp;</span><span style="color: #0000BB">array_merge</span><span style="color: #007700">(</span><span style="color: #0000BB">$f1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$f2</span><span style="color: #007700">);&nbsp;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses2379'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5531"> 
+	    <div class="reponse">
+	<div class="forum-titre">Fusion de calendriers</div>
+6 mars 2014 &agrave; 13h26min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php<br />
+// &nbsp;NOM:valeur_assacie_a_ce_nom\n<br />
+// &nbsp;BEGIN:VCALENDAR<br />
+// &nbsp; &nbsp;VERSION:1.0<br />
+// &nbsp; &nbsp;...<br />
+// &nbsp; &nbsp;BEGIN:VEVENT<br />
+// &nbsp; &nbsp; &nbsp;DTSTART:YYYYMMDDTHHMMSS // le debut de l'evenement<br />
+// &nbsp; &nbsp; &nbsp;DTEND:YYYYMMDDTHHMMSS // le fin de l'evenement<br />
+// &nbsp; &nbsp; &nbsp;DESCRIPTION: // valeur lebrement redigee, decrivat l'evenement<br />
+// &nbsp; &nbsp;END:VEVENT<br />
+// &nbsp;END:VCALENDAR<br />
+<br />
+function fusionneics ($nom_fichier_ics1, $nom_fichier_ics2) {<br />
+ &nbsp;$tab1=file($nom_fichier_ics1);<br />
+ &nbsp;$tab2=file($nom_fichier_ics2);<br />
+<br />
+ &nbsp;for($i=count($tab1)-1;$i&gt;=0 AND preg_match('/^END:VEVENT(.*)$/',trim($tab1[$i])) ;$i--) // $i=0 ??<br />
+ &nbsp; &nbsp;array_pop($tab1); &nbsp;// retirer le dernier element du tableau<br />
+ &nbsp;for($i=0;$i&lt;=count($tab2)-1 AND preg_match('/^BEGIN:VEVENT(.*)$/',trim($tab2[$i])) ;$i++) // à partir de 2 ligne<br />
+ &nbsp; &nbsp;array_shift($tab2); <br />
+<br />
+ &nbsp;return array_merge($tab1,$tab2); // concatenation de tableaux d'index numeriques<br />
+}<br />
+<br />
+echo join(fusionneics('pacs Groupe 1.ics','pacs Groupe 3.ics'));<br />
+?&gt; </code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2378'></span>
+
+
+<h2 id='a2'>2 Transmission de calendriers</h2>
+<p>Pour qu&#8217;un navigateur comprenne qu&#8217;il reçoit un document de type ICS, il faut envoyer plusieurs en-têtes HTTP avec la fonction
+ <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.header.html" class='spip_glossaire' title="Voir la description de 'header' dans la documentation de 'php'" rel='external'>header</a>&nbsp;:</p>
+
+<ul class="spip"><li> un en-tête  <tt>Content-Type</tt> valant <code class='spip_code'>text/calendar; charset=utf-8</code></li><li> un en-tête  <tt>Content-Transfer-Encoding</tt> valant <tt>8bit</tt></li><li> un en-tête <tt>Content-Disposition</tt> valant  <tt>inline&nbsp;; filename="<i>nom</i>"&nbsp;; creation-date="<i>date</i>"&nbsp;;</tt></li></ul>
+<p>où <i>nom</i> est le nom du fichier  d&#8217;extension ICS  à créer sur le client si  on le souhaite, et <i>date</i>&nbsp;sa date de fabrication côté serveur, savoir le moment de l&#8217;exécution du script (utiliser <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.time.html" class='spip_glossaire' title="Voir la description de 'time' dans la documentation de 'php'" rel='external'>time</a> pour le connaître et <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.gmdate.html" class='spip_glossaire' title="Voir la description de 'gmdate' dans la documentation de 'php'" rel='external'>gmdate</a>&nbsp;pour avoir le bon format).</p>
+
+<p>Ecrire une fonction PHP <tt>envoi_ics</tt> prenant en argument un tableau de lignes au format ICS (comme celui construit à l&#8217;exercice précédent) et un nom de fichier, et envoyant sur le flux de sortie les en-têtes HTTP définies ci-dessus suivies des lignes du tableau.</p>
+
+<p>Regarder comment les différents navigateurs réagissent à ce genre d&#8217;envois.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=739&amp;cle=699b3fa1e5438219d8dd15e06e5bbbb9debafd96&amp;file=distant%2FVCS%2FLI355%2FTM%2F7%2Fenvoi_ics.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger envoi_ics.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">envoi_ics</span><span style="color: #007700">(</span><span style="color: #0000BB">$ics</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$nom</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;header("Content-Type:&nbsp;text/plain");&nbsp;//&nbsp;pour&nbsp;mise&nbsp;au&nbsp;point<br /><br />&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Content-Type:&nbsp;text/calendar;&nbsp;charset=UTF-8"</span><span style="color: #007700">);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Content-Transfer-Encoding:&nbsp;8bit"</span><span style="color: #007700">);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">'Content-Disposition:&nbsp;inline;&nbsp;filename="'</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$nom&nbsp;</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'";&nbsp;creation-date="'&nbsp;</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">gmdate</span><span style="color: #007700">(</span><span style="color: #DD0000">"D,&nbsp;d&nbsp;M&nbsp;Y&nbsp;H:i:s"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">time</span><span style="color: #007700">()));<br /><br />&nbsp;&nbsp;foreach(</span><span style="color: #0000BB">$ics&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$ligne</span><span style="color: #007700">)&nbsp;echo&nbsp;</span><span style="color: #0000BB">$ligne</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses2378'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5561"> 
+	    <div class="reponse">
+	<div class="forum-titre">Transmission de calendriers</div>
+10 mars 2014 &agrave; 16h09min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php<br />
+function envoi_ics ($tab, $nomFichier) {<br />
+ echo header('Content-Type: text/calendar;charset=utf-8'); // telecharger un fich. <br />
+ echo header('Content-Transfer-Encoding: 8bit');<br />
+ echo header('Content-Disposition: inline;filename='.$nomFichier.';creation-date='.gmdate(&quot;M d Y H:i:s&quot;, time()).'\''); // telecharger un fich. type calendar<br />
+ //echo '&lt;br&gt;';<br />
+ //echo '&lt;br&gt;&lt;br&gt;' . 'headers_sent() = ' . (headers_sent()==true ? 'oui' : 'non') . '&lt;br&gt;&lt;br&gt;';<br />
+ //echo '&lt;br&gt;* ' . 'headers_list = ' . join(headers_list()) . '&lt;br&gt;&lt;br&gt;';<br />
+ //echo '&lt;br&gt;' . 'getallheaders() = ' .join(getallheaders()) . '&lt;br&gt;&lt;br&gt;';<br />
+ echo join($tab);<br />
+}<br />
+$nomFichier='pacsGroupe4.ics';<br />
+$tab=file('pacsGroupe4.ics');<br />
+ envoi_ics($tab,'pacsGroupe4.ics');<br />
+<br />
+?&gt;</code></div>
+<p>chez moi googlechrom ouvre le calendar avec outlook
+<br />internet explorer l&#8217;ouvre comme un texte</p></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2380'></span>
+
+
+<h2 id='a3'>3 Envoi d&#8217;un calendrier</h2>
+<p>On souhaite à présent fournir un service de fusion de deux calendriers ICS envoyé à travers un formulaire HTML.</p>
+
+<p>On écrira donc un script PHP qui, s&#8217;il est invoqué en méthode GET, envoie un formulaire HTML proposant à l&#8217;utilisateur de sélectionner deux fichiers ICS sur son disque local, à l&#8217;aide de balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-INPUT" class='spip_glossaire' title="Voir la description de 'input' dans la documentation de 'html'" rel='external'>input</a>&nbsp;de <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/links.html#adef-type-A" class='spip_glossaire' title="Voir la description de 'type' dans la documentation de 'html' section 1" rel='external'>type</a> <tt>file</tt>. L&#8217;envoi de fichiers imposera d&#8217;utiliser une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-FORM" class='spip_glossaire' title="Voir la description de 'form' dans la documentation de 'html'" rel='external'>form</a> d&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#adef-method" class='spip_glossaire' title="Voir la description de 'method' dans la documentation de 'html' section 1" rel='external'>method</a>  <tt>post</tt> avec l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#adef-enctype" class='spip_glossaire' title="Voir la description de 'enctype' dans la documentation de 'html' section 1" rel='external'>enctype</a> de valeur <code class='spip_code'>multipart/form-data</code> qui n&#8217;est pas la valeur par défaut.</p>
+
+<p>Lorsqu&#8217;un script PHP reçoit les saisies d&#8217;un formulaire contenant  une  ou plusieurs
+balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-INPUT" class='spip_glossaire' title="Voir la description de 'input' dans la documentation de 'html'" rel='external'>input</a>&nbsp;de <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/links.html#adef-type-A" class='spip_glossaire' title="Voir la description de 'type' dans la documentation de 'html' section 1" rel='external'>type</a> <tt>file</tt>, le  tableau super global <code class='spip_code'>$_FILES</code> contient des index égaux à l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/types.html#type-name" class='spip_glossaire' title="Voir la description de 'name' dans la documentation de 'html' section 1" rel='external'>name</a> de ces balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-INPUT" class='spip_glossaire' title="Voir la description de 'input' dans la documentation de 'html'" rel='external'>input</a>. Chacun des éléments de ce tableau est un sous tableau  donnant toutes les informations sur  le fichier concerné,
+en particulier le sous-index <code class='spip_code'>tmp_name</code> donne l&#8217;adresse de la copie du fichier transmis  sur le serveur, <code class='spip_code'>name</code> donnant le nom de l&#8217;original sur le client. Par exemple si la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-INPUT" class='spip_glossaire' title="Voir la description de 'input' dans la documentation de 'html'" rel='external'>input</a>&nbsp;avait pour nom <tt>userfile</tt>, le tableau <tt>$_FILES</tt> comportera en particulier&nbsp;:</p>
+
+<p><code class='spip_code'>$_FILES['userfile']['name']</code>&nbsp;:     le nom original du fichier sur le client&nbsp;;</p>
+
+<p><code class='spip_code'>$_FILES['userfile']['tmp_name']</code>&nbsp;:     le nom de sa copie  créée sur le serveur.</p>
+
+<p>On complétera donc le script en traitant le cas où il est envoyé en méthode POST, sa réponse étant alors l&#8217;envoi de la fusion des deux fichiers ICS telle que  fournie par les fonctions écrites précédemment. On notera que ce script renvoie donc tantôt  <tt>Content-Type: text/html</tt>, tantôt  <tt>Content-Type: text/calendar</tt>,  ce qui exige de n&#8217;envoyer aucun caractère tant que la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.header.html" class='spip_glossaire' title="Voir la description de 'header' dans la documentation de 'php'" rel='external'>header</a>&nbsp;n&#8217;a pas été utilisée.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=740&amp;cle=3a968a11aa7e88020e7f477c057d917d6c3a7663&amp;file=distant%2FVCS%2FLI355%2FTM%2F7%2Ffournir_ics.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger fournir_ics.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'REQUEST_METHOD'</span><span style="color: #007700">]&nbsp;==&nbsp;</span><span style="color: #DD0000">'GET'</span><span style="color: #007700">)&nbsp;{<br /></span><span style="color: #0000BB">?&gt;<br /></span>&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;Basic&nbsp;1.1//EN"&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"&gt;<br />&lt;html&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />&nbsp;&nbsp;&lt;head&gt;<br />&nbsp;&nbsp;&lt;meta&nbsp;http-equiv="Content-Type"&nbsp;content="text/html;&nbsp;charset=utf-8"&nbsp;/&gt;<br />&nbsp;&nbsp;&lt;title&gt;Transmission&nbsp;de&nbsp;calendriers&nbsp;&lt;/title&gt;&lt;/head&gt;&nbsp;<br />&nbsp;&nbsp;&lt;body&gt;&nbsp;<br />&nbsp;&nbsp;&lt;form&nbsp;action="fournir_ics.php"&nbsp;method="post"&nbsp;enctype="multipart/form-data"&gt;&nbsp;<br />&nbsp;&nbsp;&lt;fieldset&gt;<br />&nbsp;&nbsp;&lt;label&nbsp;for='ics1'&gt;Premier&nbsp;fichier&nbsp;ICS&lt;/label&gt;<br />&nbsp;&nbsp;&lt;input&nbsp;type='file'&nbsp;name='ics1'&nbsp;id='ics1'&nbsp;/&gt;<br />&nbsp;&nbsp;&lt;label&nbsp;for='ics2'&gt;Premier&nbsp;fichier&nbsp;ICS&lt;/label&gt;<br />&nbsp;&nbsp;&lt;input&nbsp;type='file'&nbsp;name='ics2'&nbsp;id='ics2'&nbsp;/&gt;<br />&nbsp;&nbsp;&lt;input&nbsp;type='submit'&nbsp;value='Fusionne'&nbsp;&nbsp;/&gt;&nbsp;<br />&nbsp;&nbsp;&lt;/fieldset&gt;<br />&nbsp;&nbsp;&lt;/form&gt;&nbsp;<br />&nbsp;&nbsp;&lt;/body&gt;&nbsp;<br />&lt;/html&gt;<br /><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;include&nbsp;</span><span style="color: #DD0000">'envoi_ics.php'</span><span style="color: #007700">;<br />&nbsp;&nbsp;include&nbsp;</span><span style="color: #DD0000">'fusionne_ics.php'</span><span style="color: #007700">;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fusionne_ics</span><span style="color: #007700">(</span><span style="color: #0000BB">$_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">"ics1"</span><span style="color: #007700">][</span><span style="color: #DD0000">"tmp_name"</span><span style="color: #007700">],&nbsp;</span><span style="color: #0000BB">$_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">"ics2"</span><span style="color: #007700">][</span><span style="color: #DD0000">"tmp_name"</span><span style="color: #007700">]);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">envoi_ics</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'fusion.ics'</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses2380'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5562"> 
+	    <div class="reponse">
+	<div class="forum-titre">Envoi d&#8217;un calendrier</div>
+11 mars 2014 &agrave; 07h24min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php<br />
+include 'envoi_ics.php';<br />
+include 'fusionne_ics.php';<br />
+<br />
+if (count($_POST)==0) { // methode GET ???<br />
+ &nbsp;echo header('Content-Type: text/html;charset=utf-8');<br />
+ &nbsp;echo &quot;&lt;form method='post' action='' enctype='multipart/form-data'&gt;&lt;fieldset style = 'width:25%'&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;input type='file' name='file1' style='float:left'&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;input type='file' name='file2' style='float:left'&gt;&quot;;<br />
+ &nbsp; // $_FILES['file1']['name'] le nom original du fichier sur le client<br />
+ &nbsp; // $_FILES['file1']['tmp_name'] le nom de sa copie créée sur le serveur<br />
+ &nbsp;echo &quot;&lt;/fieldset&gt;&lt;fieldset style = 'width:25%'&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;input type='submit' name='submit' value='submit'&lt;/input&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;/fieldset&gt;&lt;/form&gt;&quot;;<br />
+}<br />
+else { // methode POST ???<br />
+ &nbsp;$fichierFusionne = fusionneics($_FILES['file1']['tmp_name'],$_FILES['file2']['tmp_name']);<br />
+ &nbsp;envoi_ics($fichierFusionne,'resultat'); <br />
+}<br />
+?&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2381'></span>
+
+
+<h2 id='a4'>4 Demande de rendez-vous</h2>
+<p>On souhaite écrire un script <code class='spip_code'>creneau.php</code> permettant de savoir si un créneau horaire donné est libre dans un fichier ICS. Ce script retournera un formulaire de saisie s&#8217;il est appelé en méthode GET. S&#8217;il est appelé en méthode POST et que le créneau n&#8217;est pas libre, il  il renvoie une page de type <tt>text/plain</tt> indiquant que le rendez-vous est impossible. Enfin, si le créneau est disponible, il renvoie le fichier initial, complété par l&#8217;événement supplémentaire demandé, avec <tt>rendez-vous</tt> comme champ <tt>Description</tt>.</p>
+
+<p>Le formulaire permettra de saisir le nom d&#8217;un fichier ICS  sur le disque local, ainsi que trois valeurs numériques <i>jour</i>, <i>debut</i>, <i>fin</i>.
+La première valeur numérique est supposée être un nombre de 8 chiffres, indiquant l&#8217;année (4 chiffres), le mois et le jour (2 chiffres chaque). Les deux valeurs suivantes sont supposées être des nombres de 6 chiffres stipulant des heures de début et de fin de rendez-vous exprimée en heures, minutes, secondes (2 chiffres chaque). L&#8217;agenda est supposé tel que toute ligne <code class='spip_code'>DTSTART</code> est à l&#8217;intérieur d&#8217;un bloc <code class='spip_code'>VEVENT</code>, lequel contient ensuite une ligne <code class='spip_code'>DTEND</code>.</p>
+
+<p>Le script analysera les saisies en regardant dans le fichier transmis si  aucun événement ne se déroule pendant tout ou partie du rendez-vous. On supposera que les données sont correctes, et que le fuseau horaire du rendez-vous est <tt>TZID=Europe/Paris</tt>.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=738&amp;cle=3ff4efe960e782fce4f83a0245381dc175fbbb37&amp;file=distant%2FVCS%2FLI355%2FTM%2F7%2Fcreneau_ics.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger creneau_ics.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">if&nbsp;((</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'REQUEST_METHOD'</span><span style="color: #007700">]&nbsp;==&nbsp;</span><span style="color: #DD0000">'GET'</span><span style="color: #007700">)&nbsp;OR&nbsp;!isset(</span><span style="color: #0000BB">$_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">"ICS"</span><span style="color: #007700">][</span><span style="color: #DD0000">"tmp_name"</span><span style="color: #007700">]))<br />&nbsp;&nbsp;{&nbsp;</span><span style="color: #0000BB">?&gt;</span>&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;Basic&nbsp;1.1//EN"&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"&gt;<br />&lt;html&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />&nbsp;&nbsp;&lt;head&gt;<br />&nbsp;&nbsp;&lt;meta&nbsp;http-equiv="Content-Type"&nbsp;content="text/html;&nbsp;charset=utf-8"&nbsp;/&gt;<br />&nbsp;&nbsp;&lt;title&gt;Créneau&nbsp;dans&nbsp;ICS&lt;/title&gt;<br />&nbsp;&nbsp;&lt;/head&gt;&nbsp;<br />&nbsp;&nbsp;&lt;body&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Créneau&nbsp;dans&nbsp;ICS&lt;/h1&gt;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;form&nbsp;action="creneau_ics.php"&nbsp;method="post"&nbsp;enctype="multipart/form-data"&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;fieldset&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for='jour'&gt;Jour&nbsp;&lt;/label&gt;&lt;input&nbsp;name='jour'&nbsp;id='jour'&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for='debut'&gt;Commencement&nbsp;&lt;/label&gt;&lt;input&nbsp;name='debut'&nbsp;id='debut'&nbsp;/&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for='fin'&gt;Fin&nbsp;&lt;/label&gt;&lt;input&nbsp;name='fin'&nbsp;id='fin'/&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/fieldset&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;fieldset&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for='ICS'&gt;Agenda&nbsp;&lt;/label&gt;&lt;input&nbsp;type='file'&nbsp;name='ICS'&nbsp;id='ICS'/&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;type='submit'&nbsp;value='Demander&nbsp;ce&nbsp;rendez-vous'&nbsp;/&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/fieldset&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/form&gt;&nbsp;<br />&nbsp;&nbsp;&lt;/body&gt;&nbsp;<br />&lt;/html&gt;<br /><br /><span style="color: #0000BB">&lt;?php&nbsp;</span><span style="color: #007700">}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">creneau</span><span style="color: #007700">(</span><span style="color: #0000BB">$f1</span><span style="color: #007700">,</span><span style="color: #0000BB">$rdvd</span><span style="color: #007700">,</span><span style="color: #0000BB">$rdvf</span><span style="color: #007700">,</span><span style="color: #0000BB">$jour</span><span style="color: #007700">){&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$f1&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">)&nbsp;{&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #DD0000">"/^DTSTART.*:"</span><span style="color: #007700">.</span><span style="color: #0000BB">$jour</span><span style="color: #007700">.</span><span style="color: #DD0000">"T(.*)$/"</span><span style="color: #007700">,</span><span style="color: #0000BB">$l</span><span style="color: #007700">,</span><span style="color: #0000BB">$a</span><span style="color: #007700">)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$debut&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #DD0000">"/^DTEND.*:"</span><span style="color: #007700">.</span><span style="color: #0000BB">$jour</span><span style="color: #007700">.</span><span style="color: #DD0000">"T(.*)$/"</span><span style="color: #007700">,</span><span style="color: #0000BB">$l</span><span style="color: #007700">,</span><span style="color: #0000BB">$a</span><span style="color: #007700">)){&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$fin&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">];&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(((</span><span style="color: #0000BB">$fin&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">$rdvd</span><span style="color: #007700">)&nbsp;&amp;&amp;&nbsp;(</span><span style="color: #0000BB">$fin&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">$rdvf</span><span style="color: #007700">))&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;((</span><span style="color: #0000BB">$debut&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">$rdvd</span><span style="color: #007700">)&nbsp;&amp;&amp;&nbsp;(</span><span style="color: #0000BB">$debut&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">$rdvf</span><span style="color: #007700">))&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;((</span><span style="color: #0000BB">$debut&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">$rdvd</span><span style="color: #007700">)&nbsp;&amp;&amp;&nbsp;(</span><span style="color: #0000BB">$fin&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">$rdvd</span><span style="color: #007700">))){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;</span><span style="color: #0000BB">$debut&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'debut'</span><span style="color: #007700">];<br />&nbsp;</span><span style="color: #0000BB">$fin&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'fin'</span><span style="color: #007700">];<br />&nbsp;</span><span style="color: #0000BB">$jour&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'jour'</span><span style="color: #007700">];<br />&nbsp;</span><span style="color: #0000BB">$file&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">file</span><span style="color: #007700">(</span><span style="color: #0000BB">$_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">"ICS"</span><span style="color: #007700">][</span><span style="color: #DD0000">"tmp_name"</span><span style="color: #007700">]);<br /><br />&nbsp;if&nbsp;(!</span><span style="color: #0000BB">creneau</span><span style="color: #007700">(</span><span style="color: #0000BB">$file</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$debut</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$fin</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$jour</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">'Content-Type:&nbsp;text/plain;&nbsp;charset=utf-8'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'Pas&nbsp;libre'</span><span style="color: #007700">;<br />&nbsp;&nbsp;}&nbsp;else{<br />&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Content-Type:&nbsp;text/calendar;&nbsp;charset=utf-8"</span><span style="color: #007700">);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Content-Transfer-Encoding:&nbsp;8bit"</span><span style="color: #007700">);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">'Content-Disposition:&nbsp;inline;&nbsp;filename="'</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">"ICS"</span><span style="color: #007700">][</span><span style="color: #DD0000">"name"</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">'.ics'&nbsp;</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'";&nbsp;creation-date="'&nbsp;</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">gmdate</span><span style="color: #007700">(</span><span style="color: #DD0000">"D,&nbsp;d&nbsp;M&nbsp;Y&nbsp;H:i:s"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">time</span><span style="color: #007700">()));<br />&nbsp;&nbsp;while(</span><span style="color: #0000BB">true</span><span style="color: #007700">)&nbsp;{</span><span style="color: #0000BB">$last&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_shift</span><span style="color: #007700">(</span><span style="color: #0000BB">$file</span><span style="color: #007700">);&nbsp;if&nbsp;(</span><span style="color: #0000BB">$file</span><span style="color: #007700">)&nbsp;echo&nbsp;</span><span style="color: #0000BB">$last</span><span style="color: #007700">;&nbsp;else&nbsp;break;}<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"BEGIN:VEVENT\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"DESCRIPTION:&nbsp;RDV\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"DTSTART;TZID=Europe/PariS:$jour"</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">'T'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$debut&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"DTEND;TZID=Europe/Paris:$jour"</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">'T'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$fin&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"END:VEVENT\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$last</span><span style="color: #007700">;<br />&nbsp;}<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses2381'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum6001"> 
+	    <div class="reponse">
+	<div class="forum-titre">Demande de rendez-vous</div>
+19 mars 2014 &agrave; 13h21min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><p>pas fini</p>
+
+<div class="spip_code"><code>&lt;?php<br />
+ERROR_REPORTING(ALL);<br />
+include 'envoi_ics.php';<br />
+include 'fusionne_ics.php';<br />
+<br />
+function creneau_disponible($jourNV,$debutNV,$finNV,$nom_fichier_ics) {<br />
+ &nbsp;$tab=file($nom_fichier_ics);<br />
+ &nbsp;$disponibilite=true;<br />
+ &nbsp;$startNV=$jourNV*1000000+$debutNV;<br />
+ &nbsp;$endNV=$jourNV*1000000+$finNV;<br />
+ &nbsp;echo &quot;start = &quot;. $startNV . &quot;&lt;br&gt;&quot;;<br />
+ &nbsp;echo &quot;end &nbsp;= &nbsp;&quot;. $endNV . &quot;&lt;br&gt;&quot;;<br />
+ &nbsp;echo &quot;count(tab) = &quot; . count($tab) . &quot;&lt;br&gt;&quot;;<br />
+ &nbsp;for($i=0; $i&lt;count($tab) &amp;&amp; $disponibilite==true; $i++) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; echo &quot;tab[&quot;.$i.&quot;] = &quot; . trim($tab[$i]);<br />
+ &nbsp; &nbsp;while(preg_match('/^DTSTART:dddddddddddddd$/',trim($tab[$i++]),$start)==0 &amp;&amp; $i&lt;count($tab)) echo &quot;*+&quot;;<br />
+ &nbsp; &nbsp;while(preg_match('/^DTEND:dddddddddddddd$/',trim($tab[$i++]),$end)==0 &amp;&amp; $i&lt;count($tab));<br />
+ &nbsp; &nbsp;echo $start[1] . &quot; &lt;= &quot; . $startNV . &quot; &lt;= &quot; . $end[1] . &quot; ?&lt;br&gt;&quot;;<br />
+ &nbsp; &nbsp; &nbsp;//if ( $start[1]&lt;=$startNV &amp;&amp; $startNV&lt;=$end[1]) {<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;//$disponibilite=false;<br />
+ &nbsp; &nbsp; &nbsp;//}<br />
+ &nbsp; &nbsp;//}<br />
+ &nbsp;}<br />
+ &nbsp;return $disponibilite;<br />
+}<br />
+<br />
+if(false) { //!empty($_POST)) { &nbsp;// methode GET<br />
+ &nbsp;echo header('Content-Type: text/html;charset=utf-8');<br />
+ &nbsp;echo &quot;&lt;form method='post' action='' enctype='multipart/form-data'&gt;&lt;fieldset style = 'width:25%'&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;input type='file' name='file1' style='float:left'&gt;&quot;;<br />
+ &nbsp; // $_FILES['file1']['name'] le nom original du fichier sur le client<br />
+ &nbsp; // $_FILES['file1']['tmp_name'] le nom de sa copie créée sur le serveur<br />
+ &nbsp;echo &quot;&lt;input type='number' name='jour' min = '1' style='float:left'&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;input type='number' name='debut' min = '0' max = '245959' style='float:left'&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;input type='number' name='fin' min = '0' max = '245959' style='float:left'&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;/fieldset&gt;&lt;fieldset style = 'width:25%'&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;input type='submit' name='submit' value='submit_sur_button'&lt;/input&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;/fieldset&gt;&lt;/form&gt;&quot;;<br />
+}<br />
+else { &nbsp; &nbsp; &nbsp; &nbsp;// methode POST<br />
+ &nbsp;creneau_disponible('20140317','010000','230000','pacs Groupe 1.ics');<br />
+}<br />
+?&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FUn-type-MIME-pour-les-calendriers"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FUn-type-MIME-pour-les-calendriers'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FUn-type-MIME-pour-les-calendriers&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 15h01min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FUn-type-MIME-pour-les-calendriers'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

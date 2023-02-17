@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=267"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>9. JavaScript et ses méthodes (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>L&#8217;objet Date de JavaScript</a></li>
+<li class="menu-lv2"><a href='#a2'>L&#8217;objet Regexp en JavaScript</a></li>
+<li class="menu-lv2"><a href='#a3'>Tableaux et tableaux associatifs</a></li>
+<li class="menu-lv2"><a href='#a4'>Récupérer les saisies</a></li>
+<li class="menu-lv2"><a href='#a5'>Insertion de contenu dans une page HTML en Javascript</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux Dirig&eacute;s<br />9. JavaScript et ses méthodes</h1>
+<p>Cette séance de travaux dirigés présente les bases de la programmation en JavaScript. C&#8217;est un langage dit <i>orienté-objet</i>, dynamiquement typé, fournissant des tableaux associatifs et des expressions rationnelles. Rappelons qu&#8217;un objet est une structure comportant des propriétés et des méthodes. Une propriété est un champ nommé qui stocke une valeur.  On accède à la  propriété <code class='spip_code'>prop</code> d&#8217;un objet <code class='spip_code'>obj</code> par la notation pointée <code class='spip_code'>obj.prop</code>. Une méthode est une fonction que peut effectuer l&#8217;objet. On appelle la méthode <code class='spip_code'>maMethode()</code> d&#8217;un objet <code class='spip_code'>obj</code> par la notation pointée également <code class='spip_code'>obj.maMethode()</code>. Pour créer un nouvel objet on utilise l&#8217;opérateur <code class='spip_code'>new</code>.</p>
+<br /><div id='sequence267'>
+<span id='e2396'></span>
+
+
+<h2 id='a1'>1 L&#8217;objet Date de JavaScript</h2>
+<p>L&#8217;objet <strong>Date</strong> possède plusieurs méthodes, dont  <strong>getHours()</strong>
+qui retourne l&#8217;heure qu&#8217;il est, sous forme d&#8217;un entier compris en 0 et 23, 
+disons <i>n</i>.
+Écrire une  fonction qui retourne <tt>Good Morning&nbsp;! Il est <i>n</i> Heure.</tt> sous la forme d&#8217;un titre HTML de niveau 1 s’il est moins de 12h (le matin donc), <tt>Good Afternoon&nbsp;! Il est <i>n</i> Heure.</tt>sous la forme d&#8217;un titre de niveau 2 s’il est plus de 12h mais moins de 17h et <tt>Good Evening&nbsp;! Il est <i>n</i> Heure. </tt>sous la forme d&#8217;un titre de niveau 3 s’il est plus de 17h. 
+On rappelle que la concaténation en JavaScript s&#8217;écrit avec l&#8217;opérateur <tt>+</tt>.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=667&amp;cle=0a97ec468c87a2c9b3684990db64a3e1d6d03f1d&amp;file=distant%2FVCS%2FLI355%2FTD%2F9%2FafficheMessage.js"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger afficheMessage.js</a>
+</div>
+<pre>// afficheMessage.js
+
+function afficheMessage(){ 
+ d = new Date(); 
+ time = d.getHours(); 
+ if (time &lt; 12) { 
+  return ("&lt;h1&gt;Good morning&lt;/h1&gt; Il est " + time + " heure") ;
+ }else if(time &lt; 17){ 
+     return("&lt;h2&gt;Good Afternoon &lt;/h2&gt; Il est " + time + " heure");
+ }else { 
+   return ("&lt;h3&gt;Good Evening&lt;/h3&gt;Il est " + time + " heure"); 
+ } 
+}</pre></div>
+
+
+<span id='e2400'></span>
+
+
+<h2 id='a2'>2 L&#8217;objet Regexp en JavaScript</h2>
+<p>Comme nous l&#8217;avons déjà vu avec le langage PHP, les <i>expressions rationnelles</i> (ou <i>RegExp</i>)  sont des motifs qui permettent
+d&#8217;analyser finement le contenu d&#8217;une chaîne de caractères et
+d&#8217;en extraire des parties significatives.  Javascript  met en œuvre la même bibliothèque d&#8217; expressions rationnelles que PHP, mais en introduisant un objet particulier plutôt que d&#8217;utiliser des chaînes de caractères pour les motifs. Toutefois, on peut créer une RegExp à partir d&#8217;une chaîne en exécutant <code class='spip_code'>new Regexp(</code>chaine<code class='spip_code'>)</code>.</p>
+
+<p>De tels objets s&#8217;écrivent comme un chaîne, mais encadrée par / et non &#8217; ou ". Ainsi&nbsp;: <code class='spip_code'> /a*b+c*/</code> est l&#8217;expression rationnelle qui reconnaît un nombre quelconque de <tt>a</tt> suivi d&#8217;au moins un <tt>b</tt> puis d&#8217;un nombre quelconque de <tt>c</tt>.</p>
+
+<p>Les méthodes de cet objet sont les suivantes&nbsp;:</p>
+
+<ul class="spip"><li> la méthode <i>test()</i> renvoie <i>true</i> si une chaîne est en correspondance avec le motif, <i>false</i> sinon. Par exemple, <code class='spip_code'> /a*b+c*/.test(&quot;bcccc&quot;)</code> rend <i>true</i> et <code class='spip_code'> /a*b+c*/.test(&quot;aaaaaaaaacccc&quot;)</code> rend <i>false</i>,</li><li> la méthode <code class='spip_code'>exec</code> renvoie un tableau dont le premier élément est la plus grande partie de la chaîne en correspondance, et les suivants sont les fragments de la chaîne qui correspondent aux sous-motifs s&#8217;il y a correspondance, vide sinon. Par exemple, 
+<code class='spip_code'>/([abc]+)([123])/.exec(&quot;xxxxcaabb322&quot;)</code> retourne le tableau de trois éléments <code class='spip_code'>caabb3, caabb, 3</code></li></ul>
+<p>La méthode <tt>match</tt> d&#8217;un objet de type chaîne appliqué à une RegExp retourne aussi ce tableau.</p>
+
+<ol class="spip"><li> Définir une <i>expression rationnelle</i>  qui reconnaît les entiers relatifs puis écrire une fonction <i>valAbs</i> qui renvoie la valeur absolue de son argument s&#8217;il représente un entier relatif, ou <i>false</i> sinon. On refusera les nombres commencent par 0, hormis 0 lui-même qui ne devra pas être précédé d&#8217;un signe. Donner une définition avec la méthode <tt>exec</tt>, et une avec la méthode <tt>match</tt>.</li><li> À partir de l&#8217;expression rationnelle précédente, définir une seconde expression pour reconnaître des nombres réels avec éventuellement une partie flottante et éventuellement signés. Écrire une fonction <i>is_num</i> qui prend en argument une chaîne de caractère et retourne la valeur réelle correspondant à cette chaîne si et seulement si cette chaîne est reconnue par l&#8217;expression et <i>false</i> sinon. On utilisera la fonction Javascript <i>Number()</i> pour convertir une chaîne représentant un nombre en ce nombre.</li></ol>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=671&amp;cle=543627c474096310f148b55ac9f662062db08a0b&amp;file=distant%2FVCS%2FLI355%2FTD%2F9%2FvalAbs.js"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger valAbs.js</a>
+</div>
+<pre>// valabs.js
+
+function valabs(n){
+    var exprR = /^([\+\-]?[1-9][0-9]*)|0$/;
+    if (exprR.test(n)) // ou  n.match(exprR)
+        return (n &gt;= 0) ? (n + 0) : (0 - n);
+        // (n + 0) car la regexp accepte de retourner +3 au lieu de 3
+    else return 0;
+}
+
+function is_num(val){
+    var res = /^(0|(\+|\-)?\s*[1-9]+[0-9]*(\.[0-9]+)?)$/.test(val);
+    return (res)? Number(val):false;
+}</pre></div>
+
+
+<span id='e2825'></span>
+
+
+<h2 id='a3'>3 Tableaux et tableaux associatifs</h2>
+<p>Les tableaux de JavaScript, comme ceux de PHP,  peuvent être indexés par des chaînes de caractères ou des nombres. Ils sont vus comme des objets, initialisables par exemple ainsi&nbsp;:</p>
+<pre>
+var t=new Array()&nbsp;;
+t["trois"]= 30&nbsp;;
+t["un"]= &#8217;+10.5&#8217;&nbsp;;
+t["deux"]= -20&nbsp;;
+t[5]= &#8217;-50.04&#8217;&nbsp;;
+t["tableau"]=[1,2,3]&nbsp;;
+t["plusoumoins"]=&#8217;+-3.5&#8217;&nbsp;;
+</pre>
+<p><i>Attention</i>&nbsp;:  la longueur (<i>length</i>) d&#8217;un  tableau ne tient compte que des index numériques positifs, et vaut en fait celui le plus élevé plus 1.
+Pour les index non numériques, on peut utiliser la notation pointée&nbsp;:
+<i>t["deux"]</i>, peut aussi s&#8217;écrire <i>t.deux</i>
+La construction <code class='spip_code'>for (acces in tableau) {...}</code>  énumère successivement dans <i>acces</i> toutes les valeurs d&#8217;index du tableau (numériques ou chaine).</p>
+
+<p>Ecrire une fonction <i>listerTab(t)</i> qui retourne la somme des éléments numériques de son argument, qui est un tableau dont les éléments ne sont pas tous forcément numériques. On utilisera pour cela la fonction <i>is_num()</i> définie à la question précédente.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=670&amp;cle=cbaa32262bcecddcc573670b3524dc0572febbaf&amp;file=distant%2FVCS%2FLI355%2FTD%2F9%2FsommeElementsTableau.js"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger sommeElementsTableau.js</a>
+</div>
+<pre>// sommeElementsTableau.js
+
+function listerTab(t){
+    var s = 0;
+    for (var i in t){
+	var tmp = is_num(t[i]);
+	if (tmp) s = s + tmp;
+    }
+    return s;
+}
+
+// Ancienne solution reposant sur isNaN
+function listerTab(t){
+    for(var i in t){
+    if (t[i] != undefined &amp;&amp; !isNaN(t[i])){
+         s = s + t[i];
+    }
+    return s;
+}</pre></div>
+
+
+<span id='e2402'></span>
+
+
+<h2 id='a4'>4 Récupérer les saisies</h2>
+<p>Il s&#8217;agit d&#8217;écrire un convertisseur entre Francs et Euros
+(6,55957 francs   = 1 euro) en JavaScript,
+sous la forme de deux formulaires qui ne feront pas de requêtes HTTP,
+mais permettront d&#8217;appliquer des fonctions JavaScript sur les saisies du formulaire. Toute valeur saisie est de type <i>String</i>&nbsp;;  les conversions explicites s&#8217;écrivent <i>String(nombre)</i> et <i>Number(chaine)</i>.</p>
+
+<ol class="spip"><li> Écrire une fonction javascript <i>convF_E</i>,  censée recevoir en argument une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-INPUT" class='spip_glossaire' title="Voir la description de 'input' dans la documentation de 'html'" rel='external'>input</a>, en prend le champ <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#adef-value-INPUT" class='spip_glossaire' title="Voir la description de 'value' dans la documentation de 'html' section 1" rel='external'>value</a> supposée être une valeur en francs, la convertit en euros et affiche le résultat dans une fenêtre d&#8217;alerte, grâce à la fonction <tt>alert()</tt>.
+ -# Écrire la fonction symétrique <i>convE_F</i> qui convertit en euros.</li><li> Écrire une page <i>convertirjs.html</i> possédant deux formulaires réduits chacun à un champ de saisie textuel, 
+l&#8217;un proposant de saisir des francs, et l&#8217;autre des euros. Chaque balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-INPUT" class='spip_glossaire' title="Voir la description de 'input' dans la documentation de 'html'" rel='external'>input</a> aura un événement <i>onchange</i> permettant d&#8217;effectuer la conversion suggérée par l&#8217;intitulé.</li><li> Définir une expression rationnelle reconnaissant les entiers et écrire une fonction <i>estEntier(chaine)</i> qui vérifie que <i>chaine</i> représente un nombre entier.</li><li> Améliorer les fonctions <i>convE_F</i> et <i>convE_F</i> pour qu&#8217;une fenêtre d&#8217;alerte prévienne les utilisateurs si la valeur demandée pour conversion n&#8217;est pas un nombre.</li></ol>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=668&amp;cle=ce64c09a506d99e428fa03bbad3d636f1a86d27d&amp;file=distant%2FVCS%2FLI355%2FTD%2F9%2Fconvertisseur.html"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger convertisseur.html</a>
+</div>
+<p><code><span style="color: #000000">
+&lt;html&gt;<br />&lt;head&gt;<br />&lt;title&gt;Convertiseur&nbsp;Franc-Euro&lt;/title&gt;<br />&lt;script&nbsp;type="text/javascript"&gt;<br /><br />function&nbsp;convF_E(d){&nbsp;<br /><br />&nbsp;&nbsp;if&nbsp;(!estNombre(d.value))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;alert("La&nbsp;valeur&nbsp;n'est&nbsp;pas&nbsp;un&nbsp;nombre.");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//conversion&nbsp;explicite&nbsp;Chaine--&gt;Nombre<br />&nbsp;&nbsp;else&nbsp;&nbsp;d&nbsp;=&nbsp;Number(d.value)&nbsp;/&nbsp;6.55957;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//conversion&nbsp;explicite&nbsp;Nombre--&gt;Chaine<br />&nbsp;&nbsp;return&nbsp;String(d);<br />}<br /><br />function&nbsp;convE_F(d){<br />&nbsp;&nbsp;if&nbsp;(!estNombre(d.value))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;alert("La&nbsp;valeur&nbsp;n'est&nbsp;pas&nbsp;un&nbsp;nombre.");<br />&nbsp;&nbsp;else&nbsp;d&nbsp;=&nbsp;Number(d.value)&nbsp;*&nbsp;6.55957;&nbsp;<br />&nbsp;&nbsp;return&nbsp;String(d);<br />}<br /><br /><br />function&nbsp;estNombre(n){<br />&nbsp;&nbsp;var&nbsp;exprR&nbsp;=&nbsp;/^(|[\+\-])?[1-9][0-9]*$/;<br />&nbsp;&nbsp;return&nbsp;exprR.test(n);<br />}<br /><br />&lt;/script&gt;<br /><br />&lt;/head&gt;<br />&lt;body&gt;<br />&lt;h2&gt;Convertiseur&nbsp;Franc-Euro&nbsp;&lt;/h2&gt;<br /><br />&lt;form&nbsp;onsubmit='return&nbsp;false'&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for=e,euro'&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;Entrer&nbsp;une&nbsp;somme&nbsp;en&nbsp;euros<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/label&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;type="text"&nbsp;name="eneuro"&nbsp;id="eneuro"<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onchange='alert(convE_F(this))'&nbsp;/&gt;<br />&lt;/form&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&lt;form&nbsp;onsubmit='return&nbsp;false'&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for=e,euro'&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;Entrer&nbsp;une&nbsp;somme&nbsp;en&nbsp;francs<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/label&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;type="text"&nbsp;name="enfrancs"&nbsp;id="enfrancs"<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onchange='alert(convF_E(this))'&nbsp;/&gt;<br />&lt;/form&gt;<br />&lt;/body&gt;<br />&lt;/html&gt;</span>
+</code></p></div>
+
+
+<span id='e3416'></span>
+
+
+<h2 id='a5'>5 Insertion de contenu dans une page HTML en Javascript</h2>
+<p>L&#8217;objectif de cet exercice est de vous préparer à la prochaine séance dédiée à la manipulation du DOM (Document Object Model) par Javascript. On s&#8217;intéresse ici à l&#8217;insertion dans le corps du document, de contenu généré dynamiquement par un script lui aussi présent dans le document. La solution se voudra portable et n&#8217;utilisera pas la propriété <code class='spip_code'>body.innerHTML</code> développée à l&#8217;origine pour Internet Explorer, bien que supportée par les autres navigateurs.</p>
+
+<p><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;Écrire une page HTML <tt>insertionTable.html</tt> contenant un formulaire avec trois champs de saisie nommés "debut", "fin" et "pas" ainsi qu&#8217;un bouton (pas un bouton de soumission)&nbsp;;</p>
+
+<p>On s&#8217;intéresse désormais à la construction dynamique de contenu dans le document HTML à l&#8217;aide de Javascript&nbsp;:</p>
+
+<ol class="spip"><li> écrire une fonction Javascript <tt>verifNombreEntier</tt> qui utilise une expression rationnelle pour renvoyer vrai (<tt>true</tt>) si  son argument est un entier, et faux (<tt>false</tt>) sinon&nbsp;; cette fonction va être utilisée pour valider les saisies du formulaire&nbsp;;</li><li> à l&#8217;aide de la fonction <code class='spip_code'>document.createElement</code>, créer une  balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TABLE" class='spip_glossaire' title="Voir la description de 'table' dans la documentation de 'html'" rel='external'>table</a> que vous affecterez à une variable globale <i>table</i>&nbsp;;</li><li>  ajouter un événement <a href="http://fr.wikipedia.org/wiki/onload" class='spip_glossaire' title="Voir la description de 'onload' dans la documentation de 'html#'" rel='external'>onload</a> à la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-BODY" class='spip_glossaire' title="Voir la description de 'body' dans la documentation de 'html'" rel='external'>body</a> pour que la table précédente soit ajoutée au corps du document. L&#8217;ensemble des manipulations se fait au niveau du DOM.&nbsp;Vous utiliserez pour cela la méthode <tt>appendChild</tt> qui s&#8217;applique sur un noeud du DOM et prend en paramètre un noeud fils à lui ajouter. Par exemple si <i>body</i> est une variable représentant la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-BODY" class='spip_glossaire' title="Voir la description de 'body' dans la documentation de 'html'" rel='external'>body</a>  dans le DOM, alors <i>body.appendChild(elem)</i> ajoutera l&#8217;élément <i>elem</i> à la suite des fils déjà existants dans la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-BODY" class='spip_glossaire' title="Voir la description de 'body' dans la documentation de 'html'" rel='external'>body</a>&nbsp;;</li><li> écrire une fonction Javascript <tt>construction(debut,fin,pas)</tt> qui insère une <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TABLE" class='spip_glossaire' title="Voir la description de 'table' dans la documentation de 'html'" rel='external'>table</a> contenant toutes les valeurs entre &#8217;debut&#8217; et &#8217;fin&#8217; par pas de valeur &#8217;pas&#8217; dans le document HTML. L&#8217;insertion se fera en construisant successivement tous les éléments constitutifs du tableau dans le DOM.&nbsp;Vous utiliserez les méthodes <tt>createTextNode</tt> pour créer des noeuds de type texte et <tt>createElement</tt> pour construire les noeuds correspondant aux balises encadrant ces valeurs. À la fin, votre fonction devra ajouter la ligne de tableau contenant les valeurs à l&#8217;élément <i>table</i> crée et initialisé dans les questions précédentes, de façon à ce que le résultat soit visible dans le navigateur&nbsp;;</li><li> enfin, associer la fonction précédente au bouton du formulaire de sorte que lorsque le bouton est cliqué un tableau est généré à partir des valeurs contenues dans les 3 autres champs du formulaire.</li></ol>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=669&amp;cle=8a6633c4113376ea50656dd0184f9e529affa1d2&amp;file=distant%2FVCS%2FLI355%2FTD%2F9%2FinsertionTable.html"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger insertionTable.html</a>
+</div>
+<p><code><span style="color: #000000">
+&lt;html&gt;<br />&nbsp;&nbsp;&lt;head&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Introduction&nbsp;au&nbsp;DOM&lt;/title&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;script&nbsp;language="javascript"&nbsp;type="text/javascript"&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Création&nbsp;d'une&nbsp;table&nbsp;et&nbsp;ajout&nbsp;à&nbsp;la&nbsp;fin&nbsp;du&nbsp;corps&nbsp;du&nbsp;document<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;table&nbsp;=&nbsp;document.createElement("table");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;verifNombreEntier(value){<br />&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;r&nbsp;=&nbsp;/^([1-9][0-9]+|[0-9])$/;<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;r.test(value);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;construction(debut,fin,pas){<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(verifNombreEntier(debut)&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;verifNombreEntier(fin)&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;verifNombreEntier(pas)){&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deb&nbsp;=&nbsp;Number(debut);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f&nbsp;=&nbsp;Number(fin);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p&nbsp;=&nbsp;Number(pas);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(p&nbsp;==&nbsp;0){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("Le&nbsp;pas&nbsp;d'increment&nbsp;est&nbsp;nul");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tr&nbsp;=&nbsp;document.createElement("tr");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(i=deb;&nbsp;i&nbsp;&lt;=&nbsp;f;&nbsp;i&nbsp;=&nbsp;i+&nbsp;p){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;txt&nbsp;=&nbsp;document.createTextNode(i);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;td&nbsp;=&nbsp;document.createElement("td");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;td.appendChild(txt);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tr.appendChild(td);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table.appendChild(tr);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(table.hasChildNodes()){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table.replaceChild(tr,&nbsp;table.firstChild);&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table.appendChild(tr);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;//&nbsp;fin&nbsp;if&nbsp;(p&nbsp;==&nbsp;0)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;alternative&nbsp;verifNombreEntier<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("Au&nbsp;moins&nbsp;une&nbsp;des&nbsp;valeurs&nbsp;saisie&nbsp;n'est&nbsp;pas&nbsp;un&nbsp;entier");&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt;<br />&nbsp;&nbsp;&lt;/head&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&lt;body&nbsp;onload="document.getElementsByTagName('body')[0].appendChild(table);"&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;form&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;fieldset&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for="debut"&gt;Entrez&nbsp;une&nbsp;valeur&nbsp;de&nbsp;debut&nbsp;:&nbsp;&lt;/label&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;type="text"&nbsp;name="debut"&nbsp;id="debut"&nbsp;value="0"/&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for="fin"&gt;Entrez&nbsp;une&nbsp;valeur&nbsp;de&nbsp;fin&nbsp;:&nbsp;&lt;/label&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;type="text"&nbsp;name="fin"&nbsp;id="fin"&nbsp;value="0"/&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for="pas"&gt;Entrez&nbsp;une&nbsp;valeur&nbsp;de&nbsp;pas&nbsp;:&nbsp;&lt;/label&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;type="text"&nbsp;name="pas"&nbsp;id="pas"&nbsp;value="0"/&gt;&lt;br/&gt;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;type="button"&nbsp;onClick="construction(debut.value,&nbsp;fin.value,pas.value);"&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="Construire&nbsp;le&nbsp;tableau&nbsp;de&nbsp;valeurs"/&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/fieldset&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/form&gt;<br />&nbsp;&nbsp;&lt;/body&gt;<br />&lt;/html&gt;<br /></span>
+</code></p></div>
+
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FJavaScript-et-ses-methodes"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FJavaScript-et-ses-methodes'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FJavaScript-et-ses-methodes&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 15h44min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FJavaScript-et-ses-methodes'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=263"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>1. Les envois du serveur (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Lecture d&#8217;un fichier HTML</a></li>
+<li class="menu-lv2"><a href='#a2'>Première page HTML créée dynamiquement</a></li>
+<li class="menu-lv2"><a href='#a3'>Afficher les informations du serveur</a></li>
+<li class="menu-lv2"><a href='#a4'>Table de quelques variables du serveur</a></li>
+<li class="menu-lv2"><a href='#a5'>La multiplication des TD</a></li>
+<li class="menu-lv2"><a href='#a6'>La stylisation des TD</a></li>
+<li class="menu-lv2"><a href='#a7'>La Division des TD</a></li>
+<li class="menu-lv2"><a href='#a8'>Annexes</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux Dirig&eacute;s<br />1. Les envois du serveur</h1>
+<p>Comme l&#8217;a indiqué le cours, un serveur HTTP peut transmettre soit le contenu d&#8217;un fichier, soit le résultat de son exécution. Le premier exercice de cette séance examine d&#8217;abord le premier cas, avec de simples fichiers HTML déjà existants. Les exercices suivants s&#8217;occupent de pages  HTML créées <i>dynamiquement</i>, en particulier en mettant en page les variables d&#8217;environnement communiquées par le serveur. Ainsi l&#8217;exercice 2 consiste à créer dynamiquement une page HTML minimale.
+  L&#8217;exercice 3 crée une page en donnant le nom du script exécuté par le serveur,  le nom du serveur et celui du client.  Les exercices 4, 5, 6 et 7 s&#8217;occupent de créer des tables selon différentes présentations, en
+respectant néanmoins les règles d&#8217;accessibilité des sites Web afin que les mal-voyants puissent tout de même profiter de leurs informations.</p>
+<br /><div id='sequence263'>
+<span id='e2243'></span>
+
+
+<h2 id='a1'>1 Lecture d&#8217;un fichier HTML</h2>
+<p>Vous avez à votre disposition une version papier d&#8217;un extrait du fichier HTML correspondant au cours numéro 1 (voir l&#8217;annexe qui vous a été fournie). Ce fichier HTML peut être lu comme un simple fichier par votre navigateur, sans passer par un serveur HTTP.</p>
+
+<ol class="spip"><li> A quoi sert la première ligne&nbsp;?</li><li> Donner la structuration de ce texte et, d&#8217;une façon plus générale, lister les balises permettant de structurer un texte et celles permettant de mettre en forme ce texte. Comment, en HTML, écrit-on une liste&nbsp;?</li><li> Qu&#8217;est ce qui permet l&#8217;affichage  de ce texte à l&#8217;écran et à l&#8217;impression.</li><li> Où se situent ces informations sur l&#8217;affichage&nbsp;?</li><li> A quoi sert la première balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-META" class='spip_glossaire' title="Voir la description de 'meta' dans la documentation de 'html'" rel='external'>meta</a>&nbsp;?</li><li> Relever les occurrences du caractère esperluète (&amp;)&nbsp;; à quoi servent-elles&nbsp;?</li></ol>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=647&amp;cle=5b4e1c519185c7c16f2de9d6d94a74f59264a4f0&amp;file=distant%2FVCS%2FLI355%2FTD%2F1%2Flecture_html.txt"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger lecture_html.txt</a>
+</div>
+<pre>1. Doctype indique la version de la grammaire HTML à utiliser
+
+2. Il y a un en-tête (balise Head) et un corps (balise Body); 
+le corps a deux balises Div, la première pour le titre de l'enseignement,
+la deuxième pour le contenu proprement dit,
+qui comporte une liste (balise Ul) de deux éléments (balise Li).
+
+3. Les deux balises Link dont l'attribut Rel vaut "stylesheet".
+
+4. Les attributs Href de ces deux balises indiquent où sont ces feuilles de styles,
+elles sont fournies par le serveur Http de la licence.
+
+5. A préciser l'encodage du texte, notamment les lettres accentuées.
+
+6. Les occurrences sont &amp;amp; &amp;gt et &amp;nbsp;
+qui servent à afficher respectivement "&amp;" "&gt;" et " ". 
+Les deux premiers sont des caractères réservés de XHTML
+et doivent donc être transcodés quand on veut les afficher.
+Le troisième est un espace dont on précise qu'il est insécable
+(pas remplaçable par un saut de ligne).
+</pre></div>
+
+
+<span id='e2244'></span>
+
+
+<h2 id='a2'>2 Première page HTML créée dynamiquement</h2>
+<p>Tout envoi à un client HTTP commence par au moins un en-tête, suivi d&#8217;une ligne blanche, autrement dit suivi de deux sauts de lignes. 
+L&#8217;en-tête obligatoire  est <code class='spip_code'>Content-Type:</code>  (le deux-points doit être accolé) suivi d&#8217;un type indiquant le contenu, le plus fréquent étant
+<code class='spip_code'>text/html</code>. Pour les types commençant par <code class='spip_code'>text</code>, il est recommandé de préciser l&#8217;encodage de l&#8217;alphabet,
+le plus général étant l&#8217;Unicode sur 8 bits, ce qui donne&nbsp;:
+<code class='spip_code'>text/html; charset=utf-8</code>.</p>
+
+<p>Écrire un script Shell, qui produit une page HTML donnant la date à laquelle le script est exécuté par le serveur HTTP. On pourra utiliser la commande Shell <tt>echo</tt> et  la commande Unix <tt>cat</tt>, suivi d&#8217;un double chevron ouvrant (&lt;&lt;) et d&#8217;une chaîne de caractère arbitraire pour envoyer  du texte dans le flux de sortie.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=646&amp;cle=1ea7217b9ebf7900fc8200d2f12341362764a795&amp;file=distant%2FVCS%2FLI355%2FTD%2F1%2Fhtml_date.txt"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger html_date.txt</a>
+</div>
+<pre>#!/bin/sh
+cat &lt;&lt;EOF
+Content-Type: text/html; charset=utf-8
+
+&lt;html&gt;&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+&lt;title&gt; Page HTML dynamique indiquant la date&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+Voici la date d'aujourd'hui :
+&lt;br /&gt;
+EOF
+date
+echo '&lt;/body&gt;&lt;/html&gt;'
+
+# Envoyer "&lt;br /&gt;" permet d'afficher la date en dessous de la ligne
+# "Voici la date d'aujourd'hui".
+# Mettre une ligne vide dans le texte HTML 
+# ne provoquerait pas l'affichage en deux lignes par le navigateur,
+# car il identifie espace et saut de ligne.
+</pre></div>
+
+
+<span id='e2245'></span>
+
+
+<h2 id='a3'>3 Afficher les informations du serveur</h2>
+<p>Lorsqu&#8217;un serveur HTTP exécute des programmes calculant des pages HTML, il place dans l&#8217;environnement certaines variables, les plus importantes étant indiquées dans la tableau ci-dessous.</p>
+
+<table class="spip" summary="">
+<caption>Variables d&#8217;environnement fournies par le serveur HTTP</caption>
+<tr class='row_first'><th scope='col'>Nom</th><th scope='col'>Signification</th></tr>
+<tr class='row_odd'>
+<td>SCRIPT_NAME</td>
+<td>	 nom du script</td></tr>
+<tr class='row_even'>
+<td>SERVER_ADMIN</td>
+<td>	 nom de l&#8217;administrateur du serveur</td></tr>
+<tr class='row_odd'>
+<td>SERVER_NAME</td>
+<td>	 nom de l&#8217;hôte du serveur</td></tr>
+<tr class='row_even'>
+<td>SERVER_SOFTWARE</td>
+<td>	 nom du serveur</td></tr>
+<tr class='row_odd'>
+<td>SERVER_ADDR</td>
+<td>	 adresse Internet du serveur</td></tr>
+<tr class='row_even'>
+<td>REMOTE_PORT</td>
+<td>	 port où se déroule la connexion</td></tr>
+<tr class='row_odd'>
+<td>REMOTE_ADDR</td>
+<td>	 adresse Internet du client</td></tr>
+<tr class='row_even'>
+<td>HTTP_USER_AGENT</td>
+<td> le nom du client </td></tr>
+<tr class='row_odd'>
+<td>HTTP_ACCEPT_LANGUAGE </td>
+<td> langage préféré du client (<i>fr-fr</i> pour le français académique) </td></tr>
+<tr class='row_even'>
+<td>REQUEST_URI</td>
+<td>	 requête HTTP envoyée par le client</td></tr>
+<tr class='row_odd'>
+<td>QUERY_STRING</td>
+<td>	 suite des couples variable / valeur dans la requête</td></tr>
+</table>
+<p>Écrire un script Shell renvoyant le nom par lequel le serveur HTTP l&#8217;exécute, et le nom du serveur et du client. Les  trois noms seront écrits en gras, grâce à la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/text.html#edef-STRONG" class='spip_glossaire' title="Voir la description de 'strong' dans la documentation de 'html'" rel='external'>strong</a> et sa fermante. Par exemple&nbsp;:</p>
+
+<p>je suis <strong>Custer</strong>
+servi par <strong>Apache </strong>
+pour <strong>Firefox</strong>.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=644&amp;cle=77bd7ccf6a60c98afd07b267df856d35657a3ac2&amp;file=distant%2FVCS%2FLI355%2FTD%2F1%2Fcuster.txt"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger custer.txt</a>
+</div>
+<pre>#!/bin/sh 
+echo 'Content-Type: text/html; charset=utf-8'
+echo
+echo '&lt;html&gt;&lt;head&gt;'
+echo '&lt;title&gt; Afficher les informations connues du serveur&lt;/title&gt;'
+echo '&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;'
+echo '&lt;/head&gt;'
+echo '&lt;body&gt;'
+echo 'Je suis le script &lt;strong&gt;' 
+echo $SCRIPT_NAME 
+echo '&lt;/strong&gt;'
+echo ' servi par &lt;strong&gt;' $SERVER_SOFTWARE '&lt;/strong&gt;'
+echo ' pour &lt;strong&gt;' $HTTP_USER_AGENT '&lt;/strong&gt;'
+echo '&lt;/body&gt;&lt;/html&gt;'
+</pre></div>
+
+
+<span id='e2246'></span>
+
+
+<h2 id='a4'>4 Table de quelques variables du serveur</h2>
+<p>On se propose ici de reproduire par un script Shell une variante de la table HTML figurant dans l&#8217;énoncé de l&#8217;exercice précédent. On se limitera à 
+ une table composée de cinq lignes et deux colonnes, où figurent les variables suivantes initialisées par le serveur (nom en première colonne, valeur en deuxième colonne)&nbsp;:</p>
+
+<ul class="spip"><li> SERVER_NAME	 nom de l&#8217;hôte du serveur</li><li> SERVER_SOFTWARE	 nom du serveur</li><li> SERVER_ADDR	 adresse Internet du serveur</li><li> REMOTE_PORT	 port où se déroule la connexion</li><li> REMOTE_ADDR	 adresse Internet du client</li></ul>
+<p>On rappelle qu’en HTML, une table se déclare par la balise 
+<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TABLE" class='spip_glossaire' title="Voir la description de 'table' dans la documentation de 'html'" rel='external'>table</a> et sa balise fermante, que chaque ligne se commence par la balise  <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TR" class='spip_glossaire' title="Voir la description de 'tr' dans la documentation de 'html'" rel='external'>tr</a> (tr = <strong>t</strong>able <strong>r</strong>ow = rangée de tableau) et chaque cellule par la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TD" class='spip_glossaire' title="Voir la description de 'td' dans la documentation de 'html'" rel='external'>td</a> (td = <strong>t</strong>able <strong>d</strong>ata = données de tableau)&nbsp;; <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TH" class='spip_glossaire' title="Voir la description de 'th' dans la documentation de 'html'" rel='external'>th</a> définit une cellule d&#8217;entête (th = <strong>t</strong>able <strong>h</strong>eader = entête de tableau).</p>
+
+<p>De plus, le W3C a publié de nombreux travaux concernant l&#8217;accessibilité des documents sur Internet pour permettre au plus grand nombre d&#8217;y accéder&nbsp;:</p>
+
+<ul class="spip"><li> <a href="http://www.w3.org/WAI/" class='spip_out' rel='external'>Web Accessibility Initiative (WAI)</a></li><li>  <a href="http://www.w3.org/TR/WAI-WEBCONTENT/" class='spip_out' rel='external'>Web Content Accessibility Guidelines 1.0</a></li><li>  <a href="http://w3qc.org/docs/accessibilite.html" class='spip_out' rel='external'>Introduction à l&#8217;accessibilité du Web</a> </li></ul>
+<p>En ce qui concerne les tables HTML,  il est exigé&nbsp;:</p>
+
+<ul class="spip"><li>  que  les colonnes soient nommées au moins une fois, c&#8217;est-à-dire qu&#8217;il y ait  au moins une ligne  <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TR" class='spip_glossaire' title="Voir la description de 'tr' dans la documentation de 'html'" rel='external'>tr</a> composée exclusivement de balises  <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TH" class='spip_glossaire' title="Voir la description de 'th' dans la documentation de 'html'" rel='external'>th</a> , avec comme contenu ici  "Noms des variables" et "Valeurs des variables"&nbsp;;</li><li> qu&#8217;elles comportent une légende, grâce à la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-CAPTION" class='spip_glossaire' title="Voir la description de 'caption' dans la documentation de 'html'" rel='external'>caption</a>&nbsp;;</li><li> qu&#8217;elles comportentr également un résumé  grâce à l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#adef-summary" class='spip_glossaire' title="Voir la description de 'summary' dans la documentation de 'html' section 1" rel='external'>summary</a> de la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TABLE" class='spip_glossaire' title="Voir la description de 'table' dans la documentation de 'html'" rel='external'>table</a>.</li></ul>
+<p>Ecrire le script Shell demandé réalisant ces spécifications.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=650&amp;cle=f8a35638ed5847f50975cbfeb55e24959164559b&amp;file=distant%2FVCS%2FLI355%2FTD%2F1%2Ftable_serveur.txt"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger table_serveur.txt</a>
+</div>
+<pre>#!/bin/sh 
+echo 'Content-Type: text/html; charset=utf-8'
+echo
+echo '&lt;html&gt;&lt;head&gt;'
+echo '&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;'
+echo '&lt;title&gt; Table des variables du serveur&lt;/title&gt;'
+echo '&lt;/head&gt;'
+echo '&lt;body&gt;'
+echo '&lt;table summary="Table des principales variables du serveur"&gt;’ 
+echo '&lt;caption&gt; Table des variables du serveur&lt;/caption&gt;'
+echo '&lt;tr&gt;&lt;th&gt;Nom&lt;/th&gt;&lt;th&gt;Valeur&lt;/th&gt;&lt;/tr&gt;'
+echo '&lt;tr&gt;&lt;td&gt;SERVER_NAME&lt;/td&gt;&lt;td&gt;'$SERVER_NAME'&lt;/td&gt;&lt;/tr&gt;'
+echo '&lt;tr&gt;&lt;td&gt;SERVER_SOFTWARE&lt;/td&gt;&lt;td&gt;'$SERVER_SOFTWARE'&lt;/td&gt;&lt;/tr&gt;'
+echo '&lt;tr&gt;&lt;td&gt;SERVER_ADDR&lt;/td&gt;&lt;td&gt;'$SERVER_ADDR'&lt;/td&gt;&lt;/tr&gt;'
+echo '&lt;tr&gt;&lt;td&gt;REMOTE_PORT&lt;/td&gt;&lt;td&gt;'$REMOTE_PORT'&lt;/td&gt;&lt;/tr&gt;'
+echo '&lt;tr&gt;&lt;td&gt;REMOTE_ADDR&lt;/td&gt;&lt;td&gt;'$REMOTE_ADDR'&lt;/td&gt;&lt;/tr&gt;'
+echo '&lt;/table&gt;' 
+echo '&lt;/body&gt;&lt;/html&gt;'
+</pre></div>
+
+
+<span id='e2751'></span>
+
+
+<h2 id='a5'>5 La multiplication des TD</h2>
+<p>On souhaite écrire une page HTML présentant la table de multiplication par 2 sous forme de 2 colonnes et 10 lignes&nbsp;:</p>
+<pre>
+<strong>x	2x</strong>
+0	 0
+1	 2
+2	 4
+3	 6
+4	 8
+5	 10
+6	 12
+7	 14
+8	 16
+9	 18
+</pre>
+<p>Décrire d&#8217;abord le corps de la page HTML correspondant à la présentation de cette table.</p>
+
+<p>Ecrire ensuite un script Shell envoyant cette page, en utilisant une variable Shell <tt>i</tt>, qu&#8217;on incrémentera avec l&#8217;instruction <tt>i=$((i+1))</tt>, et sur laquelle on bouclera grâce à la structure</p>
+<pre>while [ $i -lt 10 ]
+do
+ ...
+done</pre>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=648&amp;cle=48bd59c3afe5dc61a7aa5a6e83d1751365936b61&amp;file=distant%2FVCS%2FLI355%2FTD%2F1%2Fmult2.txt"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger mult2.txt</a>
+</div>
+<pre>#!/bin/sh 
+echo 'Content-Type: text/html; charset=utf-8'
+echo
+echo '&lt;html&gt;&lt;head&gt;'
+echo '&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;'
+echo '&lt;title&gt;Tables de multiplication par 2&lt;/title&gt;'
+echo '&lt;/head&gt;&lt;body&gt;' 
+echo '&lt;table summary="Table de multiplication par 2 sur 2 colonnes"&gt;'
+echo '&lt;caption&gt;Table de 2&lt;/caption&gt;'
+echo '&lt;tr&gt;&lt;th&gt;x&lt;/th&gt;&lt;th&gt;2x&lt;/th&gt;&lt;/tr&gt;'
+i=0
+while [ $i -lt 10 ]
+do
+echo "&lt;tr&gt;&lt;td&gt;" $i "&lt;/td&gt;&lt;td&gt;" $(($i*2)) "&lt;/td&gt;&lt;/tr&gt;" 
+i=$((i+1))
+done
+echo '&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;'</pre></div>
+
+
+<span id='e3310'></span>
+
+
+<h2 id='a6'>6 La stylisation des TD</h2>
+<p>Pour améliorer la lisibilité d&#8217;une table, on peut alterner la couleur de fond de chaque ligne. Ceci s&#8217;obtient, entre autres solutions, en plaçant l&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/present/styles.html#adef-style" class='spip_glossaire' title="html" rel='external'>style</a> dans les balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/index/attributes.html" class='spip_glossaire' title="html" rel='external'>tr</a>. La valeur de cet attribut pourrait être par exemple <tt>background-color:#777</tt> pour les lignes paires, et 
+<tt>background-color:#111</tt> pour les lignes impaires (on étudiera plus tard toutes les possibilités de cet attribut et ses congénères).</p>
+
+<p>Pour savoir si une variable Shell a pour valeur un nombre pair,
+on peut utiliser l&#8217;opérateur&nbsp;% pour calculer son modulo, et utiliser le prédicat <tt>-eq</tt> pour le comparer à 0. Modifier le script écrit à la fonction précédente pour obtenir  la table dans la présentation demandée.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=649&amp;cle=ac2f7d6d2e57809c8d7f41e2de0684991cafe6af&amp;file=distant%2FVCS%2FLI355%2FTD%2F1%2Fmult2_smart.txt"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger mult2_smart.txt</a>
+</div>
+<pre>#!/bin/sh 
+echo 'Content-Type: text/html; charset=utf-8'
+echo
+echo '&lt;html&gt;&lt;head&gt;'
+echo '&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;'
+echo '&lt;title&gt;Tables de multiplication par 2&lt;/title&gt;'
+echo '&lt;/head&gt;&lt;body&gt;' 
+echo '&lt;table summary="Table de multiplication par 2 sur 2 colonnes"&gt;'
+echo '&lt;caption&gt;Table de 2&lt;/caption&gt;'
+echo '&lt;tr&gt;&lt;th&gt;x&lt;/th&gt;&lt;th&gt;2x&lt;/th&gt;&lt;/tr&gt;'
+i=0
+while [ $i -lt 10 ]
+do
+if [ $((i % 2)) -eq 0 ]
+then
+color='#777'
+else
+color='#111'
+fi
+echo "&lt;tr style='background-color:$color'&gt;&lt;td&gt;$i&lt;/td&gt;&lt;td&gt;" 
+echo $(($i*2))
+echo "&lt;/td&gt;&lt;/tr&gt;" 
+i=$((i+1))
+done
+echo '&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;'</pre></div>
+
+
+<span id='e3198'></span>
+
+
+<h2 id='a7'>7 La Division des TD</h2>
+<p>Ecrire un script Shell présentant la même table de multiplication qu&#8217;à l&#8217;exercice précédent, mais en 10 colonnes et 2 lignes.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=645&amp;cle=b5867bbe2a42b6efbee3633509e6379c34bb75a2&amp;file=distant%2FVCS%2FLI355%2FTD%2F1%2Fdiv2.txt"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger div2.txt</a>
+</div>
+<pre>#!/bin/sh 
+echo 'Content-Type: text/html; charset=utf-8'
+echo
+echo '&lt;html&gt;&lt;head&gt;'
+echo '&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;'
+echo '&lt;title&gt;Tables de multiplication par 2 sur 10 lignes&lt;/title&gt;'
+echo '&lt;/head&gt;&lt;body&gt;' 
+echo '&lt;table summary="Table de 2 sur 10 colonnes"&gt;'
+echo '&lt;caption&gt;Table de 2&lt;/caption&gt;'
+
+# Première ligne
+echo "&lt;tr&gt;&lt;th&gt;x&lt;/th&gt;"
+i=0
+while [ $i -lt 10 ]
+do
+echo "&lt;td&gt;" $i "&lt;/td&gt;"
+i=$((i+1))
+done
+echo "&lt;/tr&gt;"
+
+# Deuxième ligne
+
+echo '&lt;tr&gt;&lt;th&gt;2x&lt;/th&gt;'
+i=0
+while [ $i -lt 10 ]
+do
+echo "&lt;td&gt;" $((2*$i)) "&lt;/td&gt;"
+i=$((i+1))
+done
+echo "&lt;/tr&gt;"
+echo '&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;'</pre></div>
+
+
+<span id='e3296'></span>
+
+<h2 id='a8'>8 Annexes</h2>
+
+<div class="documents-joints">
+
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=469&amp;cle=ae590ee1b92d6ccd954fa8c16923806495e52bca&amp;file=distant%2FVCS%2FLI355%2FTD%2F1%2FTD1-LI355-annexe.html' type='text/html' title='HTML - - TD1-LI355-annexe.html'><img src='Ajouts/Licence_pacs_esj6_2013_2014/local/cache-vignettes/L52xH52/html-df9ff-5c7ff.png' width='52' height='52' style='height:52px;width:52px;' alt='' class='spip_logos' /></a><br />TD1-LI355-annexe.html
+
+</div>
+
+
+<div style='text-align:right' id='s10000'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>lecture_html.txt html_date.txt custer.txt table_serveur.txt mult2.txt mult2_smart.txt div2.txt</tt><br />
+</div>
+
+
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLes-envois-du-serveur"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLes-envois-du-serveur'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLes-envois-du-serveur&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 16h48min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLes-envois-du-serveur'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=274"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>2. L'environnement de PHP (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>En-tête HTML</a></li>
+<li class="menu-lv2"><a href='#a2'>Métissage PHP/HTML</a></li>
+<li class="menu-lv2"><a href='#a3'>Les informations disponibles</a></li>
+<li class="menu-lv2"><a href='#a4'>Mise en table HTML de tableaux PHP</a></li>
+<li class="menu-lv2"><a href='#a5'>Expressions rationnelles statiques</a></li>
+<li class="menu-lv2"><a href='#a6'>Expressions rationnelles dynamiques</a></li>
+<li class="menu-lv2"><a href='#a7'>Annexes</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux sur Machine<br />2. L&#8217;environnement de PHP</h1>
+<p>Cette séance est consacrée à la prise en main de l&#8217;interprète PHP.
+On rappelle qu&#8217;un fichier PHP est un fichier textuel contenant une ou plusieurs séquences d&#8217;instructions de la forme <code class='spip_code'>&lt;?php </code>séquences d&#8217;instructions<code class='spip_code'> ?&gt;</code>.
+L&#8217;exécution d&#8217;un tel fichier envoie sur le flux de sortie tout le texte en dehors de ces séquences, et remplace celles-ci par le résultat de leur exécution.
+Pour que ces résultats soient visibles, les instructions doivent utiliser la commande <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.echo.html" class='spip_glossaire' title="php" rel='external'>echo</a> ou ses variantes.</p>
+
+<p>Le comportement par défaut de PHP est de ne pas signaler les variables indéfinies et les index de tableaux  indéfinis, assimilés à la chaîne vide. Il est conseillé de forcer ces messages d&#8217;erreur en mettant comme première instruction&nbsp;:
+<code class='spip_code'>error_reporting(E_ALL)</code>.</p>
+
+<p>La documentation en anglais de PHP est sur <a href="http://www.zend.com/manual" class='spip_out' rel='external'>www.zend.com/manual</a>. Une documentation en français, assez bien traduite, est accessible sur
+<a href="http://fr2.php.net/manual/fr" class='spip_out' rel='external'>fr2.php.net/manual/fr</a> et a l&#8217;avantage sur la précédente de contenir d&#8217;intéressantes remarques d&#8217;utilisateurs (en anglais...). Les deux sites ont un moteur de recherche interne pour rapidement trouver les spécifications d&#8217;une fonction. Dans les salles de travaux sur machine, une <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/index.html" class='spip_out' rel='external'>version sans feuille de style du manuel</a> est disponible, même lors des examens, contrairement aux précédentes.</p>
+<br /><div id='sequence274'>
+<span id='e3493'></span>
+
+
+<h2 id='a1'>1 En-tête HTML</h2>
+<p>Comme il a été dit,  les pages HTML doivent commencer par certaines informations&nbsp;:</p>
+
+<ol class="spip"><li> la déclaration de type de document XML (<code class='spip_code'>&lt;!DOCTYPE ...&gt;</code>)&nbsp;;</li><li> la balise racine ouvrante <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-HTML" class='spip_glossaire' title="html" rel='external'>html</a> avec idéalement ses attributs <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/dirlang.html#adef-lang" class='spip_glossaire' title="html" rel='external'>lang</a> et <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/index/attributes.html" class='spip_glossaire' title="html" rel='external'>xmlns</a>  (pour l&#8217;espace de noms XML)&nbsp;;</li><li> la balise ouvrante <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-HEAD" class='spip_glossaire' title="html" rel='external'>head</a>&nbsp;;</li><li> une balise auto-fermante <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-META" class='spip_glossaire' title="Voir la description de 'meta' dans la documentation de 'html'" rel='external'>meta</a> rappelant au navigateur le type MIME de la page ainsi que son encodage&nbsp;;</li><li> la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-TITLE" class='spip_glossaire' title="html" rel='external'>title</a> et son contenu&nbsp;;</li><li> éventuellement d&#8217;autres balises pour les feuilles de styles etc&nbsp;;</li><li> la balise fermante <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-HEAD" class='spip_glossaire' title="html" rel='external'>head</a>.</li></ol>
+<p>Comme il est fastidieux de réécrire à chaque page toutes ces informations dont les plus verbeuses ne changent presque jamais pour un même site,
+nous allons écrire une fonction qui fera ce travail et que nous réutiliserons tout au long de cet enseignement. Cette fonction prendra en argument le contenu souhaité de la balise obligatoire <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-TITLE" class='spip_glossaire' title="html" rel='external'>title</a> signalé au point 5, et nous verrons plus tard comment fournir les informations du point 6 qu&#8217;on laissera vide pour le moment. Elle retournera en valeur une chaîne de caractères composée de ces 7 informations, chacune terminée par un "\n" pour améliorer la lisibilité du code HTML produit.</p>
+
+<p>En consultant les recommandations du <a href="Maitriser-les-hypertextes-HTML" class='spip_in'>cours 1</a> en ce qui concerne la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-META" class='spip_glossaire' title="html" rel='external'>meta</a>, écrire la fonction <tt>entete</tt> demandée. On prendra comme espace de noms XML&nbsp;:
+<tt><a href="http://www.w3.org/1999/xhtml" class='spip_url spip_out' rel='nofollow external'>http://www.w3.org/1999/xhtml</a></tt>. Pour le Doctype, le XHTML Basic 1.1 étant long à mettre au point et de plus inconnu du validateur local dont vous disposez, on prendra&nbsp;:</p>
+<div class='spip_code'><code>&lt;!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' <br />
+ &nbsp; &nbsp; 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'&gt;</code></div>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=747&amp;cle=ca8de41697607c61f2992afced5cb9bbb563083e&amp;file=distant%2FVCS%2FLI355%2FTM%2F2%2Fentete.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger entete.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">entete</span><span style="color: #007700">(</span><span style="color: #0000BB">$title</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;return<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;'-//W3C//DTD&nbsp;XHTML&nbsp;Basic&nbsp;1.1//EN'<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd'&gt;\n"&nbsp;</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;html&nbsp;xmlns='http://www.w3.org/1999/xhtml'&nbsp;lang='fr'&gt;\n"&nbsp;</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;head&gt;\n"&nbsp;</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;meta&nbsp;http-equiv='Content-Type'&nbsp;content='text/html;charset=utf-8'&nbsp;/&gt;\n"&nbsp;</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;title&gt;"&nbsp;</span><span style="color: #007700">.&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$title&nbsp;</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;/title&gt;\n"&nbsp;</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;/head&gt;\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #FF8000">//&nbsp;test<br />//&nbsp;echo&nbsp;entete('test'),&nbsp;'&lt;body&gt;&lt;div&gt;test&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;';<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses3493'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum4648"> 
+	    <div class="reponse">
+	<div class="forum-titre">En-tête HTML</div>
+30 janvier 2014 &agrave; 11h38min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php <br />
+error_reporting(E_ALL);<br />
+<br />
+function entete($title) {<br />
+ &nbsp;$res &nbsp;= &quot;&lt;!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'&gt;\n&quot;;<br />
+ &nbsp;$res .= &quot;&lt;html lang=\&quot;fr\&quot; xmlns='http://www.w3.org/1999/xhtml'&gt;\n&quot;;<br />
+ &nbsp;$res .= &quot;&lt;head&gt;\n&quot;;<br />
+ &nbsp;$res .= &quot;&lt;meta http-equiv='Content_Type' content='text/html; charset=utf-8'&gt;&lt;/meta&gt;\n&quot;;<br />
+ &nbsp;$res .= &quot;&lt;title&gt;$title&lt;/title&gt;\n&quot;;<br />
+ &nbsp;$res .= &quot;&lt;/head&gt;\n&quot;;<br />
+ &nbsp;return $res;<br />
+}<br />
+<br />
+?&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2268'></span>
+
+
+<h2 id='a2'>2 Métissage PHP/HTML</h2>
+<p>Écrire une script PHP produisant une page XHTML valide dont le corps contient seulement la date du jour à l&#8217;intérieur d&#8217;une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-H1" class='spip_glossaire' title="html" rel='external'>h1</a>. Pour ce faire, on passera du mode PHP au mode textuel ainsi&nbsp;:</p>
+
+<ol class="spip"><li> Au début du fichier, on utilisera la directive <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.include.html" class='spip_glossaire' title="Voir la description de 'include' dans la documentation de 'php'" rel='external'>include</a> afin d&#8217;inclure le fichier <tt>entete.php</tt> de la question précédente et appeler la fonction qui s&#8217;y trouve.</li><li>  Ensuite, on passera en mode texte pour afficher les balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-BODY" class='spip_glossaire' title="html" rel='external'>body</a> et <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-H1" class='spip_glossaire' title="html" rel='external'>h1</a>.</li><li> On reviendra au mode PHP pour appeler sa  fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.date.html" class='spip_glossaire' title="Voir la description de 'date' dans la documentation de 'php'" rel='external'>date</a> qui renvoie la date courante. Cette fonction prend en paramètre une valeur désignant le format de date souhaité. Le format de date est représenté par une chaîne dans laquelle les lettres minuscules ou majuscules d (day), m (month) ou y (year) peuvent être utilisées.</li><li> Enfin on reviendra au mode textuel pour fermer toutes les balises qui doivent l&#8217;être.</li></ol>
+<p>On s&#8217;assurera que le code produit est valide.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=746&amp;cle=b27f36a34e17ebea854cf452feefd76f6841fd6d&amp;file=distant%2FVCS%2FLI355%2FTM%2F2%2Fmetissage.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger metissage.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">include&nbsp;</span><span style="color: #DD0000">"entete.php"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">error_reporting</span><span style="color: #007700">(</span><span style="color: #0000BB">E_ALL</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #0000BB">entete</span><span style="color: #007700">(</span><span style="color: #DD0000">"Date&nbsp;du&nbsp;jour"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;<br /></span>&lt;body&gt;<br />&lt;h1&gt;<span style="color: #0000BB">&lt;?php&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"d&nbsp;M&nbsp;Y"</span><span style="color: #007700">);&nbsp;</span><span style="color: #0000BB">?&gt;</span>&lt;/h1&gt;<br />&lt;/body&gt;&lt;/html&gt;<br /></span>
+</code></p></div>
+ 
+ <div id='reponses2268'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum4650"> 
+	    <div class="reponse">
+	<div class="forum-titre">Métissage PHP/HTML</div>
+30 janvier 2014 &agrave; 11h38min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php <br />
+error_reporting(E_ALL);<br />
+include 'entete.php';<br />
+echo entete('tme2 ex 2');<br />
+?&gt;<br />
+<br />
+&lt;body&gt;<br />
+&lt;h1&gt;<br />
+<br />
+&lt;?php <br />
+error_reporting(E_ALL);<br />
+echo date(&quot;y&quot;);<br />
+?&gt;<br />
+<br />
+&lt;/h1&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2274'></span>
+
+
+<h2 id='a3'>3 Les informations disponibles</h2>
+<p>La fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.phpinfo.html" class='spip_glossaire' title="Voir la description de 'phpinfo' dans la documentation de 'php'" rel='external'>phpinfo</a> envoie sur le flux de sortie une page HTML complète, Doctype compris, affichant  toutes les informations concernant l&#8217;interprète PHP et son contexte d&#8217;appel.</p>
+
+<p>Ecrire un script se limitant à l&#8217;appel de cette fonctions, et répondez aux questions ci-dessous.</p>
+
+<ol class="spip"><li> Quelle est la version de PHP utilisée sur votre machine&nbsp;?</li><li> Quelle est sa date de fabrication&nbsp;? </li><li> Quelle est la principale variable PHP superglobale disponible&nbsp;?</li></ol>
+<p>Remarque importante&nbsp;: parce qu&#8217;il fournit des informations importantes sur l&#8217;installation du serveur, il est déconseillé de laisser un tel script sur un site accessible de l&#8217;extérieur.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=641&amp;cle=12646c4a1172113d570aa4227b77d5181ec031bd&amp;file=distant%2FVCS%2FLI355%2FTM%2F2%2Finformations.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger informations.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php&nbsp;phpinfo</span><span style="color: #007700">()<br /><br /></span><span style="color: #FF8000">//&nbsp;1.&nbsp;5.3.26<br />//&nbsp;2.&nbsp;Build&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;Jul&nbsp;7&nbsp;2013&nbsp;18:20:06<br />//&nbsp;3.&nbsp;$_SERVER&nbsp;indiquee&nbsp;en&nbsp;fin&nbsp;de&nbsp;page<br />&nbsp;</span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses2274'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum4675"> 
+	    <div class="reponse">
+	<div class="forum-titre">Les informations disponibles</div>
+30 janvier 2014 &agrave; 12h25min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php <br />
+error_reporting(E_ALL);<br />
+echo phpinfo();<br />
+?&gt;</code></div>
+<p>   1. Quelle est la version de PHP utilisée sur votre machine&nbsp;? 5.3.3-7+squeeze14 
+<br />2. Quelle est sa date de fabrication&nbsp;? Aug 6 2012 14:04:31 
+<br />3. Quelle est la principale variable PHP superglobale disponible&nbsp;? 
+<br />Variable               Value
+_SERVER["HTTP_HOST"]	localhost
+_SERVER["HTTP_USER_AGENT"]	Mozilla/5.0 (X11&nbsp;; U&nbsp;; Linux x86_64&nbsp;; fr&nbsp;; rv:1.9.1.16) Gecko/20120421 Iceweasel/3.5.16 (like Firefox/3.5.16)
+_SERVER["HTTP_ACCEPT"]	text/html,application/xhtml+xml,application/xml&nbsp;;q=0.9,*/*&nbsp;;q=0.8
+_SERVER["HTTP_ACCEPT_LANGUAGE"]	fr,fr-fr&nbsp;;q=0.8,en-us&nbsp;;q=0.5,en&nbsp;;q=0.3
+_SERVER["HTTP_ACCEPT_ENCODING"]	gzip,deflate
+_SERVER["HTTP_ACCEPT_CHARSET"]	ISO-8859-1,utf-8&nbsp;;q=0.7,*&nbsp;;q=0.7
+_SERVER["HTTP_KEEP_ALIVE"]	300
+_SERVER["HTTP_CONNECTION"]	keep-alive
+_SERVER["HTTP_CACHE_CONTROL"]	max-age=0
+_SERVER["PATH"]	/usr/local/bin&nbsp;:/usr/bin&nbsp;:/bin
+_SERVER["SERVER_SIGNATURE"]</p>
+<address>Apache/2.2.16 (Debian) Server at localhost Port 80</address>
+_SERVER["SERVER_SOFTWARE"]	Apache/2.2.16 (Debian)
+_SERVER["SERVER_NAME"]	localhost
+_SERVER["SERVER_ADDR"]	127.0.0.1
+_SERVER["SERVER_PORT"]	80
+_SERVER["REMOTE_ADDR"]	127.0.0.1
+_SERVER["DOCUMENT_ROOT"]	/var/www/html
+_SERVER["SERVER_ADMIN"]	root@localhost
+_SERVER["SCRIPT_FILENAME"]	/users/Etu6/3264006/public_html/informations.php
+_SERVER["REMOTE_PORT"]	50455
+_SERVER["GATEWAY_INTERFACE"]	CGI/1.1
+_SERVER["SERVER_PROTOCOL"]	HTTP/1.1
+_SERVER["REQUEST_METHOD"]	GET
+_SERVER["QUERY_STRING"]	no value
+_SERVER["REQUEST_URI"]	/&nbsp;3264006/informations.php
+_SERVER["SCRIPT_NAME"]	/&nbsp;3264006/informations.php
+_SERVER["PHP_SELF"]	/&nbsp;3264006/informations.php
+_SERVER["REQUEST_TIME"]	1391078591</div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3496'></span>
+
+
+<h2 id='a4'>4 Mise en table HTML de tableaux PHP</h2>
+<p>Définir une fonction <tt>tableau_en_table</tt> qui prend en arguments&nbsp;:</p>
+
+<ol class="spip"><li> un tableau PHP</li><li> le libellé de sa légende&nbsp;;</li><li> éventuellement son résumé, vide par défaut&nbsp;;</li><li> éventuellement la largeur pour son affichage, par défaut 100% de la fenêtre.</li></ol>
+<p>Cette fonction retourne une chaîne de caractères représentant ce tableau sous forme d’une <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TABLE" class='spip_glossaire' title="html" rel='external'>table</a> HTML de deux colonnes, une pour les index, une pour les valeurs, et ayant autant de lignes que d’éléments du tableau plus une à la fin et une au début, indiquant le nom des deux colonnes. La balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TABLE" class='spip_glossaire' title="html" rel='external'>table</a> aura un attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#adef-summary" class='spip_glossaire' title="html" rel='external'>summary</a> et pour première fille une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-CAPTION" class='spip_glossaire' title="html" rel='external'>caption</a>.  Elle retournera la chaîne vide en cas de tableau vide. On ajoutera un attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/present/styles.html#adef-style" class='spip_glossaire' title="html" rel='external'>style</a> à certaines balises, ainsi formé&nbsp;:</p>
+
+<ul class="spip"><li> pour la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TABLE" class='spip_glossaire' title="html" rel='external'>table</a>, <tt>width:<i>w</i></tt> où <i>w</i> est le 4e argument de la fonction&nbsp;;</li><li> pour la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-CAPTION" class='spip_glossaire' title="html" rel='external'>caption</a>, <tt>background-color:#aaa</tt>&nbsp;;</li><li> pour les balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TR" class='spip_glossaire' title="html" rel='external'>tr</a> de rang pair&nbsp;: <tt>background-color:#ddd</tt>&nbsp;;</li><li> pour les balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TR" class='spip_glossaire' title="html" rel='external'>tr</a> de rang impair&nbsp;: <tt>background-color:#eee</tt>&nbsp;;</li><li> pour les balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TR" class='spip_glossaire' title="html" rel='external'>tr</a> ayant des <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TH" class='spip_glossaire' title="html" rel='external'>th</a>, quel que soit le rang&nbsp;: <tt>background-color:#777</tt>.</li></ul>
+<p>Tester cette fonction avec la variable super-globale repérée à la question précédente.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=748&amp;cle=d7cb15f1e412bc7ce5b81955b603963235f6c2af&amp;file=distant%2FVCS%2FLI355%2FTM%2F2%2Ftableau_en_table.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger tableau_en_table.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">tableau_en_table</span><span style="color: #007700">(</span><span style="color: #0000BB">$t</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$caption</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$sum</span><span style="color: #007700">=</span><span style="color: #DD0000">''</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$width</span><span style="color: #007700">=</span><span style="color: #DD0000">'100%'</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$t</span><span style="color: #007700">)&nbsp;return&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$chaine&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$t&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$k&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">=&nbsp;(</span><span style="color: #0000BB">$i</span><span style="color: #007700">%</span><span style="color: #0000BB">2</span><span style="color: #007700">)&nbsp;?&nbsp;</span><span style="color: #DD0000">'#eee'&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #DD0000">'#ddd'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$chaine&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;tr&nbsp;style='background-color:$c'&gt;&lt;td&gt;$k&lt;/td&gt;&lt;td&gt;$v&lt;/td&gt;&lt;/tr&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$i</span><span style="color: #007700">++;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$h&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"&lt;tr&nbsp;style='background-color:#777'&gt;&lt;th&gt;Index&lt;/th&gt;&lt;th&gt;Valeur&lt;/th&gt;&lt;/tr&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"&lt;caption&nbsp;style='background-color:#aaa'&gt;$caption&lt;/caption&gt;"</span><span style="color: #007700">;<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #DD0000">"&lt;table&nbsp;style='width:$width'&nbsp;summary='$sum'&gt;$c$h$chaine$h&lt;/table&gt;"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #FF8000">//&nbsp;Test<br />//&nbsp;include('entete.php');<br />//&nbsp;echo&nbsp;entete('Les&nbsp;Variables&nbsp;du&nbsp;serveur');<br />//&nbsp;echo&nbsp;tableau_en_table($_SERVER,&nbsp;'Les&nbsp;Variables&nbsp;du&nbsp;serveur');<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses3496'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum4682"> 
+	    <div class="reponse">
+	<div class="forum-titre">Mise en table HTML de tableaux PHP</div>
+30 janvier 2014 &agrave; 13h17min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;?php <br />
+error_reporting(E_ALL);<br />
+include 'entete.php';<br />
+echo entete('tme2 ex 4');<br />
+?&gt;<br />
+<br />
+&lt;body&gt;<br />
+<br />
+&lt;?php <br />
+function array_to_string($t,$legende,$resume='',$largAff='100%') {<br />
+ &nbsp;if(!$t) return '';<br />
+ &nbsp;$res &nbsp;= &quot;&lt;table summary = $resume width:$largAff&gt;\n&quot;;<br />
+ &nbsp;$res .= &quot;&lt;caption style='background-color:#aaa'&gt;$legende&lt;/caption&gt;\n&quot;;<br />
+ &nbsp;$res .= &quot;&lt;tr style='background-color:#777'&gt;&lt;th&gt;index&lt;/th&gt;&lt;th&gt;valeur&lt;/th&gt;&lt;/tr&gt;\n&quot;;<br />
+ &nbsp;$i=0;<br />
+<br />
+ &nbsp;foreach($t as $k=&gt;$v) {<br />
+ &nbsp; &nbsp;if((($i++)%2)==0)<br />
+ &nbsp; &nbsp; &nbsp;$res .= &quot;&lt;tr style='background-color:#ddd'&gt;&quot;;<br />
+ &nbsp; &nbsp;else<br />
+ &nbsp; &nbsp; &nbsp;$res .= &quot;&lt;tr style='background-color:#eee'&gt;&quot;;<br />
+ &nbsp; &nbsp;$res .= &quot;&lt;td&gt;'$k'&lt;/td&gt;&lt;td&gt;'$v'&lt;/td&gt;&lt;/tr&gt;\n&quot;;<br />
+ &nbsp;}<br />
+<br />
+ &nbsp;$res .= &quot;&lt;tr style='background-color:#777'&gt;&lt;th&gt;index&lt;/th&gt;&lt;th&gt;valeur&lt;/th&gt;&lt;/tr&gt;\n&quot;; <br />
+ &nbsp;$res .= &quot;&lt;/table&gt;\n&quot;;<br />
+ &nbsp;return $res;<br />
+}<br />
+<br />
+echo array_to_string(array('CandidatB'=&gt;300,'CandidatA'=&gt;130,'CandidatC'=&gt;30),'myLegend','myResume','50%');<br />
+?&gt;<br />
+<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2600'></span>
+
+
+<h2 id='a5'>5 Expressions rationnelles statiques</h2>
+<p>Définir quatre expressions rationnelles repérant respectivement&nbsp;:</p>
+
+<ol class="spip"><li> un numéro de sécurité sociale (14 chiffres dont le premier est 1 ou 2)&nbsp;;</li><li> un horaire sous la forme hh:mm où 0&lt;=hh&lt;24 et 0&lt;=mm &lt;60&nbsp;;</li><li> un mail d&#8217;étudiant de l&#8217;UPMC&nbsp;;</li><li> une note comprise entre 0 et 20, sous la forme d&#8217;une note simple ou d&#8217;une note suivi de &#171;&nbsp;/20&nbsp;&#187;&nbsp;; par exemple 12 ou 12/20.</li></ol>
+<p>Définir ensuite une fonction <i>listeOccurences</i> prenant en argument une expression rationnelle et une chaîne de caractères, et leur appliquant la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-match-all.html" class='spip_glossaire' title="php" rel='external'>preg_match_all</a>. Si celle-ci retourne 0, la fonction retourne un message signalant que la chaîne ne correspond pas au motif. Sinon, elle retourne une <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TABLE" class='spip_glossaire' title="Voir la description de 'table' dans la documentation de 'html'" rel='external'>table</a>, en utilisant la fonction définie à l&#8217;exercice précédent, ayant comme légende l&#8217;expression rationnelle et la chaîne, et comme contenu les solutions repérées par  <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-match-all.html" class='spip_glossaire' title="php" rel='external'>preg_match_all</a>.</p>
+
+<p>Pour tester vos expression rationnelles, vous pourrez prendre le jeu de tests suivant&nbsp;:</p>
+<pre>
+define(&#8217;TEST_SECUSOC&#8217;, "12345678901234 02345678901234 123456789012345")&nbsp;;
+define(&#8217;TEST_HORAIRES&#8217;, "12:34, 05:18 et 23:14 et ensuite une heure erronée 77:17")&nbsp;;
+define(&#8217;TEST_MAILETU&#8217;, "l&#8217;elu@etu.upmc.fr saint-eloi@etu.upmc.fr faux@etu_umpc_fr")&nbsp;;
+define(&#8217;TEST_NOTE&#8217;, "20, 18/20 et 7/20 7.5")&nbsp;;
+</pre>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=642&amp;cle=8e707051b95c5eb045e6d44e5d0cbe05eed4c0f8&amp;file=distant%2FVCS%2FLI355%2FTM%2F2%2FlisteOccurrences.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger listeOccurrences.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_SECUSOC'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'/\b[12]\d{13}\b/'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_HORAIRES'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"/([0-1][0-9]|2[0-3]):([0-5][0-9])/"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_MAILETU'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'/[a-z\'-]+@etu\.upmc\.fr/i'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_NOTE'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"@\b([0-9]|1[0-9]|20)(/20)?\b@"</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">listeOccurrences</span><span style="color: #007700">(</span><span style="color: #0000BB">$regexp</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$texte</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">preg_match_all</span><span style="color: #007700">(</span><span style="color: #0000BB">$regexp</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$texte</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">tableau_en_table</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">],&nbsp;</span><span style="color: #DD0000">"$regexp&nbsp;$texte"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;return&nbsp;</span><span style="color: #DD0000">"&lt;div&gt;$texte&nbsp;ne&nbsp;correspond&nbsp;pas&nbsp;au&nbsp;motif&nbsp;$regexp&lt;/div&gt;"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'TEST_SECUSOC'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'12345678901234&nbsp;02345678901234&nbsp;123456789012345'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'TEST_HORAIRES'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"12:34,&nbsp;05:18&nbsp;et&nbsp;23:14&nbsp;et&nbsp;ensuite&nbsp;une&nbsp;heure&nbsp;erronée&nbsp;77:17"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'TEST_MAILETU'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"l'elu@etu.upmc.fr&nbsp;saint-eloi@etu.upmc.fr&nbsp;faux@etu_umpc_fr"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'TEST_NOTE'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"20,&nbsp;18/20&nbsp;et&nbsp;7/20&nbsp;7.5"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;test<br />//include('entete.php');<br />//include('tableau_en_table.php');<br />//&nbsp;echo&nbsp;entete('Expressions&nbsp;rationnelles&nbsp;statiques');<br />//&nbsp;echo&nbsp;listeOccurrences(RE_SECUSOC,&nbsp;TEST_SECUSOC);<br />//&nbsp;echo&nbsp;listeOccurrences(RE_HORAIRES,&nbsp;TEST_HORAIRES);<br />//&nbsp;echo&nbsp;listeOccurrences(RE_MAILETU,&nbsp;TEST_MAILETU);<br />//&nbsp;echo&nbsp;listeOccurrences(RE_NOTE,&nbsp;TEST_NOTE);<br />//&nbsp;echo&nbsp;listeOccurrences(RE_NOTE,&nbsp;'21');<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses2600'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum4685"> 
+	    <div class="reponse">
+	<div class="forum-titre">Expressions rationnelles statiques</div>
+30 janvier 2014 &agrave; 13h55min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>define ('SECUSOC','/^[1-2][0-9]{13}$/');<br />
+define ('HORAIRES','/^([0-1][0-9])|(2[0-4]):([0-5][0-9])|60$/');<br />
+define ('MAILETU','/^(([A-Z][a-z]*)*)[.](([A-Z][a-z]*)*)@etu.upmc.fr$/');<br />
+define ('NOTE','/^(([0-1]?)[0-9]([.]([0-9])*)?|(20))((\/20)?)$/');</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3200'></span>
+
+
+<h2 id='a6'>6 Expressions rationnelles dynamiques</h2>
+<p>Le fichier <i>/var/log/apache2/error_log</i> contient les messages d&#8217;erreurs du serveur HTTP, qui ont toujours la forme&nbsp;:</p>
+
+<p>[<i>date</i>][error][<i>adresse IP</i>]<i>message</i></p>
+
+<p>Écrire une fonction <i>message_erreur</i> qui prend en arguments&nbsp;:</p>
+
+<ol class="spip"><li> une chaîne de caractères <i>s</i> supposé être le contenu d&#8217;un tel fichier&nbsp;;</li><li> une adresse IP&nbsp;;</li><li> éventuellement un mois sous la forme retenue dans <i>date</i>, la valeur par défaut étant le mois courant.
+Elle retrouve dans la chaîne tous les messages causées par cette adresse pendant le mois considéré. Elle signale ses découvertes en retournant une chaîne de caractères sous forme d&#8217;une <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TABLE" class='spip_glossaire' title="html" rel='external'>table</a>&nbsp;HTML construire par la fonction définie précédemment, avec pour légende l&#8217;adresse et le mois, pour index l&#8217;heure de l&#8217;erreur et pour valeur le message d&#8217;erreur, et pour résumé le nombre d&#8217;erreurs trouvées.</li></ol>
+<p>On utilisera le fonction PHP <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.file-get-contents.html" class='spip_glossaire' title="Voir la description de 'file_get_contents' dans la documentation de 'php'" rel='external'>file_get_contents</a> pour transférer le contenu du fichier des erreurs dans une chaîne de caractères.
+Ensuite on utilisera
+ la fonction   <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-match-all.html" class='spip_glossaire' title="Voir la description de 'preg_match_all' dans la documentation de 'php'" rel='external'>preg_match_all</a> en l&#8217;appliquant sur une expression rationnelle construite préalablement à l&#8217;aide des arguments de la fonction.
+On veillera à neutraliser le caractère spécial "." présent dans les adresses IP, qui doit s&#8217;écrire "\." dans une expression rationnelle pour signifier que la sous-chaîne cherchée contient un point à cet endroit. Il faudra évidemment réorganiser le 3e argument de  <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-match-all.html" class='spip_glossaire' title="Voir la description de 'preg_match_all' dans la documentation de 'php'" rel='external'>preg_match_all</a> pour pouvoir appeler la fonction <tt>tableau_en_table</tt> de manière appropriée.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=639&amp;cle=eb59dab42b29719757b33922655436b92f8adfe5&amp;file=distant%2FVCS%2FLI355%2FTM%2F2%2FanalyseLog.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger analyseLog.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">message_erreur</span><span style="color: #007700">(</span><span style="color: #0000BB">$s</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$IP</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$mois</span><span style="color: #007700">=</span><span style="color: #DD0000">''</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$mip&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">str_replace</span><span style="color: #007700">(</span><span style="color: #DD0000">'.'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'\\.'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$IP</span><span style="color: #007700">);<br />&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">intval</span><span style="color: #007700">(</span><span style="color: #0000BB">$mois</span><span style="color: #007700">))&nbsp;</span><span style="color: #0000BB">$mois&nbsp;</span><span style="color: #007700">=&nbsp;@</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">'M'</span><span style="color: #007700">);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$re&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"/$mois&nbsp;\d+&nbsp;(..:..:..)&nbsp;20..\]&nbsp;\[error\]&nbsp;\[client&nbsp;$mip\](.+)/"</span><span style="color: #007700">;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$n&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">preg_match_all</span><span style="color: #007700">(</span><span style="color: #0000BB">$re</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$s</span><span style="color: #007700">,</span><span style="color: #0000BB">$m</span><span style="color: #007700">,&nbsp;&nbsp;</span><span style="color: #0000BB">PREG_SET_ORDER</span><span style="color: #007700">);<br />&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$n</span><span style="color: #007700">)&nbsp;return&nbsp;</span><span style="color: #DD0000">"&lt;div&gt;Rien&nbsp;vu.\n&lt;/div&gt;"</span><span style="color: #007700">;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$sol&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;foreach(</span><span style="color: #0000BB">$m&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">)&nbsp;</span><span style="color: #0000BB">$sol</span><span style="color: #007700">[</span><span style="color: #0000BB">$v</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]]&nbsp;=&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">];<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">tableau_en_table</span><span style="color: #007700">(</span><span style="color: #0000BB">$sol</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"$mois&nbsp;$IP"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"$n&nbsp;erreurs"</span><span style="color: #007700">);<br />}<br /></span><span style="color: #FF8000">//&nbsp;Test<br />//&nbsp;error_reporting(E_ALL);<br />//&nbsp;$chaine=file_get_contents("/var/log/apache2/error_log");<br />//&nbsp;include('entete.php');<br />//&nbsp;include('tableau_en_table.php');<br />//&nbsp;echo&nbsp;entete('Les&nbsp;erreurs&nbsp;du&nbsp;serveur');<br />//&nbsp;echo&nbsp;'&lt;body&gt;';<br />//&nbsp;echo&nbsp;message_erreur($chaine,&nbsp;'127.0.0.1');<br />//&nbsp;echo&nbsp;'&lt;/body&gt;&lt;/html&gt;';<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses3200'> 
+</div><br />
+
+<span id='e3502'></span>
+
+
+
+
+
+<div style='text-align:right' id='s1274'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>entete.php metissage.php informations.php tableau_en_table.php listeOccurrences.php analyseLog.php</tt><br />
+</div>
+
+
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FL-environnement-de-PHP"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FL-environnement-de-PHP'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FL-environnement-de-PHP&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 15h56min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FL-environnement-de-PHP'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

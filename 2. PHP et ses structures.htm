@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=282"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>2. PHP et ses structures  (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Tableaux  en PHP</a></li>
+<li class="menu-lv2"><a href='#a2'>Fonctions en PHP</a></li>
+<li class="menu-lv2"><a href='#a3'>Arguments variables des fonctions</a></li>
+<li class="menu-lv2"><a href='#a4'>Syntaxe des expressions rationnelles</a></li>
+<li class="menu-lv2"><a href='#a5'>Expressions Rationnelles en PHP</a></li>
+<li class="menu-lv2"><a href='#a6'>Expressions Rationnelles à plusieurs solutions</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux Dirig&eacute;s<br />2. PHP et ses structures </h1>
+<p>Cette première séance consacrée à PHP étudie les concepts de base qui lui permettent de fabriquer des textes&nbsp;: tableaux, fonctions, expression rationnelles. Il s&#8217;agit pour le moment de créer des textes quelconques, contenant éventuellement des balises HTML mais pas forcément.
+Des pages XHTML complètes et valides seront produites lors des séances  sur machine.</p>
+<br /><div id='sequence282'>
+<span id='e2269'></span>
+
+
+<h2 id='a1'>1 Tableaux  en PHP</h2>
+<p>Les tableaux de PHP sont <i>associatifs</i>, c&#8217;est-à-dire que leurs valeurs sont repérées par des index (ou clé) de type <i>chaînes de caractères</i>. Les
+conversions implicites de type  permettent néanmoins d&#8217;effectuer des opérations arithmétiques sur les index quand ceux-ci sont des chaines composées de chiffres,  mais il faut être conscient que la chaîne de caractères <tt>"1"</tt> et le résultat de l&#8217;opération <tt>0+1</tt> indexeront le même élément de tableau.</p>
+
+<p>Lorsqu&#8217;on définit un tableau avec la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.array.html" class='spip_glossaire' title="php" rel='external'>array</a>, on écrit  ses éléments séparés par des virgules, avec&nbsp;:</p>
+
+<ul class="spip"><li> soit un index explicite, avec la syntaxe <i>clé</i> => <i>valeur</i>&nbsp;;</li><li> soit sans index explicite, qui sera alors  <tt>"0"</tt> puis <tt>"1"</tt> etc. </li></ul>
+<p>Les fonctions de tri sur tableaux suivantes conservent la relation entre un index et sa valeur  associée&nbsp;:</p>
+
+<ul class="spip"><li> <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.asort.html" class='spip_glossaire' title="Voir la description de 'asort' dans la documentation de 'php'" rel='external'>asort</a> trie un tableau par valeurs croissantes&nbsp;; </li><li> <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.arsort.html" class='spip_glossaire' title="Voir la description de 'arsort' dans la documentation de 'php'" rel='external'>arsort</a> trie un tableau par valeurs décroissantes&nbsp;;</li><li> <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.ksort.html" class='spip_glossaire' title="Voir la description de 'ksort' dans la documentation de 'php'" rel='external'>ksort</a> trie par index croissants&nbsp;;</li><li> <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.krsort.html" class='spip_glossaire' title="Voir la description de 'krsort' dans la documentation de 'php'" rel='external'>krsort</a> trie par index décroissants.</li></ul>
+<p>Ecrire à la suite les opérations PHP suivantes&nbsp;:</p>
+
+<ol class="spip"><li> Créer un tableau indexé numériquement nommé <tt>$Candidats</tt> contenant les valeurs
+<tt>"candidatB", "candidatA", "candidatC"</tt>.</li><li> Afficher (avec <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.echo.html" class='spip_glossaire' title="php" rel='external'>echo</a>), la liste non numérotée (balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/lists.html#edef-UL" class='spip_glossaire' title="html" rel='external'>ul</a> et <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/lists.html#edef-LI" class='spip_glossaire' title="html" rel='external'>li</a>)  des éléments de ce tableau, et cela  trois fois, avec successivement la boucle <i>for</i>, la bouche <i>while</i> et la bouche <i>foreach</i>. Si l&#8217;on trie auparavant le tableau avec <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.asort.html" class='spip_glossaire' title="php" rel='external'>asort</a>, ces 3 méthodes afficheront-elles la même chose&nbsp;?</li><li> Créer un tableau nommé <tt>$Score</tt> contenant les associations
+<tt>"candidatB"=>300, "candidatA"=>130, "candidatC"=>30</tt>.</li><li> Afficher une <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TABLE" class='spip_glossaire' title="html" rel='external'>table</a>&nbsp;HTML  de deux colonnes, la première contenant les index de ce tableau, et la deuxième les valeurs associées&nbsp;; on utilisera la boucle <tt>foreach</tt> et les éléments du tableau associatif seront affichés dans l&#8217;ordre croissant de leur score. On n&#8217;oubliera pas de nommer les colonnes et de légender la table.</li><li> Afficher cette même <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TABLE" class='spip_glossaire' title="html" rel='external'>table</a>,  mais par ordre alphabétique des noms des candidats .</li></ol>
+<p>Pour améliorer la lisibilité du code HTML produit, on mettra un "\n" après chaque balise fermante, et entre deux balises ouvrantes consécutives.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=710&amp;cle=0814f9a0ede9dad508330a46d51e79aa6a5f0e4f&amp;file=distant%2FVCS%2FLI355%2FTD%2F2%2Ftableaux.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger tableaux.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;1.<br /></span><span style="color: #0000BB">$Candidats&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"candidatB"</span><span style="color: #007700">,</span><span style="color: #DD0000">"candidatA"</span><span style="color: #007700">,</span><span style="color: #DD0000">"candidatC"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;2.&nbsp;A<br /></span><span style="color: #0000BB">asort</span><span style="color: #007700">(</span><span style="color: #0000BB">$Candidats</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;h1&gt;Liste&nbsp;avec&nbsp;for&lt;/h1&gt;\n&lt;ul&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">=</span><span style="color: #0000BB">0</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$i</span><span style="color: #007700">&lt;</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$Candidats</span><span style="color: #007700">);&nbsp;</span><span style="color: #0000BB">$i</span><span style="color: #007700">++)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;li&gt;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$Candidats</span><span style="color: #007700">[</span><span style="color: #0000BB">$i</span><span style="color: #007700">],&nbsp;</span><span style="color: #DD0000">"&lt;/li&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;/ul&gt;\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;2.&nbsp;B<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"&lt;h1&gt;Liste&nbsp;avec&nbsp;while&lt;/h1&gt;\n&lt;ul&gt;\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$i</span><span style="color: #007700">=</span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />while&nbsp;(</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$Candidats</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;li&gt;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$Candidats</span><span style="color: #007700">[</span><span style="color: #0000BB">$i</span><span style="color: #007700">],&nbsp;</span><span style="color: #DD0000">"&lt;/li&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$i</span><span style="color: #007700">=</span><span style="color: #0000BB">$i</span><span style="color: #007700">+</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />}<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;/ul&gt;\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;2.&nbsp;C<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"&lt;h1&gt;Liste&nbsp;avec&nbsp;foreach&lt;/h1&gt;\n&lt;ul&gt;\n"</span><span style="color: #007700">;<br />foreach&nbsp;(</span><span style="color: #0000BB">$Candidats&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$elt</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;li&gt;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$elt</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"&lt;/li&gt;\n"&nbsp;</span><span style="color: #007700">;<br />}<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;/ul&gt;\n"</span><span style="color: #007700">;&nbsp;&nbsp;<br /></span><span style="color: #FF8000">//&nbsp;2.&nbsp;D<br />//&nbsp;La&nbsp;fonction&nbsp;asort&nbsp;conservant&nbsp;la&nbsp;relation&nbsp;entre&nbsp;une&nbsp;valeur&nbsp;et&nbsp;son&nbsp;index<br />//&nbsp;l'usage&nbsp;de&nbsp;For&nbsp;ou&nbsp;While&nbsp;provoquera&nbsp;l'affichage&nbsp;dans&nbsp;l'ordre&nbsp;d'origine,<br />//&nbsp;tandis&nbsp;que&nbsp;Foreach&nbsp;affichera&nbsp;bien&nbsp;par&nbsp;ordre&nbsp;alphabetique.<br /><br />//&nbsp;3.<br /></span><span style="color: #0000BB">$Scores&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"candidatA"</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">130</span><span style="color: #007700">,</span><span style="color: #DD0000">"candidatB"</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">300</span><span style="color: #007700">,</span><span style="color: #DD0000">"candidatC"</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">30</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;4.&nbsp;<br /></span><span style="color: #0000BB">asort</span><span style="color: #007700">(</span><span style="color: #0000BB">$Scores</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;table&gt;\n"</span><span style="color: #007700">;<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;caption&gt;Tableau&nbsp;par&nbsp;scores&nbsp;croisssants&lt;/caption&gt;\n"</span><span style="color: #007700">;<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;tr&gt;\n&lt;th&gt;Nom&lt;/th&gt;\n&lt;th&gt;Score&lt;/th&gt;\n&lt;/tr&gt;\n"</span><span style="color: #007700">;<br />foreach&nbsp;(</span><span style="color: #0000BB">$Scores&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$k&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;tr&gt;\n&lt;td&gt;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$k</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"&lt;/td&gt;\n&lt;td&gt;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"&lt;/td&gt;\n&lt;/tr&gt;\n"&nbsp;</span><span style="color: #007700">;<br />}<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;/table&gt;\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;5.<br /></span><span style="color: #0000BB">ksort</span><span style="color: #007700">(</span><span style="color: #0000BB">$Scores</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;table&gt;\n"</span><span style="color: #007700">;<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;caption&gt;Tableau&nbsp;par&nbsp;ordre&nbsp;alphabétique&lt;/caption&gt;\n"</span><span style="color: #007700">;<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;tr&gt;\n&lt;th&gt;Nom&lt;/th&gt;÷n&lt;th&gt;Score&lt;/th&gt;÷n&lt;/tr&gt;\n"</span><span style="color: #007700">;<br />foreach&nbsp;(</span><span style="color: #0000BB">$Scores&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$k&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;tr&gt;\n&lt;td&gt;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$k</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"&lt;/td&gt;\n&lt;td&gt;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"&lt;/td&gt;\n&lt;/tr&gt;\n"&nbsp;</span><span style="color: #007700">;<br />}<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;/table&gt;\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses2269'> 
+</div><br />
+
+<span id='e2756'></span>
+
+
+<h2 id='a2'>2 Fonctions en PHP</h2>
+<p>Les fonctions PHP s&#8217;introduisent par le mot clé <tt>function</tt>, suivi du nom de la fonction et de la liste de ses paramètres, séparés par des virgules. PHP ne distingue pas les fonctions qui retournent un résultat
+ (instruction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.return.html" class='spip_glossaire' title="php" rel='external'>return</a> suivie d&#8217;une valeur) et celles qui ne le font pas. Quand elles le font,
+il est conseillé de ne pas utiliser <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.echo.html" class='spip_glossaire' title="php" rel='external'>echo</a>&nbsp;et ses variantes, afin que la fonction puisse être réutilisée dans d&#8217;autres contextes, sans que son appel perturbe le flux de sortie.</p>
+
+<ol class="spip"><li> Définir une fonction <tt>array_to_string</tt> qui prend en argument un tableau et retourne une chaîne de caractères formée de la suite des éléments du tableau séparés par un espace (on pourra utiliser la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.substring.html" class='spip_glossaire' title="php" rel='external'>substring</a> pour qu&#8217;il y ait un espace de moins que d&#8217;éléments).</li><li> Définir une fonction <tt>array_to_list</tt> qui prend en argument un tableau et retourne une chaîne de caractères représentant ce tableau par une liste HTML numérotée (balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/lists.html#edef-OL" class='spip_glossaire' title="html" rel='external'>ol</a>)  ayant autant d&#8217;items que d&#8217;éléments du tableau. On retournera la chaîne vide en cas de tableau vide.</li><li> Définir une fonction <tt>array_to_table</tt> qui prend en argument un tableau et retourne une chaîne de caractères représentant ce tableau sous forme d&#8217;une <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TABLE" class='spip_glossaire' title="html" rel='external'>table</a> HTML  de deux colonnes, une pour les index, une pour les valeurs, et ayant autant de lignes que d&#8217;éléments du tableau plus une à la fin et une au début, indiquant le nom des deux colonnes. On retournera la chaîne vide en cas de tableau vide.</li></ol>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=742&amp;cle=7552acab11c7074ff85ff087b83333dfcd7ab882&amp;file=distant%2FVCS%2FLI355%2FTD%2F2%2Farray_to.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger array_to.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;1<br />//&nbsp;Remarque:&nbsp;cette&nbsp;fonction&nbsp;est&nbsp;diponible&nbsp;en&nbsp;PHP&nbsp;sous&nbsp;le&nbsp;nom&nbsp;de&nbsp;"join"<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">array_to_string</span><span style="color: #007700">(</span><span style="color: #0000BB">$tab</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$chaine&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">;<br />&nbsp;&nbsp;foreach(</span><span style="color: #0000BB">$tab&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$chaine&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&nbsp;$v"</span><span style="color: #007700">;<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #0000BB">$chaine</span><span style="color: #007700">,</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br />}<br /></span><span style="color: #FF8000">//&nbsp;2.<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">array_to_list</span><span style="color: #007700">(</span><span style="color: #0000BB">$tab</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$chaine&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">;<br />&nbsp;&nbsp;foreach(</span><span style="color: #0000BB">$tab&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$chaine&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;li&gt;$v&lt;/li&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$chaine&nbsp;</span><span style="color: #007700">?&nbsp;</span><span style="color: #DD0000">"&lt;ol&gt;$chaine&lt;/ol&gt;\n"&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />}<br /></span><span style="color: #FF8000">//&nbsp;3.<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">array_to_table</span><span style="color: #007700">(</span><span style="color: #0000BB">$tab</span><span style="color: #007700">){<br />&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$tab</span><span style="color: #007700">)&nbsp;return&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$chaine&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">;<br />&nbsp;&nbsp;foreach(</span><span style="color: #0000BB">$tab&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$k&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$chaine&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;tr&gt;\n&lt;td&gt;$k&lt;/td&gt;\n&lt;td&gt;$v&lt;/td&gt;\n&lt;/tr&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$th&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"&lt;tr&gt;\n&lt;td&gt;Index&lt;/td&gt;\n&lt;td&gt;Valeur&lt;/td&gt;\n&lt;/tr&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #DD0000">"&lt;table&gt;\n&lt;caption&gt;Table&lt;/caption$th$chaine$th&lt;/table&gt;\n"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">//&nbsp;tests<br />//&nbsp;$Scores&nbsp;=&nbsp;array("candidatA"=&gt;130,"candidatB"=&gt;300,"candidatC"=&gt;30);<br />//&nbsp;echo&nbsp;array_to_string($Scores);<br />//&nbsp;echo&nbsp;array_to_list($Scores);<br />//&nbsp;echo&nbsp;array_to_table($Scores);<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses2756'> 
+</div><br />
+
+<span id='e2270'></span>
+
+
+<h2 id='a3'>3 Arguments variables des fonctions</h2>
+<p>Les fonctions PHP admettent qu&#8217;un argument soit manquant si le paramètre correspondant est suivi du signe <tt>=</tt> et d&#8217;une valeur scalaire qui sera sa valeur par défaut. Les paramètres n&#8217;indiquent pas leur type, car il peut varier d&#8217;un appel à l&#8217;autre, et il est parfois utile de tester leur type pour savoir quelles opérations on peut leur appliquer. Par exemple, le prédicat <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.is-array.html" class='spip_glossaire' title="php" rel='external'>is_array</a> retourne Vrai si son argument est un tableau, ce qui veut dire qu&#8217;on peut lui appliquer en particulier la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.count.html" class='spip_glossaire' title="php" rel='external'>count</a>&nbsp;pour connaître son nombre d&#8217;éléments. Le prédicat <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.is-numeric.html" class='spip_glossaire' title="php" rel='external'>is_numeric</a> teste si son argument est utilisable dans les opérations arithmétiques (donc est un nombre ou une chaîne représentant un nombre).</p>
+
+<ol class="spip"><li> Définir une variante de la fonction <tt>array_to_string</tt> vue précédemment, qu&#8217;on nommera <tt>array_to_short_string</tt>,
+qui prend un argument supplémentaire optionnel <tt>$t</tt>, de valeur par défaut 80. Cette variante doit être telle que la chaîne retournée ne doit jamais dépasser <tt>$t</tt> caractères. Si le tableau reçu ne respecte pas cette exigence, on  devra retourner  la concaténation de ses N premiers éléments,  N devant être choisi pour respecter la contrainte.</li><li> Définir une fonction <tt>mult_vect</tt> qui prend en premier argument un tableau, ainsi  qu&#8217;un deuxième argument. Si ce dernier est numérique, la fonction multiplie tous les éléments du tableau par cette valeur et le retourne en résultat. Si c&#8217;est un deuxième tableau, la fonction vérifie d&#8217;abord qu&#8217;il a même taille que le premier&nbsp;; si ce n&#8217;est pas le cas, elle retourne le tableau vide, si oui elle  retourne le produit scalaire des deux tableaux (savoir, la somme des produits des éléments de même index).</li></ol>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=743&amp;cle=6ffdaa44f25fde8b2a1de4f8a3a0a7c37d2e7693&amp;file=distant%2FVCS%2FLI355%2FTD%2F2%2Ffonctions.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger fonctions.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;1&nbsp;.<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">array_to_string</span><span style="color: #007700">(</span><span style="color: #0000BB">$tab</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$max</span><span style="color: #007700">=</span><span style="color: #0000BB">80</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$chaine&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">;<br />&nbsp;&nbsp;foreach(</span><span style="color: #0000BB">$tab&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$chaine</span><span style="color: #007700">)&nbsp;+&nbsp;</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$v</span><span style="color: #007700">)&nbsp;&gt;&nbsp;</span><span style="color: #0000BB">$max</span><span style="color: #007700">)&nbsp;break;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$chaine&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&nbsp;$v"</span><span style="color: #007700">;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #0000BB">$chaine</span><span style="color: #007700">,</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br />}<br /></span><span style="color: #FF8000">//&nbsp;2.<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">mult_vect&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$vect</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$other</span><span style="color: #007700">){<br />&nbsp;&nbsp;if(</span><span style="color: #0000BB">is_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$other</span><span style="color: #007700">)){<br />&nbsp;&nbsp;&nbsp;&nbsp;if(</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$vect</span><span style="color: #007700">)!=</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$other</span><span style="color: #007700">)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$scal</span><span style="color: #007700">=</span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(</span><span style="color: #0000BB">$i</span><span style="color: #007700">=</span><span style="color: #0000BB">0</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$i</span><span style="color: #007700">&lt;</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$vect</span><span style="color: #007700">);&nbsp;</span><span style="color: #0000BB">$i</span><span style="color: #007700">++)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$scal</span><span style="color: #007700">+=</span><span style="color: #0000BB">$vect</span><span style="color: #007700">[</span><span style="color: #0000BB">$i</span><span style="color: #007700">]*</span><span style="color: #0000BB">$other</span><span style="color: #007700">[</span><span style="color: #0000BB">$i</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$scal</span><span style="color: #007700">;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;else{<br />&nbsp;&nbsp;&nbsp;&nbsp;foreach(</span><span style="color: #0000BB">$vect&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$k&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$vect</span><span style="color: #007700">[</span><span style="color: #0000BB">$k</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">*&nbsp;</span><span style="color: #0000BB">$other</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$vect</span><span style="color: #007700">;<br />&nbsp;&nbsp;}<br />}<br /></span><span style="color: #FF8000">//&nbsp;Tests<br />//&nbsp;echo&nbsp;"\nPremier&nbsp;tableau&nbsp;:";<br />//&nbsp;$tab=array(10,&nbsp;20,&nbsp;30,&nbsp;40,&nbsp;50);<br />//&nbsp;echo&nbsp;array_to_string($tab);<br />//&nbsp;$t=array(5,&nbsp;4,&nbsp;3,&nbsp;2,&nbsp;1);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />//&nbsp;echo&nbsp;"\nSecond&nbsp;tableau&nbsp;:";<br />//&nbsp;echo&nbsp;array_to_string($t);<br />//&nbsp;echo&nbsp;"\nProduit&nbsp;scalaire&nbsp;:&nbsp;".mult_vect&nbsp;($tab,$t)."\n";<br />//&nbsp;echo&nbsp;"\nMultiplication&nbsp;des&nbsp;éléments&nbsp;du&nbsp;tableau&nbsp;par&nbsp;3:\n";<br />//&nbsp;echo&nbsp;array_to_string(mult_vect&nbsp;($tab,3));<br />//&nbsp;echo&nbsp;"\n";<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses2270'> 
+</div><br />
+
+<span id='e2271'></span>
+
+
+<h2 id='a4'>4 Syntaxe des expressions rationnelles</h2>
+<p>PCRE est une bibliothèque d&#8217;algorithmes de recherche de motifs dans des chaînes, à laquelle se sont interfacés beaucoup de langages de programmation, dont PHP. Celui-ci la  propose à travers des fonctions   prenant en premier argument une chaîne de caractères représentant l&#8217;expression rationnelle. 
+On se reportera aux <a href="Dynamiser-par-le-serveur-le#(20)" class='spip_in'>diapositives 20 et suivantes du cours 2</a> pour leur syntaxe.
+Pour pouvoir réutiliser une expression rationnelle dans différents endroits d&#8217;un programme PHP, il est conseillé de la définir sous la forme d&#8217;une constante,
+à l&#8217;aide de la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.define.html" class='spip_glossaire' title="php" rel='external'>define</a>.</p>
+
+<ol class="spip"><li> Définir une expression rationnelle, qu&#8217;on nommera <tt>RE_NUMERO</tt>, qui isole le premier numéro de carte d&#8217;étudiant correctement écrit, soit 7 chiffres dont le premier est différent de zéro précédés du texte "Numéro d&#8217;étudiant&nbsp;: ".</li><li> Même question pour le dernier numéro, en nommant l&#8217;expression rationnelle <tt>RE_OREMUN</tt>.</li></ol>
+<p>On prendra comme exemple la chaîne <i>"Numéro d&#8217;étudiant&nbsp;: 123, Numéro d&#8217;étudiant&nbsp;: 2456783, Numéro d&#8217;étudiant&nbsp;: 457894566, Numéro d&#8217;étudiant&nbsp;: 4510236, Numéro d&#8217;étudiant&nbsp;: 01234567"</i>, les deux réponses étant 2456783 et 4510236 respectivement.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=745&amp;cle=ff6c639e5ed686b8f96b92db217d27cc99fd4275&amp;file=distant%2FVCS%2FLI355%2FTD%2F2%2Fsyntaxe_regexp.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger syntaxe_regexp.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;1.<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_NUMERO'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"/Numéro&nbsp;d'étudiant&nbsp;:&nbsp;([1-9][0-9]{6})[^0-9]/"</span><span style="color: #007700">);&nbsp;<br /><br /></span><span style="color: #FF8000">//&nbsp;2.&nbsp;le&nbsp;"s"&nbsp;final&nbsp;force&nbsp;l'acceptation&nbsp;de&nbsp;\n&nbsp;par&nbsp;le&nbsp;motif&nbsp;"."<br />//&nbsp;il&nbsp;n'est&nbsp;pas&nbsp;necessaire&nbsp;si&nbsp;la&nbsp;chaine&nbsp;n'en&nbsp;contient&nbsp;pas<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_OREMUN'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"/^.*Numéro&nbsp;d'étudiant&nbsp;:&nbsp;([1-9][0-9]{6})[^0-9]/s"</span><span style="color: #007700">);&nbsp;<br /><br /></span><span style="color: #FF8000">//&nbsp;define('RE_TEST',&nbsp;<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Numéro&nbsp;d'étudiant&nbsp;:&nbsp;123,<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numéro&nbsp;d'étudiant&nbsp;:&nbsp;2456783,<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numéro&nbsp;d'étudiant&nbsp;:&nbsp;457894566,<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numéro&nbsp;d'étudiant&nbsp;:&nbsp;4510236,<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numéro&nbsp;d'étudiant&nbsp;:&nbsp;01234567");<br />//&nbsp;<br />//&nbsp;if&nbsp;(preg_match(RE_NUMERO,&nbsp;RE_TEST,&nbsp;$m))&nbsp;echo&nbsp;$m[1],&nbsp;"\n";<br />//&nbsp;if&nbsp;(preg_match(RE_OREMUN,&nbsp;RE_TEST,&nbsp;$m))&nbsp;echo&nbsp;$m[1],&nbsp;"\n";<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses2271'> 
+</div><br />
+
+<span id='e3491'></span>
+
+
+<h2 id='a5'>5 Expressions Rationnelles en PHP</h2>
+<p>L&#8217;interface de PHP avec PCRE comporte un jeu de fonctions
+dont le nom commence toujours par <tt>preg_</tt>.
+La plus fréquente est le prédicat <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-match.html" class='spip_glossaire' title="php" rel='external'>preg_match</a> dont voici la signature&nbsp;:</p>
+<div class='spip_code'><code>int preg_match (string $pattern, string $subject [, array &amp;$matches])</code></div>
+<p>où&nbsp;:</p>
+
+<ul class="spip"><li> <i>pattern</i> désigne une expression rationnelle,</li><li> <i>subject</i> la chaîne à analyser,</li><li> <i>matches</i> un tableau optionnel destiné à recevoir les résultats.</li></ul>
+<p>Si une occurrence est trouvée et que le paramètre <i>matches</i> est fourni,
+il deviendra un tableau dont l&#8217;élément d&#8217;index 0 sera tout le motif reconnu, le suivant  le contenu de la première paire de parenthèses, le deuxième élément le contenu de la  deuxième,  etc.
+Par exemple le motif "<code class='spip_code'>://([^/]*)/(.*)$</code>" reconnait une chaîne comme "<code class='spip_code'>http://poux/index.html</code>", et le tableau résultat contiendra&nbsp;:</p>
+
+<ol class="spip"><li>   "&nbsp;://poux/index.html"</li><li>  "poux"</li><li>  "index.html"</li></ol>
+<p>Muni de ses indications&nbsp;:</p>
+
+<ol class="spip"><li> Définir  une expression rationnelle, qu&#8217;on nommera <tt>RE_MAIL</tt>, indiquant si une chaîne est un mail d&#8217;étudiant, autrement dit de forme <tt>prenom.nom@etu.upmc.fr</tt>. Le prénom et le nom commencent par une lettre majuscule, ne présentent pas de caractères accentués mais peuvent être composés sous la forme <i>prenom1-prenom2</i> ou/et <i>nom1-nom2</i>.</li><li>Définir une fonction <tt>titulaire_mail</tt> prenant en argument une chaîne de caractères, et appliquant dessus l&#8217;expression rationnelle <tt>RE_MAIL</tt>. Si l&#8217;application réussit, la fonction retourne une chaîne composée du nom puis du prénom, séparés par un espace. Autrement la fonction retourne False.</li></ol>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=709&amp;cle=ea60a03bf127691d902267e54b7fe9745e8159a3&amp;file=distant%2FVCS%2FLI355%2FTD%2F2%2Fregexp.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger regexp.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_MAIL'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'/^([A-Z][a-z]+(-[A-Z][a-z]+)?)\.([A-Z][a-z]+(-[A-Z][a-z]+)?)@etu\.upmc\.fr$/'</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">titulaire_mail</span><span style="color: #007700">(</span><span style="color: #0000BB">$mail</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #0000BB">RE_MAIL</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$mail</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$m</span><span style="color: #007700">))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$m</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">'&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$m</span><span style="color: #007700">[</span><span style="color: #0000BB">3</span><span style="color: #007700">];<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">$test&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"Anne@etu.upmc.fr"</span><span style="color: #007700">,<br /></span><span style="color: #FF8000">//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Anne-Marie.Manne-Ari@etu.upmc.fr",<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Anne.Manne-Arie@etu.upmc.fr",<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Anne.Manne@etu.upmc.fr",<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Anne-Marie.Manne@etu.upmc.fr",<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"A.B@etu.upmc.fr",<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Rien");<br />//&nbsp;<br />//&nbsp;for&nbsp;($i&nbsp;=0;&nbsp;$i&lt;count($test);&nbsp;$i++)<br />//&nbsp;&nbsp;&nbsp;echo&nbsp;$test[$i],&nbsp;"\t",&nbsp;titulaire_mail($test[$i]),&nbsp;"\n";<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses3491'> 
+</div><br />
+
+<span id='e3492'></span>
+
+
+<h2 id='a6'>6 Expressions Rationnelles à plusieurs solutions</h2>
+<p>Lorsqu&#8217;on veut trouver toutes les occurrences d&#8217;un motif dans une chaîne, on peut soit utiliser <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-match.html" class='spip_glossaire' title="php" rel='external'>preg_match</a> dans une boucle en avançant dans son 2e argument, soit utiliser une autre fonction, 
+<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-match-all.html" class='spip_glossaire' title="php" rel='external'>preg_match_all</a>, qui recherche toutes les occurrences&nbsp;:</p>
+
+<p><code class='spip_code'>int preg_match_all &nbsp;(string $pattern, string $subject, array &amp;$matches &nbsp;[, int $flags &nbsp;[, int $offset ]])</code></p>
+
+<p>où les deux  deniers arguments sont des indicateurs d&#8217;options,
+les 3 premiers sont ceux de <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-match.html" class='spip_glossaire' title="php" rel='external'>preg_match</a>  mais <i>matches</i> 
+est un tableau de tableaux (ceux que <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-match.html" class='spip_glossaire' title="php" rel='external'>preg_match</a> aurait produit dans une boucle). Le résultat de <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-match-all.html" class='spip_glossaire' title="php" rel='external'>preg_match_all</a> est le nombre de solutions trouvées.</p>
+
+<ol class="spip"><li> Définir une expression rationnelle, qu&#8217;on nommera <tt>RE_HORAIRES</tt> repérant dans une chaîne toutes les occurrences d&#8217;horaire, c&#8217;est-à-dire deux fois deux chiffres séparés par ":", le premier nombre étant compris 0 et 24, et le deuxième entre 0 et 59&nbsp;; on ne devra pas utiliser d&#8217;expressions arithmétiques pour effectuer ces contrôles.</li><li> Définir une fonction <tt>horaires</tt> recevant en argument une chaîne, lui appliquant <tt>RE_HORAIRE</tt>, et s&#8217;il y a exactement 2 solutions, le résultat retourné sera une chaîne formé de ces 2 solutions séparées par un tiret, sinon la chaîne vide.</li></ol>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=744&amp;cle=7e6d9bb32a733f063193b65ee7633725ec0ef4b5&amp;file=distant%2FVCS%2FLI355%2FTD%2F2%2Fregexp_multiple.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger regexp_multiple.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_HORAIRE'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"%(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])%"</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">horaires</span><span style="color: #007700">(</span><span style="color: #0000BB">$calendrier</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">preg_match_all</span><span style="color: #007700">(</span><span style="color: #0000BB">RE_HORAIRE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$calendrier</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$m</span><span style="color: #007700">)&nbsp;!=&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;array();<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$m</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">][</span><span style="color: #0000BB">0</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">'-'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$m</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">][</span><span style="color: #0000BB">1</span><span style="color: #007700">];<br />}<br /><br /></span><span style="color: #FF8000">//$test&nbsp;=&nbsp;array(<br />//&nbsp;&nbsp;"05:24&nbsp;Avez-vous&nbsp;l'heure&nbsp;?&nbsp;il&nbsp;est&nbsp;10:12&nbsp;22:64,&nbsp;32:24,&nbsp;0:56,&nbsp;12:32,&nbsp;12:58",<br />//&nbsp;&nbsp;"venez&nbsp;entre&nbsp;10:12&nbsp;et&nbsp;22:54",<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />//&nbsp;&nbsp;for&nbsp;($i&nbsp;=0;&nbsp;$i&lt;count($test);&nbsp;$i++)<br />//&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$test[$i],&nbsp;"\t",&nbsp;horaires($test[$i]),&nbsp;"\n";<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses3492'> 
+</div><br />
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FPHP-et-ses-structures"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FPHP-et-ses-structures'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FPHP-et-ses-structures&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 12h02min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FPHP-et-ses-structures'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

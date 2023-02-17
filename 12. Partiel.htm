@@ -1,0 +1,683 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=backend-breves&amp;id_rubrique=12&amp;titre= 13/03/2014"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>1. Examen d'un examen (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1"><a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a></div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class='menu-lv2'><a href='#a1'>La DTD</a></li>
+<li class='menu-lv2'><a href='#a2'>Chargement d’une épreuve</a></li>
+<li class='menu-lv2'><a href='#a3'>Formulation d’une question</a></li>
+<li class='menu-lv2'><a href='#a4'>Traitement des réponses</a></li>
+<li class='menu-lv2'><a href='#a5'>Affichage d&#8217;une note</a></li>
+<li class='menu-lv2'><a href='#a6'>L&#8217;épreuve</a></li>
+<li class='menu-lv2'><a href='#a7'>Annexes</a></li>
+</ul>
+
+
+<div class="menu-lv1">
+Authentifi&eacute; sous<br />KOSTRIKOVA ANNA</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Contr&ocirc;les des Connaissances<br />1. Examen d&#8217;un examen<br />partiel 13/03/2014</h1>
+
+<h2 style="text-align: center; color: red">KOSTRIKOVA ANNA&nbsp;: 14/50</h2><div style='text-align: center;'>
+Derni&egrave;re importation
+13 mars 2014 &agrave; 18h09min
+</div>
+<script type='text/javascript'>
+derniere_modification = 1394730576;
+</script><script type='text/javascript'>
+if (typeof(duree_examen) != "undefined") {
+	rafraichir_lire(3264006,
+		434,
+		derniere_modification,
+		15*60*1000); } // duree de l'alarme en milli-secondes: 1/4h
+</script><p>Cet examen consiste à réaliser une application permettant de faire passer un examen sur machine. Le sujet se trouve dans un fichier XML dont un exemple représentatif est donné en annexe. Le fichier doit respecter les conditions suivantes&nbsp;:</p>
+
+<ul class="spip"><li> le fichier  décrit une unique épreuve&nbsp;;</li><li> une épreuve contient obligatoirement un type, une année, la référence du module, et son intitulé&nbsp;;</li><li> une épreuve est composée d’une ou plusieurs questions&nbsp;;</li><li> chaque question contient un énoncé&nbsp;;</li><li> une question est soit de type <tt>QCM</tt> soit <tt>LIBRE</tt>&nbsp;;</li><li> dans le premier cas, la question contient des propositions, dans le second cas une réponse unique&nbsp;;</li><li> chaque proposition contient une affirmation,  indique si elle est vrai ou fausse, et fournit une explication&nbsp;;</li><li> une réponse est constituée d&#8217;un texte répondant à la question, et d&#8217;une expression rationnelle permettant d&#8217;accepter des variantes de ce texte.</li></ul>
+<p>Notes sur 50</p>
+<div id='sequence434'>
+<span id='e3565'></span>
+
+
+<h2 id='a1'>1 La DTD <small>(7&nbsp;point(s))</small></h2>
+<p>Ecrire une DTD respectant les conditions ci dessus, sur la base du fichier <tt>epreuve.xml </tt> fourni en annexe qui utilise la nomenclature suivante&nbsp;:</p>
+
+<ul class="spip"><li> l&#8217;élément racine du fichier est <code class='spip_code'>Epreuve</code> qui contient les attributs <code class='spip_code'>type</code> (avec pour valeur <code class='spip_code'>partiel</code> ou <code class='spip_code'>examen</code>), <code class='spip_code'>année</code>, <code class='spip_code'>module</code>, <code class='spip_code'>intitule</code>&nbsp;;</li><li> chaque question est définie par l&#8217;élément <code class='spip_code'>Question</code> qui contient les attributs <code class='spip_code'>enonce</code> et <code class='spip_code'>type</code>&nbsp;;</li><li> si la question est de type <code class='spip_code'>QCM</code> alors elle contient une suite de propositions encapsulées dans l&#8217;élément <code class='spip_code'>Propositions</code>&nbsp;;</li><li> chaque proposition est définie par l&#8217;élément <code class='spip_code'>Proposition</code> (sans "s"), qui contient les attributs <code class='spip_code'>vraioufaux</code> et <code class='spip_code'>explication</code>&nbsp;;</li><li> le contenu de l&#8217;élément <code class='spip_code'>Proposition</code> est un texte&nbsp;;</li><li> si l&#8217;élément <code class='spip_code'>Question</code> est de type <code class='spip_code'>LIBRE</code> alors il contiendra un sous élément <code class='spip_code'>Reponse</code> qui contient les attributs <code class='spip_code'>text</code> et <code class='spip_code'>regex</code>.</li></ul>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=810&amp;cle=d283e6fdb1eccc53b842bbe790e8010b041ff114&amp;file=distant%2FVCS%2FLI355%2FCC%2F2013-2014%2F1%2Fepreuve.dtd"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger epreuve.dtd</a>
+</div>
+<pre>&lt;!-- Question+ 1 point --&gt;
+&lt;!ELEMENT Epreuve           (Question+)&gt;
+&lt;!-- Le ou (Propositions|Reponse)  1 point --&gt;
+&lt;!ELEMENT Question          (Propositions|Reponse)&gt;
+&lt;!ELEMENT Propositions      (Proposition+)&gt;
+&lt;!-- (#PCDATA) 1 point --&gt;
+&lt;!ELEMENT Proposition       (#PCDATA)&gt;
+&lt;!-- EMPTY 1 point --&gt;
+&lt;!ELEMENT Reponse           EMPTY&gt;
+
+
+&lt;!-- ATTLIST 1 point --&gt;
+&lt;!-- Le ou (partiel|examen) 1 point --&gt;
+&lt;!-- #REQUIRED 1 point --&gt;
+&lt;!ATTLIST Epreuve
+         type         (partiel|examen)    #REQUIRED
+         annee        CDATA               #REQUIRED
+         module       CDATA               #REQUIRED
+         intitule     CDATA               #REQUIRED&gt;
+
+&lt;!ATTLIST Question
+         enonce       CDATA         #REQUIRED
+         type         (QCM|LIBRE)   #REQUIRED&gt;
+
+&lt;!ATTLIST Proposition
+         vraioufaux         (0|1)   #REQUIRED
+         explication        CDATA   #REQUIRED&gt;
+         
+&lt;!ATTLIST Reponse
+         text         CDATA   #REQUIRED
+         regex        CDATA   #REQUIRED&gt;         </pre>
+<div>Bar&egrave;me<ol class="spip"><li> Question+</li><li> Le ou (Propositions|Reponse)</li><li> (#PCDATA)</li><li> EMPTY</li><li> ATTLIST</li><li> Le ou (partiel|examen)</li><li> #REQUIRED</li></ol></div>
+</div>
+ 
+ <div id='reponses3565'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5764"> 
+	    <div class="reponse">
+	<div class="forum-titre">R&eacute;ponse 1</div>
+13 mars 2014 &agrave; 17h36min 
+	<div><div class="spip_code"><code>&lt;!ELEMENT Epreuve (Question)*&gt;<br />
+&lt;!ATTLIST Epreuve <br />
+ &nbsp; type (partiel|axamen) #IMPLIED<br />
+ &nbsp; annee (#PCDATA) #IMPLIED<br />
+ &nbsp; module (#PCDATA) #IMPLIED<br />
+ &nbsp; intitule (#PCDATA) #IMPLIED&gt;<br />
+<br />
+&lt;!ELEMENT Question $type=&quot;QCM&quot; ? (Propositions) : (Reponse)&gt;<br />
+&lt;!ATTLIST Question<br />
+ &nbsp;enonce (#PCDATA) #IMPLIED<br />
+ &nbsp;type (QCM|Libre) #REQUIRED&gt;<br />
+<br />
+<br />
+&lt;!ELEMENT Propositions (Proposition)*&gt;<br />
+<br />
+&lt;!ELEMENT Proposition (#PCDATA)&gt;<br />
+&lt;!ATTLIST Proposition<br />
+ &nbsp;vraioufaux (vrai|faux) #IMPLIED<br />
+ &nbsp;explication (#PCDATA) #IMPLIED&gt;<br />
+<br />
+<br />
+&lt;!ELEMENT Reponse&gt;<br />
+&lt;!ATTLIST Reponse<br />
+ &nbsp;text (#PCDATA) #IMPLIED<br />
+ &nbsp;regex (#PCDATA) #IMPLIED&gt;</code></div></div>
+	    </div>
+
+<ul>
+
+<li id="forum6295" class="correction">
+	<div>note&nbsp;1<br />par  Labroche Nicolas</div>
+	<div><ul class="spip"><li>  Question+
+_&nbsp;: 0</li><li>  Le ou (Propositions|Reponse)
+_&nbsp;: 0</li><li>  (#PCDATA)
+_&nbsp;: 1</li><li>  EMPTY
+_&nbsp;: 0</li><li>  ATTLIST
+_&nbsp;: 0</li><li>  Le ou (partiel|examen)
+_&nbsp;: 0</li><li>  #REQUIRED
+_&nbsp;: 0</li></ul>
+<p><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;pas de #IMPLIED
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;()* au lieu de (...+)
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;confusion PCDATA et CDATA
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;beaucoup d&#8217;erreurs</p></div>
+</li>
+</ul>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3566'></span>
+
+
+<h2 id='a2'>2 Chargement d’une épreuve <small>(8&nbsp;point(s))</small></h2>
+<p>On souhaite  appliquer sur le fichier XML la fonction<code class='spip_code'>lancer_phraseur</code>  fournie dans l&#8217;annexe, qui contient aussi le preneur d&#8217;événements <tt>texte</tt>.
+Ecrire les preneurs d&#8217;événements <code class='spip_code'>ouvrante</code> et <code class='spip_code'>fermante</code> afin que l&#8217;application de SAX réalise les affectations suivantes de variables globales&nbsp;:</p>
+
+<ul class="spip"><li> <code class='spip_code'>$typeEpreuve</code> contiendra le type de l’épreuve&nbsp;;</li><li> <code class='spip_code'>$annee</code> contiendra l’année de l’épreuve&nbsp;;</li><li> <code class='spip_code'>$module</code> contiendra la référence du module (attribut <tt>module</tt>)&nbsp;;</li><li> <code class='spip_code'>$intituleModule</code> contiendra l’intitulé complet du module&nbsp;;</li><li> <code class='spip_code'>$epreuve</code>, tableau PHP ayant la structure suivante&nbsp;:<ul class="spip"><li> chaque entrée du tableau représente une question,</li><li> chaque question est elle-même un tableau contenant&nbsp;: <ul class="spip"><li> l’énoncé de la question,</li><li> son type (<tt>QCM</tt> ou <tt>LIBRE</tt>),</li><li> un tableau PHP variable selon le type de question contenant&nbsp;:<ul class="spip"><li> les propositions si la question est de type <tt>QCM</tt>, chaque proposition devra elle aussi être modélisée sous la forme d&#8217;un tableau contenant comme éléments le texte de la proposition, si elle est vrai ou fausse ainsi que son explication.</li><li> la réponse si la question est de type <tt>LIBRE</tt>, sous forme d&#8217;un tableau à deux éléments contenant le texte de la réponse et l&#8217;expression rationnelle associée.</li></ul></li></ul></li></ul></li></ul>
+<p>Le tableau <code class='spip_code'>$epreuve</code> devant être produit à partir du fichier <i>epreuve.xml</i> est explicité à la question 4 afin que vous puissiez poursuivre l&#8217;examen même si vous ne savez pas répondre à cette question.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=803&amp;cle=9f8ba3cd14cb5f938f80353a2ffc294de3aa5db8&amp;file=distant%2FVCS%2FLI355%2FCC%2F2013-2014%2F1%2Fchargements.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger chargements.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//Déclaration&nbsp;des&nbsp;variables&nbsp;globale&nbsp;1<br /></span><span style="color: #007700">global&nbsp;</span><span style="color: #0000BB">$typeEpreuve</span><span style="color: #007700">;&nbsp;<br />global&nbsp;</span><span style="color: #0000BB">$annee</span><span style="color: #007700">;&nbsp;<br />global&nbsp;</span><span style="color: #0000BB">$module</span><span style="color: #007700">;&nbsp;<br />global&nbsp;</span><span style="color: #0000BB">$intituleModule</span><span style="color: #007700">;<br />global&nbsp;</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$epreuve&nbsp;</span><span style="color: #007700">=&nbsp;array();<br /><br />global&nbsp;</span><span style="color: #0000BB">$text</span><span style="color: #007700">;<br />global&nbsp;</span><span style="color: #0000BB">$question</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$question&nbsp;</span><span style="color: #007700">=&nbsp;array();<br /><br />global&nbsp;</span><span style="color: #0000BB">$proposition</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$proposition&nbsp;</span><span style="color: #007700">=&nbsp;array();<br /><br />global&nbsp;</span><span style="color: #0000BB">$propositions</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$propositions&nbsp;</span><span style="color: #007700">=&nbsp;array();<br /><br />global&nbsp;</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$reponse&nbsp;</span><span style="color: #007700">=&nbsp;array();<br /><br />global&nbsp;</span><span style="color: #0000BB">$typeReponse</span><span style="color: #007700">;<br /><br />function&nbsp;</span><span style="color: #0000BB">ouvrante</span><span style="color: #007700">(</span><span style="color: #0000BB">$parser</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//Déclaration&nbsp;des&nbsp;variables&nbsp;globales&nbsp;dans&nbsp;la&nbsp;fonction&nbsp;1<br />&nbsp;&nbsp;</span><span style="color: #007700">global&nbsp;</span><span style="color: #0000BB">$typeEpreuve</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$annee</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$module</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$intituleModule</span><span style="color: #007700">;<br />&nbsp;&nbsp;global&nbsp;</span><span style="color: #0000BB">$question</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$proposition</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$text</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$propositions</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$typeReponse</span><span style="color: #007700">;<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;if(</span><span style="color: #0000BB">$name&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #DD0000">"Epreuve"</span><span style="color: #007700">){&nbsp;</span><span style="color: #FF8000">//Bloc&nbsp;$name&nbsp;==&nbsp;Epreuve&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$typeEpreuve&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">"type"</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$annee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">"annee"</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$module&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">"module"</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$intituleModule&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">"intitule"</span><span style="color: #007700">];<br />&nbsp;&nbsp;}elseif(</span><span style="color: #0000BB">$name&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #DD0000">"Question"</span><span style="color: #007700">){</span><span style="color: #FF8000">//Bloc&nbsp;$name==Question&nbsp;+Test&nbsp;du&nbsp;type&nbsp;de&nbsp;réponse&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$question&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$question</span><span style="color: #007700">[</span><span style="color: #DD0000">"enonce"</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">"enonce"</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$question</span><span style="color: #007700">[</span><span style="color: #DD0000">"type"</span><span style="color: #007700">]&nbsp;&nbsp;&nbsp;=&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">"type"</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$typeReponse&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">"type"</span><span style="color: #007700">];&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;if(</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">"type"</span><span style="color: #007700">]&nbsp;==&nbsp;</span><span style="color: #DD0000">"QCM"</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$propositions&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;else{</span><span style="color: #FF8000">//Réponse&nbsp;libre<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$reponse&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;}elseif(</span><span style="color: #0000BB">$name&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #DD0000">"Propositions"</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$proposition&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;}elseif(</span><span style="color: #0000BB">$name&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #DD0000">"Proposition"</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Bloc&nbsp;proposition&nbsp;pas&nbsp;noté&nbsp;car&nbsp;pas&nbsp;de&nbsp;nouveau&nbsp;concept&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$proposition</span><span style="color: #007700">[</span><span style="color: #DD0000">"vraioufaux"</span><span style="color: #007700">]&nbsp;&nbsp;=&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">"vraioufaux"</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$proposition</span><span style="color: #007700">[</span><span style="color: #DD0000">"explication"</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">"explication"</span><span style="color: #007700">];<br />&nbsp;&nbsp;}elseif(</span><span style="color: #0000BB">$name&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #DD0000">"Reponse"</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Bloc&nbsp;proposition&nbsp;pas&nbsp;noté&nbsp;car&nbsp;pas&nbsp;de&nbsp;nouveau&nbsp;concept<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">[</span><span style="color: #DD0000">"text"</span><span style="color: #007700">]&nbsp;&nbsp;=&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">"text"</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">[</span><span style="color: #DD0000">"regex"</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$attrs</span><span style="color: #007700">[</span><span style="color: #DD0000">"regex"</span><span style="color: #007700">];<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//remise&nbsp;à&nbsp;0&nbsp;de&nbsp;$text&nbsp;1<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$text&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">;<br />}<br /><br />function&nbsp;</span><span style="color: #0000BB">fermante</span><span style="color: #007700">(</span><span style="color: #0000BB">$parser</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">){<br />&nbsp;&nbsp;global&nbsp;</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">;<br />&nbsp;&nbsp;global&nbsp;</span><span style="color: #0000BB">$question</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$proposition</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$text</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$propositions</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$typeReponse</span><span style="color: #007700">;<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//Récupération&nbsp;$text&nbsp;dans&nbsp;$proposition["texte"]&nbsp;1&nbsp;<br />&nbsp;&nbsp;</span><span style="color: #007700">if(</span><span style="color: #0000BB">$name&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #DD0000">"Proposition"</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$proposition</span><span style="color: #007700">[</span><span style="color: #DD0000">"texte"</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$text</span><span style="color: #007700">;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$propositions</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #0000BB">$proposition</span><span style="color: #007700">;<br />&nbsp;&nbsp;}elseif(</span><span style="color: #0000BB">$name&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #DD0000">"Question"</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Récupération&nbsp;de&nbsp;$proposition&nbsp;ou&nbsp;$reponse&nbsp;selon&nbsp;le&nbsp;cas&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if(</span><span style="color: #0000BB">$typeReponse&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #DD0000">"QCM"</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$question</span><span style="color: #007700">[</span><span style="color: #DD0000">"propositions"</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$propositions</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;else<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$question</span><span style="color: #007700">[</span><span style="color: #DD0000">"reponse"</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Ajout&nbsp;de&nbsp;$question&nbsp;dans&nbsp;$epreuve&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">[]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;</span><span style="color: #0000BB">$question</span><span style="color: #007700">;<br />&nbsp;&nbsp;}&nbsp;<br />}<br /><br />&nbsp;&nbsp;<br /><br /></span><span style="color: #FF8000">//Tests<br />//include&nbsp;"lancer_phraseur.php";<br />//lancer_phraseur("examen.xml");&nbsp;<br />//echo&nbsp;$typeEpreuve,&nbsp;$annee,&nbsp;$module,&nbsp;$intituleModule;&nbsp;<br />//header("Content-type:&nbsp;text;&nbsp;charset=ISO-8859-4");<br />//print_r($epreuve);<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p>
+<div>Bar&egrave;me<ol class="spip"><li> Déclaration des variables globales</li><li> Déclaration des variables globales dans la fonction</li><li> Bloc $name == "Epreuve"</li><li> Bloc $name==Question +Test du type de réponse</li><li> Remise à 0 de $text</li><li> Récupération $text dans $proposition["texte"]</li><li> Récupération de $proposition ou $reponse selon le cas</li><li> Ajout de $question dans $epreuve</li></ol></div>
+</div>
+ 
+ <div id='reponses3566'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5765"> 
+	    <div class="reponse">
+	<div class="forum-titre">R&eacute;ponse 1</div>
+13 mars 2014 &agrave; 17h36min 
+	<div><div class="spip_code"><code>&lt;?php<br />
+globale $typeEpreuve;<br />
+<br />
+function lancer_phraseur() {<br />
+ &nbsp;globale $typeEpreuve;<br />
+ &nbsp;<br />
+}<br />
+?&gt;</code></div></div>
+	    </div>
+
+<ul>
+
+<li id="forum6417" class="correction">
+	<div>note&nbsp;0 / 8<br />par  Labroche Nicolas</div>
+	<div><ul class="spip"><li>  Déclaration des variables globales&nbsp;: 0</li><li>  Déclaration des variables globales dans la fonction&nbsp;: 0</li><li>  Bloc $name == "Epreuve"&nbsp;: 0</li><li>  Bloc $name==Question +Test du type de réponse&nbsp;: 0</li><li>  Remise à 0 de $text&nbsp;: 0</li><li>  Récupération $text dans $proposition["texte"]&nbsp;: 0</li><li>  Récupération de $proposition ou $reponse selon le cas&nbsp;: 0</li><li>  Ajout de $question dans $epreuve&nbsp;: 0</li></ul></div>
+</li>
+</ul>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3567'></span>
+
+
+<h2 id='a3'>3 Formulation d’une question <small>(8&nbsp;point(s))</small></h2>
+<p>Écrire une fonction PHP <code class='spip_code'>afficher_question</code> qui prend en argument le tableau <code class='spip_code'>$epreuve</code> fourni en annexe, un numéro de question et un nom de script, et retourne un formulaire XHTML composé d&#8217;un <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/interact/forms.html#edef-FIELDSET" class='spip_glossaire' title="html" rel='external'>fieldset</a> contenant&nbsp;:</p>
+
+<ul class="spip"><li> l’énoncé de la question de numéro donné&nbsp;;</li><li> si la question est de type <tt>QCM</tt>, les propositions sous forme de cases à cocher&nbsp;: chaque proposition contient une case à cocher et le texte correspondant à cette proposition,  l&#8217;index de la proposition dans le tableau sera pris comme valeur de la case à cocher, dans le but de savoir plus tard quelles sont les propositions cochées par l’utilisateur&nbsp;;</li><li> si la question est de type <tt>LIBRE</tt>,  une balise de saisie précédée d’un label contenant le texte "Veuillez saisir votre réponse S.V.P."&nbsp;;</li><li> un bouton de soumission affichant le texte &#171;&nbsp;Valider la réponse et passer à la question suivante&nbsp;&#187;.</li></ul>
+<p>Le formulaire est à soumettre avec la méthode POST vers le script donné en 3e argument.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=802&amp;cle=8831c8117c9a996bb1d3668ce385ec7f7f22e74e&amp;file=distant%2FVCS%2FLI355%2FCC%2F2013-2014%2F1%2Faffichage_question.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger affichage_question.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;<br />&nbsp;&nbsp;</span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">afficher_question</span><span style="color: #007700">(</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$index</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$script</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Génération&nbsp;correct&nbsp;de&nbsp;la&nbsp;première&nbsp;ligne&nbsp;du&nbsp;formulaire&nbsp;+&nbsp;fieldset&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$form&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"&lt;form&nbsp;method=\"POST\"&nbsp;action=\"$script\"&gt;\n&lt;fiealdset&gt;\n"</span><span style="color: #007700">;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Récupération&nbsp;de&nbsp;la&nbsp;question&nbsp;à&nbsp;afficher&nbsp;1&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$question&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">[</span><span style="color: #0000BB">$index</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Affichage&nbsp;de&nbsp;l'énoncé&nbsp;de&nbsp;la&nbsp;question&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$form&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;div&gt;"</span><span style="color: #007700">.</span><span style="color: #0000BB">$question</span><span style="color: #007700">[</span><span style="color: #DD0000">"enonce"</span><span style="color: #007700">].</span><span style="color: #DD0000">"&lt;/div&gt;"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Test&nbsp;le&nbsp;type&nbsp;de&nbsp;question&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if(</span><span style="color: #0000BB">$question</span><span style="color: #007700">[</span><span style="color: #DD0000">"type"</span><span style="color: #007700">]&nbsp;==&nbsp;</span><span style="color: #DD0000">"QCM"</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Affichage&nbsp;des&nbsp;propositions&nbsp;avec&nbsp;des&nbsp;checkbox&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$question</span><span style="color: #007700">[</span><span style="color: #DD0000">"propositions"</span><span style="color: #007700">]&nbsp;as&nbsp;</span><span style="color: #0000BB">$index&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Affectation&nbsp;d'un&nbsp;tableau&nbsp;au&nbsp;name&nbsp;de&nbsp;la&nbsp;checkbox&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$form&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;div&gt;\n"</span><span style="color: #007700">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;input&nbsp;type=\"checkbox\"&nbsp;name=\"qcm_reponse[]\"&nbsp;value=\"$index\"/&gt;"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">[</span><span style="color: #DD0000">"texte"</span><span style="color: #007700">].</span><span style="color: #DD0000">"\n&lt;/div&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}else{</span><span style="color: #FF8000">//question&nbsp;de&nbsp;type&nbsp;réponse&nbsp;LIBRE<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Affichage&nbsp;de&nbsp;la&nbsp;zone&nbsp;de&nbsp;saisi&nbsp;avec&nbsp;le&nbsp;label&nbsp;associé&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$form&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;div&gt;\n&lt;label&nbsp;for=\"reponselibre\"&gt;"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"Veuillez&nbsp;saisir&nbsp;votre&nbsp;r&amp;eacute;ponse&nbsp;S.V.P."</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;/label&gt;&lt;input&nbsp;id=\"reponselibre\"&nbsp;type=\"text\"&nbsp;"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"name=\"qcm_reponse\"&nbsp;value=\"\"/&gt;\n&lt;/div&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Bouton&nbsp;de&nbsp;soumission&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$form&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;input&nbsp;type=\"submit\"&nbsp;value=\"Valider&nbsp;la&nbsp;r&amp;eacute;ponse&nbsp;et&nbsp;"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"passer&nbsp;&amp;agrave;&nbsp;la&nbsp;question&nbsp;suivante\"&nbsp;/&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$form&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;/fieldset&gt;\n&lt;form&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$form</span><span style="color: #007700">;&nbsp;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//TEST<br />&nbsp;&nbsp;//include&nbsp;"epreuve.php";<br />&nbsp;&nbsp;//echo&nbsp;afficher_question($epreuve,&nbsp;2,&nbsp;"corriger_libre.php");<br />&nbsp;&nbsp;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p>
+<div>Bar&egrave;me<ol class="spip"><li> Production correcte de la première ligne du formulaire + fieldset</li><li> Récupération de la question à afficher</li><li> Affichage de l&#8217;énoncé de la question</li><li> Test du type de question</li><li> Affichage des propositions avec des checkbox</li><li> Affectation d&#8217;un tableau au name de la checkbox</li><li> Affichage de la zone de saisi avec le label associé</li><li> Bouton de soumission</li></ol></div>
+</div>
+ 
+ <div id='reponses3567'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5766"> 
+	    <div class="reponse">
+	<div class="forum-titre">R&eacute;ponse 1</div>
+13 mars 2014 &agrave; 18h01min 
+	<div><div class="spip_code"><code>&lt;?php<br />
+function($epreuve,$numQuestion,$nomScript) {<br />
+ &nbsp;$res=<br />
+ &nbsp;&quot;&lt;form mathod='post' action=$nomScript&gt;&quot;.<br />
+ &nbsp;&quot;&lt;label for=''&gt;&lt;/label&gt;&quot;.<br />
+ &nbsp;&quot;&lt;fieldset&gt;&quot;.<br />
+ &nbsp;&quot;&lt;textarea&gt;$epreuve[$numQuestion]['enonce']&lt;textarea&gt;&quot;;<br />
+ &nbsp;if($epreuve[$numQuestion]['type']==&quot;LIBRE&quot;)<br />
+ &nbsp; &nbsp;$res.= &quot;&lt;label value='veilleuz saisir votre reponse S.V.P.' name='n1'/&gt;&lt;input type='text'&gt;&lt;/input&gt;&quot;;<br />
+ &nbsp;else {<br />
+ &nbsp; &nbsp;$res.=&quot;&lt;select multiple name='n2'&gt;&quot;;<br />
+ &nbsp; &nbsp;foreach($epreuve[$numQuestion]['tab']['propositions'] as $v) <br />
+ &nbsp; &nbsp; &nbsp;$res.=&quot;&lt;option&gt;$v&lt;/option&gt;&quot;;<br />
+ &nbsp; &nbsp;$res.=&quot;&lt;/select&gt;&quot;. <br />
+ &nbsp;}<br />
+ &nbsp;$res.=&quot;&lt;input type='submit' value='Valider la reponse et passer a la question suivante'/&gt;&quot;.<br />
+ &nbsp;&quot;&lt;/fieldset&gt;&quot;.<br />
+ &nbsp;&quot;&lt;/form&gt;&quot;;<br />
+ &nbsp;return $res;<br />
+}<br />
+?&gt;</code></div></div>
+	    </div>
+
+<ul>
+
+<li id="forum6502" class="correction">
+	<div>note&nbsp;3 / 8<br />par  Labroche Nicolas</div>
+	<div><ul class="spip"><li>  Production correcte de la première ligne du formulaire + fieldset&nbsp;: 0</li><li>  Récupération de la question à afficher&nbsp;: 1</li><li>  Affichage de l&#8217;énoncé de la question&nbsp;: 0</li><li>  Test du type de question&nbsp;: 1</li><li>  Affichage des propositions avec des checkbox&nbsp;: 0</li><li>  Affectation d&#8217;un tableau au name de la checkbox&nbsp;: 0</li><li>  Affichage de la zone de saisi avec le label associé&nbsp;: 0</li><li>  Bouton de soumission&nbsp;: 1</li></ul>
+<p><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;attention à la syntaxe&nbsp;: &#8217;mathod&#8217; ...
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;les valeurs de tableau ne sont pas interprétées à l&#8217;intérieur des chaînes de caractères
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;textarea = saisie pas affichage
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;pas de name au input text
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;</p></div>
+</li>
+</ul>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3568'></span>
+
+
+<h2 id='a4'>4 Traitement des réponses <small>(8&nbsp;point(s))</small></h2>
+<p>Afin de corriger une question de type <tt>QCM</tt> écrire d’abord une fonction <code class='spip_code'>count_propositions_justes</code> qui retourne le nombre de propositions vraies dans un tableau de propositions fourni en argument. Une proposition est vraie ou fausse selon que  l&#8217;index "vraioufaux" vaut 0 ou 1.</p>
+
+<p>Pour fixer les idées,  voici un exemple de tableau de propositions (c&#8217;est celui qui correspond au fichier <tt>épreuve.xml</tt>, mais ce n&#8217;est qu&#8217;un exemple)&nbsp;:</p>
+
+<div class='spip_code'><code>array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;enonce&quot; =&gt; '$a = 12; $b = 53; $c = $a++; Alors $c == ?',<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;type&quot; =&gt; &quot;QCM&quot;,<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;propositions&quot; =&gt; array<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;vraioufaux&quot; =&gt; &quot;0&quot;,<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;explication&quot; =&gt; &quot;&quot;, <br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;texte&quot; =&gt; &quot;13&quot; <br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;),<br />
+<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;vraioufaux&quot; =&gt; &quot;1&quot;,<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;explication&quot; =&gt; &quot;&quot;, <br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;texte&quot; =&gt; &quot;15&quot; <br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;),<br />
+<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;vraioufaux&quot; =&gt; &quot;1&quot;,<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;explication&quot; =&gt; &quot;&quot;, <br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;texte&quot; =&gt; &quot;0&quot; <br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;),<br />
+<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;array<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;vraioufaux&quot; =&gt; &quot;1&quot;,<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;explication&quot; =&gt; &quot;&quot;, <br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;texte&quot; =&gt; &quot;25&quot; <br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;),<br />
+<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;)<br />
+<br />
+ &nbsp; &nbsp; &nbsp; &nbsp;)</code></div>
+<p>Ecrire une fonction <code class='spip_code'>corriger_question_qcm</code> qui reçoit en argument le tableau <code class='spip_code'>$epreuve</code>, le numéro de la question à corriger, la liste (sous forme de tableau) des propositions cochées (e.g. array(0, 3) signifie que les propositions d’index 0 et d’index 3 sont cochées). Cette fonction retourne <code class='spip_code'>true</code> si et seulement
+si les propositions cochées et les propositions vraies concordent. Elle retourne <code class='spip_code'>false</code> sinon.</p>
+
+<p>Ecrire une fonction <code class='spip_code'>corriger_question_libre</code> qui reçoit en argument le tableau <code class='spip_code'>$epreuve</code>, le numéro de la question à corriger, et la réponse fournie par l’utilisateur sous forme de chaîne de caractères, et renvoie vrai si et seulement si la réponse est juste.  Une réponse est  juste si elle est conforme à l&#8217;expression rationnelle donnée dans le sous-tableau décrivant ce type de question, par exemple&nbsp;:</p>
+
+<div class='spip_code'><code>Tableau reponse d'une question.<br />
+array<br />
+ &nbsp; &nbsp; (<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;text&quot; =&gt; &quot;Le fondateur du langage PHP&quot;,<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;regex&quot; =&gt; &quot;/.*fondateur([^\.,\?\!]+)PHP/i&quot;<br />
+ &nbsp; &nbsp; &nbsp;)</code></div>
+<p>Attention, vous devez ignorer les différences entre  majuscules et minuscules  dans cette réponse (utilisez par exemple l&#8217;option <tt>i</tt> des expressions rationnelles).</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=805&amp;cle=61a98c9b23f7fb25ca0e2398e564b3b010fb08d0&amp;file=distant%2FVCS%2FLI355%2FCC%2F2013-2014%2F1%2Fcorriger_qcm.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger corriger_qcm.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;</span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">count_propositions_justes</span><span style="color: #007700">(</span><span style="color: #0000BB">$propositions</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cpt&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Boucle&nbsp;pour&nbsp;générer&nbsp;le&nbsp;compte&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$propositions&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$k&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(</span><span style="color: #0000BB">$v</span><span style="color: #007700">[</span><span style="color: #DD0000">"vraioufaux"</span><span style="color: #007700">]&nbsp;==&nbsp;</span><span style="color: #DD0000">"0"</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cpt</span><span style="color: #007700">++;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$cpt</span><span style="color: #007700">;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">corriger_question_qcm</span><span style="color: #007700">(</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$index</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$reponses</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Récupération&nbsp;des&nbsp;proposition&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$propositions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">[</span><span style="color: #0000BB">$index</span><span style="color: #007700">][</span><span style="color: #DD0000">"propositions"</span><span style="color: #007700">];&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Générer&nbsp;false&nbsp;si&nbsp;le&nbsp;nombre&nbsp;de&nbsp;propositions&nbsp;juste&nbsp;fournie&nbsp;est&nbsp;différent&nbsp;1&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if(</span><span style="color: #0000BB">count_propositions_justes</span><span style="color: #007700">(</span><span style="color: #0000BB">$propositions</span><span style="color: #007700">)&nbsp;!=&nbsp;</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$reponses</span><span style="color: #007700">))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Parcours&nbsp;tableau&nbsp;$reponse&nbsp;ou&nbsp;$proposition&nbsp;1&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach&nbsp;(</span><span style="color: #0000BB">$reponses&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(</span><span style="color: #0000BB">$propositions</span><span style="color: #007700">[</span><span style="color: #0000BB">$v</span><span style="color: #007700">][</span><span style="color: #DD0000">"vraioufaux"</span><span style="color: #007700">]&nbsp;!=&nbsp;</span><span style="color: #DD0000">"0"</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;</span><span style="color: #FF8000">//return&nbsp;false&nbsp;si&nbsp;différent&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Return&nbsp;true&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">return&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">corriger_question_libre</span><span style="color: #007700">(</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$index</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$reponse_utilisateur</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$rep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">[</span><span style="color: #0000BB">$index</span><span style="color: #007700">][</span><span style="color: #DD0000">"reponse"</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Ajout&nbsp;option&nbsp;à&nbsp;l'expression&nbsp;rationnelle&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$regex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$rep</span><span style="color: #007700">[</span><span style="color: #DD0000">"regex"</span><span style="color: #007700">].</span><span style="color: #DD0000">"i"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//preg_match&nbsp;&amp;&nbsp;return&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">return&nbsp;</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #0000BB">$regex</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$reponse_utilisateur</span><span style="color: #007700">))<br />&nbsp;&nbsp;}<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p>
+<div>Bar&egrave;me<ol class="spip"><li> Boucle pour générer le compte</li><li> Récupération des proposition</li><li> Générer false si le nombre de propositions juste fournie est différent</li><li> Parcours tableau $reponse ou $proposition</li><li> Return false si différent</li><li> Return true</li><li> Ajout option à l&#8217;expression rationnelle</li><li> preg_match &amp; return</li></ol></div>
+</div>
+ 
+ <div id='reponses3568'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5767"> 
+	    <div class="reponse">
+	<div class="forum-titre">R&eacute;ponse 1</div>
+13 mars 2014 &agrave; 18h03min 
+	<div><div class="spip_code"><code>&lt;?php<br />
+function count_propositions_justes($proposition) {<br />
+ &nbsp;$i=0;<br />
+ &nbsp;foreach($tab as $v)<br />
+ &nbsp; &nbsp;if($v['vraioufaux']==true)<br />
+ &nbsp; &nbsp; &nbsp;$i++;<br />
+ &nbsp;return $i;<br />
+}<br />
+<br />
+function corriger_question_qcm($epreuve,$numeroQuestion,$listeProCochees) {<br />
+ &nbsp;$res=true;<br />
+ &nbsp;foreach($listeProCochees as $repCoche) <br />
+ &nbsp; &nbsp;if(!($repCoche in $epreuve[$numeroQuestion]['tab']['propositions']))<br />
+ &nbsp; &nbsp; &nbsp;$res=false;<br />
+ &nbsp;foreach($epreuve[$numeroQuestion]['tab']['propositions'] as $repCorrect) <br />
+ &nbsp; &nbsp;if(!($repCorrect in $listeProCochees))<br />
+ &nbsp; &nbsp; &nbsp;$res=false;<br />
+ &nbsp;}<br />
+ &nbsp;return $res;<br />
+}<br />
+<br />
+function corriger_question_libre($epreuve,$numQuestion,$laReponseFounie) {<br />
+ &nbsp;return (preg_match($epreuve[$numQuestion]['tab']['regex']]],$laReponseFounie)); &nbsp;<br />
+}<br />
+?&gt;</code></div></div>
+	    </div>
+
+<ul>
+
+<li id="forum6574" class="correction">
+	<div>note&nbsp;2 / 8<br />par  Labroche Nicolas</div>
+	<div><ul class="spip"><li>  Boucle pour générer le compte&nbsp;: 0</li><li>  Récupération des proposition&nbsp;: 0</li><li>  Générer false si le nombre de propositions juste fournie est différent&nbsp;: 0</li><li>  Parcours tableau $reponse ou $proposition&nbsp;: 0</li><li>  Return false si différent&nbsp;: 0</li><li>  Return true&nbsp;: 1</li><li>  Ajout option à l&#8217;expression rationnelle&nbsp;: 0</li><li>  preg_match &amp; return&nbsp;: 1</li></ul>
+<p><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;fonction 1&nbsp;: $tab au lieu de $proposition, comparaison à true au lieu de 0 et 1
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;fonction 2&nbsp;: $repCoche in ... Python pas du PHP&nbsp;!
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;&#8217;tab&#8217; n&#8217;est pas un attribut reconnu dans le modèle de données</p></div>
+</li>
+</ul>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3569'></span>
+
+
+<h2 id='a5'>5 Affichage d&#8217;une note <small>(6&nbsp;point(s))</small></h2>
+<p>Ecrire une fonction <code class='spip_code'>afficher_note</code> qui prend en argument&nbsp;:</p>
+
+<ul class="spip"><li>  <code class='spip_code'>$note</code>, entier correspondant à la note obtenue&nbsp;;</li><li>  <code class='spip_code'>$note_max</code>, entier donnant la note maximale&nbsp;;</li><li> <code class='spip_code'>$couleur_note</code>, chaîne indiquant une couleur&nbsp;;</li><li> <code class='spip_code'>$couleur_note_maximale</code>, idem&nbsp;;</li><li> <code class='spip_code'>$largeur</code>, optionnel, avec une valeur par défaut égale à 20.</li></ul>
+<p>Cette fonction doit retourner un code SVG affichant deux rectangles ayant la largeur indiquée et placés côte à côte ainsi&nbsp;:</p>
+
+<ul class="spip"><li> le premier de couleur <code class='spip_code'>$couleur_note</code> et de longueur <code class='spip_code'>$note</code>&nbsp;;</li><li>  le deuxième de couleur <code class='spip_code'>$couleur_note_maximale</code> et de longueur <code class='spip_code'>$note_max</code>. Les deux vont avoir la même largeur définie dans l&#8217;argument <code class='spip_code'>$largeur</code>.</li></ul>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=809&amp;cle=f2dd5a81cedc93c3dd5cc677b1d38fd6f150d3ae&amp;file=distant%2FVCS%2FLI355%2FCC%2F2013-2014%2F1%2Fafficher_note.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger afficher_note.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">afficher_note</span><span style="color: #007700">(</span><span style="color: #0000BB">$note</span><span style="color: #007700">,</span><span style="color: #0000BB">$note_max</span><span style="color: #007700">,</span><span style="color: #0000BB">$couleur_note</span><span style="color: #007700">,</span><span style="color: #0000BB">$couleur_note_max</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$largeur</span><span style="color: #007700">=</span><span style="color: #0000BB">20</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//Valeur&nbsp;par&nbsp;défaut&nbsp;de&nbsp;$largeur&nbsp;1<br />&nbsp;&nbsp;//DOCTYPE&nbsp;1<br />&nbsp;&nbsp;//Positionnement&nbsp;du&nbsp;graphique&nbsp;1<br />&nbsp;&nbsp;//Affectation&nbsp;des&nbsp;dimensions&nbsp;aux&nbsp;rectangles&nbsp;1<br />&nbsp;&nbsp;//Affectation&nbsp;des&nbsp;couleurs&nbsp;aux&nbsp;rectangles&nbsp;1<br />&nbsp;&nbsp;//Affectation&nbsp;des&nbsp;coordonnées&nbsp;x&nbsp;et&nbsp;y&nbsp;pour&nbsp;affichage&nbsp;cote&nbsp;à&nbsp;cote&nbsp;1<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$svg&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"&lt;!DOCTYPE&nbsp;svg&nbsp;PUBLIC&nbsp;'-//W3C//DTD&nbsp;SVG&nbsp;1.1//EN'&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;svg&nbsp;&nbsp;xmlns='http://www.w3.org/2000/svg'&nbsp;width='800'&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height='500'&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;g&nbsp;transform='translate(380,10),scale(1,-1)'&nbsp;id='lanote'&gt;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rect&nbsp;x='0'&nbsp;y='-128'&nbsp;width='$largeur'&nbsp;height='$note'&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fill='$couleur_note'&nbsp;/&gt;<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rect&nbsp;x='$largeur'&nbsp;y='-128'&nbsp;width='$largeur'&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height='$note_max'&nbsp;fill='$couleur_note_max'&nbsp;/&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/g&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/svg&gt;"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$svg</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">//Test<br />//header("Content-Type:&nbsp;image/svg+xml");<br />//echo&nbsp;afficher_note(20,&nbsp;25,&nbsp;"red",&nbsp;"green");&nbsp;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p>
+<div>Bar&egrave;me<ol class="spip"><li> DOCTYPE</li><li> Positionnement du graphique</li><li> Affectation des dimensions aux rectangles</li><li> Affectation des couleurs aux rectangles</li><li> Valeur par défaut de $largeur</li><li> Affectation des coordonnées x et y pour affichage cote à cote</li></ol></div>
+</div>
+ 
+ <div id='reponses3569'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5768"> 
+	    <div class="reponse">
+	<div class="forum-titre">R&eacute;ponse 1</div>
+13 mars 2014 &agrave; 17h36min 
+	<div><div class="spip_code"><code>&lt;?php<br />
+function afficher_note($note,$note_max,$couleur_note,$couleur_note_maximal,$largeur=20){<br />
+ &nbsp;echo header(&quot;Content-type:image/svg+xml&quot;);<br />
+ &nbsp;echo &quot;&lt;!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.DTD'&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;svg version='1.1'<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;... &quot;;<br />
+ &nbsp;echo &quot;&lt;g&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;rect x='0' y='100' width='.$largeur.' heignt='.$note.' fill='.$couleur_note&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;rect x='.$largeur.' y='100' width='.$largeur.' heignt='.$note.' fill='.$couleur_note&gt;&quot;;<br />
+ &nbsp;echo &quot;&lt;/g&gt;&quot;; <br />
+ &nbsp;$res=array();<br />
+ &nbsp;<br />
+}<br />
+?&gt;</code></div></div>
+	    </div>
+
+<ul>
+
+<li id="forum6643" class="correction">
+	<div>note&nbsp;3 / 6<br />par  Labroche Nicolas</div>
+	<div><ul class="spip"><li>  DOCTYPE&nbsp;: 1</li><li>  Positionnement du graphique&nbsp;: 0</li><li>  Affectation des dimensions aux rectangles&nbsp;: 0</li><li>  Affectation des couleurs aux rectangles&nbsp;: 0</li><li>  Valeur par défaut de $largeur&nbsp;: 1</li><li>  Affectation des coordonnées x et y pour affichage cote à cote&nbsp;: 1</li></ul>
+<p><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;erreur dans la taille et la couleur du second rectangle&nbsp;: dommage
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;echo au lieu de return</p></div>
+</li>
+</ul>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3570'></span>
+
+
+<h2 id='a6'>6 L&#8217;épreuve <small>(13&nbsp;point(s))</small></h2>
+<p>Il faut à présent soumettre toutes les questions,  recevoir les réponses et calculer la note finale. Pour cela, écrire un script PHP &#171;&nbsp;jouer_epreuve.php&nbsp;&#187; qui&nbsp;:</p>
+
+<ul class="spip"><li> charge l’épreuve du fichier XML vers un tableau PHP <code class='spip_code'>$epreuve</code>&nbsp;;</li><li> si ce script est appelé par la méthode &#171;&nbsp;GET&nbsp;&#187; (la première fois), il affiche la première question de l’épreuve (la question d’index 0) à l’aide de la fonction <code class='spip_code'>afficher_question</code>, et il positionne&nbsp;:<ul class="spip"><li> un cookie nommé <tt>index</tt> valable 1 heure et qui contient comme valeur l’index de la question affichée (à laquelle l’utilisateur doit répondre),</li><li> un cookie nommé <tt>note</tt> valable 1 heure et qui contient le nombre de réponses justes fournies par l’utilisateur (donc initialisé à 0 lors du premier appel)&nbsp;;</li></ul></li><li> si le script est appelé par la méthode POST&nbsp;:<ul class="spip"><li> il récupère le cookie <tt>index</tt> pour connaitre la question courante,</li><li> il récupère le cookie <tt>note</tt>,</li><li> il corrige la question à l’aide des fonctions <code class='spip_code'>corriger_question_qcm</code> ou <code class='spip_code'>corriger_question_libre</code> selon le cas</li><li> si la réponse de l&#8217;utilisateur est vide (e.g. aucune case cochée), alors il  considère la réponse comme fausse&nbsp;;</li><li> il met à jour le cookie <tt>note</tt> selon si la réponse est juste,</li><li> il affiche la question suivante et incrémente le cookie <tt>index</tt>,</li><li> si c&#8217;est la fin du tableau, il affiche la note obtenue et la note maximale (le nombre total de questions) à l&#8217;aide du code SVG écrit précédemment&nbsp;; de plus il détruit les cookies <tt>index</tt> et <tt>note</tt> à l’aide de la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.setcookie.html" class='spip_glossaire' title="php" rel='external'>setcookie</a>&nbsp;;</li></ul></li><li> Si une incohérence est détectée (exemple&nbsp;: méthode POST et 1 ou 2 cookies absents) alors il affiche un message d’erreur et il détruit les cookies.</li></ul>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=807&amp;cle=5cead97baa170074a58a3a48009555ce66e4791c&amp;file=distant%2FVCS%2FLI355%2FCC%2F2013-2014%2F1%2Fjouer_epreuve.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger jouer_epreuve.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;</span><span style="color: #007700">include&nbsp;</span><span style="color: #DD0000">"lancer_phraseur.php"</span><span style="color: #007700">;<br />&nbsp;&nbsp;include&nbsp;</span><span style="color: #DD0000">"chargements.php"</span><span style="color: #007700">;<br />&nbsp;&nbsp;include&nbsp;</span><span style="color: #DD0000">"affichage_question.php"</span><span style="color: #007700">;<br />&nbsp;&nbsp;include&nbsp;</span><span style="color: #DD0000">"corriger_qcm.php"</span><span style="color: #007700">;<br />&nbsp;&nbsp;include&nbsp;</span><span style="color: #DD0000">"afficher_note.php"</span><span style="color: #007700">;<br />&nbsp;&nbsp;include&nbsp;</span><span style="color: #DD0000">"entete.php"</span><span style="color: #007700">;<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">"FICHIER_EPREUVE"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"epreuve.xml"</span><span style="color: #007700">);<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$index</span><span style="color: #007700">;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$note</span><span style="color: #007700">;<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//Chargement&nbsp;de&nbsp;l'épreuve&nbsp;1<br />&nbsp;&nbsp;</span><span style="color: #0000BB">lancer_phraseur</span><span style="color: #007700">(</span><span style="color: #0000BB">FICHIER_EPREUVE</span><span style="color: #007700">);<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//Test&nbsp;si&nbsp;la&nbsp;méthode&nbsp;est&nbsp;POST&nbsp;1<br />&nbsp;&nbsp;</span><span style="color: #007700">if(</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'REQUEST_METHOD'</span><span style="color: #007700">]&nbsp;!=&nbsp;</span><span style="color: #DD0000">"POST"</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Génération&nbsp;de&nbsp;la&nbsp;première&nbsp;question&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$index&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$html&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">afficher_question</span><span style="color: #007700">(</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$index</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"jouer_epreuve.php"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Calcul&nbsp;du&nbsp;expire&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$expire&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">time</span><span style="color: #007700">()&nbsp;+&nbsp;</span><span style="color: #0000BB">3600</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//positionnement&nbsp;des&nbsp;cookies&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">setcookie</span><span style="color: #007700">(</span><span style="color: #DD0000">"index"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$index</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$expire</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">setcookie</span><span style="color: #007700">(</span><span style="color: #DD0000">"note"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$expire</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;}else{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Method&nbsp;Post<br />&nbsp;&nbsp;&nbsp;&nbsp;//on&nbsp;récupère&nbsp;les&nbsp;cookies<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;//Test&nbsp;et&nbsp;Récupération&nbsp;des&nbsp;cookies&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if(isset(</span><span style="color: #0000BB">$_COOKIE</span><span style="color: #007700">[</span><span style="color: #DD0000">'index'</span><span style="color: #007700">])&nbsp;AND&nbsp;isset(</span><span style="color: #0000BB">$_COOKIE</span><span style="color: #007700">[</span><span style="color: #DD0000">'note'</span><span style="color: #007700">])){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$index&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$_COOKIE</span><span style="color: #007700">[</span><span style="color: #DD0000">'index'</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$note&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$_COOKIE</span><span style="color: #007700">[</span><span style="color: #DD0000">'note'</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Test&nbsp;isset&nbsp;$_POST["qcm_reponse"]&nbsp;!empty&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if(isset(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">"qcm_reponse"</span><span style="color: #007700">])&nbsp;AND&nbsp;!empty(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">"qcm_reponse"</span><span style="color: #007700">])){&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$reponse&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">"qcm_reponse"</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Vérifier&nbsp;si&nbsp;la&nbsp;question&nbsp;est&nbsp;de&nbsp;type&nbsp;qcm&nbsp;ou&nbsp;libre&nbsp;1&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//(Astuce:&nbsp;vérifier&nbsp;directement&nbsp;le&nbsp;type&nbsp;de&nbsp;$_POST["qcm_reponse"])<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if(</span><span style="color: #0000BB">is_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">)){</span><span style="color: #FF8000">//Question&nbsp;de&nbsp;type&nbsp;qcm<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if(</span><span style="color: #0000BB">corriger_question_qcm</span><span style="color: #007700">(</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$index</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$note</span><span style="color: #007700">++;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(</span><span style="color: #0000BB">corriger_question_libre</span><span style="color: #007700">(</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$index</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$note</span><span style="color: #007700">++;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$index</span><span style="color: #007700">++;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Incrémentation&nbsp;correcte&nbsp;de&nbsp;$note&nbsp;et&nbsp;$index&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Test&nbsp;si&nbsp;fin&nbsp;questinnaire&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if(</span><span style="color: #0000BB">$index&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Récupération&nbsp;html&nbsp;question&nbsp;courante&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$html&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">afficher_question</span><span style="color: #007700">(</span><span style="color: #0000BB">$epreuve</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$index</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"jouer_epreuve.php"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$expire&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">time</span><span style="color: #007700">()&nbsp;+&nbsp;</span><span style="color: #0000BB">3600</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">setcookie</span><span style="color: #007700">(</span><span style="color: #DD0000">"index"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$index</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$expire</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">setcookie</span><span style="color: #007700">(</span><span style="color: #DD0000">"note"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$note</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$expire</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Envoi&nbsp;header&nbsp;1&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Content-Type:&nbsp;image/svg+xml"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">afficher_note</span><span style="color: #007700">(</span><span style="color: #0000BB">$note</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$index</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"red"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"green"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$html&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//Suppression&nbsp;les&nbsp;cookies&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">setcookie</span><span style="color: #007700">(</span><span style="color: #DD0000">"index"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">setcookie</span><span style="color: #007700">(</span><span style="color: #DD0000">"note"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}else{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">setcookie</span><span style="color: #007700">(</span><span style="color: #DD0000">"index"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">setcookie</span><span style="color: #007700">(</span><span style="color: #DD0000">"note"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$html&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"&lt;div&gt;une&nbsp;erreur&nbsp;s'est&nbsp;produite&nbsp;veuiilez&nbsp;r&amp;eacute;essayer&lt;/div&gt;"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;if(</span><span style="color: #0000BB">$html</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">entete</span><span style="color: #007700">(</span><span style="color: #DD0000">"Epreuve"</span><span style="color: #007700">),</span><span style="color: #DD0000">"\n&lt;body&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$html</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;/body&gt;\n&lt;/html&gt;"</span><span style="color: #007700">;<br />&nbsp;&nbsp;}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p>
+<div>Bar&egrave;me<ol class="spip"><li> Chargement de l&#8217;épreuve</li><li> Test si la méthode est POST</li><li> Génération de la première question</li><li> Calcul du expire</li><li> Positionnement des cookies</li><li> Test et Récupération des cookies</li><li> Test isset $_POST["qcm_reponse"]&nbsp;!empty</li><li> Vérifier si la question est de type qcm ou libre</li><li> Incrémentation correcte de $note et $index</li><li> Test si fin questinnaire</li><li> Récupération html question courante</li><li> Envoi header</li><li> Suppression les cookies</li></ol></div>
+</div>
+ 
+ <div id='reponses3570'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5780"> 
+	    <div class="reponse">
+	<div class="forum-titre">R&eacute;ponse 1</div>
+13 mars 2014 &agrave; 18h09min 
+	<div><div class="spip_code"><code>&lt;?php<br />
+ERROR_REPORTING(ALL);<br />
+include 'chargements.php';<br />
+include 'affiche_question.php';<br />
+include 'corriger_qcm.php';<br />
+include 'afficher_note.php';<br />
+<br />
+$epreuve=lancer_phraseur('epreuve.xml'); // ??<br />
+<br />
+if(!empty($_GET) {<br />
+ &nbsp;setcookie('index',0,3600,&quot;&quot;,1);<br />
+ &nbsp;setcookie('note',0,3600,&quot;&quot;,1);<br />
+ &nbsp;echo afficher_question($epreuve[0]['enonce']);<br />
+}<br />
+else if (!empty($_POST) {<br />
+ &nbsp;$index=$_COOKIE['index'];<br />
+ &nbsp;$note=$_COOKIE['note'];<br />
+ &nbsp;if(empty())<br />
+ &nbsp; &nbsp;setcookie('note',false);<br />
+ &nbsp;if ($epreuve[$numQuestion]['type']==&quot;LIBRE&quot;) {<br />
+ &nbsp; &nbsp;$laReponseFounie = $_POST['n1'];<br />
+ &nbsp; &nbsp;setcookie('note',corriger_question_libre($epreuve,$index,$laReponseFounie));<br />
+ &nbsp;}<br />
+ &nbsp;else if($epreuve[$numQuestion]['type']==&quot;QCM&quot;) {<br />
+ &nbsp; &nbsp;$listeProCochees = $epreuve[$numQuestion]['n2'];<br />
+ &nbsp; &nbsp;setcookie('note',corriger_question_qcm($epreuve,$index,$listeProCochees));<br />
+ &nbsp;}<br />
+ &nbsp;else {}<br />
+ &nbsp;if (empty($_COOKIE['index'])||empty($_COOKIE['note'])) {<br />
+ &nbsp; &nbsp;echo &quot;erreur&quot;;<br />
+ &nbsp; &nbsp;exit;<br />
+ &nbsp;}<br />
+ &nbsp;if($index&lt;count($epreuve)-1) {<br />
+ &nbsp; &nbsp;setcookie('index',$_COOKIE['index']+1,3600,'',1);<br />
+ &nbsp; &nbsp;echo affichage_question($epreuve,$numQuestion+1,this()); // ?? <br />
+ &nbsp;}<br />
+ &nbsp;else {<br />
+ &nbsp; &nbsp;afficher_note($_COOKIE['note'],count($epreuve),'red','green',20);<br />
+ &nbsp; &nbsp;setcookie('index',null);<br />
+ &nbsp; &nbsp;setcookie('note',null);<br />
+ &nbsp;}<br />
+}<br />
+else {}<br />
+<br />
+?&gt;</code></div></div>
+	    </div>
+
+<ul>
+
+<li id="forum6694" class="correction">
+	<div>note&nbsp;5 / 13<br />par  Labroche Nicolas</div>
+	<div><ul class="spip"><li>  Chargement de l&#8217;épreuve&nbsp;: 1</li><li>  Test si la méthode est POST&nbsp;: 0</li><li>  Génération de la première question&nbsp;: 0</li><li>  Calcul du expire&nbsp;: 0</li><li>  Positionnement des cookies&nbsp;: 1</li><li>  Test et Récupération des cookies&nbsp;: 0</li><li>  Test isset $_POST["qcm_reponse"]&nbsp;!empty&nbsp;: 0</li><li>  Vérifier si la question est de type qcm ou libre&nbsp;: 0</li><li>  Incrémentation correcte de $note et $index&nbsp;: 0</li><li>  Test si fin questinnaire&nbsp;: 1</li><li>  Récupération html question courante&nbsp;: 1</li><li>  Envoi header&nbsp;: 0</li><li>  Suppression les cookies&nbsp;: 1</li></ul>
+<p><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;$epreuve = lancer_phraseur()&nbsp;: ne fonctionne pas car lancer_phraseur modifie la variable $epreuve
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;beaucoup de confusion&nbsp;: expire = 3600 au lieu de time()+3600, pas les bons paramèters dans afficher_question
+<br /><img src="squelettes-dist/puce.gif" width="8" height="11" class="puce" alt="-" />&nbsp;$epreuve[$numQuestion] au lieu de $epreuve[$index]</p></div>
+</li>
+</ul>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3572'></span>
+
+<h2 id='a7'>7 Annexes</h2>
+<div class='spip_code'><p>Contenu du fichier "<tt>epreuve.xml</tt>"&nbsp;:</p>
+<pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;Epreuve type="partiel" annee="2014" module="LI355" intitule="Programmation des Architectures Clients-serveur"&gt;
+  &lt;Question enonce="$a = 12; $b = 53; $c = $a++; Alors $c == ?" type="QCM"&gt;      
+      &lt;Propositions&gt;
+          &lt;Proposition vraioufaux="0" explication=""&gt;
+              13
+          &lt;/Proposition&gt;
+          &lt;Proposition vraioufaux="1" explication=""&gt;
+              15
+          &lt;/Proposition&gt;
+          &lt;Proposition vraioufaux="1" explication=""&gt;
+              0
+          &lt;/Proposition&gt;
+          &lt;Proposition vraioufaux="1" explication=""&gt;
+              25
+          &lt;/Proposition&gt;            
+      &lt;/Propositions&gt;
+  &lt;/Question&gt;
+  
+  &lt;Question enonce="Que fait la fonction str_replace($c, $b, $a); ?" type="QCM"&gt;      
+      &lt;Propositions&gt;
+          &lt;Proposition vraioufaux="1" explication=""&gt;
+              Rien
+          &lt;/Proposition&gt;
+          &lt;Proposition vraioufaux="0" explication=""&gt;
+              Elle remplace par des $b les $c de la chaîne de caractères $a
+          &lt;/Proposition&gt;
+          &lt;Proposition vraioufaux="1" explication=""&gt;
+              Elle cherche le $c et $b dans la chaîne de caractère $a
+          &lt;/Proposition&gt;
+          &lt;Proposition vraioufaux="1" explication="C'est le contraire"&gt;
+              Elle remplace par des $c les $b de la chaîne de caractères $a
+          &lt;/Proposition&gt;            
+      &lt;/Propositions&gt;
+  &lt;/Question&gt;
+  
+  &lt;Question enonce="Qui est Rasmus Lerdorf ?" type="LIBRE"&gt;
+    &lt;Reponse text="Le fondateur du langage PHP" regex="/.*fondateur([^\.,\?\!]*)PHP/" /&gt;
+  &lt;/Question&gt;
+  
+&lt;/Epreuve&gt;
+</pre></div>
+<div class="documents-joints">
+
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=811&amp;cle=dcee242fbe26fd404d78e621d1507c5e4b74cde5&amp;file=distant%2FVCS%2FLI355%2FCC%2F2013-2014%2F1%2Fepreuve.php.txt' type='text/plain' title='texte - - epreuve.php'><img src='Ajouts/Licence_pacs_esj6_2013_2014/local/cache-vignettes/L52xH52/txt-56069-0182d.png' width='52' height='52' style='height:52px;width:52px;' alt='' class='spip_logos' /></a><br />epreuve.php
+<br />
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=816&amp;cle=c4ffb815dc1a3a9f1b18dd622f8c915b50c35c0c&amp;file=distant%2FVCS%2FLI355%2FCC%2F2013-2014%2F1%2Flancer_phraseur.php.txt' type='text/plain' title='texte - - lancer_phraseur.php'><img src='Ajouts/Licence_pacs_esj6_2013_2014/local/cache-vignettes/L52xH52/txt-56069-0182d.png' width='52' height='52' style='height:52px;width:52px;' alt='' class='spip_logos' /></a><br />lancer_phraseur.php
+<br />
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=818&amp;cle=4bcb0720f3548679f1806a321c44e9aaf263e6c1&amp;file=distant%2FVCS%2FLI355%2FCC%2F2013-2014%2F1%2Fepreuve.xml' type='application/xml' title='XML - - epreuve.xml'><img src='Ajouts/Licence_pacs_esj6_2013_2014/local/cache-vignettes/L52xH52/xml-50a01-ff1ee.png' width='52' height='52' style='height:52px;width:52px;' alt='' class='spip_logos' /></a><br />epreuve.xml
+
+</div>
+
+
+<div style='text-align:right' id='s1434'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>epreuve.dtd chargements.php affichage_question.php corriger_qcm.php afficher_note.php jouer_epreuve.php</tt><br />
+</div>
+
+ 
+ <div id='reponses3572'> 
+</div><br />
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2Fpacs-2014fev%2FExamen-d-un-examen"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2Fpacs-2014fev%2FExamen-d-un-examen'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2Fpacs-2014fev%2FExamen-d-un-examen&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 22h54min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2Fpacs-2014fev%2FExamen-d-un-examen'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

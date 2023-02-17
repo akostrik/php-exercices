@@ -1,0 +1,648 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=284"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>8. Cascades de positionnements (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Un menu à dérouler</a></li>
+<li class="menu-lv2"><a href='#a2'>Un menu déroulant en CSS</a></li>
+<li class="menu-lv2"><a href='#a3'>Détourage automatique</a></li>
+<li class="menu-lv2"><a href='#a4'>Feuilles mixtes XHTML/SVG</a></li>
+<li class="menu-lv2"><a href='#a5'>Annexes</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux sur Machine<br />8. Cascades de positionnements</h1>
+<p>L&#8217;une des possibilités des <i>Cascading Style Sheets</i> sur écran est de positionner à des endroits arbitraires des blocs typographiques, y compris dynamiquement en fonction des mouvement de la souris. La présente séance illustre cette fonctionnalité avec deux exercices significatifs&nbsp;: un menu déroulant à plusieurs niveaux spécifié intégralement en CSS, et un algorithme de <i>détourage</i> d&#8217;une image par du texte. Le premier repose essentiellement sur les  <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/css2/selector.html#pseudo-classes" class='spip_glossaire' title="Voir la description de 'pseudo-classes' dans la documentation de 'css' section 2" rel='external'>pseudo-classes</a> (en particulier <tt>hover</tt>) et les propriétés <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/css2/visuren.html#propdef-position" class='spip_glossaire' title="css" rel='external'>position</a> et <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/css2/visuren.html#propdef-display" class='spip_glossaire' title="Voir la description de 'display' dans la documentation de 'css'" rel='external'>display</a>.
+La deuxième repose sur la propriété <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/css2/visuren.html#propdef-float" class='spip_glossaire' title="css" rel='external'>float</a> placée en rafale dans des attributs <a href="http://fr.wikipedia.org/wiki/style" class='spip_glossaire' title="hmt" rel='external'>style</a> (rare cas où il n&#8217;est pas pertinent d&#8217;en faire une feuille de styles), combinée avec les formats d&#8217;image réservant des bits à la <i>transparence</i> de leur fond. 
+Un dernier exercice montre l&#8217;utilisation d&#8217;une feuille de styles enrichissant la séance <a href="SVG-ou-le-traitement-d-image-par" class='spip_in'>SVG, ou le traitement d&#8217;image par XML</a>, afin de se convaincre que les feuilles de styles débordent le cadre de HTML.</p>
+
+<p>On utilisera à profit <a href="http://jigsaw.w3.org/css-validator/" class='spip_out' rel='external'>le validateur de CSS</a> pour vérifier la syntaxe, ainsi que le panneau  <a href="https://addons.mozilla.org/fr/firefox/addon/firebug/" class='spip_out' rel='external'>firebug</a> consacré aux CSS.</p>
+<br /><div id='sequence284'>
+<span id='e2933'></span>
+
+
+<h2 id='a1'>1 Un menu à dérouler</h2>
+<p>Le but de cet exercice et du suivant  est de réaliser un menu déroulant vertical à trois niveaux en utilisant les propriétés des CSS. Dans ce premier exercice,
+il s&#8217;agit d&#8217;écrire une page XHTML référençant une feuille de styles nommée <tt>deroule.css</tt>, et contenant le menu brut suivant chaque ligne étant un lien vers une page quelconque&nbsp;:</p>
+
+<ul class="spip"><li> Accueil</li><li> News</li><li> Photos<ul class="spip"><li> Couleur<ul class="spip"><li> Paris</li><li> Normandie</li></ul></li><li> Noir et Blanc<ul class="spip"><li> Portraits</li><li> Paysages</li></ul></li></ul></li><li> Liens</li><li> Contact</li></ul>
+<p>Vous penserez bien évidemment à valider votre code avant de passer à la phase suivante.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=732&amp;cle=2981ab536f3cb2aa8a8015b67d954d11b0a94dc9&amp;file=distant%2FVCS%2FLI355%2FTM%2F8%2Fderoule.html"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger deroule.html</a>
+</div>
+<p><code><span style="color: #000000">
+&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;Basic&nbsp;1.1//EN"&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"&gt;<br />&lt;html&nbsp;xmlns="http://www.w3.org/1999/xhtml"&gt;<br />&lt;head&gt;<br />&nbsp;&nbsp;&nbsp;&lt;meta&nbsp;http-equiv="Content-Type"&nbsp;content="text/html;&nbsp;charset=iso-8859-15"/&gt;<br />&nbsp;&nbsp;&nbsp;&lt;link&nbsp;rel="stylesheet"&nbsp;href="deroule.css"&nbsp;type="text/css"/&gt;<br />&nbsp;&nbsp;&nbsp;&lt;title&gt;Deroule&lt;/title&gt;<br />&nbsp;&lt;/head&gt;<br />&lt;body&gt;<br />&lt;ul&gt;<br />&nbsp;&lt;li&gt;&lt;a&nbsp;href=""&gt;Accueil&lt;/a&gt;&lt;/li&gt;<br />&nbsp;&lt;li&gt;&lt;a&nbsp;href=""&gt;News&lt;/a&gt;&lt;/li&gt;<br />&nbsp;&lt;li&gt;&lt;a&nbsp;href=""&gt;Photos&lt;/a&gt;<br />&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=""&gt;Couleur&lt;/a&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=""&gt;Normandie&lt;/a&gt;&lt;/li&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=""&gt;Paris&lt;/a&gt;&lt;/li&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/li&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=""&gt;Noir&nbsp;et&nbsp;Blanc&lt;/a&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=""&gt;Portraits&lt;/a&gt;&lt;/li&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=""&gt;Paysages&lt;/a&gt;&lt;/li&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/li&gt;<br />&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />&nbsp;&lt;/li&gt;<br />&nbsp;&lt;li&gt;&lt;a&nbsp;href=""&gt;Liens&lt;/a&gt;&lt;/li&gt;<br />&nbsp;&lt;li&gt;&lt;a&nbsp;href=""&gt;Contact&lt;/a&gt;&lt;/li&gt;<br />&lt;/ul&gt;<br />&lt;/body&gt;<br />&lt;/html&gt;<br /></span>
+</code></p></div>
+ 
+ <div id='reponses2933'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum6048"> 
+	    <div class="reponse">
+	<div class="forum-titre">Un menu à dérouler</div>
+20 mars 2014 &agrave; 21h59min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>&lt;!DOCTYPE html&gt;<br />
+&lt;html xml:lang=&quot;fr&quot; lang=&quot;fr&quot; xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;<br />
+ &lt;head&gt;<br />
+ &nbsp; &lt;meta charset=utf-8' /&gt;<br />
+ &nbsp; &lt;title&gt;title ex 1&lt;/title&gt;<br />
+ &nbsp; &lt;link rel='stylesheet' type='text/css' media='all' href='deroule.css' /&gt;<br />
+ &lt;/head&gt;<br />
+ &lt;body&gt;<br />
+ <br />
+ &lt;ul class=&quot;menu1&quot;&gt;<br />
+ &nbsp; &lt;li class=&quot;menu1_item&quot;&gt;<br />
+ &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu1_item_link&quot;&gt;Accueil&lt;/a&gt;<br />
+ &nbsp; &lt;/li&gt;<br />
+ &nbsp; &lt;li class=&quot;menu1_item&quot;&gt;<br />
+ &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu1_item_link&quot;&gt;News&lt;/a&gt;<br />
+ &nbsp; &nbsp; &lt;ul class=&quot;menu2&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &lt;li class=&quot;menu2_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; &nbsp;class=&quot;menu2_link&quot;&gt;Scientifique&lt;/a&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &lt;ul class=&quot;menu3&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;li class=&quot;menu3_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu3_link&quot;&gt;Mathametiques&lt;/a&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/li&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;li class=&quot;menu3_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu3_link&quot;&gt;Informatique&lt;/a&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/li&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &lt;/ul&gt;<br />
+ &nbsp; &nbsp; &nbsp; &lt;/li&gt;<br />
+ &nbsp; &nbsp; &nbsp; &lt;li class=&quot;menu2_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu2_link&quot;&gt;Sport&lt;/a&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &lt;ul class=&quot;menu3&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;li class=&quot;menu3_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu3_link&quot;&gt;Football&lt;/a&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/li&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;li class=&quot;menu3_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu3_link&quot;&gt;Patinage artistique&lt;/a&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/li&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &lt;/ul&gt;<br />
+ &nbsp; &nbsp; &nbsp; &lt;/li&gt;<br />
+ &nbsp; &nbsp; &lt;/ul&gt;<br />
+ &nbsp; &lt;/li&gt;<br />
+ &nbsp; &lt;li class=&quot;menu1_item&quot;&gt;<br />
+ &nbsp; &nbsp; &lt;a href=&quot;#&quot; &nbsp;class=&quot;menu1_item_link&quot;&gt;Photos&lt;/a&gt;<br />
+ &nbsp; &nbsp; &lt;ul class=&quot;menu2&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &lt;li class=&quot;menu2_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; &nbsp;class=&quot;menu2_link&quot;&gt;Couleurs&lt;/a&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &lt;ul class=&quot;menu3&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;li class=&quot;menu3_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu3_link&quot;&gt;Paris&lt;/a&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/li&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;li class=&quot;menu3_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu3_link&quot;&gt;Normandie&lt;/a&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/li&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &lt;/ul&gt;<br />
+ &nbsp; &nbsp; &nbsp; &lt;/li&gt;<br />
+ &nbsp; &nbsp; &nbsp; &lt;li class=&quot;menu2_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu2_link&quot;&gt;Noir et Blanc&lt;/a&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &lt;ul class=&quot;menu3&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;li class=&quot;menu3_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu3_link&quot;&gt;Portraits&lt;/a&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/li&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;li class=&quot;menu3_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu3_link&quot;&gt;Paysages&lt;/a&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/li&gt;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &lt;/ul&gt;<br />
+ &nbsp; &nbsp; &nbsp; &lt;/li&gt;<br />
+ &nbsp; &nbsp; &lt;/ul&gt;<br />
+ &nbsp; &lt;/li&gt;<br />
+ &nbsp; &lt;li class=&quot;menu1_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu1_item_link&quot;&gt;Liens&lt;/a&gt;<br />
+ &nbsp; &lt;/li&gt;<br />
+ &nbsp; &lt;li class=&quot;menu1_item&quot;&gt;<br />
+ &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#&quot; class=&quot;menu1_item_link&quot;&gt;Contact&lt;/a&gt;<br />
+ &nbsp; &lt;/li&gt;<br />
+ &lt;/ul&gt;<br />
+<br />
+ &lt;/body&gt;<br />
+&lt;/html&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3224'></span>
+
+
+<h2 id='a2'>2 Un menu déroulant en CSS</h2>
+<p>Il s&#8217;agit à présent de concevoir une feuille de styles  telle que ne seront affichés  au démarrage, en noir sur fond blanc,  que les items de premier niveau, chacun entouré d&#8217;un rectangle 2 fois plus haut que lui et de 10 cadratins de largeur, délimité par une bordure  grise de 1/10 de cadratin. Les puces habituellement présentes devant les items seront absentes, et les items seront au centre du rectangle. Au survol par la souris d&#8217;un des items (pseudo-classe <tt>hover</tt>), la  sous-liste éventuelle dépendant de cet item apparaît,  sa propriété  <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/css2/visuren.html#propdef-display" class='spip_glossaire' title="css" rel='external'>display</a> passant de <tt>none</tt> à <tt>block</tt>. En outre, le fond du rectangle entourant l&#8217;item change de couleur. Chaque item de sous-liste est contenu dans le même rectangle que décrit précédemment, mais il est seulement 1,5 fois plus haut. Evidemment, si cette sous-liste contient elle-même des sous-listes, le comportement doit être le même qu&#8217;au premier niveau&nbsp;: pas d&#8217;affichage initial, apparition au survol etc.</p>
+
+<p>On souhaite de sucroît que chaque sous-liste, lorsqu&#8217;elle apparaît, s&#8217;affiche non pas en dessous de l&#8217;item dont elle dépend, mais à sa droite au même niveau de départ. Pour ce faire, on spécifiera que leur propriété <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/css2/visuren.html#propdef-position" class='spip_glossaire' title="css" rel='external'>position</a> vaut <tt>absolute</tt> et on donnera aux propriétés
+ <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/css2/visuren.html#propdef-margin-left" class='spip_glossaire' title="css" rel='external'>margin-left</a> et  <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/css2/visuren.html#propdef-margin-top" class='spip_glossaire' title="css" rel='external'>margin-top</a>  des valeurs découlant des dimensions données ci-dessus (elles peuvent être négatives). On vérifiera qu&#8217;au grossissement de la page, les  blocs restent lisibles et adjacents (c&#8217;est tout l&#8217;intérêt d&#8217;utiliser l&#8217;unité de mesure <tt>em</tt>, plutôt que le pixel ou le point). Enfin, afin d&#8217;améliorer la qualité typographique, on mettra la propriété <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/css2/visuren.html#propdef-text-decoration" class='spip_glossaire' title="css" rel='external'>text-decoration</a> de la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/links.html#edef-A" class='spip_glossaire' title="html" rel='external'>a</a> à <tt>none</tt> (le souligné par défaut est indigne).</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=731&amp;cle=ce1f5a420a2317772571e56ab1b3f0e33b7b0d15&amp;file=distant%2FVCS%2FLI355%2FTM%2F8%2Fderoule.css"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger deroule.css</a>
+</div>
+<pre>/* main items */
+ul {
+ width: 10em;
+ text-align: center;
+ /* aucun cadrage pour que le changement de couleur occupe toute la case */
+ padding: 0;
+}
+/* si on survole une sous-liste on l'affiche */
+ul li:hover ul { display: block; }
+
+/* sinon ne l'affiche pas, mais on specifie le reste */
+ul ul {
+ /* sous-listes pas affichees au depart */
+ display: none;
+ /* mais on prepare leur position */
+ position: absolute;
+ /* revenir en haut du cadre du parent, bordure comprise */
+ margin-top: -2.1em; 
+ /* sauter le cadre du parent sauf la bordure:
+ /* si on laisse de l'espace entre, le :hover ne sera plus actif
+ /* et le menu lateral s'effacera avant d'etre atteint */
+ margin-left: 9.9em;
+ /* pas de cadrage ni de point pour les items */
+ padding: 0;
+ list-style-type: none;
+ /* caracteristiques arbitraires */
+ width: 10em;
+ border: 0.1em solid gray;
+ background-color: #e19d2a;
+}
+ul li {
+ border: 0.1em solid gray;
+ /* elargir le cadre sans recourir a Padding, cf ci-dessus */ 
+ line-height: 2em;
+}
+ul li a {
+ /* occuper tout l'espace */
+ display: block;
+ /* le souligne est pour les incultes en typographie */
+ text-decoration: none;
+ color: rgb(60, 0, 0);
+}
+
+/* colorer les zones de clics au survol */
+ul li a:hover { 
+ color: rgb(51, 102, 102);
+ background-color: #c5701f;
+}
+
+ /* comme ci-dessus, mais en plus petit et sans bordure */
+ul ul li { 
+ border: none;
+ line-height: 1.5em;
+}
+
+ul ul li a {
+ display: block;
+ color: black;
+}
+ul ul li a:hover {
+ color: rgb(255, 255, 204);
+}
+
+/* sous-sous-listes, toujours agir sur Display */
+ul li:hover ul li ul { display: none; }
+/* Attention le rectangle est plus petit, et bordure initiale deja sautee  */
+ul li:hover ul li:hover ul {
+    display: block;
+    position: absolute;
+    margin-top: -1.6em; 
+    margin-left: 10em;
+}
+</pre></div>
+ 
+ <div id='reponses3224'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum6054"> 
+	    <div class="reponse">
+	<div class="forum-titre">Un menu déroulant en CSS</div>
+22 mars 2014 &agrave; 18h45min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><p>************************ EXERCICE 2
+<br /></p>
+<div class="spip_code"><code>.menu1 {<br />
+}<br />
+<br />
+.menu1 UL {<br />
+}<br />
+<br />
+.menu1_item {<br />
+position: relative;<br />
+top: 0;<br />
+left: 0;<br />
+list-style-type: none;<br />
+line-height:2em;<br />
+border: 0.1em solid #000;<br />
+border-color:gray;<br />
+width: 10em;<br />
+text-align:center;<br />
+}<br />
+<br />
+.menu1_item_link {<br />
+display: block;<br />
+text-decoration: none;<br />
+color:black;<br />
+}<br />
+<br />
+.menu2 {<br />
+position: absolute;<br />
+margin-left:0em;<br />
+margin-top:-2em;<br />
+padding: 0 0 0 2px;<br />
+display: none;<br />
+}<br />
+<br />
+.menu1_item:hover .menu2 { <br />
+display: block; <br />
+}<br />
+<br />
+.menu1_item:hover{ <br />
+background-color:yellow;<br />
+}<br />
+<br />
+.menu2 UL {<br />
+}<br />
+<br />
+.menu2_item {<br />
+position: relative;<br />
+top: 0;<br />
+left: 10em;<br />
+list-style-type: none;<br />
+line-height:1.5em;<br />
+border: 0.1em solid #000;<br />
+border-color:gray;<br />
+width: 10em;<br />
+text-align:center;<br />
+}<br />
+<br />
+.menu2_item:hover{ <br />
+background-color:yellow;<br />
+}<br />
+<br />
+.menu2_link {<br />
+display: block;<br />
+text-decoration: none;<br />
+color:black;<br />
+}<br />
+<br />
+.menu3 {<br />
+position: absolute;<br />
+margin-left:0em;<br />
+margin-top:-1.5em;<br />
+padding: 0 0 0 2px;<br />
+display: none;<br />
+}<br />
+<br />
+.menu2_item:hover .menu3 { <br />
+display: block; <br />
+}<br />
+<br />
+.menu3 UL {<br />
+}<br />
+<br />
+.menu3_item {<br />
+position: relative;<br />
+top: 0;<br />
+left: 10em;<br />
+list-style-type: none;<br />
+line-height:1.2em;<br />
+border: 0.1em solid #000;<br />
+border-color:gray;<br />
+width: 10em;<br />
+text-align:center;<br />
+}<br />
+<br />
+.menu3_item:hover{ <br />
+background-color:yellow;<br />
+}<br />
+<br />
+.menu3_link {<br />
+display: block;<br />
+text-decoration: none;<br />
+color:black;<br />
+}</code></div>
+<p>***************************************** EXERCICE 3 
+<br />problème&nbsp;: 1-ere ligne&nbsp;?????????????????????????????????????</p>
+
+<div class="spip_code"><code>&lt;?php<br />
+ERROR_REPORTING(ALL);<br />
+<br />
+function detoure_image($fichierPNG,$align/*left|right*/,$marge=10) { &nbsp; <br />
+list($largeurIm, $hauteurIm, $type, $attr) = getimagesize($fichierPNG);<br />
+$im=imagecreatefrompng($fichierPNG);<br />
+$res='';<br />
+if($align='right') <br />
+ &nbsp;for($y=0;$y&lt;$hauteurIm;$y++) {<br />
+ &nbsp; &nbsp;for($x=0, $alpha=0; $x&lt;$largeurIm; $x++) {<br />
+ &nbsp; &nbsp; &nbsp;$alpha = ((imagecolorat($im, $x, $y)) &gt;&gt; 24) &amp; 0xFF;<br />
+ &nbsp; &nbsp; &nbsp;if($alpha&lt;=125) break;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; $n=$largeurIm+$marge-$x;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; //echo &quot;n = &quot;.$largeurIm.&quot; + &quot;.$marge.&quot; - &quot;.$x.&quot; = &quot;.$n.&quot;&lt;br&gt;&quot;;<br />
+ &nbsp; &nbsp;$res .= &quot;&lt;div style='background-color:red;float:right;clear:right;height:1px;width:&quot;.$n.&quot;px'&gt;&lt;/div&gt;&quot;;<br />
+ &nbsp; &nbsp; &nbsp; }<br />
+return $res;<br />
+}<br />
+<br />
+function detoure($texte,$fichierPNG,$align /*left|right*/,$marge=10) { // image detourne par le texte<br />
+list($w, $h, $type, $attr) = getimagesize($fichierPNG);<br />
+return &quot;&lt;div style='borders:1px;width:&quot;.(($w*1.5)).&quot;px'&gt;&quot;. <br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &quot;&lt;div style='position:relative;float:&quot;.$align.&quot;'&gt;&quot;.<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;&lt;span style='background:url(&quot;.$fichierPNG.&quot;);position:absolute;&quot;.$align.&quot;:0px;width:&quot;.$w.&quot;px;height:&quot;.$h.&quot;px'/&gt;&quot;.<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &quot;&lt;/div&gt;&quot;.<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; detoure_image($fichierPNG,$align,$marge). // = &quot;&lt;div&gt;&lt;/div&gt;...&lt;div&gt;&lt;/div&gt;&quot;<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &quot;&lt;p style=''&gt;&quot;.$texte.&quot;&lt;/p&gt;&quot;.<br />
+ &nbsp; &nbsp; &nbsp; &quot;&lt;/div&gt;&quot;;<br />
+}<br />
+<br />
+$texte='1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9';<br />
+echo &quot;&lt;!DOCTYPE html&gt;&quot;.&quot;&lt;html xml:lang='fr' lang='fr' xmlns='http://www.w3.org/1999/xhtml'&gt;&quot;.<br />
+ &nbsp; &quot;&lt;head&gt;&quot;.&quot;&lt;meta charset='utf-8'/&gt;&quot;.&quot;&lt;title&gt;tme 8&lt;/title&gt;&quot;.&quot;&lt;/head&gt;&quot;.&quot;&lt;body&gt;&quot;.<br />
+ &nbsp; detoure($texte,'ris.png','right',10).&quot;&lt;/body&gt;&lt;/html&gt;&quot;;<br />
+?&gt;</code></div>
+<p>******************************************* EXERCICE 4 
+<br />table.css&nbsp;:  
+<br />//on peut dupliquer les valeurs&nbsp;???????????????????????????</p>
+
+<div class="spip_code"><code>.c1 {<br />
+ background-color:red; &nbsp;<br />
+ fill;red<br />
+}<br />
+<br />
+.c2 {<br />
+ background-color:green; &nbsp;<br />
+ fill:green;<br />
+}<br />
+.c3 {<br />
+ background-color:violet; &nbsp;<br />
+ fill:violet;<br />
+}<br />
+<br />
+.c4 {<br />
+ background-color:blue; &nbsp;<br />
+ fill:blue;<br />
+}<br />
+<br />
+.c5 {<br />
+ background-color:grey; &nbsp;<br />
+ fill:grey;<br />
+}<br />
+<br />
+.c6 {<br />
+ background-color:orange; &nbsp;<br />
+ fill:orange;<br />
+}<br />
+<br />
+.c7 {<br />
+ background-color:aqua; &nbsp;<br />
+ fill:aqua;<br />
+}</code></div>
+<p>envoi.php renouvlé&nbsp;:
+<br /></p>
+<div class="spip_code"><code>&lt;?php<br />
+error_reporting(E_ALL);<br />
+<br />
+function rectangles($table,$widthTab,$heightTab) {<br />
+echo header(&quot;Content-type:image/svg+xml&quot;);<br />
+echo &quot;&lt;!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'&gt;&quot;;<br />
+echo &quot;&lt;?xml-stylesheet type='text/css' href='table.css' ?&gt; &quot;;<br />
+$widthTab = '&quot;' . $widthTab . '&quot;';<br />
+$heightTab = '&quot;' . $heightTab . '&quot;';<br />
+echo &quot;&lt;svg version = '1.1' <br />
+ &nbsp; &nbsp; baseProfile='full' <br />
+ &nbsp; &nbsp; xmlns = 'http://www.w3.org/2000/svg' <br />
+ &nbsp; &nbsp; xmlns:xlink = 'http://www.w3.org/1999/xlink' <br />
+ &nbsp; &nbsp; xmlns:ev = 'http://www.w3.org/2001/xml-events' <br />
+ &nbsp; &nbsp; height = $widthTab<br />
+ &nbsp; &nbsp; width = $heightTab &gt;&quot;;<br />
+echo &quot;&lt;g transform='translate(50,50)'&gt;&quot;;<br />
+<br />
+$i=0;<br />
+$j=0;<br />
+foreach($table as $ligne) {<br />
+ foreach($ligne as $case) {<br />
+ &nbsp; $width = '&quot;30&quot;'; // '&quot;'.$width.'&quot;'<br />
+ &nbsp; $height = '&quot;50&quot;';<br />
+ &nbsp; $colspan = isset($case['colspan']) ? $case['colspan'] : 1;<br />
+ &nbsp; $class = isset($case['class']) ? '&quot;'.$case['class'].'&quot;' : '&quot;c1&quot;';<br />
+ &nbsp; $contenu = $case['contenu'];<br />
+<br />
+ &nbsp; echo '&lt;rect x=&quot;10&quot; y=&quot;10&quot; width=' . $width . ' height=' . $height . ' class=' . $class. ' transform=&quot;translate(' . $i . ',' . $j .')&quot;/&gt;';<br />
+ &nbsp; echo '&lt;text transform=&quot;translate(' . (($i+20)) . ',' . (($j+50)) .')&quot;&gt;' . $contenu . '&lt;/text&gt;';<br />
+ &nbsp; $i+=30;<br />
+ &nbsp; for (;$colspan&gt;1;$colspan--) {<br />
+ &nbsp; &nbsp; echo '&lt;rect x=&quot;10&quot; y=&quot;10&quot; width=' . $width . ' height=' . $height . ' class=' . $class. ' transform=&quot;translate(' . $i . ',' . $j .')&quot;/&gt;';<br />
+ &nbsp; &nbsp; $i+=30;<br />
+ &nbsp; }<br />
+ }<br />
+ $i=0;<br />
+ $j+=50;<br />
+}<br />
+echo &quot;&lt;/g&gt;&lt;/svg&gt;&quot;;<br />
+}<br />
+<br />
+$table=array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('class' =&gt; 'c1','contenu'=&gt;'1','colspan'=&gt;'1'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('class' =&gt; 'c2','contenu'=&gt;'2','colspan'=&gt;'2'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('class' =&gt; 'c3','contenu'=&gt;'3','colspan'=&gt;'3')<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('class' =&gt; 'c4','contenu'=&gt;'4','colspan'=&gt;'2'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('class' =&gt; 'c5','contenu'=&gt;'5','colspan'=&gt;'3'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('class' =&gt; 'c6','contenu'=&gt;'6','colspan'=&gt;'1')<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array(<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('class' =&gt; 'c7','contenu'=&gt;'7','colspan'=&gt;'3'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('contenu'=&gt;'8'),<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('class' =&gt; 'c3','contenu'=&gt;'9','colspan'=&gt;'2')<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;)<br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; );<br />
+<br />
+rectangles($table,1500,1500);<br />
+?&gt;</code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e3221'></span>
+
+
+<h2 id='a3'>3 Détourage automatique</h2>
+<p>L&#8217;insertion d&#8217;une image dans un texte permet d&#8217;égayer celui-ci, mais occupe beaucoup de place, et de manière particulièrement dispendieuse si l&#8217;image possède un fond uni constituant un pourcentage important du rectangle englobant l&#8217;image. On peut économiser cette place perdue en procédant au <i>détourage</i> de l&#8217;image, afin que le texte occupe ce fond uni, en suivant le contour des objets significatifs, comme on le voit sur le document joint. Sur un support imprimé, cette opération s&#8217;effectue à l&#8217;aide d&#8217;une paire de ciseaux. Avec les feuilles de styles en cascades, cela peut s&#8217;obtenir en jouant sur la propriété <tt>float</tt>. Si de plus on utilise les fonctions de manipulation d&#8217;images numériques, on peut réaliser un détourage automatique.</p>
+
+<p>Les formats PNG et GIF qui expriment la valeur d&#8217;un pixel par des nombres de 32 bits, indiquent dans les bits  24 à 31 la <i>transparence</i> de ce pixel. Si cette valeur est supérieure à 125, ce point de l&#8217;image est considéré comme essentiellement transparent, il est donc permis d&#8217;écrire du texte dessus sans nuire à l&#8217;image.  La fonction PHP <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.imagecreatefrompng.html" class='spip_glossaire' title="Voir la description de 'imagecreatefrompng' dans la documentation de 'php'" rel='external'>imagecreatefrompng</a>, prenant en argument un fichier au format PNG, retourne une représentation interne de ce fichier.  Sur cette représentation, on peut notamment appliquer la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.ImageColorAt.html" class='spip_glossaire' title="Voir la description de 'ImageColorAt' dans la documentation de 'php'" rel='external'>ImageColorAt</a>, prenant également comme 2e et 3e argument les coordonnées <i>x,y</i> du pixel. Les dimensions de l&#8217;image sont données par la fonction PHP <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.getimagesize.html" class='spip_glossaire' title="Voir la description de 'getimagesize' dans la documentation de 'php'" rel='external'>getimagesize</a>&nbsp;appliquée au fichier, et retournant un tableau des deux valeurs <i>largeur, hauteur</i>.</p>
+
+<p>Ecrire d&#8217;abord une fonction PHP <tt>detoure_image</tt> prenant en argument un fichier PNG, un argument valant <tt>right</tt> ou <tt>left</tt>, et un nombre entier optionnel exprimant une marge, et calculant autant de nombres que l&#8217;image contient de lignes de pixels. Ces nombres seront  égaux à la largeur de l&#8217;image augmentée de la marge, et diminuée  de la zone de transparence à droite ou à gauche (selon ce qu&#8217;indique le 2e argument) de chaque ligne de l&#8217;image.
+A partir de chacun de ces nombres, on produira une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-DIV" class='spip_glossaire' title="Voir la description de 'div' dans la documentation de 'html'" rel='external'>div</a> dont l&#8217;attribut <a href="http://fr.wikipedia.org/wiki/style" class='spip_glossaire' title="Voir la description de 'style' dans la documentation de 'html#'" rel='external'>style</a> vaudra&nbsp;:
+<br />
+<tt>float: $align; clear: $align; height: 1px; width: $<i>n</i>px;</tt>
+<br />
+où $align est  la valeur du deuxième argument, et $n le nombre calculé.
+La fonction retournera en résultat la concaténation de ces balises ouvrantes <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-DIV" class='spip_glossaire' title="Voir la description de 'div' dans la documentation de 'html'" rel='external'>div</a>, chacune étant immédiatement suivie de sa balise fermante. Cette succession de largeurs différentes combinée avec la propriété <tt>float</tt> indique au texte donné ultérieurement l&#8217;espace dont il dispose pour s&#8217;afficher.</p>
+
+<p>Ecrire ensuite une fonction PHP <tt>détoure</tt> prenant en argument un texte puis  trois arguments identiques à ceux de fonction la précédente. Cette nouvelle fonction retourne en valeur un code HTML qui 
+présentera l&#8217;image détourée par ce texte, car composé de&nbsp;:</p>
+
+<ul class="spip"><li> une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-DIV" class='spip_glossaire' title="Voir la description de 'div' dans la documentation de 'html'" rel='external'>div</a> comportant un attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/present/styles.html#adef-style" class='spip_glossaire' title="Voir la description de 'style' dans la documentation de 'html' section 1" rel='external'>style</a> indiquant une bordure de 1 pixel, et une largeur égale à 150% de la largeur de l&#8217;image&nbsp;;</li><li> une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-DIV" class='spip_glossaire' title="Voir la description de 'div' dans la documentation de 'html'" rel='external'>div</a>, fille de la précédente, comportant un attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/present/styles.html#adef-style" class='spip_glossaire' title="Voir la description de 'style' dans la documentation de 'html' section 1" rel='external'>style</a> égal à <tt>position: relative; float: $align;</tt> où $align est la valeur du 2e argument&nbsp;;</li><li> une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-SPAN" class='spip_glossaire' title="Voir la description de 'span' dans la documentation de 'html'" rel='external'>span</a>, fille de la précédente, comportant un attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/present/styles.html#adef-style" class='spip_glossaire' title="Voir la description de 'style' dans la documentation de 'html' section 1" rel='external'>style</a> égal à <tt>background: url($img); position: absolute; $align: 0px; width: $<i>w</i>px; height:$<i>h</i>px;</tt>, où $img et $align sont les deux premiers arguments, et $w et $h les dimensions de l&#8217;image&nbsp;;</li><li> une suite de balises <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-DIV" class='spip_glossaire' title="Voir la description de 'div' dans la documentation de 'html'" rel='external'>div</a>, filles de la première balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-DIV" class='spip_glossaire' title="Voir la description de 'div' dans la documentation de 'html'" rel='external'>div</a>, telle que retournée par la fonction ci-desus&nbsp;;</li><li> enfin, une balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/text.html#edef-P" class='spip_glossaire' title="Voir la description de 'p' dans la documentation de 'html'" rel='external'>p</a>, comportant le texte fourni en argument.</li></ul>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=824&amp;cle=dc3ce34caeb69df342e2d3cffc2b62a408226001&amp;file=distant%2FVCS%2FLI355%2FTM%2F8%2Fdetoure.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger detoure.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">//&nbsp;Filtre&nbsp;d'Arnaud&nbsp;Martin&nbsp;pour&nbsp;detourer&nbsp;une&nbsp;image<br />//&nbsp;avec&nbsp;simplification&nbsp;par&nbsp;rapport&nbsp;a&nbsp;l'original,&nbsp;soucieux&nbsp;de&nbsp;portabilite<br />//&nbsp;http://www.paris-beyrouth.org/tutoriaux-spip/article/un-habillage-irregulier-float<br /><br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">image_float&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$img</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$align</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$texte</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$margin</span><span style="color: #007700">=</span><span style="color: #0000BB">10</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;list(</span><span style="color: #0000BB">$w</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$h</span><span style="color: #007700">)&nbsp;&nbsp;=&nbsp;</span><span style="color: #0000BB">getimagesize</span><span style="color: #007700">(</span><span style="color: #0000BB">$img</span><span style="color: #007700">);<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$pixels&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecreatefrompng</span><span style="color: #007700">(</span><span style="color: #0000BB">$img</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$right&nbsp;</span><span style="color: #007700">=&nbsp;(</span><span style="color: #0000BB">$align&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #DD0000">"right"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$style&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"float:&nbsp;$align;&nbsp;clear:&nbsp;$align;&nbsp;height:&nbsp;1px;&nbsp;width:&nbsp;"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$forme&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(</span><span style="color: #0000BB">$j&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$j&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">$h</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$j</span><span style="color: #007700">++)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$larg&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$w</span><span style="color: #007700">+</span><span style="color: #0000BB">$margin</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">&lt;=&nbsp;</span><span style="color: #0000BB">$w</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$i</span><span style="color: #007700">++)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">ImageColorAt</span><span style="color: #007700">(</span><span style="color: #0000BB">$pixels</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$right&nbsp;</span><span style="color: #007700">?&nbsp;</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">:&nbsp;(</span><span style="color: #0000BB">$w</span><span style="color: #007700">-</span><span style="color: #0000BB">$i</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">$j</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(((</span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">&gt;&gt;&nbsp;</span><span style="color: #0000BB">24</span><span style="color: #007700">)&nbsp;&amp;&nbsp;</span><span style="color: #0000BB">0xFF</span><span style="color: #007700">)&nbsp;&gt;&nbsp;</span><span style="color: #0000BB">125</span><span style="color: #007700">)&nbsp;</span><span style="color: #0000BB">$larg</span><span style="color: #007700">--;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;break;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$forme&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"\n&lt;div&nbsp;style='$style$larg"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"px;'&gt;&lt;/div&gt;"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$w&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">$w</span><span style="color: #007700">/</span><span style="color: #0000BB">2</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #DD0000">"&lt;div&nbsp;style='border:&nbsp;1px&nbsp;solid;&nbsp;width:&nbsp;${c}px;&nbsp;padding:&nbsp;8px;'&gt;"&nbsp;</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&lt;div&nbsp;style='position:&nbsp;relative;&nbsp;float:&nbsp;$align;'&gt;&lt;span&nbsp;style='background-image:url($img);&nbsp;position:&nbsp;absolute;&nbsp;$align:&nbsp;0px;width:&nbsp;${w}px;&nbsp;height:${h}px;'&gt;&lt;/span&gt;&lt;/div&gt;$forme&lt;p&gt;$texte&lt;/p&gt;&lt;/div&gt;"</span><span style="color: #007700">;<br />}<br /><br />echo&nbsp;</span><span style="color: #DD0000">'&lt;html&gt;&lt;body&gt;'</span><span style="color: #007700">,</span><span style="color: #0000BB">image_float&nbsp;</span><span style="color: #007700">(</span><span style="color: #DD0000">'gnu.png'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'right'</span><span style="color: #007700">,<br /></span><span style="color: #DD0000">"Lorem&nbsp;ipsum&nbsp;dolor&nbsp;sit&nbsp;amet,&nbsp;consectetuer&nbsp;adipiscing&nbsp;elit.<br />Vivamus&nbsp;ut&nbsp;nunc&nbsp;eget&nbsp;ante&nbsp;ornare&nbsp;nonummy.<br />Ut&nbsp;arcu.<br />Duis&nbsp;tincidunt&nbsp;tincidunt&nbsp;quam.<br />In&nbsp;elementum&nbsp;blandit&nbsp;odio.<br />Nullam&nbsp;ultrices.<br />Nulla&nbsp;sem&nbsp;augue,&nbsp;mollis&nbsp;id,&nbsp;vulputate&nbsp;eget,&nbsp;ullamcorper&nbsp;ultrices,&nbsp;purus.<br />Aenean&nbsp;porttitor&nbsp;odio&nbsp;at&nbsp;mauris.<br />Mauris&nbsp;quis&nbsp;enim&nbsp;vitae&nbsp;purus&nbsp;dictum&nbsp;ultricies.<br />Proin&nbsp;pharetra&nbsp;lectus&nbsp;auctor&nbsp;lacus.<br />Quisque&nbsp;at&nbsp;sem&nbsp;ac&nbsp;lectus&nbsp;ornare&nbsp;vehicula.<br />Nunc&nbsp;pulvinar,&nbsp;leo&nbsp;ut&nbsp;tristique&nbsp;auctor,&nbsp;felis&nbsp;diam&nbsp;gravida&nbsp;neque,<br />consectetuer&nbsp;cursus&nbsp;sem&nbsp;nisl&nbsp;ut&nbsp;enim.<br />Lorem&nbsp;ipsum&nbsp;dolor&nbsp;sit&nbsp;amet,&nbsp;consectetuer&nbsp;adipiscing&nbsp;elit.<br />Donec&nbsp;justo.<br />Aliquam&nbsp;erat&nbsp;volutpat.<br />Sed&nbsp;vel&nbsp;enim&nbsp;nec&nbsp;tellus&nbsp;suscipit&nbsp;imperdiet.<br />Maecenas&nbsp;sagittis,&nbsp;dolor&nbsp;id&nbsp;tincidunt&nbsp;suscipit,&nbsp;orci&nbsp;tortor&nbsp;fermentum&nbsp;mi,<br />id&nbsp;varius&nbsp;dolor&nbsp;nisi&nbsp;quis&nbsp;lectus.<br />Quisque&nbsp;ante&nbsp;sem,&nbsp;molestie&nbsp;a,&nbsp;euismod&nbsp;sed,&nbsp;tempus&nbsp;sit&nbsp;amet,&nbsp;mauris.<br />Integer&nbsp;vel&nbsp;ante&nbsp;eget&nbsp;urna&nbsp;sagittis&nbsp;consectetuer.<br />Quisque&nbsp;ullamcorper&nbsp;convallis&nbsp;velit."</span><span style="color: #007700">)<br />;<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+<span id='e3220'></span>
+
+
+<h2 id='a4'>4 Feuilles mixtes XHTML/SVG</h2>
+<p>On trouvera en annexe le fichier  <tt>table-pour-svg.html</tt>, variante du fichier utilisé pour la séance <a href="SVG-ou-le-traitement-d-image-par" class='spip_in'>SVG, ou le traitement d&#8217;image par XML</a> qui transformait une page XHTML comportant une <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TABLE" class='spip_glossaire' title="Voir la description de 'table' dans la documentation de 'html'" rel='external'>table</a> en un document SVG. Cette variante spécifie les couleurs non plus par un attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/present/styles.html#adef-style" class='spip_glossaire' title="Voir la description de 'style' dans la documentation de 'html' section 1" rel='external'>style</a>, mais par un attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#adef-class" class='spip_glossaire' title="Voir la description de 'class' dans la documentation de 'html' section 1" rel='external'>class</a>, indiquant un style défini dans un fichier nommé <tt>table.css</tt>.</p>
+
+<p>Un document SVG peut référencer un feuille de style nommé <tt>table.css</tt> en mettant après son DOCTYPE, la ligne&nbsp;:
+<br />
+<code>&lt;?xml-stylesheet type="text/css" href="table.css" ?>
+</code>
+<br />
+On suppose que le script PHP produisant le document SVG insère à présent  cette ligne. L&#8217;attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/present/styles.html#adef-style" class='spip_glossaire' title="Voir la description de 'style' dans la documentation de 'html' section 1" rel='external'>style</a> n&#8217;étant plus disponible dans la page XHTML, le script ne peut doter les balises <tt>rect</tt> d&#8217;un attribut <tt>fill</tt>, aussi il lui donne le même attribut <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#adef-class" class='spip_glossaire' title="Voir la description de 'class' dans la documentation de 'html' section 1" rel='external'>class</a> que celui trouvé dans la balise <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/tables.html#edef-TD" class='spip_glossaire' title="Voir la description de 'td' dans la documentation de 'html'" rel='external'>td</a>.</p>
+
+<p>Ecrire la feuille de styles <tt>table.css</tt>, donc utilisée par les deux documents XHTML et SVG, permettant de rendre les mêmes couleurs que précédemment.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=737&amp;cle=4ab128e953f8376b576bb17395a791a0d606efd9&amp;file=distant%2FVCS%2FLI355%2FTM%2F8%2Ftable.css"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger table.css</a>
+</div>
+<pre>.c1 {background-color: red; fill: red}
+.c2 {background-color: green; fill: green}
+.c3 {background-color: orchid; fill: orchid}
+.c4 {background-color: blue; fill: blue}
+.c5 {background-color: grey; fill: grey}
+.c6 {background-color: orange; fill: orange}
+.c7 {background-color: cyan; fill: cyan}
+
+</pre></div>
+
+
+<span id='e3375'></span>
+
+<h2 id='a5'>5 Annexes</h2>
+
+<div class="documents-joints">
+
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=833&amp;cle=54ab8de2b214af4a1c9ed68c56627cef5e02f967&amp;file=distant%2FVCS%2FLI355%2FTM%2F8%2Fdetoure.jpg' type='image/jpeg' title='JPEG - - detoure.jpg'><img src='Ajouts/Licence_pacs_esj6_2013_2014/local/cache-vignettes/L52xH52/jpg-2e71e-4b60a.png' width='52' height='52' style='height:52px;width:52px;' alt='' class='spip_logos' /></a><br />detoure.jpg
+<br />
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=834&amp;cle=b9696d9b4696c2e8e6f682f29f3f621f27c0bc55&amp;file=distant%2FVCS%2FLI355%2FTM%2F8%2Fgnu.png' type='image/png' title='PNG - - gnu.png'><img src='Ajouts/Licence_pacs_esj6_2013_2014/local/cache-vignettes/L52xH52/png-66f07-4c1ad.png' width='52' height='52' style='height:52px;width:52px;' alt='' class='spip_logos' /></a><br />gnu.png
+<br />
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=835&amp;cle=9b327a98a3e568f35a219e21e6bde68becda4eba&amp;file=distant%2FVCS%2FLI355%2FTM%2F8%2Ftable-pour-svg.html' type='text/html' title='HTML - - table-pour-svg.html'><img src='Ajouts/Licence_pacs_esj6_2013_2014/local/cache-vignettes/L52xH52/html-df9ff-5c7ff.png' width='52' height='52' style='height:52px;width:52px;' alt='' class='spip_logos' /></a><br />table-pour-svg.html
+
+</div>
+
+
+<div style='text-align:right' id='s1103'>
+Fichier &agrave; cr&eacute;er&nbsp;: <tt>deroule.html deroule.css detoure.php table.css</tt><br />
+</div>
+
+
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FCascades-de-positionnements"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FCascades-de-positionnements'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FCascades-de-positionnements&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 15h52min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FCascades-de-positionnements'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

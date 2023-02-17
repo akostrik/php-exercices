@@ -1,0 +1,430 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=277"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>4. Observation des protocoles textuels (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>La commande telnet</a></li>
+<li class="menu-lv2"><a href='#a2'>Protocole HTTP et Telnet</a></li>
+<li class="menu-lv2"><a href='#a3'>Visualiser les en-têtes</a></li>
+<li class="menu-lv2"><a href='#a4'>FireBug &amp; Web Developer</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux sur Machine<br />4. Observation des protocoles textuels</h1>
+<p>Cette séance est consacrée à l&#8217;observation de protocoles textuels, en particulier HTTP. On commencera par utiliser <a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=zman&amp;nom=telnet" class='spip_glossaire' title="Voir la description de 'telnet' dans la documentation de 'man'">telnet</a> afin de comprendre l&#8217;essence de l&#8217;architecture client/serveur débarassée des commodités des interfaces graphiques traditionnelles.</p>
+
+<p>Ensuite, on écrira un petit script PHP permettant de visualiser les en-têtes que les clients Internet ne montrent justement pas.</p>
+
+<p>Enfin, on chargera deux extensions de Firefox, savoir
+Web Developer et Firebug, qui permettent d&#8217;observer les réponses aux requêtes et plus généralement d&#8217;analyser les pages web&nbsp;: affichage des en-têtes HTTP, représentation arborescente ou indentée du source, temps de chargement des différentes composantes, etc. La barre de menu du navigateur, lorsqu&#8217;il est dépouvu de ces extensions, ne fournit que des versions très simplifiées de ces services&nbsp;: cookie montrés en vrac, source montrée sans sa structure, en-têtes inaccessibles etc. Ces deux extensions sont donc  indispensables à la programmation Web.</p>
+
+<p>Appelez Firefox,  vérifiez que le proxy est déclaré selon les recommandations indiquées dans votre salle de travaux pratiques. Dans le menu <tt>Outils</tt>, demandez à voir toutes les extensions disponibles, et  chargez Firebug  et Web Developer (attention à l&#8217;espace entre ces deux mots). Vous serez invité à  redémarrer Firefox pour qu&#8217;il prenne en compte ces extensions, qui vous sont personnelles. Après rechargement, vous verrez apparaître les menus de Web Developer en dessous des icones de navigation&nbsp;:  <strong>Disable, Cookies, CSS, Forms, Images, information, ... Options</strong>.  Firebug se repère quant à lui par un petit icône représentant un insecte en haut à droite de la fenêtre (du moins dans certaines versions).</p>
+<br /><div id='sequence277'>
+<span id='e2343'></span>
+
+
+<h2 id='a1'>1 La commande telnet</h2>
+<p>La commande  <a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=zman&amp;nom=telnet" class='spip_glossaire' title="Voir la description de 'telnet' dans la documentation de 'man'">telnet</a>  est un client capable de se connecter à tout serveur afin de lui envoyer des requêtes et de recevoir ses réponses. Elle
+ prend deux arguments, une adresse ou un nom de machine et un numéro de port (ou un nom associé à un numéro de port dans <tt>/etc/services</tt>).
+Elle se connecte à la machine spécifiée, et il faut alors envoyer des requêtes spécifiques au protocole parlé sur ce port.</p>
+
+<p>Il faut préciser le numéro de port, car sa valeur par défaut est tombée quasiment en désuétude (23, qui permet  une connexion distante non cryptée, danger qui a conduit à la fermeture de ce port pratiquement partout). Si la machine n&#8217;est pas précisée, <tt>telnet</tt> renvoie une invite&nbsp;; saisir alors <tt>help</tt> pour connaître ses commandes.</p>
+
+<p>Appeler  <a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=zman&amp;nom=telnet" class='spip_glossaire' title="Voir la description de 'telnet' dans la documentation de 'man'">telnet</a>  sans argument. Quelle commande permet de faire alors comme si on avait écrit tout de suite  <a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=zman&amp;nom=telnet" class='spip_glossaire' title="Voir la description de 'telnet' dans la documentation de 'man'">telnet</a> <i> machine port</i>&nbsp;?</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=712&amp;cle=5bd5737362e70b28695eab829d051936a5c0b6d6&amp;file=distant%2FVCS%2FLI355%2FTM%2F4%2FTM4-1.txt"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger TM4-1.txt</a>
+</div>
+<pre>Il faut écrire &lt;tt&gt;open&lt;/tt&gt;{ machine port}.</pre></div>
+ 
+ <div id='reponses2343'> 
+</div><br />
+
+<span id='e2395'></span>
+
+
+<h2 id='a2'>2 Protocole HTTP et Telnet</h2>
+<p>Connectez-vous à  votre serveur http local avec   <a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=zman&amp;nom=telnet" class='spip_glossaire' title="Voir la description de 'telnet' dans la documentation de 'man'">telnet</a> , autrement dit à la machine <tt>localhost</tt>  (alias <tt>127.0.0.1</tt>) sur le port 80, traditionnel  des serveurs HTTP. Envoyez la  requête minimale&nbsp;:</p>
+<pre>GET /</pre>
+<p>Quel est le type de document renvoyé&nbsp;? Que faut-il donner comme URL  à votre navigateur pour y voir apparaître la même chose&nbsp;?</p>
+
+<p>Relancer  <a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=zman&amp;nom=telnet" class='spip_glossaire' title="Voir la description de 'telnet' dans la documentation de 'man'">telnet</a>  avec les mêmes arguments. Envoyez la requête</p>
+<pre>GET /~<i>login</i> HTTP/1.0</pre>
+<p>suivie de 2 sauts de lignes, 
+où <i>login</i> est votre numéro d&#8217;étudiant. Quel est le code de retour envoyé par le serveur&nbsp;? Que veut-il dire&nbsp;?</p>
+
+<p>Relancer encore  <a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=zman&amp;nom=telnet" class='spip_glossaire' title="Voir la description de 'telnet' dans la documentation de 'man'">telnet</a>  avec les mêmes arguments. Envoyez la requête</p>
+<pre>GET /~<i>login</i> HTTP/1.1</pre>
+<p>où <i>login</i> est votre numéro d&#8217;étudiant (ATTENTION, notez le changement avec la requête précédente).  Tapez ensuite <code class='spip_code'>Host: 127.0.0.1</code>, cet en-tête étant obligatoire en HTTP/1.1, puis
+les 2 sauts de lignes. Constatez que cette fois la communication n&#8217;est pas coupée&nbsp;; vous avez environ 30 secondes (selon les installations) pour soumettre une nouvelle requête, suggérée par la réponse à la première. Quel est le document alors renvoyé&nbsp;? Que conclure sur ce que fait votre navigateur lorsque vous lui donnez <tt>http://localhost/~</tt><i>login</i> comme URL&nbsp;?</p>
+
+<p>Relancer une dernière fois  <a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=zman&amp;nom=telnet" class='spip_glossaire' title="Voir la description de 'telnet' dans la documentation de 'man'">telnet</a>  avec les mêmes arguments en redirigeant sa sortie dans le  fichier <tt>telnet.html</tt>  (il faudra lire ce fichier à partir d&#8217;une autre fenêtre pour observer les réponses de <tt>telnet</tt>). Demander cette fois 
+une page HTML que vous avez mise dans votre  répertoire 
+<code class='spip_code'>~/public_html</code>. 
+Avec votre navigateur, chargez ce même fichier et enregistrez-le sous un nom quelconque. Avec la commande <tt>diff</tt>,  comparer le fichier enregistré
+et celui issu de la session avec <tt>telnet</tt>&nbsp;;
+quelles différences observez-vous&nbsp;?</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=713&amp;cle=fe12f12504e0a9426977d80f282fe5157f201693&amp;file=distant%2FVCS%2FLI355%2FTM%2F4%2FTM4-2.txt"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger TM4-2.txt</a>
+</div>
+<pre>Le document renvoyé est de type HTML. 
+C'est le même que celui renvoyé lorsqu'on écrit
+http://127.0.0.1
+dans la barre de navigation.
+
+Le code de retour est 302, indiquant une redirection. 
+Celle-ci est indiquée dans l'en-tête &lt;tt&gt;Location&lt;/tt&gt;.
+Elle est due au fait que l'URL donnée ne se termine pas par /
+mais indique pourtant  un répertoire, non un fichier.
+
+Lorsqu'on demande l'URL indiquée par l'en-tête &lt;tt&gt;Location&lt;/tt&gt;
+on obtient la liste des entrées de son répertoire &lt;tt&gt;public_html&lt;/tt&gt;.
+Le navigateur a donc immédiatement opéré la redirection.
+
+Le fichier reçu par telnet contient les en-têtes HTTP
+que la navigateur a interprété sans les montrer explicitement.
+</pre></div>
+ 
+ <div id='reponses2395'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5394"> 
+	    <div class="reponse">
+	<div class="forum-titre">Protocole HTTP et Telnet</div>
+25 f&eacute;vrier 2014 &agrave; 18h50min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><p>$ telnet localhost 23
+<br />Trying 127.0.0.1...
+<br />telnet&nbsp;: Unable to connect to remote host&nbsp;: Connection refused&nbsp;?????????</p>
+
+<div class="spip_code"><code></code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2626'></span>
+
+
+<h2 id='a3'>3 Visualiser les en-têtes</h2>
+<p>Dans cet exercice, on se propose de se connecter à un serveur HTTP et d&#8217;afficher les en-têtes HTTP qu&#8217;il renvoie, mais pas le reste de sa réponse (on veut donc montrer ce qu&#8217;un navigateur dissimule et inversement).</p>
+
+<p>La fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fsockopen.html" class='spip_glossaire' title="Voir la description de 'fsockopen' dans la documentation de 'php'" rel='external'>fsockopen</a><tt>(</tt><i>serveur, port</i><tt>)</tt> permet de se connecter à n&#8217;importe quel serveur sur n&#8217;importe quel port. Elle renvoie  0 si le service est indisponible, ou un descripteur 
+sur lequel il est possible d&#8217;appliquer les fonctions
+<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fputs.html" class='spip_glossaire' title="Voir la description de 'fputs' dans la documentation de 'php'" rel='external'>fputs</a><tt>(</tt><i>descripteur, requête</i><tt>)</tt> (pour envoyer une requête) et 
+<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fgets.html" class='spip_glossaire' title="Voir la description de 'fgets' dans la documentation de 'php'" rel='external'>fgets</a><tt>(</tt><i>descripteur,longueur</i><tt>)</tt> (pour recevoir la réponse, dont on limite la longueur).</p>
+
+<p>On commencera par écrire une expression rationnelle décomposant une chaîne supposée de la forme <i>protocole://serveur:port/chemin</i>
+où <i>:port</i> peut être absent et valant alors 80 si le protocole est <tt>http</tt> et 443 si c&#8217;est <tt>https</tt>.</p>
+
+<p>On écrira ensuite une fonction <tt>get_entetes</tt> prenant en argument l&#8217;adresse d&#8217;un serveur, un port et un chemin vers une ressource sur ce serveur. On établira la connexion, et si elle échoue on retournera un message d&#8217;erreur. Si elle réussit, on enverra les deux lignes suivies d&#8217;une ligne vide&nbsp;:</p>
+
+<pre>
+<tt>GET http://</tt>{serveur/chemin}<tt> HTTP/1.1
+Host: </tt>{serveur}
+</pre>
+<p>puis on lira les réponses jusqu&#8217;à la première ligne  vide, en construisant un tableau PHP dont les index seront le nom des en-têtes (utiliser la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.preg-match.html" class='spip_glossaire' title="Voir la description de 'preg_match' dans la documentation de 'php'" rel='external'>preg_match</a> pour couper chaque ligne en deux).
+On ajoutera également au début de ce tableau une ligne comportant le code de retour à 3 chiffres
+Pour finir, on coupera la connexion  et en retournera le tableau comme valeur de la fonction.</p>
+
+<p>Ecrire enfin le script PHP complet recevant dans sa 
+<tt>QUERY_STRING</tt> un paramètre nommé  <tt>url</tt>, désignant
+une page à récupérer sur un serveur, ce qu&#8217;il fait avec la fonction <tt>get_entetes</tt>.  Il envoie alors une
+Si celle-ci retourne un message d&#8217;erreur, il &#8217;affiche page XHTML valide, dont le corps est soit le message d&#8217;erreur, si <tt>get_entetes</tt> en a renvoyé un message d&#8217;erreur, soit le tableau des en-têtes HTTP, présenté sous forme d&#8217;une table XHTML de deux colonnes indiquant le nom des en-têtes et leur valeur, par exemple&nbsp;:</p>
+
+<table class="spip" summary="">
+<caption>En-têtes reçus</caption>
+<tr class='row_first'><th scope='col'>Clef</th><th scope='col'>Valeur</th></tr>
+<tr class='row_odd'>
+<td>status</td>
+<td>HTTP/1.1 200 OK</td></tr>
+<tr class='row_even'>
+<td>Date</td>
+<td> Sat, 10 Mar 2007 07</td></tr>
+<tr class='row_odd'>
+<td>Last-Modified</td>
+<td> Fri, 04 May 2001 00</td></tr>
+<tr class='row_even'>
+<td>Content-Length</td>
+<td> 1456</td></tr>
+<tr class='row_odd'>
+<td>Content-Type</td>
+<td> text/html</td></tr>
+</table>
+<p>Appliquer votre script sur l&#8217;adresse du validateur local  et pour finir sur votre propre script. D&#8217;où viennent les en-têtes dans ce dernier cas&nbsp;?</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=715&amp;cle=1d63e1890efaa91966f93d725a6cc8f5b65943f2&amp;file=distant%2FVCS%2FLI355%2FTM%2F4%2Fget_entetes.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger get_entetes.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">include&nbsp;</span><span style="color: #DD0000">'entete.php'</span><span style="color: #007700">;<br /><br />function&nbsp;</span><span style="color: #0000BB">getentetes</span><span style="color: #007700">(</span><span style="color: #0000BB">$serveur</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$port</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$ressource</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$d</span><span style="color: #007700">=@</span><span style="color: #0000BB">fsockopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$serveur</span><span style="color: #007700">,</span><span style="color: #0000BB">$port</span><span style="color: #007700">);<br />&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$d</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(</span><span style="color: #0000BB">$serveur&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"&nbsp;sur&nbsp;le&nbsp;port&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$port&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"&nbsp;ne&nbsp;répond&nbsp;pas."</span><span style="color: #007700">);<br />&nbsp;&nbsp;else<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fputs</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"GET&nbsp;http://$serveur$ressource&nbsp;HTTP/1.1\nHost:&nbsp;$serveur\n\n"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$status&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fgets</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">,</span><span style="color: #0000BB">4096</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$reponse&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'status'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$status</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$l&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fgets</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">,</span><span style="color: #0000BB">4096</span><span style="color: #007700">))&nbsp;&gt;&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #DD0000">'@([^:]+):&nbsp;+(.*)$@'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$x</span><span style="color: #007700">))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">[</span><span style="color: #0000BB">$x</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]]&nbsp;=&nbsp;</span><span style="color: #0000BB">$x</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$reponse</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br />function&nbsp;</span><span style="color: #0000BB">arrayEnTableHTML</span><span style="color: #007700">(</span><span style="color: #0000BB">$t</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$r&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$t&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$k&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$i</span><span style="color: #007700">++;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$color&nbsp;</span><span style="color: #007700">=&nbsp;(</span><span style="color: #0000BB">$i</span><span style="color: #007700">%</span><span style="color: #0000BB">2</span><span style="color: #007700">)&nbsp;?&nbsp;</span><span style="color: #DD0000">'#777'&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #DD0000">'#aaa'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$r&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"\n&lt;tr&nbsp;style='background-color:$color'&gt;&lt;td&gt;"<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">htmlspecialchars</span><span style="color: #007700">(</span><span style="color: #0000BB">$k</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;</span><span style="color: #DD0000">'&lt;/td&gt;&lt;td&gt;'&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">htmlspecialchars</span><span style="color: #007700">(</span><span style="color: #0000BB">$v</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;</span><span style="color: #DD0000">"&lt;/td&gt;&lt;/tr&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #DD0000">"&lt;table&gt;\n&lt;tr&gt;&lt;th&gt;Nom&lt;/th&gt;&lt;th&gt;Valeur&lt;/th&gt;&lt;/tr&gt;\n$r&lt;/table&gt;\n"</span><span style="color: #007700">;<br />}<br /><br />if&nbsp;(!isset(</span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">'url'</span><span style="color: #007700">])&nbsp;OR<br />&nbsp;&nbsp;&nbsp;&nbsp;!</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #DD0000">',^(https?)://([^/:]*)(:\d+)?(.*)$,'</span><span style="color: #007700">,</span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">'url'</span><span style="color: #007700">],</span><span style="color: #0000BB">$r</span><span style="color: #007700">))<br />&nbsp;&nbsp;{echo&nbsp;</span><span style="color: #DD0000">"Argument&nbsp;'url'&nbsp;incorrect"</span><span style="color: #007700">;}<br />&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;list(,&nbsp;</span><span style="color: #0000BB">$schema</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$serveur</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$port</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$ressource</span><span style="color: #007700">)&nbsp;=&nbsp;</span><span style="color: #0000BB">$r</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$port</span><span style="color: #007700">)&nbsp;</span><span style="color: #0000BB">$port&nbsp;</span><span style="color: #007700">=&nbsp;(</span><span style="color: #0000BB">$schema&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #DD0000">'http'</span><span style="color: #007700">)&nbsp;?&nbsp;&nbsp;</span><span style="color: #0000BB">80&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">443</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$r&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">getentetes</span><span style="color: #007700">(</span><span style="color: #0000BB">$serveur</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$port</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$ressource</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">is_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$r</span><span style="color: #007700">))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$r</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;include&nbsp;</span><span style="color: #DD0000">"entete.php"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">error_reporting</span><span style="color: #007700">(</span><span style="color: #0000BB">E_ALL</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">DOCTYPE_XHTML_BASIC_11</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">HTML_FR</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;head&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">META_TYPE_TEXT_HTML_UTF8</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;title&gt;Date&nbsp;du&nbsp;jour&lt;/title&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;/head&gt;\n&lt;body&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">arrayEnTableHTML</span><span style="color: #007700">(</span><span style="color: #0000BB">$r</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;/body&gt;&lt;/html&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;}<br />&nbsp;}<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+ 
+ <div id='reponses2626'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5398"> 
+	    <div class="reponse">
+	<div class="forum-titre">Visualiser les en-têtes</div>
+26 f&eacute;vrier 2014 &agrave; 11h33min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><p>// pas testé</p>
+
+<div class="spip_code"><code>&lt;?php<br />
+include '/users/nfs/Etu6/3264006/public_html/tme2/tableau_en_table.php';<br />
+include '/users/nfs/Etu6/3264006/public_html/tme2/entete.php';<br />
+error_reporting(E_ALL);<br />
+<br />
+function get_entetes($serveur=&quot;localhost&quot;,$port=110,$chemin='~3264006/tme4/get_entetes.php') {<br />
+ &nbsp;$s=fsockopen($serveur,$port);<br />
+ &nbsp;if($s==false) <br />
+ &nbsp; &nbsp;return &quot;erreur&quot;;<br />
+ &nbsp;else {<br />
+ &nbsp; &nbsp;fputs($s,&quot;GET http://$serveur/$chemin} HTTP/1.1&quot;);<br />
+ &nbsp; &nbsp;fputs($s,&quot;Host: {$serveur}&quot;);<br />
+ &nbsp; &nbsp;fputc($s,&quot;&quot;);<br />
+ &nbsp; &nbsp;define ('EN_TETE',&quot;@^(\w+):(\w+)$@&quot;);<br />
+ &nbsp; &nbsp;$res=array();<br />
+ &nbsp; &nbsp;$res['Clef']='Valeur';<br />
+ &nbsp; &nbsp;while(($ligne=trim(fgets($s))) != &quot;&quot;) {<br />
+ &nbsp; &nbsp; &nbsp;pregmatch(EN_TETE,htmlentities($ligne),$m);<br />
+ &nbsp; &nbsp; &nbsp;$res[$m[1]]=$m[2];<br />
+ &nbsp; &nbsp;}<br />
+ &nbsp; &nbsp;@close($s);<br />
+ &nbsp; &nbsp;return $res; &nbsp;<br />
+ &nbsp;}<br />
+}<br />
+<br />
+$url=isset($QUERY_STRING['url']) ? $QUERY_STRING['url'] : &quot;&quot;;<br />
+if ($url=&quot;&quot;) {<br />
+ &nbsp;echo &quot;definissez url&quot;;<br />
+ &nbsp;exit 0;<br />
+}<br />
+<br />
+define ('EXPR',&quot;@^((http):\/\/(\w+):(80)?\/(\w+))|((https):\/\/(\w+):(443)?\/(w+))$@&quot;);<br />
+preg_match(EXPR,$url,$m).&quot;&lt;br&gt;&quot;;<br />
+$protocole=$m[2];<br />
+$serveur=$m[3];<br />
+$port=$m[4];<br />
+$chemin=$m[5];<br />
+<br />
+$entetes=get_entetes($serveur,$port,$chemin)).&quot;&lt;br&gt;&quot;;<br />
+if(!$entetes) {<br />
+ &nbsp;echo entete(erreur);<br />
+}<br />
+else {<br />
+ &nbsp;echo entete(tableau entetes);<br />
+ &nbsp;echo tableau_en_table($entetes);<br />
+}<br />
+<br />
+&lt;/body&gt;&lt;/html&gt; &nbsp;<br />
+?&gt;</code></div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />_&nbsp;$sock</span><span style="color: #007700">=</span><span style="color: #0000BB">fsockopen</span><span style="color: #007700">(</span><span style="color: #DD0000">"mail.ru"</span><span style="color: #007700">,</span><span style="color: #0000BB">80</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">_&nbsp;</span><span style="color: #007700">if(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">==</span><span style="color: #0000BB">false</span><span style="color: #007700">)<br /></span><span style="color: #0000BB">_&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"erreur"</span><span style="color: #007700">.</span><span style="color: #DD0000">"&lt;br&gt;"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">_&nbsp;?&gt;</span>
+</span>
+</code></p>
+
+<p>Warning&nbsp;: fsockopen()&nbsp;: unable to connect to mail.ru:80 (Connection timed out) in /users/nfs/Etu6/3264006/public_html/tme4/get_entetes.php on line 18 erreur</p>
+
+<p>&nbsp;????????????????????????????????????????????????????????????????????</p></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2341'></span>
+
+
+<h2 id='a4'>4 FireBug &amp; Web Developer</h2>
+<p>Dans cet exercice,  il s&#8217;agit de découvrir les fonctionnalités de  Firebug et Web&nbsp;Developer  en répondant à une suite de questions 
+<i>sans lire le texte source</i>, le but étant de trouver les commandes de ces extensions permettant de trouver les réponses sans cette lecture.
+ On prendra comme exemple la <a href="pacs" class='spip_in'>page d&#8217;accueil du site</a>.</p>
+
+<p><i>Question 1&nbsp;:</i> Trouver, à l&#8217;aide de Web&nbsp;Developer, les en-têtes HTTP transmises par le serveur avec cette page d&#8217;accueil.
+  Quel menu avez-vous utilisé&nbsp;? Combien y a-t-il d&#8217;en-têtes&nbsp;? Trouver la durée pendant laquelle ce serveur autorise une nouvelle requête avant de fermer la connexion. Chercher dans un autre menu la requête et les en-têtes envoyés par le client pour obtenir cette page.</p>
+
+<p><i>Question 2&nbsp;:</i>  Trouver, à l&#8217;aide de Web&nbsp;Developer, si le site d&#8217;où provient cette page a envoyé à votre navigateur un cookie à lui renvoyer à chaque connexion.</p>
+
+<p><i>Question 3&nbsp;:</i> Trouver, à l&#8217;aide de Web&nbsp;Developer, tous les liens hyper-textuels de cette page.
+ Combien y en a-t-il&nbsp;? Sont-ils tous fondés sur http ou https? A quoi servent la plupart d&#8217;entre eux&nbsp;?</p>
+
+<p><i>Question 4&nbsp;:</i> Vérifier, à l&#8217;aide de Web&nbsp;Developer, que toutes les images de cette page ont un attribut <tt>Alt</tt>.
+ Cela fait, revenez à la présentation  normale.</p>
+
+<p><i>Question 5&nbsp;:</i>  Trouver, à l&#8217;aide de Web&nbsp;Developer, combien de formulaires sont offerts sur  cette page.</p>
+
+<p><i>Question 7&nbsp;:</i>  Trouver, à l&#8217;aide de Web&nbsp;Developer, combien de feuilles de style sont référencées dans cette page.</p>
+
+<p><i>Question 6&nbsp;:</i>   Web&nbsp;Developer offre des outils de validation, notamment du source HTML&nbsp;; quel est en fait cet outil&nbsp;?</p>
+
+<p><i>Question 8&nbsp;:</i> Passer maintenant à Firebug, avec son menu <tt>Inspect</tt> et son sou-menu <tt>Net</tt>.
+ Cliquer sur le triangle sous le mot <tt>Console</tt>.
+ Comparer les informations avec celle founies par Webdeveloper.
+ Qu&#8217;y a-t-il de plus&nbsp;?</p>
+
+<p><i>Question 9&nbsp;:</i> Cliquer sur le <tt>CSS</tt> sur la même ligne que <tt>Inspect</tt>, de nouveau qu&#8217;y a-t-il comme information supplémentaire sur les feuilles de styles&nbsp;?</p>
+
+<p><i>Question 10&nbsp;:</i> Cliquer à présent sur <tt>HTML</tt> dans la ligne en dessous de Inspect, et survolez lentement  les différentes zones de la page. Quelles aides sont fournies dans le volet de Firebug&nbsp;?</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=714&amp;cle=5ccc3b8ed572063e394fb06702c68e2e1bf2c147&amp;file=distant%2FVCS%2FLI355%2FTM%2F4%2FTM4-4.txt"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger TM4-4.txt</a>
+</div>
+<pre>{Question 1:}
+Menu {Informations}. 11 en-têtes.
+{Keep-Alive: timeout=15}, donc 15 secondes.  
+
+{Question 2:}
+Menu {Cookies}. Un cookie est posé si on est passé par {Accès authentifié}.
+
+{Question 3:}
+Menu {Informations/Links}.
+Il y a 356 liens, certains active les pseudo protocoles {mailto}
+et {webcal}. La plupart permettent des affichages différents de l'emploi du temps.
+
+{Question 4:}
+Menu {Images/Attribut Alt}.
+Toutes les icones ont un attribut  Alt, ainsi que les petits carrés.
+
+{Question 5:}
+Menu {Forms}. Un seul formulaire, la recherche.
+
+{Question 6:}
+Menu {CC / Display CSS by MediaType / Print}.    
+
+{Question 7:}
+Menu {CSS / Edit CSS}
+montre 4 onglets de éditions.  
+
+{Question 8:}
+Il indique la taille et le temps de chargement.
+
+{Question 9:}
+En cliquant sur les petits triangles on voit les en-têtes HTTP pour les feuilles de styles.
+
+{Question 10:}
+Sur la gauche le système de cascades de styles est exemplifié.
+
+{Question 11:}
+WebDeveloper insère des attributs {class}
+pour provoquer un affichage différent.
+</pre></div>
+ 
+ <div id='reponses2341'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum5399"> 
+	    <div class="reponse">
+	<div class="forum-titre">FireBug &amp; Web Developer</div>
+26 f&eacute;vrier 2014 &agrave; 11h46min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><p>Comment utilisar Firebug et Web Developer&nbsp;???????????????????????????????????????????????????????????????</p>
+
+<div class="spip_code"><code></code></div></div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FObservation-des-protocoles"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FObservation-des-protocoles'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FObservation-des-protocoles&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 17h43min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FObservation-des-protocoles'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

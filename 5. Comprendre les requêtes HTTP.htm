@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=276"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>5. Comprendre les requêtes HTTP (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Trouver le sous-type</a></li>
+<li class="menu-lv2"><a href='#a2'>L&#8217;Expire n&#8217;arrive pas toujours</a></li>
+<li class="menu-lv2"><a href='#a3'>Retrouver un cache</a></li>
+<li class="menu-lv2"><a href='#a4'>Mémoriser un cache</a></li>
+<li class="menu-lv2"><a href='#a5'>Détruire un cache</a></li>
+<li class="menu-lv2"><a href='#a6'>Mettre à jour le cache</a></li>
+<li class="menu-lv2"><a href='#a7'>Cache à l&#8217;eau</a></li>
+<li class="menu-lv2"><a href='#a8'>Utiliser votre système de cache</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux Dirig&eacute;s<br />5. Comprendre les requêtes HTTP</h1>
+<p>Les navigateurs mémorisent parfois sur leurs disques
+locaux les résultats des requêtes <tt>HTTP</tt>, afin de renvoyer ceux-ci sans se reconnecter aux serveurs concernés lorsqu&#8217;une de ces requêtes est à nouveau émise. Le but de cette séance est d&#8217;implémenter ce  <i>système de cache</i>, en respectant quelques unes des directives du protocole <tt>HTTP</tt> relatives à ce phénomène qui n&#8217;est pas sans effets surprenants.</p>
+
+<p>Pour les besoins de l&#8217;expérimentation, cet exercice prendra, en fin de séance, la forme d&#8217;un script <tt>PHP</tt> dont l&#8217;unique paramètre, passé dans la <code class='spip_code'>QUERY_STRING</code>,
+contiendra l&#8217;<em>URL</em> souhaitée (le serveur exécutant ce script est donc utilisé comme un relais (en anglais <i>proxy</i>) muni d&#8217;un système de cache).
+Ainsi, l&#8217;appel de</p>
+
+<div class='spip_code'><code>http://localhost/~votreLogin/cache.php?url=<br />
+http://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/index.php</code></div>
+<p>devra mettre dans le cache, géré par vous, de votre serveur local, la page d&#8217;accueil de la licence que vous suivez, et l&#8217;affichera dans la fenêtre de votre navigateur.</p>
+<br /><div id='sequence276'>
+<span id='e2361'></span>
+
+
+<h2 id='a1'>1 Trouver le sous-type</h2>
+<p>La réponse à une requête <tt>HTTP</tt> commence toujours par une ligne contenant le code de retour à 3 chiffres, puis les lignes d&#8217;en-têtes. Par exemple,  en réponse à la requête&nbsp;:</p>
+
+<div class='spip_code'><code>http://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2007/ue/retic-2008fev/</code></div>
+<p>s&#8217;ensuit une réponse avec des en-têtes comme&nbsp;:</p>
+<div class='spip_code'><code>Content-Type: text/html; charset=utf-8<br />
+Date: Fri, 31 Jan 2014 13:10:51 GMT<br />
+Last-Modified: Fri, 31 Jan 2014 13:10:51 GMT<br />
+Connection: Keep-Alive<br />
+Cache-Control: no-cache,must-revalidate<br />
+Composed-By: SPIP 2.1.25 @ www.spip.net + didacspip(5.3.14)</code></div>
+<p>Ces en-têtes comportent en particulier une ligne de la forme&nbsp;:
+<code class='spip_code'>Content-Type: </code><i>type</i>/<i>sous-type</i>.
+Dans les types  <code class='spip_code'>text</code>, le sous-type précise presque toujours  le codage des caractères, par une chaîne commençant par un point-virgule&nbsp;; on l&#8217;ignorera ici.
+Votre  système de cache devant créer un fichier cache ayant le sous-type comme extension, on commencera par écrire une expression rationnelle, 
+que l&#8217;on définira sous le nom <tt>RE_CONTENT_TYPE</tt>, repérant cet en-tête et isolant le sous-type.</p>
+
+<p>Ecrire ensuite une fonction
+<code class='spip_code'>typer_cache</code>, prenant en argument un tableau d&#8217;en-têtes de  réponses à une requête <tt>HTTP</tt>, y trouvant celle décrite ci-dessus, et retournant le sous-type décrit, ou <tt>html</tt> si elle n&#8217;est pas trouvée.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=756&amp;cle=ccc884773575a5c88f5587431d85a884d850a470&amp;file=distant%2FVCS%2FLI355%2FTD%2F5%2Ftyper_cache.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger typer_cache.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_CONTENT_TYPE'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">',Content-Type:\s+\w+/([^\s;]+),'</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">typer_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$headers</span><span style="color: #007700">){<br />&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$headers&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #0000BB">RE_CONTENT_TYPE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$match</span><span style="color: #007700">)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$match</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #DD0000">'html'</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+<span id='e2362'></span>
+
+
+<h2 id='a2'>2 L&#8217;Expire n&#8217;arrive pas toujours</h2>
+<p>Le protocole <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21" class='spip_out' rel='external'>HTTP/1.1</a> indique que la réponse à une requête 
+peut contenir une ligne de la forme</p>
+
+<p> <code class='spip_code'>Expires: </code><i>jour,  quantième, mois année, heure</i> <code class='spip_code'>GMT</code></p>
+
+<p>Par exemple, 
+<code class='spip_code'>Expires: Thu, 01 Dec 1994 16:00:00 GMT</code>
+indique que le document transmis ne devra plus figurer dans le cache 
+au-delà de la date indiquée.</p>
+
+<p>Écrire une expression rationnelle, que l’on définira sous le nom RE_EXPIRE, repérant cet en-tête et isolant la date indiquée. Écrire ensuite une fonction <code class='spip_code'>limiter_cache</code>, prenant en argument le  même tableau
+qu&#8217;à la question précédente, y cherchant cet en-tête, et retournant <code class='spip_code'>true</code> si la date d&#8217;expiration trouvée
+est antérieure à la date courante ou si elle n&#8217;existe pas. Elle retourne <code class='spip_code'>false</code>
+si la date d&#8217;expiration n&#8217;est pas  dépassée. Rappelons  que <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.strtotime.html" class='spip_glossaire' title="Voir la description de 'strtotime' dans la documentation de 'php'" rel='external'>strtotime</a> convertit une date, comme celle ci-dessus, au nombre de secondes écoulées  depuis le 1/1/1970
+et que la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.time.html" class='spip_glossaire' title="Voir la description de 'time' dans la documentation de 'php'" rel='external'>time</a> retourne la date du jour exprimée pareillement.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=751&amp;cle=d7c79c4fe1519179998fa332243e158d85601bf2&amp;file=distant%2FVCS%2FLI355%2FTD%2F5%2Flimiter_cache.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger limiter_cache.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_EXPIRE'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"%^Expires:&nbsp;(.*)%"</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">limiter_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$headers</span><span style="color: #007700">){<br />&nbsp;&nbsp;foreach(</span><span style="color: #0000BB">$headers&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #0000BB">RE_EXPIRE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$match</span><span style="color: #007700">)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&nbsp;(</span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #0000BB">$match</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">])&nbsp;&lt;&nbsp;</span><span style="color: #0000BB">time</span><span style="color: #007700">())&nbsp;;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+<span id='e2363'></span>
+
+
+<h2 id='a3'>3 Retrouver un cache</h2>
+<p>A partir d&#8217;une URL donnée, un système de cache doit être capable de dire s&#8217;il l&#8217;a déjà vue et retrouver les fichiers où il a placé non seulement le corps de la réponse mais aussi les en-têtes <tt>HTTP</tt>. Pour ce faire,
+on créera deux fichiers pour stocker une réponse d&#8217;un serveur, l&#8217;un contenant les en-têtes, l&#8217;autre le contenu de la page demandée. Les deux fichiers auront le même nom,  avec comme extension <code class='spip_code'>.http</code> pour le premier, et pour le second le sous-type du document demandé.</p>
+
+<p>Écrire une fonction, <code class='spip_code'>trouver_cache</code>, prenant en argument 
+un nom de fichier sans extension,  
+regardant s&#8217;il existe  un fichier nommé par ce nom 
+suivi de l&#8217;extension <code class='spip_code'>.http</code>.
+Si oui, on y prélève le sous-type, à l&#8217;aide de la fonction <tt>typer_cache</tt>, 
+et on vérifie qu&#8217;il existe aussi  un fichier homonyme mais ayant 
+comme extension ce sous-type.
+On utilisera <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.is-readable.html" class='spip_glossaire' title="Voir la description de 'is_readable' dans la documentation de 'php'" rel='external'>is_readable</a> pour savoir si un fichier existe.</p>
+
+<p>Si toutes les conditions sont remplies, la fonction retourne le contenu du fichier d&#8217;extension <code class='spip_code'>.http</code> sous forme d’un tableau de ses lignes, grâce à la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.file.html" class='spip_glossaire' title="Voir la description de 'file' dans la documentation de 'php'" rel='external'>file</a> qui retourne le tableau des lignes d’un fichier. Si l’un des deux fichiers n’existe pas, la fonction retourne un tableau vide.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=755&amp;cle=119aebc23c9e2c5f0ac512727aec6bc7a407281d&amp;file=distant%2FVCS%2FLI355%2FTD%2F5%2Ftrouver_cache.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger trouver_cache.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">trouver_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">is_readable</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">'.http'</span><span style="color: #007700">))&nbsp;return&nbsp;array();<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$h&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">file</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">'.http'</span><span style="color: #007700">);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$type&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">typer_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$h</span><span style="color: #007700">);<br />&nbsp;&nbsp;return&nbsp;(</span><span style="color: #0000BB">is_readable</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">'.'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$type</span><span style="color: #007700">)&nbsp;?&nbsp;</span><span style="color: #0000BB">$h&nbsp;</span><span style="color: #007700">:&nbsp;array());<br />}<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+<span id='e3511'></span>
+
+
+<h2 id='a4'>4 Mémoriser un cache</h2>
+<p>Ecrire  une fonction <tt>mémoriser_cache</tt>, prenant en argument un nom de cache, un tableau d&#8217;en-têtes HTTP et le contenu d&#8217;une page. La fonction trouve le type dans les en-têtes comme pour la fonction précédente, puis  ouvre en écriture les deux fichiers tels que décrits précédemment,
+et les remplit avec les valeurs fournies en argument.</p>
+
+<p>Pour passer du tableau des en-têtes à une chaîne constituant le contenu du fichier, on utilisera la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.join.html" class='spip_glossaire' title="php" rel='external'>join</a>, ici appelée avec un seul argument.
+Les fonctions usuelles d&#8217;Unix sur fichier sont disponibles en PHP&nbsp;: <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fopen.html" class='spip_glossaire' title="Voir la description de 'fopen' dans la documentation de 'php'" rel='external'>fopen</a>(<i>chemin</i>,<i>mode</i>), 
+<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fclose.html" class='spip_glossaire' title="Voir la description de 'fclose' dans la documentation de 'php'" rel='external'>fclose</a>(<i>descripteur</i>) et <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fputs.html" class='spip_glossaire' title="Voir la description de 'fputs' dans la documentation de 'php'" rel='external'>fputs</a>(<i>descripteur</i>, <i>chaîne</i>).
+L&#8217;argument <i>mode</i> sera ici <tt>w</tt> pour signifier que le fichier va être créé ou recréé,
+<a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fopen.html" class='spip_glossaire' title="Voir la description de 'fopen' dans la documentation de 'php'" rel='external'>fopen</a> retournant alors un <i>descripteur</i> de fichier en cours d&#8217;écriture utilisable par les deux autres fonctions, ou 0 si les droits d&#8217;accès l&#8217;empêchent de créer le fichier.</p>
+
+<p> La fonction <tt>mémoriser_cache</tt> devra retourner <tt>True</tt> si les deux créations se sont bien passées, <tt>False</tt> sinon.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=752&amp;cle=012d340186ce774e429b2ba68a1fb9c78823c97b&amp;file=distant%2FVCS%2FLI355%2FTD%2F5%2Fmemoriser_cache.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger memoriser_cache.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">memoriser_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$page</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$type&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">typer_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">);<br />&nbsp;&nbsp;if&nbsp;((</span><span style="color: #0000BB">$d1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">".http"</span><span style="color: #007700">,</span><span style="color: #DD0000">'w'</span><span style="color: #007700">))&nbsp;AND<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</span><span style="color: #0000BB">$d2&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$type</span><span style="color: #007700">,</span><span style="color: #DD0000">'w'</span><span style="color: #007700">)))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fputs</span><span style="color: #007700">(</span><span style="color: #0000BB">$d1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">join</span><span style="color: #007700">(</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$d1</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fputs</span><span style="color: #007700">(</span><span style="color: #0000BB">$d2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$page</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$d2</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></p></div>
+
+
+<span id='e2364'></span>
+
+
+<h2 id='a5'>5 Détruire un cache</h2>
+<p>Afin de préserver l&#8217;espace disponible sur les disques locaux, il faut  limiter le nombre de pages mémorisées, en détruisant celle demandée le moins récemment
+lorsque le maximum de pages mémorisables est atteint.
+Pour ce faire, on représente l&#8217;état du cache sous forme d&#8217;un tableau dont les index sont les noms des fichiers du cache sans leur extension,
+et  dont les valeurs sont la date de leur dernière visite, exprimée en secondes
+depuis le 1/1/1970.</p>
+
+<p>Écrire une fonction <tt>nettoyer_cache</tt> prenant en argument un tel tableau, et y cherchant l&#8217;index dont la valeur associée est la plus petite. Pour cela, appliquer la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.sort.html" class='spip_glossaire' title="Voir la description de 'sort' dans la documentation de 'php'" rel='external'>sort</a> qui trie un tableau. Appliquer ensuite la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.key.html" class='spip_glossaire' title="Voir la description de 'key' dans la documentation de 'php'" rel='external'>key</a> sur le tableau obtenu,
+afin d&#8217;avoir l&#8217;index de cette valeur minimale.
+Accéder au fichier dont le nom est cet index suivi de <code class='spip_code'>.http</code> pour y trouver le type du document mémorisé. 
+Détruire alors les deux fichiers concernés, avec la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.unlink.html" class='spip_glossaire' title="Voir la description de 'unlink' dans la documentation de 'php'" rel='external'>unlink</a>, et
+retirer du tableau son premier élément avec la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.array-shift.html" class='spip_glossaire' title="Voir la description de 'array_shift' dans la documentation de 'php'" rel='external'>array_shift</a>&nbsp;ou <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.unset.html" class='spip_glossaire' title="Voir la description de 'unset' dans la documentation de 'php'" rel='external'>unset</a>. Retourner le tableau final comme résultat de la fonction.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=753&amp;cle=3628eeace37de2ac1740668dc3643c31f70ef77a&amp;file=distant%2FVCS%2FLI355%2FTD%2F5%2Fnettoyer_cache.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger nettoyer_cache.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">nettoie_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$tabCaches</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">sort</span><span style="color: #007700">(</span><span style="color: #0000BB">$tabCaches</span><span style="color: #007700">);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$nom&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">key</span><span style="color: #007700">(</span><span style="color: #0000BB">$tabCaches</span><span style="color: #007700">);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$nom_h&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$nom&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">'.http'</span><span style="color: #007700">;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$nom_t&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$nom&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">'.'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">typer_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">file</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom_h</span><span style="color: #007700">));<br />&nbsp;&nbsp;</span><span style="color: #0000BB">unlink</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom_h</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;</span><span style="color: #0000BB">unlink</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom_t</span><span style="color: #007700">);<br />&nbsp;&nbsp;</span><span style="color: #0000BB">array_shift</span><span style="color: #007700">(</span><span style="color: #0000BB">$tabCaches</span><span style="color: #007700">);&nbsp;<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$tabCaches</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+<span id='e2365'></span>
+
+
+<h2 id='a6'>6 Mettre à jour le cache</h2>
+<p>A chaque demande d&#8217;une page,  il faut mémoriser la date de sa visite.  Pour être retrouvées ultérieurement, ces informations doivent être enregistrées dans un fichier, qu&#8217;on organisera ainsi&nbsp;: chaque ligne comporte un nom de cache, puis un espace puis la date de sa dernière visite, sous forme du nombre de secondes écoulées depuis le 1/1/1970.
+Ce fichier  sera relu grâce à la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.file.html" class='spip_glossaire' title="Voir la description de 'file' dans la documentation de 'php'" rel='external'>file</a> déjà mentionnée,
+qui retourne un tableau formé d&#8217;autant d&#8217;éléments que de lignes dans le fichier.
+Il sera créé et modifié à l&#8217;aide du trio de fonctions également déjà mentionné.</p>
+
+<p>Écrire d&#8217;abord la fonction <code class='spip_code'>charger_cache()</code> prenant en argument un nom de fichier contenant des lignes de deux colonnes comme décrit ci-dessus. A partir de ce fichier elle fabrique puis retourne en valeur un tableau dont les index sont la première colonne du fichier, et les valeurs la deuxième colonne du fichier.</p>
+
+<p>Écrire ensuite la fonction <code class='spip_code'>actualiser_cache</code> prenant en argument un nom de fichiers de cache. Elle charge d&#8217;abord l&#8217;état du cache grâce à la fonction précédente, puis modifie le tableau retourné  en utilisant le  nom fourni en argument comme un index, qu&#8217;on associera à la date courante.
+Si le tableau dépasse alors la taille maximale, donnée par la constante <tt>MAXCACHE</tt>, la fonction <tt>nettoie_cache</tt> sera appelée pour le réduire. Dans tous les cas, le fichier mémorisant le tableau dans le format ci-dessus sera réécrit. On considérera que son nom est donné par la constante <tt>CACHEFILE</tt>.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=626&amp;cle=7c8d4b85f4ef72a6e7c49922b9f626b951fb0eb4&amp;file=distant%2FVCS%2FLI355%2FTD%2F5%2Factualiser_cache.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger actualiser_cache.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;La&nbsp;fonction&nbsp;"file"&nbsp;retourne&nbsp;un&nbsp;tableau&nbsp;de&nbsp;lignes&nbsp;qui&nbsp;se&nbsp;terminent&nbsp;par&nbsp;\n<br />//&nbsp;On&nbsp;coupe&nbsp;en&nbsp;deux&nbsp;chaque&nbsp;ligne&nbsp;par&nbsp;preg_split&nbsp;avec&nbsp;\s+&nbsp;<br />//&nbsp;afin&nbsp;de&nbsp;supprimer&nbsp;aussi&nbsp;ces&nbsp;\n.<br />//&nbsp;On&nbsp;memorise&nbsp;la&nbsp;duree&nbsp;sous&nbsp;forme&nbsp;numerique&nbsp;pour&nbsp;accelerer&nbsp;le&nbsp;tri&nbsp;ulterieur<br /><br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">charger_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$clefVal&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">is_readable</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom</span><span style="color: #007700">)&nbsp;?&nbsp;</span><span style="color: #0000BB">file</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom</span><span style="color: #007700">)&nbsp;:&nbsp;array()&nbsp;as&nbsp;</span><span style="color: #0000BB">$v&nbsp;</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;list(</span><span style="color: #0000BB">$nom</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$age</span><span style="color: #007700">)&nbsp;=&nbsp;</span><span style="color: #0000BB">preg_split</span><span style="color: #007700">(</span><span style="color: #DD0000">'@\s+@'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$clefVal</span><span style="color: #007700">[</span><span style="color: #0000BB">$nom</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">intval</span><span style="color: #007700">(</span><span style="color: #0000BB">$age</span><span style="color: #007700">);<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$clefVal</span><span style="color: #007700">;<br />}<br /><br />function&nbsp;</span><span style="color: #0000BB">actualiser_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$nom</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$tabCaches&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">charger_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">CACHEFILE</span><span style="color: #007700">);<br />&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$d&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #0000BB">CACHEFILE</span><span style="color: #007700">,</span><span style="color: #DD0000">'w'</span><span style="color: #007700">)){<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tabCaches</span><span style="color: #007700">[</span><span style="color: #0000BB">$nom</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">time</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$tabCaches</span><span style="color: #007700">)&nbsp;&gt;&nbsp;</span><span style="color: #0000BB">MAXCACHES</span><span style="color: #007700">)&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tabCaches&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">nettoie_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$tabCaches</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$tabCaches&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$k&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$heure</span><span style="color: #007700">)&nbsp;</span><span style="color: #0000BB">fputs</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$k</span><span style="color: #007700">.</span><span style="color: #DD0000">"&nbsp;"</span><span style="color: #007700">.</span><span style="color: #0000BB">$heure</span><span style="color: #007700">.</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">);<br />&nbsp;}<br />}<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+<span id='e2366'></span>
+
+
+<h2 id='a7'>7 Cache à l&#8217;eau</h2>
+<p>Lorsque la page demandée n&#8217;est pas présente dans le cache, il faut la demander au serveur concerné.  Normalement, celui-ci va répondre par
+une ligne comportant <tt>200 OK</tt>, puis des en-têtes et le corps.
+Dans les en-têtes renvoyés, peut figurer une ligne indiquant que cette page ne doit pas être mise en cache, à l&#8217;aide de l&#8217;en-tête <tt>Cache-Control</tt> (ou <tt>Pragma</tt> en <tt>HTTP1.0</tt>) dont la valeur contient 
+ <tt>no-cache</tt>.</p>
+
+<p>Écrire une fonction <code class='spip_code'>no_cache</code>, prenant en argument un port,
+un serveur, et une ressource sur ce serveur.
+Elle se connecte à cette adresse avec <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fsockopen.html" class='spip_glossaire' title="php" rel='external'>fsockopen</a>,
+puis émet avec <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.fputs.html" class='spip_glossaire' title="php" rel='external'>fputs</a> une requête GET 
+d&#8217;argument <tt>http://</tt> suivi du serveur, de la ressource, d&#8217;un espace et de <tt>HTTP/1.1</tt> puis un saut de ligne. Elle émet ensuite l&#8217;en-tête <tt>Host:</tt> suivi d&#8217;un espace et à nouveau du serveur puis deux sauts de ligne afin de provoquer la réponse.</p>
+
+<p>Les en-têtes reçues seront mémorisés dans un tableau et la page dans une chaîne. Ensuite,  tous seront envoyés dans le flux de sortie, à l&#8217;aide de <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.header.html" class='spip_glossaire' title="php" rel='external'>header</a>&nbsp;ou <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.echo.html" class='spip_glossaire' title="php" rel='external'>echo</a>.</p>
+
+<p>Pour finir, si un en-tête <tt>no-cache</tt> a été aperçu, ou si la première ligne n&#8217;est pas <tt>HTTP</tt> suivi d&#8217;un numéro de version puis <code class='spip_code'>200 OK</code>, la fonction retourne <tt>False</tt>. Sinon elle retourne un tableau de deux éléments, les en-têtes et la page, pour mise en cache par la fonction appelante. On définira deux expressions rationnelles 
+<tt>RE_NOCACHE</tt> et <tt>RE_HTTP200</tt> pour effectuer ces dernières analyses.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=754&amp;cle=bddf142b8061c69f8afef7f49eb7eb27d2639d06&amp;file=distant%2FVCS%2FLI355%2FTD%2F5%2Fno_cache.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger no_cache.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_HTTP200'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"%^HTTP.*200&nbsp;OK%"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_NOCACHE'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"%^(Pragma|Cache-Control):.*no-cache%"</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">no_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$serveur</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$port</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$resource</span><span style="color: #007700">){<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$d&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fsockopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$serveur</span><span style="color: #007700">,</span><span style="color: #0000BB">$port</span><span style="color: #007700">);<br />&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$d</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$serveur</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"&nbsp;sur&nbsp;le&nbsp;port&nbsp;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$port</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"&nbsp;est&nbsp;muet."</span><span style="color: #007700">;<br />&nbsp;&nbsp;else{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$entetes&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cache&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fputs</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"GET&nbsp;http://$serveur$resource&nbsp;HTTP/1.1\nHost:&nbsp;$serveur\n\n"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$l&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fgets</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">))&nbsp;&gt;</span><span style="color: #0000BB">2</span><span style="color: #007700">)&nbsp;{&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #0000BB">RE_NOCACHE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">))&nbsp;</span><span style="color: #0000BB">$cache&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$page</span><span style="color: #007700">=</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(&nbsp;!</span><span style="color: #0000BB">feof</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">)&nbsp;)&nbsp;</span><span style="color: #0000BB">$page&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #0000BB">fgets</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;foreach(</span><span style="color: #0000BB">$entetes&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">)&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #0000BB">$l</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$page</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(</span><span style="color: #0000BB">$cache&nbsp;</span><span style="color: #007700">AND&nbsp;</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #0000BB">RE_HTTP200</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">]))&nbsp;?&nbsp;array(</span><span style="color: #0000BB">$entetes</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$page</span><span style="color: #007700">)&nbsp;:&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;}<br />}<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+<span id='e2367'></span>
+
+
+<h2 id='a8'>8 Utiliser votre système de cache</h2>
+<p>A l&#8217;aide de toutes les fonctions précédentes, écrire une fonction 
+<tt>utiliser_cache</tt> prenant en argument une URL telle que&nbsp;:</p>
+
+<ul class="spip"><li> si son contenu et ses en-têtes figurent dans le cache, la fonction met à jour sa date de consultation, envoie les en-têtes avec <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.header.html" class='spip_glossaire' title="php" rel='external'>header</a> puis le contenu avec la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.readfile.html" class='spip_glossaire' title="Voir la description de 'readfile' dans la documentation de 'php'" rel='external'>readfile</a> qui envoie sur le flux de sortie le fichier donné en argument&nbsp;;</li><li> si l&#8217;URL ne figure pas dans le cache et qu&#8217;elle n&#8217;est pas correctement écrite, la fonction renvoie un message d&#8217;erreur, avec un code d&#8217;erreur 400&nbsp;;</li><li> autrement,   on appelle la fonction <tt>no_cache</tt>, en donnant le  serveur, le port et la ressource demandée sur celui-ci, telle que précisée par l&#8217;URL. Si <tt>no_cache</tt> retourne en résultat un tableau, c&#8217;est qu&#8217;il faut mémoriser le résultat de la requête et en conséquence actualiser l&#8217;état du cache.</li></ul>
+<p>Pour vérifier que l&#8217;argument est correct et séparer ses composantes (serveur, port éventuel précédé de "&nbsp;:", ressource), on définira une expression rationnelle que l&#8217;on nommera <tt>RE_URL</tt>.</p>
+
+<p>Pour associer à une URL le nom des fichiers correspondant dans le cache, on ne peut la prendre directement comme nom de fichier  à cause des caractères "/" qui y figurent, il faut utiliser un codage.
+Pour les besoins de cet exercice, on
+prendra son <i>résumé MD5</i> formé de 32 caractères hexadécimaux
+(voir le <a href="http://www.rfc-editor.org/rfc/rfc1321.txt" class='spip_out' rel='external'>rfc 1321</a>) fournie par la fonction <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/PHP/html/function.md5.html" class='spip_glossaire' title="Voir la description de 'md5' dans la documentation de 'php'" rel='external'>md5</a> de <tt>PHP</tt>.</p>
+
+
+<div class='solution'>
+<div>Solution
+<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?action=acceder_document&amp;arg=767&amp;cle=79da81b53d30d9548f57a22e68bf9bd1fe8915e6&amp;file=distant%2FVCS%2FLI355%2FTD%2F5%2Futiliser_cache.php"
+      style='float:right'
+      class='solution'>T&eacute;l&eacute;charger utiliser_cache.php</a>
+</div>
+<p><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">//&nbsp;Constante&nbsp;indiquant&nbsp;le&nbsp;nombre&nbsp;maximum&nbsp;de&nbsp;cache<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'MAXCACHES'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">6</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;Répertoire&nbsp;des&nbsp;caches<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'DIRCACHE'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'Cache/'</span><span style="color: #007700">);&nbsp;<br /></span><span style="color: #FF8000">//&nbsp;Fichier&nbsp;de&nbsp;la&nbsp;table&nbsp;des&nbsp;caches&nbsp;:&nbsp;md5&nbsp;=&gt;&nbsp;date&nbsp;(en&nbsp;secondes&nbsp;depuis&nbsp;le&nbsp;1/1/1970)<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'CACHEFILE'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'Cache/caches'</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;Analyser&nbsp;une&nbsp;URL<br /></span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'RE_URL'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"%http://([^/:]*)(:(\d+))?(/.*)$%"</span><span style="color: #007700">);<br /><br />Include(</span><span style="color: #DD0000">'actualiser_cache.php'</span><span style="color: #007700">);<br />include(</span><span style="color: #DD0000">'limiter_cache.php'</span><span style="color: #007700">);<br />include(</span><span style="color: #DD0000">'memoriser_cache.php'</span><span style="color: #007700">);<br />include(</span><span style="color: #DD0000">'nettoyer_cache.php'</span><span style="color: #007700">);<br />include(</span><span style="color: #DD0000">'no_cache.php'</span><span style="color: #007700">);<br />include(</span><span style="color: #DD0000">'trouver_cache.php'</span><span style="color: #007700">);<br />include(</span><span style="color: #DD0000">'typer_cache.php'</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">utiliser_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$url</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$md5&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">md5</span><span style="color: #007700">(</span><span style="color: #0000BB">$url</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$h&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">trouver_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">DIRCACHE&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$md5</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$h&nbsp;</span><span style="color: #007700">AND&nbsp;</span><span style="color: #0000BB">limiter_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$h</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">actualiser_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$md5</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$h&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$l</span><span style="color: #007700">)&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #0000BB">$l</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">readfile</span><span style="color: #007700">(</span><span style="color: #0000BB">DIRCACHE&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$md5&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">typer_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$h</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;elseif&nbsp;(!</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #0000BB">RE_URL</span><span style="color: #007700">,</span><span style="color: #0000BB">$url</span><span style="color: #007700">,</span><span style="color: #0000BB">$desc</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">'HTTP/1.1&nbsp;400'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"URL&nbsp;incomprise"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$r&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">no_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$desc</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">],&nbsp;</span><span style="color: #0000BB">$desc</span><span style="color: #007700">[</span><span style="color: #0000BB">3</span><span style="color: #007700">]&nbsp;?&nbsp;</span><span style="color: #0000BB">$desc</span><span style="color: #007700">[</span><span style="color: #0000BB">3</span><span style="color: #007700">]&nbsp;:&nbsp;</span><span style="color: #0000BB">80</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$desc</span><span style="color: #007700">[</span><span style="color: #0000BB">4</span><span style="color: #007700">]);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$r&nbsp;</span><span style="color: #007700">AND&nbsp;</span><span style="color: #0000BB">memoriser_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">DIRCACHE&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$md5</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$r</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">],&nbsp;</span><span style="color: #0000BB">$r</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">actualiser_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$md5</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /></span><span style="color: #FF8000">//&nbsp;Pour&nbsp;tester&nbsp;(avec&nbsp;utiliser_cache.php?URL&nbsp;sans&nbsp;meme&nbsp;de&nbsp;truc=URL):<br /></span><span style="color: #0000BB">utiliser_cache</span><span style="color: #007700">(</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">"QUERY_STRING"</span><span style="color: #007700">]);<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code></p></div>
+
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FComprendre-les-requetes-HTTP"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FComprendre-les-requetes-HTTP'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FComprendre-les-requetes-HTTP&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 17h40min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FComprendre-les-requetes-HTTP'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>

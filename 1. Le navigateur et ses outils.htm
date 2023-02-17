@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" 
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="fr" lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta name='generator' content='SPIP 2.1.26' />
+<meta name='language' content='fr' />
+<meta name='description' content='PACS 2013 2014' />
+<link rel='stylesheet' type='text/css' media='all'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config-placement.css' />
+<link rel='stylesheet' type='text/css' media='screen, projection' 
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=config.css&amp;spec=Licence' />
+<link rel='stylesheet' type='text/css'  media='print'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/impression.css' />
+<link rel='stylesheet' type='text/css' 
+	media='handheld, only screen and (max-device-width: 480px)'
+	href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/css/handheld.css' />
+<link rel="alternate"
+	type="application/rss+xml"
+	title="Syndiquer cette rubrique"
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/?page=backend&amp;id_rubrique[]=1&amp;id_rubrique[]=265"
+/><link rel="search" type="application/opensearchdescription+xml" 
+	href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=opensearch.xml"
+	title="PACS 2013 2014" />
+<script type='text/javascript' src='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/extensions/DidacSPIP/prive/javascript/admin_check.js'></script>
+<title>1. Le navigateur et ses outils (PACS 2013 2014)</title>
+</head><body class="default-parameters">
+<div id="navigation-upmc">
+	<div class="menu-lv1">
+		<a class='menu-logo' href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/ecrire/'
+			title='Espace priv&eacute;'>Espace priv&eacute;</a>
+	</div>
+	<div class="menu-lv1"><a href="http://www.upmc.fr" title="Universit&eacute; Pierre et Marie Curie">UPMC</a></div>
+	<div class='menu-lv1 fs80'><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev" title="Accueil du site">PACS 2013 2014</a></div>
+	<div class="menu-lv1">
+	<a href='pacs' title="Programmation des Architectures Clients-serveur">pacs</a>
+</div>
+
+
+<div class="menu-lv1">Navigation dans la page</div><ul class="menu-lv1">
+<li class="menu-lv2"><a href='#a1'>Un simple fichier HTML</a></li>
+<li class="menu-lv2"><a href='#a2'>Une première page HTML créée dynamiquement</a></li>
+<li class="menu-lv2"><a href='#a3'>Les variables du serveur</a></li>
+<li class="menu-lv2"><a href='#a4'>Validation  de pages HTML</a></li>
+<li class="menu-lv2"><a href='#a5'>Accessibilité des pages HTML</a></li>
+</ul>
+
+
+<div class="menu-lv1"><form id="formulaire_recherche" action="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=recherche" method="get"><div>
+<input name="page" value="recherche" type="hidden" />
+<a href='.'
+	onclick='addSearchProvider("https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=opensearch.xml");return false'
+	title='Utiliser le moteur de recherche OpenSearch'>O</a>
+<label for='recherche' style='display:none'>Rechercher</label>
+<input type="text" name="recherche" id='recherche' value="Rechercher" />
+</div></form>
+</div>	<div class="menu-lv1-last">&nbsp;</div>
+</div><div id="content">
+
+<h1>pacs&nbsp;: Travaux sur Machine<br />1. Le navigateur et ses outils</h1>
+<p>Cette séance est consacrée à la prise en main du serveur HTTP&nbsp;:</p>
+
+<ul class="spip"><li> prise en main du navigateur et réglage de ses préférences&nbsp;:<ul class="spip"><li> la visualisation du source,</li><li> la navigation par onglet,</li><li> la gestion des signets et de l&#8217;historique,</li><li> le réglage du proxy et  ses exceptions&nbsp;:<ul class="spip"><li> localhost,</li><li> www-licence.ufr-info-p6.jussieu.fr,</li><li> www-ari.ufr-info-p6.jussieu.fr&nbsp;;</li></ul></li></ul></li></ul>
+<ul class="spip"><li> prise en main de son répertoire de pages personnelles&nbsp;;</li></ul>
+<ul class="spip"><li> prise en main du validateur W3C,  
+disponible localement&nbsp;: <a href="http://localhost/w3c-markup-validator/" class='spip_out' rel='external'>http://localhost/w3c-markup-validator/</a>&nbsp;;</li></ul>
+<ul class="spip"><li> essais des validateurs d&#8217;accessibilité et du profileur de mobilité.</li></ul>
+<p> Vous disposez d&#8217;un serveur HTTP sur votre machine, donc d&#8217;adresse <a href="http://127.0.0.1" class='spip_out' rel='external'>http://127.0.0.1</a>
+ou
+<a href="http://localhost" class='spip_out' rel='external'>http://localhost</a>
+selon les configurations.
+Vous aurez à créer le répertoire <tt>public_html</tt> à la racine de votre compte, et à donner à ces deux répertoires un <a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=zman&amp;nom=chmod" class='spip_glossaire' title="Voir la description de 'chmod' dans la documentation de 'man'">chmod</a> d&#8217;au minimum <tt>705</tt> ou <tt>755</tt> (pas <tt>777</tt>, inopérant car trop dangereux). 
+Vous accéderez aux fichiers placés dans votre <tt>public_html</tt> en donnant à votre navigateur des adresses de la forme <tt>http://localhost/~</tt><i>nnnnnnn</i> où <i>nnnnnnn</i> est votre identifiant sur 7 chiffres.</p>
+<br /><div id='sequence265'>
+<span id='e2252'></span>
+
+
+<h2 id='a1'>1 Un simple fichier HTML</h2>
+<ul class="spip"><li> Créer un fichier HTML de nom de <tt>index.html</tt> et le placer  dans votre <tt>public_html</tt>. Ce document doit contenir au moins&nbsp;:<ul class="spip"><li> un titre général, </li><li> un titre de niveau <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-H1" class='spip_glossaire' title="Voir la description de 'h1' dans la documentation de 'html'" rel='external'>h1</a>,</li><li> un autre de niveau <a href="http://www-ari.ufr-info-p6.jussieu.fr/OUTILS/documentation/doc/html4/struct/global.html#edef-H2" class='spip_glossaire' title="Voir la description de 'h2' dans la documentation de 'html'" rel='external'>h2</a>, </li><li> une liste numérotée, </li><li> une liste non numérotée, </li><li> un tableau, </li><li> une image,</li><li> deux liens, l&#8217;un vers le site de l&#8217;ARI et l&#8217;autre vers le site de la licence.</li></ul></li><li> Afficher votre document via votre navigateur.</li><li> Essayer d&#8217;y accéder via votre serveur local. </li><li> Essayer sur votre fichier <tt>index.html</tt>, les deux types de validateurs&nbsp;:<ul class="spip"><li> le validateur HTML du W3C,  disponible  en <a href="http://localhost/w3c-markup-validator/" class='spip_out' rel='external'>local</a>
+et <a href="http://validator.w3.org/" class='spip_out' rel='external'>outre-atlantique</a> (ou par l&#8217;icône en bas de cette page mais qui commencera par valider celle-ci)&nbsp;;</li><li> un validateur d&#8217;accessibilité (voir ceux recommandés  par l&#8217;<a href="http://openweb.eu.org/ressources/validation/" class='spip_out' rel='external'>Openweb</a>).</li><li> le <a href="http://validator.w3.org/mobile/" class='spip_out' rel='external'>profileur de mobilité</a>.</li></ul></li></ul>
+
+
+<div style='text-align:right' id='s110'>
+</div>
+
+ 
+ <div id='reponses2252'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum4395"> 
+	    <div class="reponse">
+	<div class="forum-titre">Un simple fichier HTML</div>
+23 janvier 2014 &agrave; 12h05min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>#!/bin/sh<br />
+cat &lt;&lt; EOF<br />
+Content_Type: text/html; charset=utf-8<br />
+<br />
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML Basic 1.1//EN&quot; &quot;http://www.w3.org/TR/xhtml-basic11.dtd&quot;&gt;<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+&lt;meta http-equiv='Content_Type' content='text/html; charset=utf-8'&gt;&lt;/meta&gt;<br />
+&lt;title&gt;tp-1 ex-1&lt;/title&gt;<br />
+&lt;link href='http://www-ari.ufr-info-p6.jussieu.fr/' rel=&quot;shortcut icon&quot;&gt;&lt;/link&gt;<br />
+&lt;link href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/public/index.php'&gt;&lt;/link&gt;<br />
+&lt;/head&gt;<br />
+<br />
+&lt;body&gt;<br />
+&lt;div&gt;&lt;img src='ordinateur.png' alt='ordinateur'&gt;&lt;/img&gt;&lt;/div&gt;<br />
+&lt;h1&gt;chapitre 1 (titre de niveau h1)&lt;/h1&gt;<br />
+&lt;ul&gt;<br />
+&lt;li&gt;&lt;h2&gt;point 1.1 (titre de niveau h2)&lt;/h2&gt;&lt;/li&gt;<br />
+&lt;li&gt;&lt;h2&gt;point 1.2 (titre de niveau h2)&lt;/h2&gt;&lt;/li&gt;<br />
+&lt;li&gt;&lt;h2&gt;point 1.3 (titre de niveau h2)&lt;/h2&gt;&lt;/li&gt;<br />
+&lt;/ul&gt;<br />
+&lt;h1&gt;chapitre 2 (titre de niveau h1)&lt;/h1&gt;<br />
+&lt;ul&gt;<br />
+&lt;li&gt;&lt;h2&gt;point 2.1 (titre de niveau h2)&lt;/h2&gt;&lt;/li&gt;<br />
+&lt;li&gt;&lt;h2&gt;point 2.2 (titre de niveau h2)&lt;/h2&gt;&lt;/li&gt;<br />
+&lt;li&gt;&lt;h2&gt;point 2.3 (titre de niveau h2)&lt;/h2&gt;&lt;/li&gt;<br />
+&lt;/ul&gt;<br />
+<br />
+&lt;table&gt;<br />
+&lt;caption&gt;Table&lt;/caption&gt;<br />
+&lt;tr&gt;&lt;th&gt;colonne 1&lt;/th&gt;&lt;th&gt;colonne 2&lt;/th&gt;&lt;/tr&gt;<br />
+&lt;tr&gt;&lt;th&gt;A11&lt;/th&gt;&lt;th&gt;A21&lt;/th&gt;&lt;/tr&gt;<br />
+&lt;tr&gt;&lt;th&gt;A12&lt;/th&gt;&lt;th&gt;A22&lt;/th&gt;&lt;/tr&gt;<br />
+&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</code></div></div>
+	<div class="forum-repondre-message">
+		<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=ramassage&amp;id_article=2252&amp;id_rubrique=265&amp;id_forum=4395&amp;retour=Le-navigateur-et-ses-outils">Am&eacute;liorer votre r&eacute;ponse&nbsp;</a>
+	</div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2253'></span>
+
+
+<h2 id='a2'>2 Une première page HTML créée dynamiquement</h2>
+<p>La configuration actuelle du serveur exige que les  fichiers exécutables répondant aux requêtes&nbsp;:</p>
+
+<ul class="spip"><li> aient un nom terminé par <tt>.cgi</tt>&nbsp;;</li><li> soient placés dans votre répertoire <tt>public_html/cgi-bin</tt> personnel (dont le serveur ne donne jamais le contenu bien qu&#8217;il y accède)&nbsp;;</li><li> soient exécutables par le serveur, par exemple en leur donnant un  <a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=zman&amp;nom=chmod" class='spip_glossaire' title="Voir la description de 'chmod' dans la documentation de 'man'">chmod</a> égal à <tt>705</tt>.</li></ul>
+<p>En conséquence&nbsp;:</p>
+
+<ul class="spip"><li> Reprendre l&#8217;<a href="Les-envois-du-serveur" class='spip_in'>exercice 2 vu en travaux dirigés</a>.</li></ul>
+<ul class="spip"><li> Mettre le script correspondant dans votre répertoire <tt>public_html/cgi-bin</tt>.</li></ul>
+<ul class="spip"><li> Exécuter votre script dans votre terminal.</li></ul>
+<ul class="spip"><li> Essayer d&#8217;accéder à votre script via le serveur local. Le serveur HTTP 
+recueille toutes leurs erreurs dans un même fichier, à savoir
+<tt>/var/log/apache2/error.log</tt>.
+La syntaxe des erreurs est la suivante (ce qui n&#8217;est pas en italique
+est une constante, en particulier les crochets)&nbsp;:
+<tt>[</tt><em>date</em><tt>][error][client </tt><em>numéro-IP</em><tt>]</tt> <em>message</em></li></ul>
+<ul class="spip"><li> Lorsque vous avez obtenu l&#8217;affichage voulu, consulter le source généré par le navigateur.</li></ul>
+
+
+<div style='text-align:right' id='s120'>
+</div>
+
+ 
+ <div id='reponses2253'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum4422"> 
+	    <div class="reponse">
+	<div class="forum-titre">Une première page HTML créée dynamiquement</div>
+23 janvier 2014 &agrave; 12h47min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>#!/bin/sh<br />
+cat &lt;&lt;EOF<br />
+Content_Type: text/html; charset=utf-8<br />
+<br />
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML Basic 1.1//EN&quot; &quot;http://www.w3.org/TR/xhtml-basic11.dtd&quot;&gt;<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+&lt;meta http-equiv='Content_Type' content='text/html; charset=utf-8'&gt;&lt;/meta&gt;<br />
+&lt;title&gt;tp-1 ex-1&lt;/title&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+EOF<br />
+date<br />
+echo &quot;&lt;/body&gt;&lt;/html&gt;&quot;</code></div>
+<p>// acceder à /var/log/apache2/error.log&nbsp;: taper /var/log/apache2/error.log dans le navigatuer</p></div>
+	<div class="forum-repondre-message">
+		<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=ramassage&amp;id_article=2253&amp;id_rubrique=265&amp;id_forum=4422&amp;retour=Le-navigateur-et-ses-outils">Am&eacute;liorer votre r&eacute;ponse&nbsp;</a>
+	</div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2584'></span>
+
+
+<h2 id='a3'>3 Les variables du serveur</h2>
+<p>Exécuter les scripts correspondants à l&#8217;<a href="Les-envois-du-serveur#a4" class='spip_in'>exercice 4 de la séance de travaux dirigés</a>, afin d&#8217;analyser le contenu de quelques variables du serveur.</p>
+
+
+<div style='text-align:right' id='s125'>
+</div>
+
+ 
+ <div id='reponses2584'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum4436"> 
+	    <div class="reponse">
+	<div class="forum-titre">Les variables du serveur</div>
+24 janvier 2014 &agrave; 09h08min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><div class="spip_code"><code>#!/bin/sh<br />
+cat &lt;&lt;EOF<br />
+Content_Type: text/html; charset=utf-8<br />
+<br />
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML Basic 1.1//EN&quot; &quot;http://www.w3.org/TR/xhtml-basic11.dtd&quot;&gt;<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+&lt;meta http-equiv='Content_Type' content='text/html; charset=utf-8'&gt;&lt;/meta&gt;<br />
+&lt;title&gt;tp-1 ex-1&lt;/title&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+EOF<br />
+echo &quot;&lt;table summary = '$SERVER_NAME'&gt;&quot;<br />
+echo &quot;&lt;tr&gt;&lt;th&gt;noms&lt;/th&gt;&lt;th&gt;valeurs&lt;/th&gt;&lt;/tr&gt;&quot;<br />
+echo &quot;&lt;tr&gt;&lt;td&gt;SERVER_NAME&lt;/td&gt;&lt;td&gt;$SERVER_NAME&lt;/td&gt;&lt;/tr&gt;&quot;<br />
+echo &quot;&lt;tr&gt;&lt;td&gt;SERVER_SOFTWARE&lt;/td&gt;&lt;td&gt;$SERVER_SOFTWARE&lt;/td&gt;&lt;/tr&gt;&quot;<br />
+echo &quot;&lt;tr&gt;&lt;td&gt;SERVER_ADDR&lt;/td&gt;&lt;td&gt;$SERVER_ADDR&lt;/td&gt;&lt;/tr&gt;&quot;<br />
+echo &quot;&lt;tr&gt;&lt;td&gt;REMOTE_PORT&lt;/td&gt;&lt;td&gt;$REMOTE_PORT&lt;/td&gt;&lt;/tr&gt;&quot;<br />
+echo &quot;&lt;tr&gt;&lt;td&gt;REMOTE_ADDR&lt;/td&gt;&lt;td&gt;$REMOTE_ADDR&lt;/td&gt;&lt;/tr&gt;&quot;<br />
+echo &quot;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;&quot;</code></div>
+<p>&nbsp;!! est-ce que c’est normale que le script ne marche pas via terminal&nbsp;?</p>
+
+<p>&nbsp;!! est-ce que c’est normale&nbsp;?     http://localhost/&nbsp;3264006/cgi-bin/ex4.cgi</p></div>
+	<div class="forum-repondre-message">
+		<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=ramassage&amp;id_article=2584&amp;id_rubrique=265&amp;id_forum=4436&amp;retour=Le-navigateur-et-ses-outils">Am&eacute;liorer votre r&eacute;ponse&nbsp;</a>
+	</div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2257'></span>
+
+
+<h2 id='a4'>4 Validation  de pages HTML</h2>
+<p>Le but de cet exercice est de travailler sur la validation des pages HTML.</p>
+
+<p>Pour ce faire, nous utiliserons le validateur HTML du W3C</p>
+
+<ul class="spip"><li> soit disponible  <a href="http://localhost/w3c-validator/" class='spip_out' rel='external'>en local</a>  (notamment à l&#8217;examen)&nbsp;;</li></ul>
+<ul class="spip"><li> soit <a href="http://validator.w3.org/" class='spip_out' rel='external'>outre-atlantique</a> (qui offre la toute dernière version).</li></ul>
+<p>Observez si les pages du site de cet enseignement sont valides. 
+Essayez avec vos sites Internet préférés.
+Décrivez brièvement le résultat de vos analyses.</p>
+
+
+<div style='text-align:right' id='s150'>
+</div>
+
+ 
+ <div id='reponses2257'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum4424"> 
+	    <div class="reponse">
+	<div class="forum-titre">Validation  de pages HTML</div>
+23 janvier 2014 &agrave; 12h49min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><p><a href="https://www-licence.ufr-info-p6.jus.." class="spip_url spip_out" rel="nofollow external">https://www-licence.ufr-info-p6.jus..</a>.    est valide</p>
+
+<p><a href="http://www.google.com" class="spip_url spip_out" rel="nofollow external">www.google.com</a>    n&#8217;est pas valide</p></div>
+	<div class="forum-repondre-message">
+		<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=ramassage&amp;id_article=2257&amp;id_rubrique=265&amp;id_forum=4424&amp;retour=Le-navigateur-et-ses-outils">Am&eacute;liorer votre r&eacute;ponse&nbsp;</a>
+	</div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+<span id='e2256'></span>
+
+
+<h2 id='a5'>5 Accessibilité des pages HTML</h2>
+<p>Nous utiliserons dans cet exercice la norme d&#8217;accessibilité  WCAG 1.0 (Web Content Accessibility Guidelines version 1.0) qui est la plus communément admise (la <a href="http://www.w3.org/TR/WCAG20/" class='spip_out' rel='external'>version 2.0</a> ,parue en Décembre 2008 est très critiquée).</p>
+
+<p>Plusieurs validateurs et testeurs d&#8217;accessibilité sont recommandés par l&#8217;<a href="http://openweb.eu.org/ressources/validation/" class='spip_out' rel='external'>Openweb</a>.</p>
+
+<p>Utilisez l&#8217;un de ces outils d&#8217;accessibilité pour tester  <a href="Les-envois-du-serveur" class='spip_in'>cet énoncé</a>  (intéressant car il contient quelques tableaux).  Utiliser le également sur d&#8217;autres pages de votre choix. Décrivez brièvement le résultat de vos analyses.</p>
+
+<p>Créer toutes les réponses aux exercices de  <a href="Les-envois-du-serveur" class='spip_in'>la séance de travaux dirigés</a>,  et tester leur accessibilité.</p>
+
+
+<div style='text-align:right' id='s200'>
+</div>
+
+ 
+ <div id='reponses2256'>
+<ul class="forum-total">
+
+<li class="forum-fil" id="forum4427"> 
+	    <div class="reponse">
+	<div class="forum-titre">Accessibilité des pages HTML</div>
+23 janvier 2014 &agrave; 12h54min, par  <a href="mailto:">KOSTRIKOVA ANNA</a> 
+	<div><p><a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/Le-navigateur-et-ses-outils#forum4424" class="spip_url spip_out" rel="nofollow">https://www-licence.ufr-info-p6.jus...</a>
+<br />This document was successfully checked as XHTML Basic 1.1&nbsp;!</p>
+
+<p><a href="http://www.google.com/" class="spip_url spip_out" rel="nofollow external">http://www.google.com/</a>
+<br />Errors found while checking this document as HTML5&nbsp;!
+<br />Result&nbsp;:  	 23 Errors, 4 warning(s)</p>
+
+<p><a href="http://perevodperevod.ru/" class="spip_url spip_out" rel="nofollow external">http://perevodperevod.ru/</a>
+<br />Errors found while checking this document as XHTML 1.0 Strict&nbsp;!
+<br />Result&nbsp;:  	 29 Errors</p></div>
+	<div class="forum-repondre-message">
+		<a href="https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/pacs-2014fev/spip.php?page=ramassage&amp;id_article=2256&amp;id_rubrique=265&amp;id_forum=4427&amp;retour=Le-navigateur-et-ses-outils">Am&eacute;liorer votre r&eacute;ponse&nbsp;</a>
+	</div>
+	    </div>
+
+</li>
+
+</ul>
+
+</div><br />
+
+
+</div><div id='pied' class='pied_page'><ul>
+<li><a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLe-navigateur-et-ses-outils"
+	rel='noindex nofollow'
+	class='validation-css'
+	title='v&eacute;rifier la validit&eacute; CSS 2.1'>Valid CSS 2.1</a></li>
+<li><a href='http://validator.w3.org/check?uri=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLe-navigateur-et-ses-outils'
+	class='validation-xml'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; XHTML Baisc 1.1'>Valid XHTML Basic 1.1</a></li>
+<li><a href='http://www.contentquality.com/Default.asp?Url1=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLe-navigateur-et-ses-outils&amp;rptmode=2'
+	 class='validation-wcag'
+	title='v&eacute;rifier la validit&eacute; WCAG 2.0 AAA'>Triple-A conformance Web Content Accessibility Guidelines 2.0</a></li>
+<li class='date-publi'>
+Calcul&eacute; le 13 mai 2014 &agrave; 16h10min<br />
+par 
+<a href='https://www-licence.ufr-info-p6.jussieu.fr/lmd/licence/2013/ue/LI355-2014fev/spip.php?page=auteur&amp;id_auteur=1&amp;sujet=Signaler%20un%20souci%20technique%20avec%20le%20site%20PACS%202013%202014' 
+	rel='noindex nofollow'
+	title='Signaler un souci technique avec le site'>DidacSPIP</a><br />
+Universit&eacute; Pierre et Marie Curie
+</li>
+<li><a href='http://validator.w3.org/mobile/check?docAddr=https%3A%2F%2Fwww-licence.ufr-info-p6.jussieu.fr%2Flmd%2Flicence%2F2013%2Fue%2FLI355-2014fev%2FLe-navigateur-et-ses-outils'
+	class='mobile-ok'
+	rel='noindex nofollow'
+	title='v&eacute;rifier la validit&eacute; Mobile OK'>Mobile OK</a></li>
+<li><a href='http://www.spip.net'
+	class='reference-spip'
+	title='Visiter SPIP'>SPIP</a></li>
+<li><a href="http://prefetch.validatorsearch.verisignlabs.com"
+	rel='noindex nofollow'
+	title='voir http://validatorsearch.verisignlabs.com/'></a></li>
+</ul></div></div></body>
+</html>
